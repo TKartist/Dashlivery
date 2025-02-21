@@ -11,4 +11,4 @@ def load_excel(path):
         print(sheet_name)
         print(sheet.columns)
 
-load_excel("../dummy_data/EWTS_Master_data Dummy Data.xlsx")
+load_excel("../dummy_data/ewts_master_dummy_data.xlsx")
