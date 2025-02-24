@@ -12,7 +12,7 @@ Data Structure:
 ![Data Split and Structure for Emergency Appeals](imgs/dashboard_data_struct_phase_1.png)
 
 -- Data split for DREFs
-![Data Split and Structure for Emergency Appeals](imgs/dashboard_data_struct_phase_1.png)
+![Data Split and Structure for Emergency Appeals](imgs/dashboard_data_struct_dref.png)
 
 -- Data split for MCMRs
 ![Data Split and Structure for Emergency Appeals](imgs/dashboard_data_struct_phase_1.png)
