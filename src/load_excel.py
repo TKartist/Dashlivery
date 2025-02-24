@@ -23,6 +23,7 @@ def organize_ea(sheet):
     root = "../organized_ea/"
     col_name = sheet.columns.tolist()
     sheet["Ref"] = "EA" + sheet[col_name[3]] + sheet[col_name[5]] 
+
     disasters = sheet.loc[:, col_name[:10]]
     operational_progresses = sheet.loc[:, [col_name[0]] + col_name[10:14] + col_name[26:30] + col_name[43:49] + col_name[73:]]
     financial_progress = sheet.loc[:, [col_name[0]] + col_name[56:61]]
@@ -32,6 +33,7 @@ def organize_ea(sheet):
     rrp = sheet.loc[:, [col_name[0]] + col_name[30:43]]
     nfi = sheet.loc[:, [col_name[0]] + col_name[49:51] + col_name[61:64]]
     operational_achievements = sheet.loc[:, [col_name[0]] + col_name[64:73]]
+    
     disasters.to_csv(f"{root}disasters.csv")
     operational_progresses.to_csv(f"{root}operational_progresses.csv")
     financial_progress.to_csv(f"{root}financial_progress.csv")
@@ -41,19 +43,73 @@ def organize_ea(sheet):
     rrp.to_csv(f"{root}rrp.csv")
     nfi.to_csv(f"{root}nfi.csv")
     operational_achievements.to_csv(f"{root}operational_achievements.csv")
+
     print("EA master data organized")
 
 
 def organize_dref(sheet):
-    return "hi"
+    root = "../organized_dref/"
+    col_name = sheet.columns.tolist()
+    sheet["Ref"] = "DREF" + sheet[col_name[3]] + sheet[col_name[5]] 
 
+    disasters = sheet.loc[:, col_name[:10]]
+    operational_progresses = sheet.loc[:, [col_name[0]] + col_name[10:18] + col_name[31:33] + col_name[50:52]]
+    rrp = sheet.loc[:, [col_name[0]] + col_name[18:31]]
+    financial_progress = sheet.loc[:, [col_name[0]] + col_name[33:40]]
+    operational_achievements = sheet.loc[:, [col_name[0]] + col_name[40:50]]
+
+    disasters.to_csv(f"{root}disasters.csv")
+    operational_progresses.to_csv(f"{root}operational_progresses.csv")
+    financial_progress.to_csv(f"{root}financial_progress.csv")
+    rrp.to_csv(f"{root}rrp.csv")
+    operational_achievements.to_csv(f"{root}operational_achievements.csv")
+
+    print("DREF master data organized")
 
 def organize_mcmr(sheet):
-    return "hi"
+    root = "../organized_mcmr/"
+    col_name = sheet.columns.tolist()
+    sheet["Ref"] = "MCMR" + sheet[col_name[3]] + sheet[col_name[5]] 
+
+    disasters = sheet.loc[:, col_name[:10]]
+    operational_progresses = sheet.loc[:, [col_name[0]] + col_name[10:13] + col_name[19:21] + col_name[34:41]]
+    total_coverage = sheet.loc[:, [col_name[0]] + col_name[13:19]]
+    rrp = sheet.loc[:, [col_name[0]] + col_name[21:34]]
+    financial_progress = sheet.loc[:, [col_name[0]] + col_name[41:43]]
+    operational_achievements = sheet.loc[:, [col_name[0]] + col_name[43:]]
+
+    disasters.to_csv(f"{root}disasters.csv")
+    operational_progresses.to_csv(f"{root}operational_progresses.csv")
+    total_coverage.to_csv(f"{root}total_coverage.csv")
+    rrp.to_csv(f"{root}rrp.csv")
+    financial_progress.to_csv(f"{root}financial_progress.csv")
+    operational_achievements.to_csv(f"{root}operational_achievements.csv")
+    
+    print("MCMR master data organized")
 
 
 def organize_protracted(sheet):
-    return "hi"
+    root = "../organized_pcce/"
+    col_name = sheet.columns.tolist()
+    sheet["Ref"] = "PCCE" + sheet[col_name[3]] + sheet[col_name[5]]
+
+    disasters = sheet.loc[:, col_name[:10]]
+    operational_progresses = sheet.loc[:, [col_name[0]] + col_name[10:14] + col_name[20:24] + col_name[38:46] + col_name[56:57] + col_name[59:61]]
+    coverage = sheet.loc[:, [col_name[0]] + col_name[14:20]]
+    rrp = sheet.loc[:, [col_name[0]] + col_name[24:38]]
+    dashboard = sheet.loc[:, [col_name[0]] + col_name[46:51]]
+    financial_progress = sheet.loc[:, [col_name[0]] + col_name[51:56]]
+    operational_achievements = sheet.loc[:, [col_name[0]] + col_name[57:59]]
+
+    disasters.to_csv(f"{root}disasters.csv")
+    operational_progresses.to_csv(f"{root}operational_progresses.csv")
+    coverage.to_csv(f"{root}coverage.csv")
+    rrp.to_csv(f"{root}rrp.csv")
+    dashboard.to_csv(f"{root}dashboard.csv")
+    financial_progress.to_csv(f"{root}financial_progress.csv")
+    operational_achievements.to_csv(f"{root}operational_achievements.csv")
+
+    print("PCCE master data organized")
 
 def organize_sheets(sheets):
     for sheet_name, sheet in sheets.items():
