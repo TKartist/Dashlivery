@@ -8,7 +8,17 @@ Outlayer of the Dashboard can be viewed here: [***Please Click Here***](https://
 
 
 Data Structure:
-![Data Split and Structure](imgs/dashboard_data_struct_phase_1.png)
+-- Data split for Emergency Appeals
+![Data Split and Structure for Emergency Appeals](imgs/dashboard_data_struct_phase_1.png)
+
+-- Data split for DREFs
+![Data Split and Structure for Emergency Appeals](imgs/dashboard_data_struct_phase_1.png)
+
+-- Data split for MCMRs
+![Data Split and Structure for Emergency Appeals](imgs/dashboard_data_struct_phase_1.png)
+
+-- Data split for Protracted
+![Data Split and Structure for Emergency Appeals](imgs/dashboard_data_struct_phase_1.png)
 
 
 GOAL:
