@@ -1,0 +1,6 @@
+Ref,Trigger Date ,Region,Country,ISO,Appeal Code,Appeal Name ,Disaster Type ,Classification ,EWTS Varient 
+EAMozambiqueMDRM989,2024-06-20,Africa,Mozambique,,MDRM989,Mozambique earthquake,Earthquake,Orange,Emergency Appeal
+EANigeriaMDRN777,2024-07-15,Africa,Nigeria,,MDRN777,Nigeria population movement,Population Movement ,Red,Emergency Appeal
+EAPeruMDRO999,2024-08-11,Americas ,Peru,,MDRO999,Peru population movement,Population Movement ,Orange,Emergency Appeal
+EAMaldivesMDRM787,2024-08-28,Asia,Maldives,,MDRM787,Maldives floods,Flood,Orange,Emergency Appeal
+EAJordanMDRJ000,2024-09-01,MENA,Jordan,,MDRJ000,Jordan earthquake,Earthquake,Red,Emergency Appeal

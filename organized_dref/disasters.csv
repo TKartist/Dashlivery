@@ -1,0 +1,6 @@
+Ref,Trigger Date ,Region,Country,ISO,Appeal Code,Appeal Name ,Disaster Type ,Classification ,EWTS Varient 
+DREFAfghanistanMDRA111,2024-06-05,Asia,Afghanistan,,MDRA111,Afghanistan Civil Unrest,Civil Unrest,Red,DREF
+DREFBangladeshMDRB567,2024-07-01,Asia,Bangladesh,,MDRB567,Bangladesh Cyclone,Cyclone,Orange,DREF
+DREFGermanyMDRG909,2024-08-10,Europe,Germany,,MDRG909,Germany Earthquake,Earthquake,Orange,DREF
+DREFChileMDRC464,2024-08-20,Americas ,Chile,,MDRC464,Chile Fire,Fire,Red,DREF
+DREFEgyptMDRE698,2024-09-02,MENA,Egypt,,MDRE698,Egypt Cyclone,Cyclone,Orange,DREF
