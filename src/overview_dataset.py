@@ -99,10 +99,51 @@ def process_ea(ea):
     ea[key].to_csv("../organized_ea/ea_overview.csv", index=True)
     return ea
 
-
 def process_dref(dref):
-    return dref
+    op = dref["operational_progresses"].copy()
+    fin = dref["financial_progress"].copy()
+    key = "achievements"
 
+    dref[key] = pd.DataFrame()
+    start_date = dref["disasters"]["Trigger Date "].apply(convert_date)
+
+    on = op.columns
+    for col in on:
+        op[col] = op[col].apply(convert_date)
+    
+    fn = fin.columns
+    for col in fn[:5]:
+        fin[col] = fin[col].apply(convert_date)
+    
+    dref[key]["Ref"] = dref["disasters"].index
+    dref[key].set_index("Ref", inplace=True)
+
+    dref[key][[on[0], f"{on[0]} (days)"]] = pd.merge(start_date, op[on[0]], left_index=True, right_index=True).apply(determine_status, args=(3,), axis=1)
+    dref[key][[on[1], f"{on[1]} (days)"]] = pd.merge(op[on[4]], op[on[1]], left_index=True, right_index=True).apply(determine_status, args=(2,), axis=1)
+    dref[key][[on[2], f"{on[2]} (days)"]] = pd.merge(start_date, op[on[2]], left_index=True, right_index=True).apply(determine_status, args=(14,), axis=1)
+    dref[key][[on[3], f"{on[3]} (days)"]] = pd.merge(start_date, op[on[3]], left_index=True, right_index=True).apply(determine_status, args=(14,), axis=1) # check for viability (10 if NS started moving)
+    dref[key][[on[4], f"{on[4]} (days)"]] = pd.merge(start_date, op[on[4]], left_index=True, right_index=True).apply(determine_status, args=(1,), axis=1)
+    dref[key][[on[5], f"{on[5]} (days)"]] = pd.merge(start_date, op[on[5]], left_index=True, right_index=True).apply(determine_status, args=(1,), axis=1)
+    dref[key][[on[6], f"{on[6]} (days)"]] = pd.merge(op[on[5]], op[on[6]], left_index=True, right_index=True).apply(determine_status, args=(1,), axis=1)
+    dref[key][[on[7], f"{on[7]} (days)"]] = pd.merge(op[on[6]], op[on[7]], left_index=True, right_index=True).apply(determine_status, args=(2,), axis=1)
+    dref[key][[on[8], f"{on[8]} (days)"]] = pd.merge(op[on[4]], op[on[8]], left_index=True, right_index=True).apply(determine_status, args=(7,), axis=1)
+    dref[key][[on[9], f"{on[9]} (days)"]] = pd.merge(op[on[8]], op[on[9]], left_index=True, right_index=True).apply(determine_status, args=(3,), axis=1)
+    dref[key][on[10]] = op[on[10]].apply(determine_done)
+    dref[key][on[11]] = op[on[11]].apply(determine_done)
+    dref[key][[fn[0], f"{fn[0]} (days)"]] = pd.merge(op[on[4]], fin[fn[0]], left_index=True, right_index=True).apply(determine_status, args=(7,), axis=1)
+    dref[key][[fn[1], f"{fn[1]} (days)"]] = pd.merge(fin[fn[0]], fin[fn[1]], left_index=True, right_index=True).apply(determine_status, args=(10,), axis=1)
+    dref[key][[fn[2], f"{fn[2]} (days)"]] = pd.merge(fin[fn[1]], fin[fn[2]], left_index=True, right_index=True).apply(determine_status, args=(1,), axis=1)
+    dref[key][[fn[3], f"{fn[3]} (days)"]] = pd.merge(fin[fn[2]], fin[fn[3]], left_index=True, right_index=True).apply(determine_status, args=(3,), axis=1)
+    dref[key][[fn[4], f"{fn[4]} (days)"]] = pd.merge(op[on[4]], fin[fn[4]], left_index=True, right_index=True).apply(determine_status, args=(30,), axis=1)
+    dref[key]["Achieved"] = dref[key].apply(lambda x: x.str.startswith("Achieved").sum(), axis=1)
+    dref[key]["Not Achieved"] = dref[key].apply(lambda x: x.str.contains("Not Achieved").sum(), axis=1)
+    dref[key]["Achieved Early"] = dref[key].apply(lambda x: x.str.contains("Achieved Early").sum(), axis=1)
+    dref[key]["Achieved Late"] = dref[key].apply(lambda x: x.str.contains("Achieved Late").sum(), axis=1)
+    dref[key] = dref[key][dref[key].columns[-4:].tolist() + dref[key].columns[:-4].tolist()]
+    dref[key].to_csv("../organized_dref/dref_overview.csv", index=True)
+    
+
+    return dref
 
 def process_mcmr(mcmr):
     return mcmr
@@ -126,7 +167,7 @@ def merge_dfs(folder):
 
 def generate_overview():
     ea = process_ea(merge_dfs("../organized_ea"))
-    # dref = merge_dfs("../organized_dref")
+    dref = process_dref(merge_dfs("../organized_dref"))
     # mcmr = merge_dfs("../organized_mcmr")
     # pcce = merge_dfs("../organized_pcce")
 
