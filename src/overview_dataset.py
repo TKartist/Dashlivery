@@ -146,8 +146,47 @@ def process_dref(dref):
     return dref
 
 def process_mcmr(mcmr):
-    return mcmr
+    op = mcmr["operational_progresses"].copy()
+    fin = mcmr["financial_progress"].copy()
+    key = "achievements"
 
+    mcmr[key] = pd.DataFrame()
+    start_date = mcmr["disasters"][mcmr["disasters"].columns[0]].apply(convert_date)
+
+    on = op.columns
+    for col in on:
+        op[col] = op[col].apply(convert_date)
+    
+    fn = fin.columns
+    for col in fn:
+        fin[col] = fin[col].apply(convert_date)
+    
+    mcmr[key]["Ref"] = mcmr["disasters"].index
+    mcmr[key].set_index("Ref", inplace=True)
+
+    mcmr[key][[on[0], f"{on[0]} (days)"]] = pd.merge(start_date, op[on[0]], left_index=True, right_index=True).apply(determine_status, args=(3,), axis=1)
+    mcmr[key][[on[1], f"{on[1]} (days)"]] = pd.merge(op[on[0]], op[on[1]], left_index=True, right_index=True).apply(determine_status, args=(1,), axis=1)
+    mcmr[key][[on[2], f"{on[2]} (days)"]] = pd.merge(op[on[1]], op[on[2]], left_index=True, right_index=True).apply(determine_status, args=(1,), axis=1)
+    mcmr[key][[on[3], f"{on[3]} (days)"]] = pd.merge(start_date, op[on[3]], left_index=True, right_index=True).apply(determine_status, args=(7,), axis=1) # check for viability (10 if NS started moving)
+    mcmr[key][[on[4], f"{on[4]} (days)"]] = pd.merge(op[on[3]], op[on[4]], left_index=True, right_index=True).apply(determine_status, args=(1,), axis=1)
+    mcmr[key][[on[5], f"{on[5]} (days)"]] = pd.merge(op[on[1]], op[on[5]], left_index=True, right_index=True).apply(determine_status, args=(2,), axis=1)
+    mcmr[key][[on[6], f"{on[6]} (days)"]] = pd.merge(op[on[5]], op[on[6]], left_index=True, right_index=True).apply(determine_status, args=(1,), axis=1)
+    mcmr[key][[on[7], f"{on[7]} (days)"]] = pd.merge(start_date, op[on[7]], left_index=True, right_index=True).apply(determine_status, args=(1,), axis=1)
+    mcmr[key][[on[8], f"{on[8]} (days)"]] = pd.merge(op[on[1]], op[on[8]], left_index=True, right_index=True).apply(determine_status, args=(7,), axis=1)
+    mcmr[key][[on[9], f"{on[9]} (days)"]] = pd.merge(op[on[1]], op[on[9]], left_index=True, right_index=True).apply(determine_status, args=(7,), axis=1)
+    mcmr[key][[on[10], f"{on[10]} (days)"]] = pd.merge(op[on[9]], op[on[10]], left_index=True, right_index=True).apply(determine_status, args=(3,), axis=1)
+    mcmr[key][on[11]] = op[on[11]].apply(determine_done)
+    mcmr[key][[fn[0], f"{fn[0]} (days)"]] = pd.merge(op[on[1]], fin[fn[0]], left_index=True, right_index=True).apply(determine_status, args=(5,), axis=1)
+    mcmr[key][[fn[1], f"{fn[1]} (days)"]] = pd.merge(fin[fn[0]], fin[fn[1]], left_index=True, right_index=True).apply(determine_status, args=(5,), axis=1)
+    mcmr[key]["Achieved"] = mcmr[key].apply(lambda x: x.str.startswith("Achieved").sum(), axis=1)
+    mcmr[key]["Not Achieved"] = mcmr[key].apply(lambda x: x.str.contains("Not Achieved").sum(), axis=1)
+    mcmr[key]["Achieved Early"] = mcmr[key].apply(lambda x: x.str.contains("Achieved Early").sum(), axis=1)
+    mcmr[key]["Achieved Late"] = mcmr[key].apply(lambda x: x.str.contains("Achieved Late").sum(), axis=1)
+    mcmr[key] = mcmr[key][mcmr[key].columns[-4:].tolist() + mcmr[key].columns[:-4].tolist()]
+    mcmr[key].to_csv("../organized_mcmr/mcmr_overview.csv", index=True)
+
+    return mcmr
+    
 
 def process_pcce(pcce):
     return pcce
@@ -168,7 +207,7 @@ def merge_dfs(folder):
 def generate_overview():
     ea = process_ea(merge_dfs("../organized_ea"))
     dref = process_dref(merge_dfs("../organized_dref"))
-    # mcmr = merge_dfs("../organized_mcmr")
+    mcmr = process_mcmr(merge_dfs("../organized_mcmr"))
     # pcce = merge_dfs("../organized_pcce")
 
 
