@@ -19,27 +19,40 @@ Needed data for overview:
 # uncomplete IF it the due date has passed
 # Missing, Not Achieved, Achieved Early, Achieved Late, Achieved
 
-def full_list(list):
+def full_list(cols):
     output = []
-    for col in list:
+    if not isinstance(cols, list):
+        cols = [cols]
+    for col in cols:
         output.append(col)
         output.append(f"{col} (days)")
     return output
 
 
 def area_split_ea(overview, columns):
+    folder = "../organized_ea/"
     assessment = overview[full_list(columns[10])]
     resource_mobilization = overview[full_list(columns[11:14] + [columns[26]])] # add EA coverage
     surge = overview[full_list(columns[27:30])] # add % related values to the surge (rrp)
     hr = overview[full_list(columns[43:45])] # add % related values to the hr (rrp)
-    coordination = overview[full_list(columns[49:52])] # missing joint statement in master data
-    logistics = overview[full_list(columns[52:55])]
-    im = overview[full_list(columns[55:59])]
-    finance = overview[full_list(columns[61:65])]
-    security = overview[full_list(columns[73:75])]
-    return assessment, resource_mobilization, surge, hr, coordination, logistics, im, finance, security
+    coordination = overview[columns[45:48]] # missing joint statement in master data
+    logistics = overview[columns[48:51]]
+    im = overview[columns[51:56]]
+    finance = overview[columns[56:60]]
+    security = overview[columns[73:75]]
+
+    assessment.to_csv(f"{folder}assessment.csv", index=True)
+    resource_mobilization.to_csv(f"{folder}planning_and_resource_mobilization.csv", index=True)
+    surge.to_csv(f"{folder}surge.csv", index=True)
+    hr.to_csv(f"{folder}hr_planning_and_recruitement.csv", index=True)
+    coordination.to_csv(f"{folder}coordination.csv", index=True)
+    logistics.to_csv(f"{folder}procurement_and_logistics.csv", index=True)
+    im.to_csv(f"{folder}information_management.csv", index=True)
+    finance.to_csv(f"{folder}financial_management.csv", index=True)
+    security.to_csv(f"{folder}security.csv", index=True)
 
 def area_split_dref(overview, columns):
+    folder = "../organized_dref/"
     assessment = overview[full_list(columns[10])]
     risk = overview[full_list(columns[11:13])]
     resource_mobilization = overview[full_list(columns[13:15])]
@@ -47,32 +60,59 @@ def area_split_dref(overview, columns):
     logistics = overview[full_list(columns[31:33])]
     finance = overview[full_list(columns[33:37])]
     delivery = overview[full_list([columns[37]])] # add targeted population, ehi distribution, and implementation rate
-    security = overview[full_list(columns[50:52])]
-    return assessment, risk, resource_mobilization, surge, logistics, finance, delivery, security
+    security = overview[columns[50:52]]
+
+    assessment.to_csv(f"{folder}assessment.csv", index=True)
+    risk.to_csv(f"{folder}risk_and_accountability.csv", index=True)
+    resource_mobilization.to_csv(f"{folder}planning_and_resource_mobilization.csv", index=True)
+    surge.to_csv(f"{folder}surge.csv", index=True)
+    logistics.to_csv(f"{folder}procurement_and_logistics.csv", index=True)
+    finance.to_csv(f"{folder}financial_management.csv", index=True)
+    delivery.to_csv(f"{folder}programme_delivery.csv", index=True)
+    security.to_csv(f"{folder}security.csv", index=True)
 
 def area_split_mcmr(overview, columns):
+    folder = "../organized_mcmr/"
     resource_mobilization = overview[full_list(columns[10:13] + [columns[37]])] # add coverage
     surge = overview[full_list(columns[19:21])] # add % related values to the surge (rrp)
     hr = overview[full_list(columns[34:36])] # add % related values to the hr (rrp)
     coordination = overview[full_list(columns[36])]
     logistics = overview[full_list(columns[37:40])]
-    im = overview[full_list(columns[40])]
+    im = overview[columns[40]]
     finance = overview[full_list(columns[41:43])]
-    delivery = overview[full_list(columns[44])] # add cumulative % targeted population
-    return resource_mobilization, surge, hr, coordination, logistics, im, finance, delivery
+
+    resource_mobilization.to_csv(f"{folder}planning_and_resource_mobilization.csv", index=True)
+    surge.to_csv(f"{folder}surge.csv", index=True)
+    hr.to_csv(f"{folder}hr_planning_and_recruitement.csv", index=True)
+    coordination.to_csv(f"{folder}coordination.csv", index=True)
+    logistics.to_csv(f"{folder}procurement_and_logistics.csv", index=True)
+    im.to_csv(f"{folder}information_management.csv", index=True)
+    finance.to_csv(f"{folder}financial_management.csv", index=True)
 
 def area_split_pcce(overview, columns):
+    folder = "../organized_pcce/"
     assessment = overview[full_list(columns[10])]
     resource_mobilization = overview[full_list(columns[11:14] + [columns[20]])]
     surge = overview[full_list(columns[21:24])]
     hr = overview[full_list(columns[38:40])]
     coordination = overview[full_list(columns[40:43])]
     logistics = overview[full_list(columns[43:46])]
-    im = overview[full_list(columns[46:51])]
+    im = overview[columns[46:51]]
     finance = overview[full_list(columns[51:55])]
-    delivery = overview[full_list(columns[55:57])] # add percentage of targeted population receiving assistance and % of planned budget implementation
-    security = overview[full_list(columns[59:61])]
-    return assessment, resource_mobilization, surge, hr, coordination, logistics, im, finance, delivery, security
+    # delivery = overview[full_list(columns[55:57])] # add percentage of targeted population receiving assistance and % of planned budget implementation
+    security = overview[columns[59:61]]
+    print(assessment)
+
+    assessment.to_csv(f"{folder}assessment.csv", index=True)
+    resource_mobilization.to_csv(f"{folder}planning_and_resource_mobilization.csv", index=True)
+    surge.to_csv(f"{folder}surge.csv", index=True)
+    hr.to_csv(f"{folder}hr_planning_and_recruitement.csv", index=True)
+    coordination.to_csv(f"{folder}coordination.csv", index=True)
+    logistics.to_csv(f"{folder}procurement_and_logistics.csv", index=True)
+    im.to_csv(f"{folder}information_management.csv", index=True)
+    finance.to_csv(f"{folder}financial_management.csv", index=True)
+    # delivery.to_csv(f"{folder}programme_delivery.csv", index=True)
+    security.to_csv(f"{folder}security.csv", index=True)
 
 def convert_date(date_str):
     if date_str == "-" or pd.isna(date_str):
@@ -320,11 +360,23 @@ def merge_dfs(folder):
     
     return bucket
 
-def generate_overview():
+def generate_overview(sheets):
     ea = process_ea(merge_dfs("../organized_ea"))
     dref = process_dref(merge_dfs("../organized_dref"))
     mcmr = process_mcmr(merge_dfs("../organized_mcmr"))
     pcce = process_pcce(merge_dfs("../organized_pcce"))
 
-
-generate_overview()
+    key = "achievements"
+    for sheet_name, sheet in sheets.items():
+        if "EA" in sheet_name:
+            area_split_ea(ea[key], sheet.columns.tolist())
+        elif "DREF" in sheet_name:
+            area_split_dref(dref[key], sheet.columns.tolist())
+        elif "MCMR" in sheet_name:
+            area_split_mcmr(mcmr[key], sheet.columns.tolist())
+        elif "PCCE" in sheet_name:
+            area_split_pcce(pcce[key], sheet.columns.tolist())
+        else:
+            continue
+    print("All complete")
+    

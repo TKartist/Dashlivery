@@ -1,4 +1,4 @@
-Ref, Disaster Escalation Date ,Region,Country,ISO,Appeal Code,Key initial longer-term positions (for the Regional/multi country level) identified by operational leadership and requested via submission in the HR system, one week after the EA publication, one week after the EA publication,Disaster Type ,Classification ,EWTS Varient 
+Ref, Disaster Escalation Date ,Region,Country,ISO,Appeal Code,Appeal Name ,Disaster Type ,Classification ,EWTS Varient 
 MCMRNepalMDRS2002,2024-06-10,Asia,Nepal,,MDRS2002,Earthquake Minu South Asia,Earthquake,Orange,Multi Country
 MCMRZambiaMDRS7890,2024-07-11,Africa,Zambia,,MDRS7890,Covid 19 Africa,Epidemic,Orange,Multi Country
 MCMRJordanMDRS1234,2024-08-15,MENA,Jordan,,MDRS1234,Civil wat MENA,Civil Unrest,Red,Multi Country

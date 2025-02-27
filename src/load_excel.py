@@ -132,11 +132,3 @@ def organize_sheets(sheets):
         else:
             print("Sheet name not recognized")
     print("organization complete")
-
-def main():
-    filename = "../dummy_data/ewts_master_dummy_data.xlsx"
-    sheet_dict = load_excel(filename)
-    organize_sheets(sheet_dict)
-
-if __name__ == "__main__":
-    main()
