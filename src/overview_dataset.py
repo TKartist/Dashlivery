@@ -19,26 +19,60 @@ Needed data for overview:
 # uncomplete IF it the due date has passed
 # Missing, Not Achieved, Achieved Early, Achieved Late, Achieved
 
+def full_list(list):
+    output = []
+    for col in list:
+        output.append(col)
+        output.append(f"{col} (days)")
+    return output
+
+
 def area_split_ea(overview, columns):
-    assessment = overview[columns[10]]
-    resource_mobilization = overview[columns[11:14] + [columns[26]]] # add EA coverage
-    surge = overview[columns[27:30]] # add % related values to the surge (rrp)
-    hr = overview[columns[43:45]] # add % related values to the hr (rrp)
-    coordination = overview[columns[49:52]] # missing joint statement in master data
-    logistics = overview[columns[52:55]]
-    im = overview[columns[55:59]]
-    finance = overview[columns[61:65]]
-    security = overview[columns[73:75]]
+    assessment = overview[full_list(columns[10])]
+    resource_mobilization = overview[full_list(columns[11:14] + [columns[26]])] # add EA coverage
+    surge = overview[full_list(columns[27:30])] # add % related values to the surge (rrp)
+    hr = overview[full_list(columns[43:45])] # add % related values to the hr (rrp)
+    coordination = overview[full_list(columns[49:52])] # missing joint statement in master data
+    logistics = overview[full_list(columns[52:55])]
+    im = overview[full_list(columns[55:59])]
+    finance = overview[full_list(columns[61:65])]
+    security = overview[full_list(columns[73:75])]
     return assessment, resource_mobilization, surge, hr, coordination, logistics, im, finance, security
 
 def area_split_dref(overview, columns):
-    return ""
+    assessment = overview[full_list(columns[10])]
+    risk = overview[full_list(columns[11:13])]
+    resource_mobilization = overview[full_list(columns[13:15])]
+    surge = overview[full_list(columns[15:18])]
+    logistics = overview[full_list(columns[31:33])]
+    finance = overview[full_list(columns[33:37])]
+    delivery = overview[full_list([columns[37]])] # add targeted population, ehi distribution, and implementation rate
+    security = overview[full_list(columns[50:52])]
+    return assessment, risk, resource_mobilization, surge, logistics, finance, delivery, security
 
 def area_split_mcmr(overview, columns):
-    return ""
+    resource_mobilization = overview[full_list(columns[10:13] + [columns[37]])] # add coverage
+    surge = overview[full_list(columns[19:21])] # add % related values to the surge (rrp)
+    hr = overview[full_list(columns[34:36])] # add % related values to the hr (rrp)
+    coordination = overview[full_list(columns[36])]
+    logistics = overview[full_list(columns[37:40])]
+    im = overview[full_list(columns[40])]
+    finance = overview[full_list(columns[41:43])]
+    delivery = overview[full_list(columns[44])] # add cumulative % targeted population
+    return resource_mobilization, surge, hr, coordination, logistics, im, finance, delivery
 
 def area_split_pcce(overview, columns):
-    return ""
+    assessment = overview[full_list(columns[10])]
+    resource_mobilization = overview[full_list(columns[11:14] + [columns[20]])]
+    surge = overview[full_list(columns[21:24])]
+    hr = overview[full_list(columns[38:40])]
+    coordination = overview[full_list(columns[40:43])]
+    logistics = overview[full_list(columns[43:46])]
+    im = overview[full_list(columns[46:51])]
+    finance = overview[full_list(columns[51:55])]
+    delivery = overview[full_list(columns[55:57])] # add percentage of targeted population receiving assistance and % of planned budget implementation
+    security = overview[full_list(columns[59:61])]
+    return assessment, resource_mobilization, surge, hr, coordination, logistics, im, finance, delivery, security
 
 def convert_date(date_str):
     if date_str == "-" or pd.isna(date_str):
