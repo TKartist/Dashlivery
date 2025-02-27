@@ -15,6 +15,31 @@ Needed data for overview:
 - Missing columns (to be filled) -> for data completeness
 '''
 
+# missing data if it the date is in the future
+# uncomplete IF it the due date has passed
+# Missing, Not Achieved, Achieved Early, Achieved Late, Achieved
+
+def area_split_ea(overview, columns):
+    assessment = overview[columns[10]]
+    resource_mobilization = overview[columns[11:14] + [columns[26]]] # add EA coverage
+    surge = overview[columns[27:30]] # add % related values to the surge (rrp)
+    hr = overview[columns[43:45]] # add % related values to the hr (rrp)
+    coordination = overview[columns[49:52]] # missing joint statement in master data
+    logistics = overview[columns[52:55]]
+    im = overview[columns[55:59]]
+    finance = overview[columns[61:65]]
+    security = overview[columns[73:75]]
+    return assessment, resource_mobilization, surge, hr, coordination, logistics, im, finance, security
+
+def area_split_dref(overview, columns):
+    return ""
+
+def area_split_mcmr(overview, columns):
+    return ""
+
+def area_split_pcce(overview, columns):
+    return ""
+
 def convert_date(date_str):
     if date_str == "-" or pd.isna(date_str):
         return pd.NaT
