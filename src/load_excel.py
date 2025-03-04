@@ -21,114 +21,84 @@ def load_excel(path):
 def organize_ea(sheet):
     root = "../organized_ea/"
     col_name = sheet.columns.tolist()
-    sheet["Ref"] = "EA" + sheet[col_name[3]] + sheet[col_name[5]]
-    print(sheet)
-    disasters = sheet.loc[:, col_name[:10]]
-    operational_progresses = sheet.loc[:, [col_name[0]] + col_name[10:14] + col_name[26:30] + col_name[43:49] + col_name[73:]]
-    financial_progress = sheet.loc[:, [col_name[0]] + col_name[56:61]]
-    dashboard_progress = sheet.loc[:, [col_name[0]] + col_name[51:56]]
-    sec_coverage = sheet.loc[:, [col_name[0]] + col_name[14:20]]
-    fed_coverage = sheet.loc[:, [col_name[0]] + col_name[20:26]]
-    rrp = sheet.loc[:, [col_name[0]] + col_name[30:43]]
-    nfi = sheet.loc[:, [col_name[0]] + col_name[49:51] + col_name[61:64]]
-    operational_achievements = sheet.loc[:, [col_name[0]] + col_name[64:73]]
+    sheet["Ref"] = "EA" + sheet[col_name[4]] + sheet[col_name[6]]
+    disasters = sheet.loc[:, col_name[:11]]
+    operational_progresses = sheet.loc[:, [col_name[0]] + col_name[11:15] + col_name[27:31] + col_name[44:50] + col_name[74:]]
+    financial_progress = sheet.loc[:, [col_name[0]] + col_name[57:62]]
+    dashboard_progress = sheet.loc[:, [col_name[0]] + col_name[52:57]]
+    sec_coverage = sheet.loc[:, [col_name[0]] + col_name[15:21]]
+    fed_coverage = sheet.loc[:, [col_name[0]] + col_name[21:27]]
+    rrp = sheet.loc[:, [col_name[0]] + col_name[31:44]]
+    nfi = sheet.loc[:, [col_name[0]] + col_name[50:52] + col_name[62:65]]
+    operational_achievements = sheet.loc[:, [col_name[0]] + col_name[65:74]]
     
     sec_coverage = sec_coverage.replace('\n', ' ', regex=True)
     sec_coverage = sec_coverage.replace(' ', ' ', regex=True)
     
-    disasters.to_csv(f"{root}disasters.csv", index=False)
-    operational_progresses.to_csv(f"{root}operational_progresses.csv", index=False)
-    financial_progress.to_csv(f"{root}financial_progress.csv", index=False)
-    dashboard_progress.to_csv(f"{root}dashboard_progress.csv", index=False)
-    sec_coverage.to_csv(f"{root}sec_coverage.csv", index=False)
-    fed_coverage.to_csv(f"{root}fed_coverage.csv", index=False)
-    rrp.to_csv(f"{root}rrp.csv", index=False)
-    nfi.to_csv(f"{root}nfi.csv", index=False)
-    operational_achievements.to_csv(f"{root}operational_achievements.csv", index=False)
 
     print("EA master data organized")
-
+    return {"disasters" : disasters.set_index("Ref"), "operational_progresses" : operational_progresses.set_index("Ref"), "financial_progress" : financial_progress.set_index("Ref"), "dashboard_progress" : dashboard_progress.set_index("Ref"), "sec_coverage" : sec_coverage.set_index("Ref"), "fed_coverage" : fed_coverage.set_index("Ref"), "rrp" : rrp.set_index("Ref"), "nfi" : nfi.set_index("Ref"), "operational_achievements" : operational_achievements.set_index("Ref")}
 
 def organize_dref(sheet):
-    root = "../organized_dref/"
     col_name = sheet.columns.tolist()
-    sheet["Ref"] = "DREF" + sheet[col_name[3]] + sheet[col_name[5]] 
-
-    disasters = sheet.loc[:, col_name[:10]]
-    operational_progresses = sheet.loc[:, [col_name[0]] + col_name[10:18] + col_name[31:33] + col_name[50:52]]
-    rrp = sheet.loc[:, [col_name[0]] + col_name[18:31]]
-    financial_progress = sheet.loc[:, [col_name[0]] + col_name[33:40]]
-    operational_achievements = sheet.loc[:, [col_name[0]] + col_name[40:50]]
-
-    disasters.to_csv(f"{root}disasters.csv", index=False)
-    operational_progresses.to_csv(f"{root}operational_progresses.csv", index=False)
-    financial_progress.to_csv(f"{root}financial_progress.csv", index=False)
-    rrp.to_csv(f"{root}rrp.csv", index=False)
-    operational_achievements.to_csv(f"{root}operational_achievements.csv", index=False)
+    sheet["Ref"] = "DREF" + sheet[col_name[4]] + sheet[col_name[6]]
+    disasters = sheet.loc[:, col_name[:11]]
+    operational_progresses = sheet.loc[:, [col_name[0]] + col_name[11:19] + col_name[32:34] + col_name[51:53]]
+    rrp = sheet.loc[:, [col_name[0]] + col_name[19:32]]
+    financial_progress = sheet.loc[:, [col_name[0]] + col_name[34:41]]
+    operational_achievements = sheet.loc[:, [col_name[0]] + col_name[41:51]]
 
     print("DREF master data organized")
+    return {"disasters": disasters.set_index("Ref"), "operational_progresses": operational_progresses.set_index("Ref"), "rrp": rrp.set_index("Ref"), "financial_progress": financial_progress.set_index("Ref"), "operational_achievements": operational_achievements.set_index("Ref")}
 
 def organize_mcmr(sheet):
     root = "../organized_mcmr/"
     col_name = sheet.columns.tolist()
     sheet["Ref"] = "MCMR" + sheet[col_name[4]] + sheet[col_name[6]] 
-
     disasters = sheet.loc[:, col_name[:11]]
-    operational_progresses = sheet.loc[:, [col_name[0]] + col_name[10:13] + col_name[19:21] + col_name[34:41]]
-    total_coverage = sheet.loc[:, [col_name[0]] + col_name[13:19]]
-    rrp = sheet.loc[:, [col_name[0]] + col_name[21:34]]
-    financial_progress = sheet.loc[:, [col_name[0]] + col_name[41:43]]
-    operational_achievements = sheet.loc[:, [col_name[0]] + col_name[43:]]
+    operational_progresses = sheet.loc[:, [col_name[0]] + col_name[11:14] + col_name[20:22] + col_name[35:42]]
+    total_coverage = sheet.loc[:, [col_name[0]] + col_name[14:20]]
+    rrp = sheet.loc[:, [col_name[0]] + col_name[22:35]]
+    financial_progress = sheet.loc[:, [col_name[0]] + col_name[42:44]]
+    operational_achievements = sheet.loc[:, [col_name[0]] + col_name[44:]]
 
     total_coverage = total_coverage.replace('\n', ' ', regex=True)
     total_coverage = total_coverage.replace(' ', ' ', regex=True)
 
-    disasters.to_csv(f"{root}disasters.csv", index=False)
-    operational_progresses.to_csv(f"{root}operational_progresses.csv", index=False)
-    total_coverage.to_csv(f"{root}total_coverage.csv", index=False)
-    rrp.to_csv(f"{root}rrp.csv", index=False)
-    financial_progress.to_csv(f"{root}financial_progress.csv", index=False)
-    operational_achievements.to_csv(f"{root}operational_achievements.csv", index=False)
-    
     print("MCMR master data organized")
+    return {"disasters" : disasters.set_index("Ref"), "operational_progresses" : operational_progresses.set_index("Ref"), "total_coverage" : total_coverage.set_index("Ref"), "rrp" : rrp.set_index("Ref"), "financial_progress" : financial_progress.set_index("Ref"), "operational_achievements" : operational_achievements.set_index("Ref")}
 
 
 def organize_protracted(sheet):
     root = "../organized_pcce/"
     col_name = sheet.columns.tolist()
-    sheet["Ref"] = "PCCE" + sheet[col_name[3]] + sheet[col_name[5]]
-
-    disasters = sheet.loc[:, col_name[:10]]
-    operational_progresses = sheet.loc[:, [col_name[0]] + col_name[10:14] + col_name[20:24] + col_name[38:46] + col_name[56:57] + col_name[59:61]]
-    coverage = sheet.loc[:, [col_name[0]] + col_name[14:20]]
-    rrp = sheet.loc[:, [col_name[0]] + col_name[24:38]]
-    dashboard = sheet.loc[:, [col_name[0]] + col_name[46:51]]
-    financial_progress = sheet.loc[:, [col_name[0]] + col_name[51:56]]
-    operational_achievements = sheet.loc[:, [col_name[0]] + col_name[57:59]]
+    sheet["Ref"] = "PCCE" + sheet[col_name[4]] + sheet[col_name[6]]
+    disasters = sheet.loc[:, col_name[:11]]
+    operational_progresses = sheet.loc[:, [col_name[0]] + col_name[11:15] + col_name[21:25] + col_name[39:47] + col_name[57:58] + col_name[60:62]]
+    coverage = sheet.loc[:, [col_name[0]] + col_name[15:21]]
+    rrp = sheet.loc[:, [col_name[0]] + col_name[25:39]]
+    dashboard = sheet.loc[:, [col_name[0]] + col_name[47:52]]
+    financial_progress = sheet.loc[:, [col_name[0]] + col_name[52:57]]
+    operational_achievements = sheet.loc[:, [col_name[0]] + col_name[58:60]]
 
     coverage = coverage.replace('\n', ' ', regex=True)
     coverage = coverage.replace(' ', ' ', regex=True)
 
-    disasters.to_csv(f"{root}disasters.csv", index=False)
-    operational_progresses.to_csv(f"{root}operational_progresses.csv", index=False)
-    coverage.to_csv(f"{root}coverage.csv", index=False)
-    rrp.to_csv(f"{root}rrp.csv", index=False)
-    dashboard.to_csv(f"{root}dashboard.csv", index=False)
-    financial_progress.to_csv(f"{root}financial_progress.csv", index=False)
-    operational_achievements.to_csv(f"{root}operational_achievements.csv", index=False)
-
     print("PCCE master data organized")
+    return {"disasters" : disasters.set_index("Ref"), "operational_progresses" : operational_progresses.set_index("Ref"), "coverage" : coverage.set_index("Ref"), "rrp" : rrp.set_index("Ref"), "dashboard" : dashboard.set_index("Ref"), "financial_progress" : financial_progress.set_index("Ref"), "operational_achievements" : operational_achievements.set_index("Ref")}
 
 def organize_sheets(sheets):
+    bucket = {}
     for sheet_name, sheet in sheets.items():
         if "DREF" in sheet_name:
-            organize_dref(sheet)
+            bucket["DREF"] = organize_dref(sheet)
         elif "EA" in sheet_name:
-            organize_ea(sheet)
+            bucket["EA"] = organize_ea(sheet)
         elif "MCMR" in sheet_name:
-            organize_mcmr(sheet)
+            bucket["MCMR"] = organize_mcmr(sheet)
         elif "Protracted" in sheet_name:
-            organize_protracted(sheet)
+            bucket["Protracted"] = organize_protracted(sheet)
         else:
             print("Sheet name not recognized")
     print("organization complete")
+    return bucket

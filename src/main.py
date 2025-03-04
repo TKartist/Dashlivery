@@ -5,8 +5,8 @@ from overview_dataset import generate_overview
 def main():
     filename = "../dummy_data/ewts_master_dummy_data.xlsx"
     sheets = load_excel(filename)
-    organize_sheets(sheets)
-    generate_overview(sheets)
+    buckets = organize_sheets(sheets)
+    generate_overview(buckets, sheets)
 
 
 if __name__ == "__main__":
