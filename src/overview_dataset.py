@@ -141,14 +141,13 @@ def determine_done(row):
 
 def msr_ready(row ,limit):
     msr_column = "MSR ready (compliant or resource allocated)"
-    if pd.isna(row[0]) or pd.isna(row[1]):
+    if (pd.isna(row[1]) or row[1] == "-") and (pd.isna(row[2]) or row[2] == "-"):
         return pd.Series(["Not Achieved", -1], index=[msr_column, f"{msr_column} (days)"])
-    elif pd.isna(row[0]):
-        days = (row[1] - datetime.now()).days
+    elif pd.isna(row[1]) or row[1] == "-":
+        days = (row[2] - row[0]).days
         return pd.Series(["Achieved Late" if days > limit else "Achieved Early", days], index=[msr_column, f"{msr_column} (days)"])
     else:
-        
-        days = (row[0] - datetime.now()).days
+        days = (row[1] - row[0]).days
         return pd.Series(["Achieved Late" if days > limit else "Achieved Early", days], index=[msr_column, f"{msr_column} (days)"])
 
 def process_ea(ea):
@@ -195,7 +194,7 @@ def process_ea(ea):
     ea[key][on[11]] = op[on[11]].apply(determine_done)
     ea[key][[on[12], f"{on[12]} (days)"]] = pd.merge(start_date, op[on[12]], left_index=True, right_index=True).apply(determine_status, args=(2,), axis=1)
     ea[key][[on[13], f"{on[13]} (days)"]] = pd.merge(start_date, op[on[13]], left_index=True, right_index=True).apply(determine_status, args=(7,), axis=1)
-    ea[key][[msr_column, f"{msr_column} (days)"]] = pd.merge(op[on[14]], op[on[15]], left_index=True, right_index=True).apply(msr_ready, args=(7,), axis=1)
+    ea[key][[msr_column, f"{msr_column} (days)"]] = pd.merge(start_date, op[[on[14], on[15]]], left_index=True, right_index=True).apply(msr_ready, args=(7,), axis=1)
     ea[key][[nn[0], f"{nn[0]} (days)"]] = pd.merge(start_date, nfi[nn[0]], left_index=True, right_index=True).apply(determine_status, args=(11,), axis=1)
     ea[key][[nn[1], f"{nn[1]} (days)"]] = pd.merge(start_date, nfi[nn[1]], left_index=True, right_index=True).apply(determine_status, args=(14,), axis=1)
     ea[key][[nn[2], f"{nn[2]} (days)"]] = pd.merge(start_date, nfi[nn[2]], left_index=True, right_index=True).apply(determine_status, args=(28,), axis=1)
@@ -247,7 +246,7 @@ def process_dref(dref):
     dref[key][[on[7], f"{on[7]} (days)"]] = pd.merge(start_date, op[on[7]], left_index=True, right_index=True).apply(determine_status, args=(3,), axis=1)
     dref[key][[on[8], f"{on[8]} (days)"]] = pd.merge(start_date, op[on[8]], left_index=True, right_index=True).apply(determine_status, args=(11,), axis=1)
     dref[key][[on[9], f"{on[9]} (days)"]] = pd.merge(start_date, op[on[9]], left_index=True, right_index=True).apply(determine_status, args=(14,), axis=1)
-    dref[key][[msr_column, f"{msr_column} (days)"]] = pd.merge(op[on[10]], op[on[11]], left_index=True, right_index=True).apply(msr_ready, args=(7,), axis=1)
+    dref[key][[msr_column, f"{msr_column} (days)"]] = pd.merge(start_date, op[[on[10], on[11]]], left_index=True, right_index=True).apply(msr_ready, args=(7,), axis=1)
     
     dref[key][[fn[0], f"{fn[0]} (days)"]] = pd.merge(start_date, fin[fn[0]], left_index=True, right_index=True).apply(determine_status, args=(11,), axis=1)
     dref[key][[fn[1], f"{fn[1]} (days)"]] = pd.merge(start_date, fin[fn[1]], left_index=True, right_index=True).apply(determine_status, args=(14,), axis=1)
@@ -340,13 +339,13 @@ def process_pcce(pcce):
     pcce[key][[on[8], f"{on[8]} (days)"]] = pd.merge(start_date, op[on[8]], left_index=True, right_index=True).apply(determine_status, args=(11,), axis=1)
     pcce[key][[on[9], f"{on[9]} (days)"]] = pd.merge(start_date, op[on[9]], left_index=True, right_index=True).apply(determine_status, args=(13,), axis=1)
     pcce[key][[on[10], f"{on[10]} (days)"]] = pd.merge(start_date, op[on[10]], left_index=True, right_index=True).apply(determine_status, args=(2,), axis=1)
-    pcce[key][on[11]] = op[on[11]].apply(determine_done)
+    pcce[key][[on[11], f"{on[11]} (days)"]] = pd.merge(start_date, op[on[11]], left_index=True, right_index=True).apply(determine_status, args=(7,), axis=1)
     pcce[key][[on[12], f"{on[12]} (days)"]] = pd.merge(start_date, op[on[12]], left_index=True, right_index=True).apply(determine_status, args=(1,), axis=1)
     pcce[key][[on[13], f"{on[13]} (days)"]] = pd.merge(op[on[2]], op[on[13]], left_index=True, right_index=True).apply(determine_status, args=(11,), axis=1)
     pcce[key][[on[14], f"{on[14]} (days)"]] = pd.merge(op[on[2]], op[on[14]], left_index=True, right_index=True).apply(determine_status, args=(11,), axis=1)
     pcce[key][[on[15], f"{on[15]} (days)"]] = pd.merge(op[on[14]], op[on[15]], left_index=True, right_index=True).apply(determine_status, args=(14,), axis=1)
     pcce[key][[on[16], f"{on[16]} (days)"]] = pd.merge(op[on[2]], op[on[16]], left_index=True, right_index=True).apply(determine_status, args=(28,), axis=1)
-    pcce[key][[msr_column, f"{msr_column} (days)"]] = pd.merge(op[on[17]], op[on[18]], left_index=True, right_index=True).apply(msr_ready, args=(7,), axis=1)
+    pcce[key][[msr_column, f"{msr_column} (days)"]] = pd.merge(start_date, op[[on[17], on[18]]], left_index=True, right_index=True).apply(msr_ready, args=(7,), axis=1)
     pcce[key][dn[0]] = dash[dn[0]].apply(determine_done)
     pcce[key][dn[1]] = dash[dn[1]].apply(determine_done)
     pcce[key][dn[2]] = dash[dn[2]].apply(determine_done)
@@ -366,18 +365,6 @@ def process_pcce(pcce):
     return pcce
 
 
-
-def merge_dfs(folder):
-    files = os.listdir(folder)
-    files = [f for f in files if f.endswith('.csv')]
-    bucket = {}
-    for file in files:
-        key = file.split(".")[0]
-        value = pd.read_csv(folder + "/" + file, index_col="Ref")
-        bucket[key] = value
-    
-    return bucket
-
 def generate_overview(bucket, sheets):
     ea = process_ea(bucket["EA"])
     dref = process_dref(bucket["DREF"])
@@ -392,7 +379,7 @@ def generate_overview(bucket, sheets):
             area_split_dref(dref[key], sheet.columns.tolist())
         elif "MCMR" in sheet_name:
             area_split_mcmr(mcmr[key], sheet.columns.tolist())
-        elif "PCCE" in sheet_name:
+        elif "Protracted" in sheet_name:
             area_split_pcce(pcce[key], sheet.columns.tolist())
         else:
             continue

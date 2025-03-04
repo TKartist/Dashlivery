@@ -1,6 +1,6 @@
 Ref,MSR ready (compliant or resource allocated),MSR ready (compliant or resource allocated) (days)
-DREFAfghanistanMDRA111,Not Achieved,-1
-DREFBangladeshMDRB567,Not Achieved,-1
-DREFGermanyMDRG909,Not Achieved,-1
-DREFChileMDRC464,Not Achieved,-1
-DREFEgyptMDRE698,Not Achieved,-1
+DREFAfghanistanMDRA111,Achieved Early,1
+DREFBangladeshMDRB567,Achieved Early,1
+DREFGermanyMDRG909,Achieved Early,2
+DREFChileMDRC464,Achieved Early,1
+DREFEgyptMDRE698,Achieved Late,10
