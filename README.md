@@ -22,23 +22,11 @@ Outlayer of the Dashboard can be viewed here: [***Please Click Here***](https://
 
 
 ## GOAL:
--- Data transformation to clean and organize data for the dashboard
-
-
-## Questions regarding master data (for meeting) :
- -- How do we determine if an operation is active or closed (assuming we have to refer from the dataset)
- -- What does this mean "First round of payment received to the target beneficiaries four weeks after the EA launch for sudden onset (when relevant and when CVA is planned)" (ignore percentages afterwards)
- -- Is it OK to assume the EA approval date is "col M" of "EA_MD" sheet
- -- col BV and BW, shouldn't they be exclusive(???)
- -- BJ to BL -> why is first month date but other 2 percentage
- -- General performance and data completeness (meanings)
-
-
- -- CCA (Crisis Categorization Analysis)
+- Data transformation to clean and organize data for the dashboard
+- CCA (Crisis Categorization Analysis)
 
  
  ## TODO:
- - Complete area based spliting of data
- - handle percentage data according to determined standards
  - Data transformation for scatter (distribution) graph
- 
+ - New variables are added to the dummy data-set, adjust the code to encorporate the change in the data
+ - Optimize the code for easier maintenance in the future

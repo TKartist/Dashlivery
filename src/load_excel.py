@@ -21,8 +21,8 @@ def load_excel(path):
 def organize_ea(sheet):
     root = "../organized_ea/"
     col_name = sheet.columns.tolist()
-    sheet["Ref"] = "EA" + sheet[col_name[3]] + sheet[col_name[5]] 
-
+    sheet["Ref"] = "EA" + sheet[col_name[3]] + sheet[col_name[5]]
+    print(sheet)
     disasters = sheet.loc[:, col_name[:10]]
     operational_progresses = sheet.loc[:, [col_name[0]] + col_name[10:14] + col_name[26:30] + col_name[43:49] + col_name[73:]]
     financial_progress = sheet.loc[:, [col_name[0]] + col_name[56:61]]
@@ -71,9 +71,9 @@ def organize_dref(sheet):
 def organize_mcmr(sheet):
     root = "../organized_mcmr/"
     col_name = sheet.columns.tolist()
-    sheet["Ref"] = "MCMR" + sheet[col_name[3]] + sheet[col_name[5]] 
+    sheet["Ref"] = "MCMR" + sheet[col_name[4]] + sheet[col_name[6]] 
 
-    disasters = sheet.loc[:, col_name[:10]]
+    disasters = sheet.loc[:, col_name[:11]]
     operational_progresses = sheet.loc[:, [col_name[0]] + col_name[10:13] + col_name[19:21] + col_name[34:41]]
     total_coverage = sheet.loc[:, [col_name[0]] + col_name[13:19]]
     rrp = sheet.loc[:, [col_name[0]] + col_name[21:34]]

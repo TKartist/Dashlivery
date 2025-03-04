@@ -30,6 +30,7 @@ def full_list(cols):
 
 
 def area_split_ea(overview, columns):
+    msr_column = "MSR ready (compliant or resource allocated)"
     folder = "../organized_ea/"
     assessment = overview[full_list(columns[10])]
     resource_mobilization = overview[full_list(columns[11:14] + [columns[26]])] # add EA coverage
@@ -39,7 +40,7 @@ def area_split_ea(overview, columns):
     logistics = overview[columns[48:51]]
     im = overview[columns[51:56]]
     finance = overview[columns[56:60]]
-    security = overview[columns[73:75]]
+    security = overview[msr_column, f"{msr_column} (days)"]
 
     assessment.to_csv(f"{folder}assessment.csv", index=True)
     resource_mobilization.to_csv(f"{folder}planning_and_resource_mobilization.csv", index=True)
@@ -53,6 +54,8 @@ def area_split_ea(overview, columns):
 
 def area_split_dref(overview, columns):
     folder = "../organized_dref/"
+    msr_column = "MSR ready (compliant or resource allocated)"
+
     assessment = overview[full_list(columns[10])]
     risk = overview[full_list(columns[11:13])]
     resource_mobilization = overview[full_list(columns[13:15])]
@@ -60,7 +63,7 @@ def area_split_dref(overview, columns):
     logistics = overview[full_list(columns[31:33])]
     finance = overview[full_list(columns[33:37])]
     delivery = overview[full_list([columns[37]])] # add targeted population, ehi distribution, and implementation rate
-    security = overview[columns[50:52]]
+    security = overview[msr_column, f"{msr_column} (days)"]
 
     assessment.to_csv(f"{folder}assessment.csv", index=True)
     risk.to_csv(f"{folder}risk_and_accountability.csv", index=True)
@@ -91,6 +94,8 @@ def area_split_mcmr(overview, columns):
 
 def area_split_pcce(overview, columns):
     folder = "../organized_pcce/"
+    msr_column = "MSR ready (compliant or resource allocated)"
+
     assessment = overview[full_list(columns[10])]
     resource_mobilization = overview[full_list(columns[11:14] + [columns[20]])]
     surge = overview[full_list(columns[21:24])]
@@ -100,8 +105,7 @@ def area_split_pcce(overview, columns):
     im = overview[columns[46:51]]
     finance = overview[full_list(columns[51:55])]
     # delivery = overview[full_list(columns[55:57])] # add percentage of targeted population receiving assistance and % of planned budget implementation
-    security = overview[columns[59:61]]
-    print(assessment)
+    security = overview[msr_column, f"{msr_column} (days)"]
 
     assessment.to_csv(f"{folder}assessment.csv", index=True)
     resource_mobilization.to_csv(f"{folder}planning_and_resource_mobilization.csv", index=True)
@@ -135,12 +139,26 @@ def determine_done(row):
         return "Not Achieved"
     return "Achieved"
 
+def msr_ready(row ,limit):
+    msr_column = "MSR ready (compliant or resource allocated)"
+    if pd.isna(row[0]) or pd.isna(row[1]):
+        return pd.Series(["Not Achieved", -1], index=[msr_column, f"{msr_column} (days)"])
+    elif pd.isna(row[0]):
+        days = (row[1] - datetime.now()).days
+        return pd.Series(["Achieved Late" if days > limit else "Achieved Early", days], index=[msr_column, f"{msr_column} (days)"])
+    else:
+        
+        days = (row[0] - datetime.now()).days
+        return pd.Series(["Achieved Late" if days > limit else "Achieved Early", days], index=[msr_column, f"{msr_column} (days)"])
+
 def process_ea(ea):
     op = ea["operational_progresses"].copy()
     dash = ea["dashboard_progress"].copy()
     fin = ea["financial_progress"].copy()
     nfi = ea["nfi"].copy()
     key = "achievements"
+
+    msr_column = "MSR ready (compliant or resource allocated)"
 
     ea[key] = pd.DataFrame()
     start_date = ea["disasters"]["Trigger Date "].apply(convert_date)
@@ -165,43 +183,45 @@ def process_ea(ea):
     ea[key].set_index("Ref", inplace=True)
     ea[key][[on[0], f"{on[0]} (days)"]] = pd.merge(start_date, op[on[0]], left_index=True, right_index=True).apply(determine_status, args=(3,), axis=1)
     ea[key][[on[1], f"{on[1]} (days)"]] = pd.merge(start_date, op[on[1]], left_index=True, right_index=True).apply(determine_status, args=(3,), axis=1)
-    ea[key][[on[2], f"{on[2]} (days)"]] = pd.merge(op[on[1]], op[on[2]], left_index=True, right_index=True).apply(determine_status, args=(1,), axis=1)
-    ea[key][[on[3], f"{on[3]} (days)"]] = pd.merge(op[on[2]], op[on[3]], left_index=True, right_index=True).apply(determine_status, args=(7,), axis=1)
-    ea[key][[on[4], f"{on[4]} (days)"]] = pd.merge(op[on[3]], op[on[4]], left_index=True, right_index=True).apply(determine_status, args=(14,), axis=1)
+    ea[key][[on[2], f"{on[2]} (days)"]] = pd.merge(start_date, op[on[2]], left_index=True, right_index=True).apply(determine_status, args=(4,), axis=1)
+    ea[key][[on[3], f"{on[3]} (days)"]] = pd.merge(start_date, op[on[3]], left_index=True, right_index=True).apply(determine_status, args=(11,), axis=1)
+    ea[key][[on[4], f"{on[4]} (days)"]] = pd.merge(start_date, op[on[4]], left_index=True, right_index=True).apply(determine_status, args=(18,), axis=1)
     ea[key][[on[5], f"{on[5]} (days)"]] = pd.merge(start_date, op[on[5]], left_index=True, right_index=True).apply(determine_status, args=(1,), axis=1)
-    ea[key][[on[6], f"{on[6]} (days)"]] = pd.merge(op[on[5]], op[on[6]], left_index=True, right_index=True).apply(determine_status, args=(0,), axis=1)
-    ea[key][[on[7], f"{on[7]} (days)"]] = pd.merge(op[on[6]], op[on[7]], left_index=True, right_index=True).apply(determine_status, args=(2,), axis=1)
-    ea[key][[on[8], f"{on[8]} (days)"]] = pd.merge(op[on[2]], op[on[8]], left_index=True, right_index=True).apply(determine_status, args=(7,), axis=1)
-    ea[key][[on[9], f"{on[9]} (days)"]] = pd.merge(op[on[8]], op[on[9]], left_index=True, right_index=True).apply(determine_status, args=(2,), axis=1)
+    ea[key][[on[6], f"{on[6]} (days)"]] = pd.merge(start_date, op[on[6]], left_index=True, right_index=True).apply(determine_status, args=(2,), axis=1)
+    ea[key][[on[7], f"{on[7]} (days)"]] = pd.merge(start_date, op[on[7]], left_index=True, right_index=True).apply(determine_status, args=(3,), axis=1)
+    ea[key][[on[8], f"{on[8]} (days)"]] = pd.merge(start_date, op[on[8]], left_index=True, right_index=True).apply(determine_status, args=(11,), axis=1)
+    ea[key][[on[9], f"{on[9]} (days)"]] = pd.merge(start_date, op[on[9]], left_index=True, right_index=True).apply(determine_status, args=(13,), axis=1)
     ea[key][[on[10], f"{on[10]} (days)"]] = pd.merge(start_date, op[on[10]], left_index=True, right_index=True).apply(determine_status, args=(2,), axis=1)
     ea[key][on[11]] = op[on[11]].apply(determine_done)
-    ea[key][[on[12], f"{on[12]} (days)"]] = pd.merge(start_date, op[on[12]], left_index=True, right_index=True).apply(determine_status, args=(1,), axis=1)
-    ea[key][[on[13], f"{on[13]} (days)"]] = pd.merge(op[on[2]], op[on[13]], left_index=True, right_index=True).apply(determine_status, args=(7,), axis=1)
-    ea[key][on[14]] = op[on[14]].apply(determine_done)
-    ea[key][on[15]] = op[on[15]].apply(determine_done)
-    ea[key][[nn[0], f"{nn[0]} (days)"]] = pd.merge(op[on[2]], nfi[nn[0]], left_index=True, right_index=True).apply(determine_status, args=(7,), axis=1)
-    ea[key][[nn[1], f"{nn[1]} (days)"]] = pd.merge(nfi[nn[0]], nfi[nn[1]], left_index=True, right_index=True).apply(determine_status, args=(3,), axis=1)
+    ea[key][[on[12], f"{on[12]} (days)"]] = pd.merge(start_date, op[on[12]], left_index=True, right_index=True).apply(determine_status, args=(2,), axis=1)
+    ea[key][[on[13], f"{on[13]} (days)"]] = pd.merge(start_date, op[on[13]], left_index=True, right_index=True).apply(determine_status, args=(7,), axis=1)
+    ea[key][msr_column, f"{msr_column} (days)"] = pd.merge(op[on[14]], op[on[15]], left_index=True, right_index=True).apply(msr_ready, args=(7,), axis=1)
+    ea[key][[nn[0], f"{nn[0]} (days)"]] = pd.merge(start_date, nfi[nn[0]], left_index=True, right_index=True).apply(determine_status, args=(11,), axis=1)
+    ea[key][[nn[1], f"{nn[1]} (days)"]] = pd.merge(start_date, nfi[nn[1]], left_index=True, right_index=True).apply(determine_status, args=(14,), axis=1)
+    ea[key][[nn[2], f"{nn[2]} (days)"]] = pd.merge(start_date, nfi[nn[2]], left_index=True, right_index=True).apply(determine_status, args=(28,), axis=1)
     ea[key][dn[0]] = dash[dn[0]].apply(determine_done)
     ea[key][dn[1]] = dash[dn[1]].apply(determine_done)
     ea[key][dn[2]] = dash[dn[2]].apply(determine_done)
     ea[key][dn[3]] = dash[dn[3]].apply(determine_done)
     ea[key][dn[4]] = dash[dn[4]].apply(determine_done)
-    ea[key][[fn[0], f"{fn[0]} (days)"]] = pd.merge(op[on[2]], fin[fn[0]], left_index=True, right_index=True).apply(determine_status, args=(7,), axis=1)
-    ea[key][[fn[1], f"{fn[1]} (days)"]] = pd.merge(op[on[2]], fin[fn[1]], left_index=True, right_index=True).apply(determine_status, args=(10,), axis=1)
-    ea[key][[fn[2], f"{fn[2]} (days)"]] = pd.merge(fin[fn[1]], fin[fn[2]], left_index=True, right_index=True).apply(determine_status, args=(1,), axis=1)
-    ea[key][[fn[3], f"{fn[3]} (days)"]] = pd.merge(fin[fn[1]], fin[fn[3]], left_index=True, right_index=True).apply(determine_status, args=(3,), axis=1)
+    ea[key][[fn[0], f"{fn[0]} (days)"]] = pd.merge(start_date, fin[fn[0]], left_index=True, right_index=True).apply(determine_status, args=(11,), axis=1)
+    ea[key][[fn[1], f"{fn[1]} (days)"]] = pd.merge(start_date, fin[fn[1]], left_index=True, right_index=True).apply(determine_status, args=(14,), axis=1)
+    ea[key][[fn[2], f"{fn[2]} (days)"]] = pd.merge(start_date, fin[fn[2]], left_index=True, right_index=True).apply(determine_status, args=(16,), axis=1)
+    ea[key][[fn[3], f"{fn[3]} (days)"]] = pd.merge(start_date, fin[fn[3]], left_index=True, right_index=True).apply(determine_status, args=(20,), axis=1)
+    ea[key][[fn[4], f"{fn[4]} (days)"]] = pd.merge(start_date, fin[fn[4]], left_index=True, right_index=True).apply(determine_status, args=(32,), axis=1)
     ea[key]["Achieved"] = ea[key].apply(lambda x: x.str.startswith("Achieved").sum(), axis=1)
     ea[key]["Not Achieved"] = ea[key].apply(lambda x: x.str.contains("Not Achieved").sum(), axis=1)
     ea[key]["Achieved Early"] = ea[key].apply(lambda x: x.str.contains("Achieved Early").sum(), axis=1)
     ea[key]["Achieved Late"] = ea[key].apply(lambda x: x.str.contains("Achieved Late").sum(), axis=1)
     ea[key] = ea[key][ea[key].columns[-4:].tolist() + ea[key].columns[:-4].tolist()]
-    ea[key].to_csv("../organized_ea/ea_overview.csv", index=True)
+    
     return ea
 
 def process_dref(dref):
     op = dref["operational_progresses"].copy()
     fin = dref["financial_progress"].copy()
     key = "achievements"
+    msr_column = "MSR ready (compliant or resource allocated)"
 
     dref[key] = pd.DataFrame()
     start_date = dref["disasters"]["Trigger Date "].apply(convert_date)
@@ -223,24 +243,22 @@ def process_dref(dref):
     dref[key][[on[3], f"{on[3]} (days)"]] = pd.merge(start_date, op[on[3]], left_index=True, right_index=True).apply(determine_status, args=(14,), axis=1) # check for viability (10 if NS started moving)
     dref[key][[on[4], f"{on[4]} (days)"]] = pd.merge(start_date, op[on[4]], left_index=True, right_index=True).apply(determine_status, args=(1,), axis=1)
     dref[key][[on[5], f"{on[5]} (days)"]] = pd.merge(start_date, op[on[5]], left_index=True, right_index=True).apply(determine_status, args=(1,), axis=1)
-    dref[key][[on[6], f"{on[6]} (days)"]] = pd.merge(op[on[5]], op[on[6]], left_index=True, right_index=True).apply(determine_status, args=(1,), axis=1)
-    dref[key][[on[7], f"{on[7]} (days)"]] = pd.merge(op[on[6]], op[on[7]], left_index=True, right_index=True).apply(determine_status, args=(2,), axis=1)
-    dref[key][[on[8], f"{on[8]} (days)"]] = pd.merge(op[on[4]], op[on[8]], left_index=True, right_index=True).apply(determine_status, args=(7,), axis=1)
-    dref[key][[on[9], f"{on[9]} (days)"]] = pd.merge(op[on[8]], op[on[9]], left_index=True, right_index=True).apply(determine_status, args=(3,), axis=1)
-    dref[key][on[10]] = op[on[10]].apply(determine_done)
-    dref[key][on[11]] = op[on[11]].apply(determine_done)
-    dref[key][[fn[0], f"{fn[0]} (days)"]] = pd.merge(op[on[4]], fin[fn[0]], left_index=True, right_index=True).apply(determine_status, args=(7,), axis=1)
-    dref[key][[fn[1], f"{fn[1]} (days)"]] = pd.merge(fin[fn[0]], fin[fn[1]], left_index=True, right_index=True).apply(determine_status, args=(10,), axis=1)
-    dref[key][[fn[2], f"{fn[2]} (days)"]] = pd.merge(fin[fn[1]], fin[fn[2]], left_index=True, right_index=True).apply(determine_status, args=(1,), axis=1)
-    dref[key][[fn[3], f"{fn[3]} (days)"]] = pd.merge(fin[fn[2]], fin[fn[3]], left_index=True, right_index=True).apply(determine_status, args=(3,), axis=1)
-    dref[key][[fn[4], f"{fn[4]} (days)"]] = pd.merge(op[on[4]], fin[fn[4]], left_index=True, right_index=True).apply(determine_status, args=(30,), axis=1)
+    dref[key][[on[6], f"{on[6]} (days)"]] = pd.merge(start_date, op[on[6]], left_index=True, right_index=True).apply(determine_status, args=(2,), axis=1)
+    dref[key][[on[7], f"{on[7]} (days)"]] = pd.merge(start_date, op[on[7]], left_index=True, right_index=True).apply(determine_status, args=(3,), axis=1)
+    dref[key][[on[8], f"{on[8]} (days)"]] = pd.merge(start_date, op[on[8]], left_index=True, right_index=True).apply(determine_status, args=(11,), axis=1)
+    dref[key][[on[9], f"{on[9]} (days)"]] = pd.merge(start_date, op[on[9]], left_index=True, right_index=True).apply(determine_status, args=(14,), axis=1)
+    dref[key][[msr_column, f"{msr_column} (days)"]] = pd.merge(op[on[10]], op[on[11]], left_index=True, right_index=True).apply(msr_ready, args=(7,), axis=1)
+    
+    dref[key][[fn[0], f"{fn[0]} (days)"]] = pd.merge(start_date, fin[fn[0]], left_index=True, right_index=True).apply(determine_status, args=(11,), axis=1)
+    dref[key][[fn[1], f"{fn[1]} (days)"]] = pd.merge(start_date, fin[fn[1]], left_index=True, right_index=True).apply(determine_status, args=(14,), axis=1)
+    dref[key][[fn[2], f"{fn[2]} (days)"]] = pd.merge(start_date, fin[fn[2]], left_index=True, right_index=True).apply(determine_status, args=(16,), axis=1)
+    dref[key][[fn[3], f"{fn[3]} (days)"]] = pd.merge(start_date, fin[fn[3]], left_index=True, right_index=True).apply(determine_status, args=(20,), axis=1)
+    dref[key][[fn[4], f"{fn[4]} (days)"]] = pd.merge(start_date, fin[fn[4]], left_index=True, right_index=True).apply(determine_status, args=(32,), axis=1)
     dref[key]["Achieved"] = dref[key].apply(lambda x: x.str.startswith("Achieved").sum(), axis=1)
     dref[key]["Not Achieved"] = dref[key].apply(lambda x: x.str.contains("Not Achieved").sum(), axis=1)
     dref[key]["Achieved Early"] = dref[key].apply(lambda x: x.str.contains("Achieved Early").sum(), axis=1)
     dref[key]["Achieved Late"] = dref[key].apply(lambda x: x.str.contains("Achieved Late").sum(), axis=1)
     dref[key] = dref[key][dref[key].columns[-4:].tolist() + dref[key].columns[:-4].tolist()]
-    dref[key].to_csv("../organized_dref/dref_overview.csv", index=True)
-    
 
     return dref
 
@@ -282,7 +300,6 @@ def process_mcmr(mcmr):
     mcmr[key]["Achieved Early"] = mcmr[key].apply(lambda x: x.str.contains("Achieved Early").sum(), axis=1)
     mcmr[key]["Achieved Late"] = mcmr[key].apply(lambda x: x.str.contains("Achieved Late").sum(), axis=1)
     mcmr[key] = mcmr[key][mcmr[key].columns[-4:].tolist() + mcmr[key].columns[:-4].tolist()]
-    mcmr[key].to_csv("../organized_mcmr/mcmr_overview.csv", index=True)
 
     return mcmr
     
@@ -292,6 +309,8 @@ def process_pcce(pcce):
     dash = pcce["dashboard"].copy()
     fin = pcce["financial_progress"].copy()
     key = "achievements"
+    msr_column = "MSR ready (compliant or resource allocated)"
+
 
     pcce[key] = pd.DataFrame()
     start_date = pcce["disasters"][pcce["disasters"].columns[0]].apply(convert_date)
@@ -312,39 +331,38 @@ def process_pcce(pcce):
     pcce[key].set_index("Ref", inplace=True)
     pcce[key][[on[0], f"{on[0]} (days)"]] = op[on[0]].apply(determine_done)
     pcce[key][[on[1], f"{on[1]} (days)"]] = pd.merge(start_date, op[on[1]], left_index=True, right_index=True).apply(determine_status, args=(3,), axis=1)
-    pcce[key][[on[2], f"{on[2]} (days)"]] = pd.merge(op[on[1]], op[on[2]], left_index=True, right_index=True).apply(determine_status, args=(1,), axis=1)
+    pcce[key][[on[2], f"{on[2]} (days)"]] = pd.merge(start_date, op[on[2]], left_index=True, right_index=True).apply(determine_status, args=(4,), axis=1)
     pcce[key][[on[3], f"{on[3]} (days)"]] = pd.merge(op[on[2]], op[on[3]], left_index=True, right_index=True).apply(determine_status, args=(14,), axis=1)
-    pcce[key][[on[4], f"{on[4]} (days)"]] = pd.merge(op[on[3]], op[on[4]], left_index=True, right_index=True).apply(determine_status, args=(28,), axis=1)
+    pcce[key][[on[4], f"{on[4]} (days)"]] = pd.merge(start_date, op[on[4]], left_index=True, right_index=True).apply(determine_status, args=(32,), axis=1)
     pcce[key][[on[5], f"{on[5]} (days)"]] = pd.merge(start_date, op[on[5]], left_index=True, right_index=True).apply(determine_status, args=(5,), axis=1)
-    pcce[key][[on[6], f"{on[6]} (days)"]] = pd.merge(start_date, op[on[6]], left_index=True, right_index=True).apply(determine_status, args=(1,), axis=1)
-    pcce[key][[on[7], f"{on[7]} (days)"]] = pd.merge(op[on[6]], op[on[7]], left_index=True, right_index=True).apply(determine_status, args=(5,), axis=1)
-    pcce[key][[on[8], f"{on[8]} (days)"]] = pd.merge(op[on[2]], op[on[8]], left_index=True, right_index=True).apply(determine_status, args=(7,), axis=1)
-    pcce[key][[on[9], f"{on[9]} (days)"]] = pd.merge(op[on[8]], op[on[9]], left_index=True, right_index=True).apply(determine_status, args=(2,), axis=1)
+    pcce[key][[on[6], f"{on[6]} (days)"]] = pd.merge(start_date, op[on[6]], left_index=True, right_index=True).apply(determine_status, args=(2,), axis=1)
+    pcce[key][[on[7], f"{on[7]} (days)"]] = pd.merge(start_date, op[on[7]], left_index=True, right_index=True).apply(determine_status, args=(6,), axis=1)
+    pcce[key][[on[8], f"{on[8]} (days)"]] = pd.merge(start_date, op[on[8]], left_index=True, right_index=True).apply(determine_status, args=(11,), axis=1)
+    pcce[key][[on[9], f"{on[9]} (days)"]] = pd.merge(start_date, op[on[9]], left_index=True, right_index=True).apply(determine_status, args=(13,), axis=1)
     pcce[key][[on[10], f"{on[10]} (days)"]] = pd.merge(start_date, op[on[10]], left_index=True, right_index=True).apply(determine_status, args=(2,), axis=1)
     pcce[key][on[11]] = op[on[11]].apply(determine_done)
     pcce[key][[on[12], f"{on[12]} (days)"]] = pd.merge(start_date, op[on[12]], left_index=True, right_index=True).apply(determine_status, args=(1,), axis=1)
-    pcce[key][[on[13], f"{on[13]} (days)"]] = pd.merge(op[on[2]], op[on[13]], left_index=True, right_index=True).apply(determine_status, args=(7,), axis=1)
-    pcce[key][[on[14], f"{on[14]} (days)"]] = pd.merge(op[on[2]], op[on[14]], left_index=True, right_index=True).apply(determine_status, args=(7,), axis=1)
-    pcce[key][[on[15], f"{on[15]} (days)"]] = pd.merge(op[on[14]], op[on[15]], left_index=True, right_index=True).apply(determine_status, args=(3,), axis=1)
-    pcce[key][[on[16], f"{on[16]} (days)"]] = pd.merge(op[on[2]], op[on[16]], left_index=True, right_index=True).apply(determine_status, args=(30,), axis=1)
-    pcce[key][on[17]] = op[on[17]].apply(determine_done)
-    pcce[key][on[18]] = op[on[18]].apply(determine_done)
+    pcce[key][[on[13], f"{on[13]} (days)"]] = pd.merge(op[on[2]], op[on[13]], left_index=True, right_index=True).apply(determine_status, args=(11,), axis=1)
+    pcce[key][[on[14], f"{on[14]} (days)"]] = pd.merge(op[on[2]], op[on[14]], left_index=True, right_index=True).apply(determine_status, args=(11,), axis=1)
+    pcce[key][[on[15], f"{on[15]} (days)"]] = pd.merge(op[on[14]], op[on[15]], left_index=True, right_index=True).apply(determine_status, args=(14,), axis=1)
+    pcce[key][[on[16], f"{on[16]} (days)"]] = pd.merge(op[on[2]], op[on[16]], left_index=True, right_index=True).apply(determine_status, args=(28,), axis=1)
+    pcce[key][[msr_column, f"{msr_column} (days)"]] = pd.merge(op[on[17]], op[on[18]], left_index=True, right_index=True).apply(msr_ready, args=(7,), axis=1)
     pcce[key][dn[0]] = dash[dn[0]].apply(determine_done)
     pcce[key][dn[1]] = dash[dn[1]].apply(determine_done)
     pcce[key][dn[2]] = dash[dn[2]].apply(determine_done)
     pcce[key][dn[3]] = dash[dn[3]].apply(determine_done)
     pcce[key][dn[4]] = dash[dn[4]].apply(determine_done)
-    pcce[key][[fn[0], f"{fn[0]} (days)"]] = pd.merge(op[on[2]], fin[fn[0]], left_index=True, right_index=True).apply(determine_status, args=(7,), axis=1)
-    pcce[key][[fn[1], f"{fn[1]} (days)"]] = pd.merge(op[on[2]], fin[fn[1]], left_index=True, right_index=True).apply(determine_status, args=(10,), axis=1)
-    pcce[key][[fn[2], f"{fn[2]} (days)"]] = pd.merge(fin[fn[1]], fin[fn[2]], left_index=True, right_index=True).apply(determine_status, args=(1,), axis=1)
-    pcce[key][[fn[3], f"{fn[3]} (days)"]] = pd.merge(fin[fn[1]], fin[fn[3]], left_index=True, right_index=True).apply(determine_status, args=(3,), axis=1)
-    pcce[key][[fn[3], f"{fn[3]} (days)"]] = pd.merge(op[on[2]], fin[fn[4]], left_index=True, right_index=True).apply(determine_status, args=(7,), axis=1)
+    pcce[key][[fn[0], f"{fn[0]} (days)"]] = pd.merge(start_date, fin[fn[0]], left_index=True, right_index=True).apply(determine_status, args=(11,), axis=1)
+    pcce[key][[fn[1], f"{fn[1]} (days)"]] = pd.merge(start_date, fin[fn[1]], left_index=True, right_index=True).apply(determine_status, args=(14,), axis=1)
+    pcce[key][[fn[2], f"{fn[2]} (days)"]] = pd.merge(start_date, fin[fn[2]], left_index=True, right_index=True).apply(determine_status, args=(16,), axis=1)
+    pcce[key][[fn[3], f"{fn[3]} (days)"]] = pd.merge(start_date, fin[fn[3]], left_index=True, right_index=True).apply(determine_status, args=(20,), axis=1)
+    pcce[key][[fn[4], f"{fn[4]} (days)"]] = pd.merge(start_date, fin[fn[4]], left_index=True, right_index=True).apply(determine_status, args=(32,), axis=1)
     pcce[key]["Achieved"] = pcce[key].apply(lambda x: x.str.startswith("Achieved").sum(), axis=1)
     pcce[key]["Not Achieved"] = pcce[key].apply(lambda x: x.str.contains("Not Achieved").sum(), axis=1)
     pcce[key]["Achieved pccerly"] = pcce[key].apply(lambda x: x.str.contains("Achieved pccerly").sum(), axis=1)
     pcce[key]["Achieved Late"] = pcce[key].apply(lambda x: x.str.contains("Achieved Late").sum(), axis=1)
     pcce[key] = pcce[key][pcce[key].columns[-4:].tolist() + pcce[key].columns[:-4].tolist()]
-    pcce[key].to_csv("../organized_pcce/pcce_overview.csv", index=True)
+
     return pcce
 
 
