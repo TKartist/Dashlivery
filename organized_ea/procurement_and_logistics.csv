@@ -1,6 +1,6 @@
-Ref,Achieved,Not Achieved,Achieved Early,Achieved Late,TBD,Data Completeness,General Performance,Supply chain plan developed between logs and ops coordinator within 1 week of the approved EA,Supply chain plan developed between logs and ops coordinator within 1 week of the approved EA (days),Fully approved and submitted requisitions for NFIs within 1 week of the EA (when relevant) ,Fully approved and submitted requisitions for NFIs within 1 week of the EA (when relevant)  (days),NFI (or emergencies items) being delivered to the country in 3 days since the approval of the  Requistion,NFI (or emergencies items) being delivered to the country in 3 days since the approval of the  Requistion (days)
-EAMozambiqueMDRM989,0,2,0,1,0,0.3333333333333333,0.16666666666666666,Achieved Late,15,Not Achieved,-1,Not Achieved,-1
-EANigeriaMDRN777,0,0,0,3,0,1.0,0.5,Achieved Late,14,Achieved Late,15,Achieved Late,18
-EAPeruMDRO999,0,0,0,3,0,1.0,0.5,Achieved Late,17,Achieved Late,16,Achieved Late,18
-EAMaldivesMDRM787,0,0,3,0,0,1.0,1.0,Achieved Early,-18,Achieved Early,-17,Achieved Early,-13
-EAJordanMDRJ000,0,2,0,1,0,0.3333333333333333,0.16666666666666666,Achieved Late,14,Not Achieved,-1,Not Achieved,-1
+Ref,Achieved,Not Achieved,Missing,Achieved Early,Achieved Late,TBD,DNU,Data Completeness,General Performance,Supply chain plan developed between logs and ops coordinator within 1 week of the approved EA,Supply chain plan developed between logs and ops coordinator within 1 week of the approved EA (days),Fully approved and submitted requisitions for NFIs within 1 week of the EA (when relevant) ,Fully approved and submitted requisitions for NFIs within 1 week of the EA (when relevant)  (days),NFI (or emergencies items) being delivered to the country in 3 days since the approval of the  Requistion,NFI (or emergencies items) being delivered to the country in 3 days since the approval of the  Requistion (days)
+EAMozambiqueMDRM989,0,0,2,1,0,0,0,0.3333333333333333,1.0,Achieved Early,2,Missing,-1,Missing,-1
+EANigeriaMDRN777,0,0,0,1,2,0,0,1.0,0.6666666666666666,Achieved Early,1,Achieved Late,15,Achieved Late,18
+EAPeruMDRO999,0,0,0,1,2,0,0,1.0,0.6666666666666666,Achieved Early,0,Achieved Late,16,Achieved Late,18
+EAMaldivesMDRM787,0,0,0,3,0,0,0,1.0,1.0,Achieved Early,1,Achieved Early,-17,Achieved Early,-13
+EAJordanMDRJ000,0,0,2,1,0,0,0,0.3333333333333333,1.0,Achieved Early,0,Missing,-1,Missing,-1

@@ -1,6 +1,6 @@
-Ref,Achieved,Not Achieved,Achieved Early,Achieved Late,TBD,Data Completeness,General Performance,Hold a mini summit within 48 h of the disaster,Hold a mini summit within 48 h of the disaster (days),review/adapt membership coordination for the context for this specific emergency ,review/adapt membership coordination for the context for this specific emergency  (days),Appropriate membership coordination is in place after 24h of disaster,Appropriate membership coordination is in place after 24h of disaster (days)
-EAMozambiqueMDRM989,0,1,1,1,0,0.6666666666666666,0.5,Not Achieved,-1,Achieved Late,15,Achieved Early,2
-EANigeriaMDRN777,0,1,1,1,0,0.6666666666666666,0.5,Not Achieved,-1,Achieved Late,14,Achieved Early,1
-EAPeruMDRO999,0,1,1,1,0,0.6666666666666666,0.5,Not Achieved,-1,Achieved Late,17,Achieved Early,0
-EAMaldivesMDRM787,0,1,1,1,0,0.6666666666666666,0.5,Not Achieved,-1,Achieved Late,18,Achieved Early,1
-EAJordanMDRJ000,0,1,1,1,0,0.6666666666666666,0.5,Not Achieved,-1,Achieved Late,11,Achieved Early,0
+Ref,Achieved,Not Achieved,Missing,Achieved Early,Achieved Late,TBD,DNU,Data Completeness,General Performance,Hold a mini summit within 48 h of the disaster,Hold a mini summit within 48 h of the disaster (days),The Movement Joint statement is produced 48h after the Mini Summit,The Movement Joint statement is produced 48h after the Mini Summit (days),review/adapt membership coordination for the context for this specific emergency ,review/adapt membership coordination for the context for this specific emergency  (days),Appropriate membership coordination is in place after 24h of disaster,Appropriate membership coordination is in place after 24h of disaster (days)
+EAMozambiqueMDRM989,0,0,0,0,1,0,3,1.0,0.5,DNU,-1,DNU,-1,DNU,-1,Achieved Late,15
+EANigeriaMDRN777,0,0,0,0,1,0,3,1.0,0.5,DNU,-1,DNU,-1,DNU,-1,Achieved Late,14
+EAPeruMDRO999,0,0,0,3,1,0,0,1.0,0.875,Achieved Early,2,Achieved Early,2,Achieved Early,4,Achieved Late,17
+EAMaldivesMDRM787,0,0,0,2,2,0,0,1.0,0.75,Achieved Late,4,Achieved Early,4,Achieved Early,5,Achieved Late,18
+EAJordanMDRJ000,0,0,0,0,1,0,3,1.0,0.5,DNU,-1,DNU,-1,DNU,-1,Achieved Late,11

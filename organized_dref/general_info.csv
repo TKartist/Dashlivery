@@ -1,6 +1,6 @@
-Ref,tracker Status,Trigger Date ,Region,Country,ISO,Appeal Code,Appeal Name ,Disaster Type ,Classification ,EWTS Varient 
-DREFAfghanistanMDRA111,active,2024-06-05,Asia,Afghanistan,AFG,MDRA111,Afghanistan Civil Unrest,Civil Unrest,Red,DREF
-DREFBangladeshMDRB567,not active,2024-07-01,Asia,Bangladesh,BGD,MDRB567,Bangladesh Cyclone,Cyclone,Orange,DREF
-DREFGermanyMDRG909,active,2024-08-10,Europe,Germany,DEU,MDRG909,Germany Earthquake,Earthquake,Orange,DREF
-DREFChileMDRC464,active,2024-08-20,Americas ,Chile,CHL,MDRC464,Chile Fire,Fire,Red,DREF
-DREFEgyptMDRE698,not active,2024-09-02,MENA,Egypt,EGY,MDRE698,Egypt Cyclone,Cyclone,Orange,DREF
+Ref,tracker Status,Trigger Date ,Region,Country,ISO,Appeal Code,Appeal Name ,Disaster Type ,Classification ,EWTS Varient ,Achieved,Not Achieved,Missing,Achieved Early,Achieved Late,TBD,DNU,Data Completeness,General Performance
+DREFAfghanistanMDRA111,active,2024-06-05,Asia,Afghanistan,AFG,MDRA111,Afghanistan Civil Unrest,Civil Unrest,Red,DREF,0,0,0,9,7,0,0,1.0,0.78125
+DREFBangladeshMDRB567,not active,2024-07-01,Asia,Bangladesh,BGD,MDRB567,Bangladesh Cyclone,Cyclone,Orange,DREF,0,0,0,9,7,0,0,1.0,0.78125
+DREFGermanyMDRG909,active,2024-08-10,Europe,Germany,DEU,MDRG909,Germany Earthquake,Earthquake,Orange,DREF,0,0,0,9,7,0,0,1.0,0.78125
+DREFChileMDRC464,active,2024-08-20,Americas ,Chile,CHL,MDRC464,Chile Fire,Fire,Red,DREF,0,0,0,8,8,0,0,1.0,0.75
+DREFEgyptMDRE698,not active,2024-09-02,MENA,Egypt,EGY,MDRE698,Egypt Cyclone,Cyclone,Orange,DREF,0,0,0,5,11,0,0,1.0,0.65625

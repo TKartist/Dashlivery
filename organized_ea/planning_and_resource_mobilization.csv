@@ -1,6 +1,6 @@
-Ref,Achieved,Not Achieved,Achieved Early,Achieved Late,TBD,Data Completeness,General Performance,Disaster Brief done to inform the FAD between 48-72 h,Disaster Brief done to inform the FAD between 48-72 h (days),EA is launched within 24 hours after the FAD has been approved (or within 48 hours after field report was published). ,EA is launched within 24 hours after the FAD has been approved (or within 48 hours after field report was published).  (days),Operational Strategy validated 7 days after the EA ,Operational Strategy validated 7 days after the EA  (days),A resource mobilization plan is developed and approved within 2 weeks of the EA,A resource mobilization plan is developed and approved within 2 weeks of the EA (days)
-EAMozambiqueMDRM989,0,0,0,4,0,1.0,0.5,Achieved Late,6,Achieved Late,8,Achieved Late,13,Achieved Late,20
-EANigeriaMDRN777,0,0,0,4,0,1.0,0.5,Achieved Late,4,Achieved Late,7,Achieved Late,15,Achieved Late,31
-EAPeruMDRO999,0,0,0,4,0,1.0,0.5,Achieved Late,9,Achieved Late,10,Achieved Late,18,Achieved Late,40
-EAMaldivesMDRM787,0,0,0,4,0,1.0,0.5,Achieved Late,7,Achieved Late,9,Achieved Late,15,Achieved Late,28
-EAJordanMDRJ000,0,0,1,3,0,1.0,0.625,Achieved Late,4,Achieved Late,6,Achieved Early,11,Achieved Late,34
+Ref,Achieved,Not Achieved,Missing,Achieved Early,Achieved Late,TBD,DNU,Data Completeness,General Performance,Disaster Brief done to inform the FAD between 48-72 h,Disaster Brief done to inform the FAD between 48-72 h (days),EA is launched within 24 hours after the FAD has been approved (or within 48 hours after field report was published). ,EA is launched within 24 hours after the FAD has been approved (or within 48 hours after field report was published).  (days),Operational Strategy validated 7 days after the EA ,Operational Strategy validated 7 days after the EA  (days),A resource mobilization plan is developed and approved within 2 weeks of the EA,A resource mobilization plan is developed and approved within 2 weeks of the EA (days)
+EAMozambiqueMDRM989,0,0,0,0,4,0,0,1.0,0.5,Achieved Late,6,Achieved Late,8,Achieved Late,13,Achieved Late,20
+EANigeriaMDRN777,0,0,1,0,3,0,0,0.75,0.5,Missing,-1,Achieved Late,7,Achieved Late,15,Achieved Late,31
+EAPeruMDRO999,0,0,0,0,4,0,0,1.0,0.5,Achieved Late,9,Achieved Late,10,Achieved Late,18,Achieved Late,40
+EAMaldivesMDRM787,0,0,1,0,3,0,0,0.75,0.5,Missing,-1,Achieved Late,9,Achieved Late,15,Achieved Late,28
+EAJordanMDRJ000,0,0,0,1,3,0,0,1.0,0.625,Achieved Late,4,Achieved Late,6,Achieved Early,11,Achieved Late,34

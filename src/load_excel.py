@@ -22,14 +22,14 @@ def organize_ea(sheet):
     col_name = sheet.columns.tolist()
     sheet["Ref"] = "EA" + sheet[col_name[4]] + sheet[col_name[6]]
     disasters = sheet.loc[:, col_name[:11]]
-    operational_progresses = sheet.loc[:, [col_name[0]] + col_name[11:15] + col_name[27:31] + col_name[44:50] + col_name[74:]]
-    financial_progress = sheet.loc[:, [col_name[0]] + col_name[57:62]]
-    dashboard_progress = sheet.loc[:, [col_name[0]] + col_name[52:57]]
+    operational_progresses = sheet.loc[:, [col_name[0]] + col_name[11:15] + col_name[27:31] + col_name[44:51] + col_name[75:]]
+    financial_progress = sheet.loc[:, [col_name[0]] + col_name[58:63]]
+    dashboard_progress = sheet.loc[:, [col_name[0]] + col_name[53:58]]
     sec_coverage = sheet.loc[:, [col_name[0]] + col_name[15:21]]
     fed_coverage = sheet.loc[:, [col_name[0]] + col_name[21:27]]
     rrp = sheet.loc[:, [col_name[0]] + col_name[31:44]]
-    nfi = sheet.loc[:, [col_name[0]] + col_name[50:52] + col_name[62:65]]
-    operational_achievements = sheet.loc[:, [col_name[0]] + col_name[65:74]]
+    nfi = sheet.loc[:, [col_name[0]] + col_name[51:53] + col_name[63:66]]
+    operational_achievements = sheet.loc[:, [col_name[0]] + col_name[66:75]]
     
     sec_coverage = sec_coverage.replace('\n', ' ', regex=True)
     sec_coverage = sec_coverage.replace(' ', ' ', regex=True)
