@@ -1,6 +1,6 @@
-Ref,DREF approved within 10 days of the trigger. 14 if the NS has started responding.,DREF approved within 10 days of the trigger. 14 if the NS has started responding. (days),Approval by the DREF appeal manager within 24h of receiving the final package,Approval by the DREF appeal manager within 24h of receiving the final package (days)
-DREFAfghanistanMDRA111,Achieved Early,10,Achieved Early,0
-DREFBangladeshMDRB567,Achieved Early,11,Achieved Late,2
-DREFGermanyMDRG909,Achieved Early,11,Achieved Early,1
-DREFChileMDRC464,Achieved Early,10,Achieved Late,3
-DREFEgyptMDRE698,Achieved Late,16,Achieved Late,6
+Ref,Achieved,Not Achieved,Achieved Early,Achieved Late,TBD,Data Completeness,General Performance,DREF approved within 10 days of the trigger. 14 if the NS has started responding.,DREF approved within 10 days of the trigger. 14 if the NS has started responding. (days),Approval by the DREF appeal manager within 24h of receiving the final package,Approval by the DREF appeal manager within 24h of receiving the final package (days)
+DREFAfghanistanMDRA111,0,0,2,0,0,1.0,1.0,Achieved Early,10,Achieved Early,0
+DREFBangladeshMDRB567,0,0,1,1,0,1.0,0.75,Achieved Early,11,Achieved Late,2
+DREFGermanyMDRG909,0,0,2,0,0,1.0,1.0,Achieved Early,11,Achieved Early,1
+DREFChileMDRC464,0,0,1,1,0,1.0,0.75,Achieved Early,10,Achieved Late,3
+DREFEgyptMDRE698,0,0,0,2,0,1.0,0.5,Achieved Late,16,Achieved Late,6

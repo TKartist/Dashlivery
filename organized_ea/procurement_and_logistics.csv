@@ -1,6 +1,6 @@
-Ref,Supply chain plan developed between logs and ops coordinator within 1 week of the approved EA,Fully approved and submitted requisitions for NFIs within 1 week of the EA (when relevant) ,NFI (or emergencies items) being delivered to the country in 3 days since the approval of the  Requistion
-EAMozambiqueMDRM989,Achieved Late,Not Achieved,Not Achieved
-EANigeriaMDRN777,Achieved Late,Achieved Late,Achieved Late
-EAPeruMDRO999,Achieved Late,Achieved Late,Achieved Late
-EAMaldivesMDRM787,Achieved Early,Achieved Early,Achieved Early
-EAJordanMDRJ000,Achieved Late,Not Achieved,Not Achieved
+Ref,Achieved,Not Achieved,Achieved Early,Achieved Late,TBD,Data Completeness,General Performance,Supply chain plan developed between logs and ops coordinator within 1 week of the approved EA,Supply chain plan developed between logs and ops coordinator within 1 week of the approved EA (days),Fully approved and submitted requisitions for NFIs within 1 week of the EA (when relevant) ,Fully approved and submitted requisitions for NFIs within 1 week of the EA (when relevant)  (days),NFI (or emergencies items) being delivered to the country in 3 days since the approval of the  Requistion,NFI (or emergencies items) being delivered to the country in 3 days since the approval of the  Requistion (days)
+EAMozambiqueMDRM989,0,2,0,1,0,0.3333333333333333,0.16666666666666666,Achieved Late,15,Not Achieved,-1,Not Achieved,-1
+EANigeriaMDRN777,0,0,0,3,0,1.0,0.5,Achieved Late,14,Achieved Late,15,Achieved Late,18
+EAPeruMDRO999,0,0,0,3,0,1.0,0.5,Achieved Late,17,Achieved Late,16,Achieved Late,18
+EAMaldivesMDRM787,0,0,3,0,0,1.0,1.0,Achieved Early,-18,Achieved Early,-17,Achieved Early,-13
+EAJordanMDRJ000,0,2,0,1,0,0.3333333333333333,0.16666666666666666,Achieved Late,14,Not Achieved,-1,Not Achieved,-1

@@ -1,4 +1,4 @@
-Ref,A multi country dashboard is in place and updated timely to display the situation and the activities being implemented
-MCMRNepalMDRS2002,Not Achieved
-MCMRZambiaMDRS7890,Not Achieved
-MCMRJordanMDRS1234,Achieved
+Ref,Achieved,Not Achieved,Achieved Early,Achieved Late,TBD,Data Completeness,General Performance,A multi country dashboard is in place and updated timely to display the situation and the activities being implemented
+MCMRNepalMDRS2002,0,1,0,0,0,0.0,0.0,Not Achieved
+MCMRZambiaMDRS7890,0,1,0,0,0,0.0,0.0,Not Achieved
+MCMRJordanMDRS1234,1,0,0,0,0,1.0,1.0,Achieved

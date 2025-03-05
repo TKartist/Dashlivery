@@ -29,6 +29,24 @@ def full_list(cols):
     return output
 
 
+def summarize_df(df):
+    df = df.copy()
+    categories = ["Achieved", "Not Achieved", "Achieved Early", "Achieved Late", "TBD"]
+
+    for category in categories:
+        df.loc[:, category] = df.apply(lambda x: sum(str(cell) == category for cell in x), axis=1)
+
+    df.loc[:, "Data Completeness"] = (df["Achieved"] + df["Achieved Early"] + df["Achieved Late"]) / \
+                                    (df["Achieved"] + df["Not Achieved"] + df["Achieved Early"] + df["Achieved Late"])
+    df.loc[:, "General Performance"] = (((df["Achieved"] + df["Achieved Early"]) * 2) + df["Achieved Late"]) / \
+                                    ((df["Achieved"] + df["Not Achieved"] + df["Achieved Early"] + df["Achieved Late"]) * 2)
+
+    cols_to_move = ["Achieved", "Not Achieved", "Achieved Early", "Achieved Late", "TBD", "Data Completeness", "General Performance"]
+    df = df[cols_to_move + [col for col in df.columns if col not in cols_to_move]]
+
+    return df
+
+
 def area_split_ea(overview, columns):
     msr_column = "MSR ready (compliant or resource allocated)"
     folder = "../organized_ea/"
@@ -36,21 +54,21 @@ def area_split_ea(overview, columns):
     resource_mobilization = overview[full_list(columns[12:15] + [columns[27]])] # add EA coverage
     surge = overview[full_list(columns[28:31])] # add % related values to the surge (rrp)
     hr = overview[full_list(columns[44:46])] # add % related values to the hr (rrp)
-    coordination = overview[columns[46:49]] # missing joint statement in master data
-    logistics = overview[columns[49:52]]
+    coordination = overview[full_list(columns[46:49])] # missing joint statement in master data
+    logistics = overview[full_list(columns[49:52])]
     im = overview[columns[52:57]]
-    finance = overview[columns[57:61]]
+    finance = overview[full_list(columns[57:61])]
     security = overview[[msr_column, f"{msr_column} (days)"]]
 
-    assessment.to_csv(f"{folder}assessment.csv", index=True)
-    resource_mobilization.to_csv(f"{folder}planning_and_resource_mobilization.csv", index=True)
-    surge.to_csv(f"{folder}surge.csv", index=True)
-    hr.to_csv(f"{folder}hr_planning_and_recruitement.csv", index=True)
-    coordination.to_csv(f"{folder}coordination.csv", index=True)
-    logistics.to_csv(f"{folder}procurement_and_logistics.csv", index=True)
-    im.to_csv(f"{folder}information_management.csv", index=True)
-    finance.to_csv(f"{folder}financial_management.csv", index=True)
-    security.to_csv(f"{folder}security.csv", index=True)
+    summarize_df(assessment).to_csv(f"{folder}assessment.csv", index=True)
+    summarize_df(resource_mobilization).to_csv(f"{folder}planning_and_resource_mobilization.csv", index=True)
+    summarize_df(surge).to_csv(f"{folder}surge.csv", index=True)
+    summarize_df(hr).to_csv(f"{folder}hr_planning_and_recruitement.csv", index=True)
+    summarize_df(coordination).to_csv(f"{folder}coordination.csv", index=True)
+    summarize_df(logistics).to_csv(f"{folder}procurement_and_logistics.csv", index=True)
+    summarize_df(im).to_csv(f"{folder}information_management.csv", index=True)
+    summarize_df(finance).to_csv(f"{folder}financial_management.csv", index=True)
+    summarize_df(security).to_csv(f"{folder}security.csv", index=True)
 
 def area_split_dref(overview, columns):
     folder = "../organized_dref/"
@@ -65,14 +83,14 @@ def area_split_dref(overview, columns):
     delivery = overview[full_list([columns[38]])] # add targeted population, ehi distribution, and implementation rate
     security = overview[[msr_column, f"{msr_column} (days)"]]
 
-    assessment.to_csv(f"{folder}assessment.csv", index=True)
-    risk.to_csv(f"{folder}risk_and_accountability.csv", index=True)
-    resource_mobilization.to_csv(f"{folder}planning_and_resource_mobilization.csv", index=True)
-    surge.to_csv(f"{folder}surge.csv", index=True)
-    logistics.to_csv(f"{folder}procurement_and_logistics.csv", index=True)
-    finance.to_csv(f"{folder}financial_management.csv", index=True)
-    delivery.to_csv(f"{folder}programme_delivery.csv", index=True)
-    security.to_csv(f"{folder}security.csv", index=True)
+    summarize_df(assessment).to_csv(f"{folder}assessment.csv", index=True)
+    summarize_df(risk).to_csv(f"{folder}risk_and_accountability.csv", index=True)
+    summarize_df(resource_mobilization).to_csv(f"{folder}planning_and_resource_mobilization.csv", index=True)
+    summarize_df(surge).to_csv(f"{folder}surge.csv", index=True)
+    summarize_df(logistics).to_csv(f"{folder}procurement_and_logistics.csv", index=True)
+    summarize_df(finance).to_csv(f"{folder}financial_management.csv", index=True)
+    summarize_df(delivery).to_csv(f"{folder}programme_delivery.csv", index=True)
+    summarize_df(security).to_csv(f"{folder}security.csv", index=True)
 
 def area_split_mcmr(overview, columns):
     folder = "../organized_mcmr/"
@@ -81,22 +99,22 @@ def area_split_mcmr(overview, columns):
     hr = overview[full_list(columns[35:37])] # add % related values to the hr (rrp)
     coordination = overview[full_list(columns[37])]
     logistics = overview[full_list(columns[38:41])]
-    im = overview[columns[41]]
+    im = overview[columns[41:42]]
     finance = overview[full_list(columns[42:44])]
 
-    resource_mobilization.to_csv(f"{folder}planning_and_resource_mobilization.csv", index=True)
-    surge.to_csv(f"{folder}surge.csv", index=True)
-    hr.to_csv(f"{folder}hr_planning_and_recruitement.csv", index=True)
-    coordination.to_csv(f"{folder}coordination.csv", index=True)
-    logistics.to_csv(f"{folder}procurement_and_logistics.csv", index=True)
-    im.to_csv(f"{folder}information_management.csv", index=True)
-    finance.to_csv(f"{folder}financial_management.csv", index=True)
+    summarize_df(resource_mobilization).to_csv(f"{folder}planning_and_resource_mobilization.csv", index=True)
+    summarize_df(surge).to_csv(f"{folder}surge.csv", index=True)
+    summarize_df(hr).to_csv(f"{folder}hr_planning_and_recruitement.csv", index=True)
+    summarize_df(coordination).to_csv(f"{folder}coordination.csv", index=True)
+    summarize_df(logistics).to_csv(f"{folder}procurement_and_logistics.csv", index=True)
+    summarize_df(im).to_csv(f"{folder}information_management.csv", index=True)
+    summarize_df(finance).to_csv(f"{folder}financial_management.csv", index=True)
 
 def area_split_pcce(overview, columns):
     folder = "../organized_pcce/"
     msr_column = "MSR ready (compliant or resource allocated)"
 
-    assessment = overview[full_list(columns[11])]
+    assessment = overview[columns[11:12]]
     resource_mobilization = overview[full_list(columns[12:15] + [columns[21]])]
     surge = overview[full_list(columns[22:25])]
     hr = overview[full_list(columns[39:41])]
@@ -107,16 +125,16 @@ def area_split_pcce(overview, columns):
     # delivery = overview[full_list(columns[55:57])] # add percentage of targeted population receiving assistance and % of planned budget implementation
     security = overview[[msr_column, f"{msr_column} (days)"]]
 
-    assessment.to_csv(f"{folder}assessment.csv", index=True)
-    resource_mobilization.to_csv(f"{folder}planning_and_resource_mobilization.csv", index=True)
-    surge.to_csv(f"{folder}surge.csv", index=True)
-    hr.to_csv(f"{folder}hr_planning_and_recruitement.csv", index=True)
-    coordination.to_csv(f"{folder}coordination.csv", index=True)
-    logistics.to_csv(f"{folder}procurement_and_logistics.csv", index=True)
-    im.to_csv(f"{folder}information_management.csv", index=True)
-    finance.to_csv(f"{folder}financial_management.csv", index=True)
+    summarize_df(assessment).to_csv(f"{folder}assessment.csv", index=True)
+    summarize_df(resource_mobilization).to_csv(f"{folder}planning_and_resource_mobilization.csv", index=True)
+    summarize_df(surge).to_csv(f"{folder}surge.csv", index=True)
+    summarize_df(hr).to_csv(f"{folder}hr_planning_and_recruitement.csv", index=True)
+    summarize_df(coordination).to_csv(f"{folder}coordination.csv", index=True)
+    summarize_df(logistics).to_csv(f"{folder}procurement_and_logistics.csv", index=True)
+    summarize_df(im).to_csv(f"{folder}information_management.csv", index=True)
+    summarize_df(finance).to_csv(f"{folder}financial_management.csv", index=True)
     # delivery.to_csv(f"{folder}programme_delivery.csv", index=True)
-    security.to_csv(f"{folder}security.csv", index=True)
+    summarize_df(security).to_csv(f"{folder}security.csv", index=True)
 
 def convert_date(date_str):
     if date_str == "-" or pd.isna(date_str):
@@ -125,9 +143,10 @@ def convert_date(date_str):
 
 def determine_status(row, limit):
     keys = row.index.tolist()
-    if pd.isna(row[keys[0]]) or pd.isna(row[keys[1]]):
+    r0, r1 = row.iloc[0], row.iloc[1]
+    if pd.isna(r0) or pd.isna(r1):
         return pd.Series(["Not Achieved", -1], index=[keys[1], f"{keys[1]} (days)"])
-    days = (row[keys[1]] - row[keys[0]]).days
+    days = (r1 - r0).days
     if days > limit:
         return pd.Series(["Achieved Late", days], index=[keys[1], f"{keys[1]} (days)"])
 
@@ -141,13 +160,14 @@ def determine_done(row):
 
 def msr_ready(row ,limit):
     msr_column = "MSR ready (compliant or resource allocated)"
-    if (pd.isna(row[1]) or row[1] == "-") and (pd.isna(row[2]) or row[2] == "-"):
+    r0, r1, r2 = row.iloc[0], row.iloc[1], row.iloc[2]
+    if (pd.isna(r1) or r1 == "-") and (pd.isna(r2) or r2 == "-"):
         return pd.Series(["Not Achieved", -1], index=[msr_column, f"{msr_column} (days)"])
-    elif pd.isna(row[1]) or row[1] == "-":
-        days = (row[2] - row[0]).days
+    elif pd.isna(r1) or r1 == "-":
+        days = (r2 - r0).days
         return pd.Series(["Achieved Late" if days > limit else "Achieved Early", days], index=[msr_column, f"{msr_column} (days)"])
     else:
-        days = (row[1] - row[0]).days
+        days = (r1 - r0).days
         return pd.Series(["Achieved Late" if days > limit else "Achieved Early", days], index=[msr_column, f"{msr_column} (days)"])
 
 def process_ea(ea):
@@ -191,7 +211,7 @@ def process_ea(ea):
     ea[key][[on[8], f"{on[8]} (days)"]] = pd.merge(start_date, op[on[8]], left_index=True, right_index=True).apply(determine_status, args=(11,), axis=1)
     ea[key][[on[9], f"{on[9]} (days)"]] = pd.merge(start_date, op[on[9]], left_index=True, right_index=True).apply(determine_status, args=(13,), axis=1)
     ea[key][[on[10], f"{on[10]} (days)"]] = pd.merge(start_date, op[on[10]], left_index=True, right_index=True).apply(determine_status, args=(2,), axis=1)
-    ea[key][on[11]] = op[on[11]].apply(determine_done)
+    ea[key][[on[11], f"{on[11]} (days)"]] = pd.merge(start_date, op[on[11]], left_index=True, right_index=True).apply(determine_status, args=(7,), axis=1)
     ea[key][[on[12], f"{on[12]} (days)"]] = pd.merge(start_date, op[on[12]], left_index=True, right_index=True).apply(determine_status, args=(2,), axis=1)
     ea[key][[on[13], f"{on[13]} (days)"]] = pd.merge(start_date, op[on[13]], left_index=True, right_index=True).apply(determine_status, args=(7,), axis=1)
     ea[key][[msr_column, f"{msr_column} (days)"]] = pd.merge(start_date, op[[on[14], on[15]]], left_index=True, right_index=True).apply(msr_ready, args=(7,), axis=1)
@@ -328,7 +348,7 @@ def process_pcce(pcce):
     
     pcce[key]["Ref"] = pcce["disasters"].index
     pcce[key].set_index("Ref", inplace=True)
-    pcce[key][[on[0], f"{on[0]} (days)"]] = op[on[0]].apply(determine_done)
+    pcce[key][on[0]] = op[on[0]].apply(determine_done)
     pcce[key][[on[1], f"{on[1]} (days)"]] = pd.merge(start_date, op[on[1]], left_index=True, right_index=True).apply(determine_status, args=(3,), axis=1)
     pcce[key][[on[2], f"{on[2]} (days)"]] = pd.merge(start_date, op[on[2]], left_index=True, right_index=True).apply(determine_status, args=(4,), axis=1)
     pcce[key][[on[3], f"{on[3]} (days)"]] = pd.merge(op[on[2]], op[on[3]], left_index=True, right_index=True).apply(determine_status, args=(14,), axis=1)

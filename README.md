@@ -28,5 +28,6 @@ Outlayer of the Dashboard can be viewed here: [***Please Click Here***](https://
  
  ## TODO:
  - Data transformation for scatter (distribution) graph
- - New variables are added to the dummy data-set, adjust the code to encorporate the change in the data
  - Optimize the code for easier maintenance in the future
+ - Data Completeness (as long as it is achieved; and the deadline hasn't passed)
+ - General Performance (0 for Not achieved, 1 for achieved late, 2 for achieved early, if it is doesn't  then it is 2)

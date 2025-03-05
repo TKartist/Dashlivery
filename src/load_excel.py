@@ -19,7 +19,6 @@ def load_excel(path):
 
 
 def organize_ea(sheet):
-    root = "../organized_ea/"
     col_name = sheet.columns.tolist()
     sheet["Ref"] = "EA" + sheet[col_name[4]] + sheet[col_name[6]]
     disasters = sheet.loc[:, col_name[:11]]
@@ -34,7 +33,7 @@ def organize_ea(sheet):
     
     sec_coverage = sec_coverage.replace('\n', ' ', regex=True)
     sec_coverage = sec_coverage.replace(' ', ' ', regex=True)
-    
+    disasters.to_csv("../organized_ea/general_info.csv", index=False)
 
     print("EA master data organized")
     return {"disasters" : disasters.set_index("Ref"), "operational_progresses" : operational_progresses.set_index("Ref"), "financial_progress" : financial_progress.set_index("Ref"), "dashboard_progress" : dashboard_progress.set_index("Ref"), "sec_coverage" : sec_coverage.set_index("Ref"), "fed_coverage" : fed_coverage.set_index("Ref"), "rrp" : rrp.set_index("Ref"), "nfi" : nfi.set_index("Ref"), "operational_achievements" : operational_achievements.set_index("Ref")}
@@ -47,12 +46,12 @@ def organize_dref(sheet):
     rrp = sheet.loc[:, [col_name[0]] + col_name[19:32]]
     financial_progress = sheet.loc[:, [col_name[0]] + col_name[34:41]]
     operational_achievements = sheet.loc[:, [col_name[0]] + col_name[41:51]]
+    disasters.to_csv("../organized_dref/general_info.csv", index=False)
 
     print("DREF master data organized")
     return {"disasters": disasters.set_index("Ref"), "operational_progresses": operational_progresses.set_index("Ref"), "rrp": rrp.set_index("Ref"), "financial_progress": financial_progress.set_index("Ref"), "operational_achievements": operational_achievements.set_index("Ref")}
 
 def organize_mcmr(sheet):
-    root = "../organized_mcmr/"
     col_name = sheet.columns.tolist()
     sheet["Ref"] = "MCMR" + sheet[col_name[4]] + sheet[col_name[6]] 
     disasters = sheet.loc[:, col_name[:11]]
@@ -64,13 +63,13 @@ def organize_mcmr(sheet):
 
     total_coverage = total_coverage.replace('\n', ' ', regex=True)
     total_coverage = total_coverage.replace(' ', ' ', regex=True)
+    disasters.to_csv("../organized_mcmr/general_info.csv", index=False)
 
     print("MCMR master data organized")
     return {"disasters" : disasters.set_index("Ref"), "operational_progresses" : operational_progresses.set_index("Ref"), "total_coverage" : total_coverage.set_index("Ref"), "rrp" : rrp.set_index("Ref"), "financial_progress" : financial_progress.set_index("Ref"), "operational_achievements" : operational_achievements.set_index("Ref")}
 
 
 def organize_protracted(sheet):
-    root = "../organized_pcce/"
     col_name = sheet.columns.tolist()
     sheet["Ref"] = "PCCE" + sheet[col_name[4]] + sheet[col_name[6]]
     disasters = sheet.loc[:, col_name[:11]]
@@ -83,7 +82,7 @@ def organize_protracted(sheet):
 
     coverage = coverage.replace('\n', ' ', regex=True)
     coverage = coverage.replace(' ', ' ', regex=True)
-
+    disasters.to_csv("../organized_pcce/general_info.csv", index=False)
     print("PCCE master data organized")
     return {"disasters" : disasters.set_index("Ref"), "operational_progresses" : operational_progresses.set_index("Ref"), "coverage" : coverage.set_index("Ref"), "rrp" : rrp.set_index("Ref"), "dashboard" : dashboard.set_index("Ref"), "financial_progress" : financial_progress.set_index("Ref"), "operational_achievements" : operational_achievements.set_index("Ref")}
 

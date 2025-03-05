@@ -1,4 +1,4 @@
-Ref,Regional RR personnel Alert sent within 12h of the request ,Regional RR personnel Alert sent within 12h of the request  (days),Identification of 1st rotation RR personnel within 48h of the alert ,Identification of 1st rotation RR personnel within 48h of the alert  (days)
-MCMRNepalMDRS2002,Achieved Early,1,Achieved Late,2
-MCMRZambiaMDRS7890,Achieved Early,1,Achieved Late,3
-MCMRJordanMDRS1234,Achieved Early,2,Achieved Late,3
+Ref,Achieved,Not Achieved,Achieved Early,Achieved Late,TBD,Data Completeness,General Performance,Regional RR personnel Alert sent within 12h of the request ,Regional RR personnel Alert sent within 12h of the request  (days),Identification of 1st rotation RR personnel within 48h of the alert ,Identification of 1st rotation RR personnel within 48h of the alert  (days)
+MCMRNepalMDRS2002,0,0,1,1,0,1.0,0.75,Achieved Early,1,Achieved Late,2
+MCMRZambiaMDRS7890,0,0,1,1,0,1.0,0.75,Achieved Early,1,Achieved Late,3
+MCMRJordanMDRS1234,0,0,1,1,0,1.0,0.75,Achieved Early,2,Achieved Late,3

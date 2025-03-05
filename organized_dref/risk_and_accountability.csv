@@ -1,6 +1,6 @@
-Ref,Risk management one pager using country risk the dashboard developed within 48h after the approval,Risk management one pager using country risk the dashboard developed within 48h after the approval (days),Project manager and appeal manager responsibilities one pager is shared with approval (max 14 days after trigger),Project manager and appeal manager responsibilities one pager is shared with approval (max 14 days after trigger) (days)
-DREFAfghanistanMDRA111,Achieved Early,1,Achieved Early,4
-DREFBangladeshMDRB567,Achieved Early,-1,Achieved Early,11
-DREFGermanyMDRG909,Achieved Early,1,Achieved Early,10
-DREFChileMDRC464,Achieved Early,-2,Achieved Early,5
-DREFEgyptMDRE698,Achieved Early,-2,Achieved Late,19
+Ref,Achieved,Not Achieved,Achieved Early,Achieved Late,TBD,Data Completeness,General Performance,Risk management one pager using country risk the dashboard developed within 48h after the approval,Risk management one pager using country risk the dashboard developed within 48h after the approval (days),Project manager and appeal manager responsibilities one pager is shared with approval (max 14 days after trigger),Project manager and appeal manager responsibilities one pager is shared with approval (max 14 days after trigger) (days)
+DREFAfghanistanMDRA111,0,0,2,0,0,1.0,1.0,Achieved Early,1,Achieved Early,4
+DREFBangladeshMDRB567,0,0,2,0,0,1.0,1.0,Achieved Early,-1,Achieved Early,11
+DREFGermanyMDRG909,0,0,2,0,0,1.0,1.0,Achieved Early,1,Achieved Early,10
+DREFChileMDRC464,0,0,2,0,0,1.0,1.0,Achieved Early,-2,Achieved Early,5
+DREFEgyptMDRE698,0,0,1,1,0,1.0,0.75,Achieved Early,-2,Achieved Late,19

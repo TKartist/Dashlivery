@@ -1,6 +1,6 @@
-Ref,Hold a mini summit within 48 h of the disaster,review/adapt membership coordination for the context for this specific emergency ,Appropriate membership coordination is in place after 24h of disaster
-EAMozambiqueMDRM989,Not Achieved,Achieved,Achieved Early
-EANigeriaMDRN777,Not Achieved,Achieved,Achieved Early
-EAPeruMDRO999,Not Achieved,Achieved,Achieved Early
-EAMaldivesMDRM787,Not Achieved,Achieved,Achieved Early
-EAJordanMDRJ000,Not Achieved,Achieved,Achieved Early
+Ref,Achieved,Not Achieved,Achieved Early,Achieved Late,TBD,Data Completeness,General Performance,Hold a mini summit within 48 h of the disaster,Hold a mini summit within 48 h of the disaster (days),review/adapt membership coordination for the context for this specific emergency ,review/adapt membership coordination for the context for this specific emergency  (days),Appropriate membership coordination is in place after 24h of disaster,Appropriate membership coordination is in place after 24h of disaster (days)
+EAMozambiqueMDRM989,0,1,1,1,0,0.6666666666666666,0.5,Not Achieved,-1,Achieved Late,15,Achieved Early,2
+EANigeriaMDRN777,0,1,1,1,0,0.6666666666666666,0.5,Not Achieved,-1,Achieved Late,14,Achieved Early,1
+EAPeruMDRO999,0,1,1,1,0,0.6666666666666666,0.5,Not Achieved,-1,Achieved Late,17,Achieved Early,0
+EAMaldivesMDRM787,0,1,1,1,0,0.6666666666666666,0.5,Not Achieved,-1,Achieved Late,18,Achieved Early,1
+EAJordanMDRJ000,0,1,1,1,0,0.6666666666666666,0.5,Not Achieved,-1,Achieved Late,11,Achieved Early,0
