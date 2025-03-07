@@ -1,4 +1,4 @@
-Ref,Achieved,Not Achieved,Missing,Achieved Early,Achieved Late,TBD,DNU,Data Completeness,General Performance,A multi country dashboard is in place and updated timely to display the situation and the activities being implemented
-MCMRNepalMDRS2002,0,0,1,0,0,0,0,0.0,,Missing
-MCMRZambiaMDRS7890,0,0,1,0,0,0,0,0.0,,Missing
-MCMRJordanMDRS1234,1,0,0,0,0,0,0,1.0,1.0,Achieved
+Ref,Achieved,Not Achieved,Missing,Achieved Early,Achieved Late,TBD,DNU,Data Completeness,General Performance,A multi country dashboard is in place and updated timely to display the situation and the activities being implemented,A multi country dashboard is in place and updated timely to display the situation and the activities being implemented date
+MCMRNepalMDRS2002,1,0,0,0,0,0,0,1.0,1.0,Achieved,2024-06-21
+MCMRZambiaMDRS7890,1,0,0,0,0,0,0,1.0,1.0,Achieved,2024-07-14
+MCMRJordanMDRS1234,1,0,0,0,0,0,0,1.0,1.0,Achieved,2024-08-18

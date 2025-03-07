@@ -1,6 +1,6 @@
-Ref,Achieved,Not Achieved,Missing,Achieved Early,Achieved Late,TBD,DNU,Data Completeness,General Performance,Initial needs assessments completed within 72 hours​ of the event.,Initial needs assessments completed within 72 hours​ of the event. (days)
-DREFAfghanistanMDRA111,0,0,0,1,0,0,0,1.0,1.0,Achieved Early,2
-DREFBangladeshMDRB567,0,0,0,1,0,0,0,1.0,1.0,Achieved Early,1
-DREFGermanyMDRG909,0,0,0,0,1,0,0,1.0,0.5,Achieved Late,4
-DREFChileMDRC464,0,0,0,0,1,0,0,1.0,0.5,Achieved Late,5
-DREFEgyptMDRE698,0,0,0,1,0,0,0,1.0,1.0,Achieved Early,1
+Ref,Achieved,Not Achieved,Missing,Achieved Early,Achieved Late,TBD,DNU,Data Completeness,General Performance,Initial needs assessments completed within 72 hours​ of the event.,Initial needs assessments completed within 72 hours​ of the event. (days),Initial needs assessments completed within 72 hours​ of the event. date
+DREFAfghanistanMDRA111,0,0,0,1,0,0,0,1.0,1.0,Achieved Early,2,2024-06-07
+DREFBangladeshMDRB567,0,0,0,1,0,0,0,1.0,1.0,Achieved Early,1,2024-07-02
+DREFGermanyMDRG909,0,0,0,0,1,0,0,1.0,0.5,Achieved Late,4,2024-08-14
+DREFChileMDRC464,0,0,0,0,1,0,0,1.0,0.5,Achieved Late,5,2024-08-25
+DREFEgyptMDRE698,0,0,0,1,0,0,0,1.0,1.0,Achieved Early,1,2024-09-03

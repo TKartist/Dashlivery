@@ -1,6 +1,5 @@
 import requests
 import pandas as pd
-from dotenv import load_dotenv
 import os
 import json
 
@@ -8,6 +7,13 @@ ea_folder = "../organized_ea/"
 dref_folder = "../organized_dref/"
 mcmr_folder = "../organized_mcmr/"
 pcce_folder = "../organized_pcce/"
+status_mapping = {
+    "Achieved" : 2,
+    "Achieved Early" : 2,
+    "Achieved Late" : 1,
+    "DNU" : 0,
+    "Missing" : 0,
+}
 
 def general_info():
     filename = "general_info.csv"
@@ -58,6 +64,27 @@ def area_info():
 
 def read_task_info(root, file):
     df = pd.read_csv(root+file, index_col="Ref")
+    op_type = root.split("_")[1][:-1]
+    cols = df.columns[9:].copy()
+    area = file.split(".")[0]
+    task_infos = []
+    for index, row in df.iterrows():
+        for a, b, c in zip(cols[::3], cols[1::3], cols[2::3]):
+            task_infos.append({
+                "Ref" : index,
+                "EWTS Varient" : op_type,
+                "Area" : area,
+                "Task" : a,
+                "Status" : row[a],
+                "Completed" : row[c],
+                "Delta" : row[b],
+            })
+    return task_infos
+
+
+def read_im(root, file):
+    df = pd.read_csv(root+file, index_col="Ref")
+    op_type = root.split("_")[1][:-1]
     cols = df.columns[9:].copy()
     area = file.split(".")[0]
     task_infos = []
@@ -65,10 +92,12 @@ def read_task_info(root, file):
         for a, b in zip(cols[::2], cols[1::2]):
             task_infos.append({
                 "Ref" : index,
+                "EWTS Varient" : op_type,
                 "Area" : area,
                 "Task" : a,
                 "Status" : row[a],
-                "Delta" : row[b]
+                "Completed" : row[b],
+                "Delta" : 0,
             })
     return task_infos
 
@@ -77,8 +106,10 @@ def areas_in_op(folder):
     files = os.listdir(folder)
     task_infos = []
     for file in files:
-        if file == "general_info.csv" or file == "information_management.csv":
+        if file == "general_info.csv":
             continue
+        elif file == "information_management.csv":
+            task_infos += read_im(folder, file)
         task_infos += read_task_info(folder, file)
     return task_infos
 
@@ -86,6 +117,13 @@ def areas_in_op(folder):
 def task_info():
     task_infos = areas_in_op(ea_folder) + areas_in_op(dref_folder) + areas_in_op(mcmr_folder) + areas_in_op(pcce_folder)
     df = pd.DataFrame(task_infos)
+    df["Avg"] = df["Status"].map(status_mapping)
+    df_grouped = df.groupby(["EWTS Varient", "Task"], as_index=False).agg({
+        'Avg': 'mean'
+    })
+    df = df.merge(df_grouped, on=["EWTS Varient", "Task"], suffixes=('', '_col'))
+    df = df.drop(columns=["Avg"])
+    df["Avg_col"] = df["Avg_col"] / 2 
     df.to_csv("../power_bi_input/task_summaries.csv", index=False)
 
     return df
@@ -101,5 +139,3 @@ def generate_powerbi_input():
         area.to_excel(writer, sheet_name="area_info", index=False)
         task.to_excel(writer, sheet_name="task_info", index=False)
 
-
-generate_powerbi_input()

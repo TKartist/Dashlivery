@@ -12,7 +12,7 @@ EAJordanMDRJ000,coordination,0,0,0,0,1,0,3,1.0,0.5
 EAMozambiqueMDRM989,financial_management,0,0,0,0,4,0,0,1.0,0.5
 EANigeriaMDRN777,financial_management,0,0,0,0,4,0,0,1.0,0.5
 EAPeruMDRO999,financial_management,0,0,0,0,4,0,0,1.0,0.5
-EAMaldivesMDRM787,financial_management,0,0,0,4,0,0,0,1.0,1.0
+EAMaldivesMDRM787,financial_management,0,0,0,0,4,0,0,1.0,0.5
 EAJordanMDRJ000,financial_management,0,0,0,0,4,0,0,1.0,0.5
 EAMozambiqueMDRM989,hr_planning_and_recruitement,0,0,0,2,0,0,0,1.0,1.0
 EANigeriaMDRN777,hr_planning_and_recruitement,0,0,0,0,2,0,0,1.0,0.5
@@ -32,7 +32,7 @@ EAJordanMDRJ000,planning_and_resource_mobilization,0,0,0,1,3,0,0,1.0,0.625
 EAMozambiqueMDRM989,procurement_and_logistics,0,0,2,1,0,0,0,0.3333333333333333,1.0
 EANigeriaMDRN777,procurement_and_logistics,0,0,0,1,2,0,0,1.0,0.6666666666666666
 EAPeruMDRO999,procurement_and_logistics,0,0,0,1,2,0,0,1.0,0.6666666666666666
-EAMaldivesMDRM787,procurement_and_logistics,0,0,0,3,0,0,0,1.0,1.0
+EAMaldivesMDRM787,procurement_and_logistics,0,0,0,1,2,0,0,1.0,0.6666666666666666
 EAJordanMDRJ000,procurement_and_logistics,0,0,2,1,0,0,0,0.3333333333333333,1.0
 EAMozambiqueMDRM989,security,0,0,0,1,0,0,0,1.0,1.0
 EANigeriaMDRN777,security,0,0,0,1,0,0,0,1.0,1.0
@@ -72,8 +72,8 @@ DREFEgyptMDRE698,programme_delivery,0,0,0,1,0,0,0,1.0,1.0
 DREFAfghanistanMDRA111,risk_and_accountability,0,0,0,2,0,0,0,1.0,1.0
 DREFBangladeshMDRB567,risk_and_accountability,0,0,0,2,0,0,0,1.0,1.0
 DREFGermanyMDRG909,risk_and_accountability,0,0,0,2,0,0,0,1.0,1.0
-DREFChileMDRC464,risk_and_accountability,0,0,0,2,0,0,0,1.0,1.0
-DREFEgyptMDRE698,risk_and_accountability,0,0,0,1,1,0,0,1.0,0.75
+DREFChileMDRC464,risk_and_accountability,0,0,0,1,1,0,0,1.0,0.75
+DREFEgyptMDRE698,risk_and_accountability,0,0,0,0,2,0,0,1.0,0.5
 DREFAfghanistanMDRA111,security,0,0,0,1,0,0,0,1.0,1.0
 DREFBangladeshMDRB567,security,0,0,0,1,0,0,0,1.0,1.0
 DREFGermanyMDRG909,security,0,0,0,1,0,0,0,1.0,1.0
@@ -93,8 +93,8 @@ MCMRJordanMDRS1234,financial_management,0,0,0,2,0,0,0,1.0,1.0
 MCMRNepalMDRS2002,hr_planning_and_recruitement,0,0,0,1,1,0,0,1.0,0.75
 MCMRZambiaMDRS7890,hr_planning_and_recruitement,0,0,0,0,2,0,0,1.0,0.5
 MCMRJordanMDRS1234,hr_planning_and_recruitement,0,0,0,0,2,0,0,1.0,0.5
-MCMRNepalMDRS2002,information_management,0,0,1,0,0,0,0,0.0,
-MCMRZambiaMDRS7890,information_management,0,0,1,0,0,0,0,0.0,
+MCMRNepalMDRS2002,information_management,1,0,0,0,0,0,0,1.0,1.0
+MCMRZambiaMDRS7890,information_management,1,0,0,0,0,0,0,1.0,1.0
 MCMRJordanMDRS1234,information_management,1,0,0,0,0,0,0,1.0,1.0
 MCMRNepalMDRS2002,planning_and_resource_mobilization,0,0,0,2,2,0,0,1.0,0.75
 MCMRZambiaMDRS7890,planning_and_resource_mobilization,0,0,0,3,1,0,0,1.0,0.875
@@ -105,8 +105,8 @@ MCMRJordanMDRS1234,procurement_and_logistics,0,0,0,3,0,0,0,1.0,1.0
 MCMRNepalMDRS2002,surge,0,0,0,1,1,0,0,1.0,0.75
 MCMRZambiaMDRS7890,surge,0,0,0,1,1,0,0,1.0,0.75
 MCMRJordanMDRS1234,surge,0,0,0,1,1,0,0,1.0,0.75
-PCCEIraqMDRI1998,assessment,1,0,0,0,0,0,0,1.0,1.0
-PCCENigeriaMDRN6879,assessment,1,0,0,0,0,0,0,1.0,1.0
+PCCEIraqMDRI1998,assessment,0,0,0,0,0,0,0,,
+PCCENigeriaMDRN6879,assessment,0,0,0,0,0,0,0,,
 PCCEIraqMDRI1998,coordination,0,0,0,3,0,0,0,1.0,1.0
 PCCENigeriaMDRN6879,coordination,0,0,0,2,1,0,0,1.0,0.8333333333333334
 PCCEIraqMDRI1998,financial_management,0,0,0,4,0,0,0,1.0,1.0
