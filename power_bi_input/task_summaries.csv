@@ -79,21 +79,6 @@ EAJordanMDRJ000,ea,information_management,A dashboard is in place and updated ti
 EAJordanMDRJ000,ea,information_management,A dashboard is in place and updated timely to display the situation and the activities being implemented (1 week),Missing,-,0,0.4
 EAJordanMDRJ000,ea,information_management,A dashboard is in place and updated timely to display the situation and the activities being implemented (2 weeks),Missing,-,0,0.4
 EAJordanMDRJ000,ea,information_management,A dashboard is in place and updated timely to display the situation and the activities being implemented (1 month),Missing,-,0,0.4
-EAMozambiqueMDRM989,ea,information_management,A dashboard is in place and updated timely to display the situation and the activities being implemented (24h),Missing,Missing,-,0.4
-EAMozambiqueMDRM989,ea,information_management,A dashboard is in place and updated timely to display the situation and the activities being implemented (72h) date,-,2024-07-05 00:00:00,Achieved,
-EAMozambiqueMDRM989,ea,information_management,A dashboard is in place and updated timely to display the situation and the activities being implemented (2 weeks),Achieved,Achieved,2024-08-10 00:00:00,0.4
-EANigeriaMDRN777,ea,information_management,A dashboard is in place and updated timely to display the situation and the activities being implemented (24h),Missing,Missing,-,0.4
-EANigeriaMDRN777,ea,information_management,A dashboard is in place and updated timely to display the situation and the activities being implemented (72h) date,-,-,Missing,
-EANigeriaMDRN777,ea,information_management,A dashboard is in place and updated timely to display the situation and the activities being implemented (2 weeks),Missing,Missing,-,0.4
-EAPeruMDRO999,ea,information_management,A dashboard is in place and updated timely to display the situation and the activities being implemented (24h),Achieved,Achieved,2024-08-25 00:00:00,0.4
-EAPeruMDRO999,ea,information_management,A dashboard is in place and updated timely to display the situation and the activities being implemented (72h) date,2024-08-30 00:00:00,-,Missing,
-EAPeruMDRO999,ea,information_management,A dashboard is in place and updated timely to display the situation and the activities being implemented (2 weeks),Missing,Missing,-,0.4
-EAMaldivesMDRM787,ea,information_management,A dashboard is in place and updated timely to display the situation and the activities being implemented (24h),Achieved,Achieved,2024-08-29 00:00:00,0.4
-EAMaldivesMDRM787,ea,information_management,A dashboard is in place and updated timely to display the situation and the activities being implemented (72h) date,2024-09-01 00:00:00,2024-09-09 00:00:00,Achieved,
-EAMaldivesMDRM787,ea,information_management,A dashboard is in place and updated timely to display the situation and the activities being implemented (2 weeks),Achieved,Achieved,2024-09-30 00:00:00,0.4
-EAJordanMDRJ000,ea,information_management,A dashboard is in place and updated timely to display the situation and the activities being implemented (24h),Missing,Missing,-,0.4
-EAJordanMDRJ000,ea,information_management,A dashboard is in place and updated timely to display the situation and the activities being implemented (72h) date,-,-,Missing,
-EAJordanMDRJ000,ea,information_management,A dashboard is in place and updated timely to display the situation and the activities being implemented (2 weeks),Missing,Missing,-,0.4
 EAMozambiqueMDRM989,ea,planning_and_resource_mobilization,Disaster Brief done to inform the FAD between 48-72 h,Achieved Late,2024-06-26 00:00:00,6,0.3
 EAMozambiqueMDRM989,ea,planning_and_resource_mobilization,EA is launched within 24 hours after the FAD has been approved (or within 48 hours after field report was published). ,Achieved Late,2024-06-28,8,0.5
 EAMozambiqueMDRM989,ea,planning_and_resource_mobilization,Operational Strategy validated 7 days after the EA ,Achieved Late,2024-07-03,13,0.6
@@ -292,12 +277,6 @@ PCCENigeriaMDRN6879,pcce,information_management,A dashboard is in place and upda
 PCCENigeriaMDRN6879,pcce,information_management,A dashboard is in place and updated timely to display the situation and the activities being implemented (1 week),Achieved,2024-08-29 00:00:00,0,0.5
 PCCENigeriaMDRN6879,pcce,information_management,A dashboard is in place and updated timely to display the situation and the activities being implemented (2 weeks),Achieved,2024-08-04 00:00:00,0,0.5
 PCCENigeriaMDRN6879,pcce,information_management,A dashboard is in place and updated timely to display the situation and the activities being implemented (1 m),Missing,-,0,0.0
-PCCEIraqMDRI1998,pcce,information_management,A dashboard is in place and updated timely to display the situation and the activities being implemented (24h),Missing,Missing,-,0.5
-PCCEIraqMDRI1998,pcce,information_management,A dashboard is in place and updated timely to display the situation and the activities being implemented (72h) date,-,-,Missing,
-PCCEIraqMDRI1998,pcce,information_management,A dashboard is in place and updated timely to display the situation and the activities being implemented (2 weeks),Missing,Missing,-,0.5
-PCCENigeriaMDRN6879,pcce,information_management,A dashboard is in place and updated timely to display the situation and the activities being implemented (24h),Achieved,Achieved,2024-08-25 00:00:00,0.5
-PCCENigeriaMDRN6879,pcce,information_management,A dashboard is in place and updated timely to display the situation and the activities being implemented (72h) date,2024-08-25 00:00:00,2024-08-29 00:00:00,Achieved,
-PCCENigeriaMDRN6879,pcce,information_management,A dashboard is in place and updated timely to display the situation and the activities being implemented (2 weeks),Achieved,Missing,2024-08-04 00:00:00,0.5
 PCCEIraqMDRI1998,pcce,planning_and_resource_mobilization,Disaster Brief done for the  Management Call to inform the FAD between 48-72 ,Achieved Early,2024-07-09,3,1.0
 PCCEIraqMDRI1998,pcce,planning_and_resource_mobilization,EA is launched within 24 hours after the FAD has been approved (or within 48 hours after field report was published). ,Achieved Early,2024-07-06,0,1.0
 PCCEIraqMDRI1998,pcce,planning_and_resource_mobilization,Operational Strategy validated 10 to 14  days after the EA ,Achieved Early,2024-07-16,10,1.0

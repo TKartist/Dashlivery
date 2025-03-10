@@ -4,11 +4,11 @@ EANigeriaMDRN777,assessment,0,0,0,1,0,0,0,1.0,1.0
 EAPeruMDRO999,assessment,0,0,0,1,0,0,0,1.0,1.0
 EAMaldivesMDRM787,assessment,0,0,0,0,1,0,0,1.0,0.5
 EAJordanMDRJ000,assessment,0,0,0,1,0,0,0,1.0,1.0
-EAMozambiqueMDRM989,coordination,0,0,0,0,1,0,3,1.0,0.5
-EANigeriaMDRN777,coordination,0,0,0,0,1,0,3,1.0,0.5
+EAMozambiqueMDRM989,coordination,0,0,0,0,1,0,3,0.25,0.5
+EANigeriaMDRN777,coordination,0,0,0,0,1,0,3,0.25,0.5
 EAPeruMDRO999,coordination,0,0,0,3,1,0,0,1.0,0.875
 EAMaldivesMDRM787,coordination,0,0,0,2,2,0,0,1.0,0.75
-EAJordanMDRJ000,coordination,0,0,0,0,1,0,3,1.0,0.5
+EAJordanMDRJ000,coordination,0,0,0,0,1,0,3,0.25,0.5
 EAMozambiqueMDRM989,financial_management,0,0,0,0,4,0,0,1.0,0.5
 EANigeriaMDRN777,financial_management,0,0,0,0,4,0,0,1.0,0.5
 EAPeruMDRO999,financial_management,0,0,0,0,4,0,0,1.0,0.5

@@ -110,6 +110,7 @@ def areas_in_op(folder):
             continue
         elif file == "information_management.csv":
             task_infos += read_im(folder, file)
+            continue
         task_infos += read_task_info(folder, file)
     return task_infos
 
