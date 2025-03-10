@@ -18,6 +18,8 @@ def send_request(data, api_url, iteration):
         print(f"Too many requests")
     else:
         print(f"Error {res.status_code}: {res.text}")
+    
+    print("Uploaded")
 
 
 
@@ -32,7 +34,7 @@ def batch_request(df, api_url):
             print("Waiting for REQUEST LIMIT to be refreshed")
             time.sleep(60)
         
-    print("Complete")
+    print("Finished Batched Uploading")
             
 
 
@@ -50,4 +52,22 @@ def upload_request(df, type):
 
 
 def delete_request(type):
-    print("x")
+    api_url = os.getenv(type)
+    token = os.getenv(VARIABLE.ACCESS_TOKEN)
+    headers = {
+        "Authorization": f"Bearer {token}",
+        "Content-Type": "application/json"
+    }
+    res = requests.delete(api_url, headers=headers)
+
+    if res.status_code == 200:
+        print("The data is completely wiped")
+    else:
+        print(f"Error {res.status_code}: {res.text}")
+
+
+def put_request(df, type):
+    api_url = os.getenv(type)
+    delete_request(type)
+    upload_request(df, type)
+    print("PowerBI Streaming Dataset Content Updated.")
