@@ -41,17 +41,17 @@ def full_list_im(cols):
 
 def summarize_df(df):
     df = df.copy()
-    categories = ["Achieved", "Not Achieved", "Achieved Early", "Achieved Late", "TBD", "DNU", "Missing"]
+    categories = ["Achieved", "NA", "Achieved Early", "Achieved Late", "TBD", "DNU", "Missing"]
 
     for category in categories:
         df.loc[:, category] = df.apply(lambda x: sum(str(cell) == category for cell in x), axis=1)
     
-    df.loc[:, "Data Completeness"] = (df["Achieved"] + df["Achieved Early"] + df["Achieved Late"] + df["Not Achieved"]) / \
-                                    (df["Achieved"] + df["Not Achieved"] + df["Achieved Early"] + df["Achieved Late"] + df["Missing"] + df["TBD"] + df["DNU"])
+    df.loc[:, "Data Completeness"] = (df["Achieved"] + df["Achieved Early"] + df["Achieved Late"] + df["NA"]) / \
+                                    (df["Achieved"] + df["NA"] + df["Achieved Early"] + df["Achieved Late"] + df["Missing"] + df["TBD"] + df["DNU"])
     df.loc[:, "General Performance"] = (((df["Achieved"] + df["Achieved Early"]) * 2) + df["Achieved Late"]) / \
-                                    ((df["Achieved"] + df["Not Achieved"] + df["Achieved Early"] + df["Achieved Late"]) * 2)
+                                    ((df["Achieved"] + df["NA"] + df["Achieved Early"] + df["Achieved Late"]) * 2)
 
-    cols_to_move = ["Achieved", "Not Achieved", "Missing", "Achieved Early", "Achieved Late", "TBD", "DNU", "Data Completeness", "General Performance"]
+    cols_to_move = ["Achieved", "NA", "Missing", "Achieved Early", "Achieved Late", "TBD", "DNU", "Data Completeness", "General Performance"]
     df = df[cols_to_move + [col for col in df.columns if col not in cols_to_move]]
 
     return df
@@ -66,17 +66,17 @@ def update_general_info(folder):
             continue
         temp = pd.read_csv(f"{folder}{file}", index_col="Ref")
         df["Achieved"] = temp["Achieved"] if "Achieved" not in df.columns else df["Achieved"] + temp["Achieved"]
-        df["Not Achieved"] = temp["Not Achieved"] if "Not Achieved" not in df.columns else df["Not Achieved"] + temp["Not Achieved"]
+        df["NA"] = temp["NA"] if "NA" not in df.columns else df["NA"] + temp["NA"]
         df["Missing"] = temp["Missing"] if "Missing" not in df.columns else df["Missing"] + temp["Missing"]
         df["Achieved Early"] = temp["Achieved Early"] if "Achieved Early" not in df.columns else df["Achieved Early"] + temp["Achieved Early"]
         df["Achieved Late"] = temp["Achieved Late"] if "Achieved Late" not in df.columns else df["Achieved Late"] + temp["Achieved Late"]
         df["TBD"] = temp["TBD"] if "TBD" not in df.columns else df["TBD"] + temp["TBD"]
         df["DNU"] = temp["DNU"] if "DNU" not in df.columns else df["DNU"] + temp["DNU"]
     
-    df.loc[:, "Data Completeness"] = (df["Achieved"] + df["Achieved Early"] + df["Achieved Late"] + df["Not Achieved"]) / \
-                                    (df["Achieved"] + df["Not Achieved"] + df["Achieved Early"] + df["Achieved Late"] + df["Missing"] + df["TBD"] + df["DNU"])
+    df.loc[:, "Data Completeness"] = (df["Achieved"] + df["Achieved Early"] + df["Achieved Late"] + df["NA"]) / \
+                                    (df["Achieved"] + df["NA"] + df["Achieved Early"] + df["Achieved Late"] + df["Missing"] + df["TBD"] + df["DNU"])
     df.loc[:, "General Performance"] = (((df["Achieved"] + df["Achieved Early"]) * 2) + df["Achieved Late"]) / \
-                                    ((df["Achieved"] + df["Not Achieved"] + df["Achieved Early"] + df["Achieved Late"]) * 2)
+                                    ((df["Achieved"] + df["NA"] + df["Achieved Early"] + df["Achieved Late"]) * 2)
 
     df.to_csv(f"{folder}general_info.csv", index=True)
 

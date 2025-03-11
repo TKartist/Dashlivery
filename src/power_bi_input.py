@@ -12,6 +12,7 @@ status_mapping = {
     "Achieved Late" : 1,
     "DNU" : 0,
     "Missing" : 0,
+    "NA" : 0,
 }
 
 def general_info():
@@ -44,7 +45,7 @@ def read_area_info_folder(folder):
             continue
         df = pd.read_csv(f"{folder}/{file}")
         df["Area"] = file.split(".")[0]
-        df = df[["Ref", "Area", "Achieved", "Not Achieved", "Missing", "Achieved Early", "Achieved Late", "TBD", "DNU", "Data Completeness", "General Performance"]]
+        df = df[["Ref", "Area", "Achieved", "NA", "Missing", "Achieved Early", "Achieved Late", "TBD", "DNU", "Data Completeness", "General Performance"]]
         df_list.append(df)
     
     df_combined = pd.concat(df_list)
@@ -96,7 +97,7 @@ def read_im(root, file):
                 "Task" : a,
                 "Status" : row[a],
                 "Completed" : row[b],
-                "Delta" : 0,
+                "Delta" : -1,
             })
     return task_infos
 

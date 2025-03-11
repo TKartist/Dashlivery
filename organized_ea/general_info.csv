@@ -1,4 +1,4 @@
-Ref,tracker Status,Trigger Date ,Region,Country,ISO,Appeal Code,Appeal Name ,Disaster Type ,Classification ,EWTS Varient ,Achieved,Not Achieved,Missing,Achieved Early,Achieved Late,TBD,DNU,Data Completeness,General Performance
+Ref,tracker Status,Trigger Date ,Region,Country,ISO,Appeal Code,Appeal Name ,Disaster Type ,Classification ,EWTS Varient ,Achieved,NA,Missing,Achieved Early,Achieved Late,TBD,DNU,Data Completeness,General Performance
 EAMozambiqueMDRM989,Not Active,2024-06-20,Africa,Mozambique,,MDRM989,Mozambique earthquake,Earthquake,Orange,Emergency Appeal,3,0,4,7,10,0,3,0.7407407407407407,0.75
 EANigeriaMDRN777,Not Active,2024-07-15,Africa,Nigeria,,MDRN777,Nigeria population movement,Population Movement ,Red,Emergency Appeal,0,0,6,3,15,0,3,0.6666666666666666,0.5833333333333334
 EAPeruMDRO999,Active,2024-08-11,Americas ,Peru,,MDRO999,Peru population movement,Population Movement ,Orange,Emergency Appeal,2,0,3,8,14,0,0,0.8888888888888888,0.7083333333333334
