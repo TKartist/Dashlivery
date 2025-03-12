@@ -1,59 +1,59 @@
 Ref,EWTS Varient,Area,Task,Status,Completed,Delta,Avg_col
-EAMozambiqueMDRM989,ea,assessment,Initial needs assessments completed and disseminated within 72 hours​ of the event.,Achieved Late,2024-06-24,4,0.8
-EANigeriaMDRN777,ea,assessment,Initial needs assessments completed and disseminated within 72 hours​ of the event.,Achieved Early,2024-07-17,2,0.8
-EAPeruMDRO999,ea,assessment,Initial needs assessments completed and disseminated within 72 hours​ of the event.,Achieved Early,2024-08-13,2,0.8
-EAMaldivesMDRM787,ea,assessment,Initial needs assessments completed and disseminated within 72 hours​ of the event.,Achieved Late,2024-09-01,4,0.8
-EAJordanMDRJ000,ea,assessment,Initial needs assessments completed and disseminated within 72 hours​ of the event.,Achieved Early,2024-09-03,2,0.8
-EAMozambiqueMDRM989,ea,coordination,Hold a mini summit within 48 h of the disaster,DNU,-,-1,0.3
-EAMozambiqueMDRM989,ea,coordination,The Movement Joint statement is produced 48h after the Mini Summit,DNU,-,-1,0.4
-EAMozambiqueMDRM989,ea,coordination,review/adapt membership coordination for the context for this specific emergency ,DNU,-,-1,0.4
-EAMozambiqueMDRM989,ea,coordination,Appropriate membership coordination is in place after 24h of disaster,Achieved Late,2024-07-05,15,0.5
-EANigeriaMDRN777,ea,coordination,Hold a mini summit within 48 h of the disaster,DNU,-,-1,0.3
-EANigeriaMDRN777,ea,coordination,The Movement Joint statement is produced 48h after the Mini Summit,DNU,-,-1,0.4
-EANigeriaMDRN777,ea,coordination,review/adapt membership coordination for the context for this specific emergency ,DNU,-,-1,0.4
-EANigeriaMDRN777,ea,coordination,Appropriate membership coordination is in place after 24h of disaster,Achieved Late,2024-07-29,14,0.5
-EAPeruMDRO999,ea,coordination,Hold a mini summit within 48 h of the disaster,Achieved Early,2024-08-13 00:00:00,2,0.3
-EAPeruMDRO999,ea,coordination,The Movement Joint statement is produced 48h after the Mini Summit,Achieved Early,2024-08-13 00:00:00,2,0.4
-EAPeruMDRO999,ea,coordination,review/adapt membership coordination for the context for this specific emergency ,Achieved Early,2024-08-15 00:00:00,4,0.4
-EAPeruMDRO999,ea,coordination,Appropriate membership coordination is in place after 24h of disaster,Achieved Late,2024-08-28,17,0.5
-EAMaldivesMDRM787,ea,coordination,Hold a mini summit within 48 h of the disaster,Achieved Late,2024-09-01 00:00:00,4,0.3
-EAMaldivesMDRM787,ea,coordination,The Movement Joint statement is produced 48h after the Mini Summit,Achieved Early,2024-09-01 00:00:00,4,0.4
-EAMaldivesMDRM787,ea,coordination,review/adapt membership coordination for the context for this specific emergency ,Achieved Early,2024-09-02 00:00:00,5,0.4
-EAMaldivesMDRM787,ea,coordination,Appropriate membership coordination is in place after 24h of disaster,Achieved Late,2024-09-15,18,0.5
-EAJordanMDRJ000,ea,coordination,Hold a mini summit within 48 h of the disaster,DNU,-,-1,0.3
-EAJordanMDRJ000,ea,coordination,The Movement Joint statement is produced 48h after the Mini Summit,DNU,-,-1,0.4
-EAJordanMDRJ000,ea,coordination,review/adapt membership coordination for the context for this specific emergency ,DNU,-,-1,0.4
-EAJordanMDRJ000,ea,coordination,Appropriate membership coordination is in place after 24h of disaster,Achieved Late,2024-09-12,11,0.5
-EAMozambiqueMDRM989,ea,financial_management,Project Funding Agreements (PFA) signed by the NS and the IFRC no longer than 7 days from the DREF/EA approval,Achieved Late,2024-07-04,14,0.5
-EAMozambiqueMDRM989,ea,financial_management,"After PFA  is signed by both parties, HoD/project manager to process the Request for Payment to be sent to Treasury within 10 days of DREF/ EA approval",Achieved Late,2024-07-07,17,0.5
-EAMozambiqueMDRM989,ea,financial_management,Bank transfer process by IFRC to the NS within 24h after the request for payment is received/approved,Achieved Late,2024-07-10,20,0.5
-EAMozambiqueMDRM989,ea,financial_management,Confirmation from the NSs of the funds received to be obtained within 3 working days from the value date of the transfer,Achieved Late,2024-07-12,22,0.5
-EANigeriaMDRN777,ea,financial_management,Project Funding Agreements (PFA) signed by the NS and the IFRC no longer than 7 days from the DREF/EA approval,Achieved Late,2024-07-30,15,0.5
-EANigeriaMDRN777,ea,financial_management,"After PFA  is signed by both parties, HoD/project manager to process the Request for Payment to be sent to Treasury within 10 days of DREF/ EA approval",Achieved Late,2024-08-02,18,0.5
-EANigeriaMDRN777,ea,financial_management,Bank transfer process by IFRC to the NS within 24h after the request for payment is received/approved,Achieved Late,2024-08-03,19,0.5
-EANigeriaMDRN777,ea,financial_management,Confirmation from the NSs of the funds received to be obtained within 3 working days from the value date of the transfer,Achieved Late,2024-08-06,22,0.5
-EAPeruMDRO999,ea,financial_management,Project Funding Agreements (PFA) signed by the NS and the IFRC no longer than 7 days from the DREF/EA approval,Achieved Late,2024-08-26,15,0.5
-EAPeruMDRO999,ea,financial_management,"After PFA  is signed by both parties, HoD/project manager to process the Request for Payment to be sent to Treasury within 10 days of DREF/ EA approval",Achieved Late,2024-08-27,16,0.5
-EAPeruMDRO999,ea,financial_management,Bank transfer process by IFRC to the NS within 24h after the request for payment is received/approved,Achieved Late,2024-08-28,17,0.5
-EAPeruMDRO999,ea,financial_management,Confirmation from the NSs of the funds received to be obtained within 3 working days from the value date of the transfer,Achieved Late,2024-09-01,21,0.5
-EAMaldivesMDRM787,ea,financial_management,Project Funding Agreements (PFA) signed by the NS and the IFRC no longer than 7 days from the DREF/EA approval,Achieved Late,2024-09-14,17,0.5
-EAMaldivesMDRM787,ea,financial_management,"After PFA  is signed by both parties, HoD/project manager to process the Request for Payment to be sent to Treasury within 10 days of DREF/ EA approval",Achieved Late,2024-09-20,23,0.5
-EAMaldivesMDRM787,ea,financial_management,Bank transfer process by IFRC to the NS within 24h after the request for payment is received/approved,Achieved Late,2024-09-22,25,0.5
-EAMaldivesMDRM787,ea,financial_management,Confirmation from the NSs of the funds received to be obtained within 3 working days from the value date of the transfer,Achieved Late,2024-09-25,28,0.5
-EAJordanMDRJ000,ea,financial_management,Project Funding Agreements (PFA) signed by the NS and the IFRC no longer than 7 days from the DREF/EA approval,Achieved Late,2024-09-15,14,0.5
-EAJordanMDRJ000,ea,financial_management,"After PFA  is signed by both parties, HoD/project manager to process the Request for Payment to be sent to Treasury within 10 days of DREF/ EA approval",Achieved Late,2024-09-19,18,0.5
-EAJordanMDRJ000,ea,financial_management,Bank transfer process by IFRC to the NS within 24h after the request for payment is received/approved,Achieved Late,2024-09-23,22,0.5
-EAJordanMDRJ000,ea,financial_management,Confirmation from the NSs of the funds received to be obtained within 3 working days from the value date of the transfer,Achieved Late,2024-09-25,24,0.5
-EAMozambiqueMDRM989,ea,hr_planning_and_recruitement,"Key initial longer-term positions identified by operational leadership and requested via submission in the HR system, one week after the EA publication",Achieved Early,2024-07-01,11,0.6
-EAMozambiqueMDRM989,ea,hr_planning_and_recruitement,"Once approved in the HR system and pre-classified JD provided, HR advertises key initial longer-term positions within 48 hours.",Achieved Early,2024-07-02,12,0.6
-EANigeriaMDRN777,ea,hr_planning_and_recruitement,"Key initial longer-term positions identified by operational leadership and requested via submission in the HR system, one week after the EA publication",Achieved Late,2024-07-29,14,0.6
-EANigeriaMDRN777,ea,hr_planning_and_recruitement,"Once approved in the HR system and pre-classified JD provided, HR advertises key initial longer-term positions within 48 hours.",Achieved Late,2024-07-30,15,0.6
-EAPeruMDRO999,ea,hr_planning_and_recruitement,"Key initial longer-term positions identified by operational leadership and requested via submission in the HR system, one week after the EA publication",Achieved Late,2024-08-30,19,0.6
-EAPeruMDRO999,ea,hr_planning_and_recruitement,"Once approved in the HR system and pre-classified JD provided, HR advertises key initial longer-term positions within 48 hours.",Achieved Late,2024-09-01,21,0.6
-EAMaldivesMDRM787,ea,hr_planning_and_recruitement,"Key initial longer-term positions identified by operational leadership and requested via submission in the HR system, one week after the EA publication",Achieved Late,2024-09-15,18,0.6
-EAMaldivesMDRM787,ea,hr_planning_and_recruitement,"Once approved in the HR system and pre-classified JD provided, HR advertises key initial longer-term positions within 48 hours.",Achieved Late,2024-09-18,21,0.6
-EAJordanMDRJ000,ea,hr_planning_and_recruitement,"Key initial longer-term positions identified by operational leadership and requested via submission in the HR system, one week after the EA publication",Achieved Late,2024-09-15,14,0.6
-EAJordanMDRJ000,ea,hr_planning_and_recruitement,"Once approved in the HR system and pre-classified JD provided, HR advertises key initial longer-term positions within 48 hours.",Achieved Late,2024-09-15,14,0.6
+EAMozambiqueMDRM989,ea,assessment,Initial needs assessments completed and disseminated within 72 hours​ of the event.,Achieved Late,2024-06-24,1,0.7
+EANigeriaMDRN777,ea,assessment,Initial needs assessments completed and disseminated within 72 hours​ of the event.,Achieved Early,2024-07-17,-1,0.7
+EAPeruMDRO999,ea,assessment,Initial needs assessments completed and disseminated within 72 hours​ of the event.,Achieved Early,2024-08-13,-1,0.7
+EAMaldivesMDRM787,ea,assessment,Initial needs assessments completed and disseminated within 72 hours​ of the event.,Achieved Late,2024-09-01,1,0.7
+EAJordanMDRJ000,ea,assessment,Initial needs assessments completed and disseminated within 72 hours​ of the event.,Achieved Late,2024-09-09,5,0.7
+EAMozambiqueMDRM989,ea,coordination,Hold a mini summit within 48 h of the disaster,DNU,-,365,0.375
+EAMozambiqueMDRM989,ea,coordination,The Movement Joint statement is produced 48h after the Mini Summit,DNU,-,365,0.375
+EAMozambiqueMDRM989,ea,coordination,review/adapt membership coordination for the context for this specific emergency ,Achieved Late,2024-07-05,8,0.5
+EAMozambiqueMDRM989,ea,coordination,Appropriate membership coordination is in place after 24h of disaster,Achieved Early,2024-06-22,0,0.9
+EANigeriaMDRN777,ea,coordination,Hold a mini summit within 48 h of the disaster,DNU,-,365,0.375
+EANigeriaMDRN777,ea,coordination,The Movement Joint statement is produced 48h after the Mini Summit,DNU,-,365,0.375
+EANigeriaMDRN777,ea,coordination,review/adapt membership coordination for the context for this specific emergency ,Achieved Late,2024-07-29,7,0.5
+EANigeriaMDRN777,ea,coordination,Appropriate membership coordination is in place after 24h of disaster,Achieved Early,2024-07-16,-1,0.9
+EAPeruMDRO999,ea,coordination,Hold a mini summit within 48 h of the disaster,Achieved Early,2024-08-13 00:00:00,0,0.375
+EAPeruMDRO999,ea,coordination,The Movement Joint statement is produced 48h after the Mini Summit,Achieved Early,2024-08-15 00:00:00,0,0.375
+EAPeruMDRO999,ea,coordination,review/adapt membership coordination for the context for this specific emergency ,Achieved Late,2024-08-28,10,0.5
+EAPeruMDRO999,ea,coordination,Appropriate membership coordination is in place after 24h of disaster,Achieved Early,2024-08-11,-2,0.9
+EAMaldivesMDRM787,ea,coordination,Hold a mini summit within 48 h of the disaster,Achieved Late,2024-09-01 00:00:00,2,0.375
+EAMaldivesMDRM787,ea,coordination,The Movement Joint statement is produced 48h after the Mini Summit,Achieved Late,2024-09-02 00:00:00,1,0.375
+EAMaldivesMDRM787,ea,coordination,review/adapt membership coordination for the context for this specific emergency ,Achieved Late,2024-09-15,11,0.5
+EAMaldivesMDRM787,ea,coordination,Appropriate membership coordination is in place after 24h of disaster,Achieved Early,2024-08-29,-1,0.9
+EAJordanMDRJ000,ea,coordination,Hold a mini summit within 48 h of the disaster,Not Achieved,-,365,0.375
+EAJordanMDRJ000,ea,coordination,The Movement Joint statement is produced 48h after the Mini Summit,Not Achieved,-,365,0.375
+EAJordanMDRJ000,ea,coordination,review/adapt membership coordination for the context for this specific emergency ,Achieved Late,2024-09-21,13,0.5
+EAJordanMDRJ000,ea,coordination,Appropriate membership coordination is in place after 24h of disaster,Achieved Late,2024-09-04,1,0.9
+EAMozambiqueMDRM989,ea,financial_management,Project Funding Agreements (PFA) signed by the NS and the IFRC no longer than 7 days from the DREF/EA approval,Achieved Late,2024-07-04,3,0.5
+EAMozambiqueMDRM989,ea,financial_management,"After PFA  is signed by both parties, HoD/project manager to process the Request for Payment to be sent to Treasury within 10 days of DREF/ EA approval",Achieved Late,2024-07-07,3,0.5
+EAMozambiqueMDRM989,ea,financial_management,Bank transfer process by IFRC to the NS within 24h after the request for payment is received/approved,Achieved Late,2024-07-10,4,0.5
+EAMozambiqueMDRM989,ea,financial_management,Confirmation from the NSs of the funds received to be obtained within 3 working days from the value date of the transfer,Achieved Late,2024-07-12,2,0.5
+EANigeriaMDRN777,ea,financial_management,Project Funding Agreements (PFA) signed by the NS and the IFRC no longer than 7 days from the DREF/EA approval,Achieved Late,2024-07-30,4,0.5
+EANigeriaMDRN777,ea,financial_management,"After PFA  is signed by both parties, HoD/project manager to process the Request for Payment to be sent to Treasury within 10 days of DREF/ EA approval",Achieved Late,2024-08-02,4,0.5
+EANigeriaMDRN777,ea,financial_management,Bank transfer process by IFRC to the NS within 24h after the request for payment is received/approved,Achieved Late,2024-08-03,3,0.5
+EANigeriaMDRN777,ea,financial_management,Confirmation from the NSs of the funds received to be obtained within 3 working days from the value date of the transfer,Achieved Late,2024-08-06,2,0.5
+EAPeruMDRO999,ea,financial_management,Project Funding Agreements (PFA) signed by the NS and the IFRC no longer than 7 days from the DREF/EA approval,Achieved Late,2024-08-26,4,0.5
+EAPeruMDRO999,ea,financial_management,"After PFA  is signed by both parties, HoD/project manager to process the Request for Payment to be sent to Treasury within 10 days of DREF/ EA approval",Achieved Late,2024-08-27,2,0.5
+EAPeruMDRO999,ea,financial_management,Bank transfer process by IFRC to the NS within 24h after the request for payment is received/approved,Achieved Late,2024-08-28,1,0.5
+EAPeruMDRO999,ea,financial_management,Confirmation from the NSs of the funds received to be obtained within 3 working days from the value date of the transfer,Achieved Late,2024-09-01,1,0.5
+EAMaldivesMDRM787,ea,financial_management,Project Funding Agreements (PFA) signed by the NS and the IFRC no longer than 7 days from the DREF/EA approval,Achieved Late,2024-09-14,6,0.5
+EAMaldivesMDRM787,ea,financial_management,"After PFA  is signed by both parties, HoD/project manager to process the Request for Payment to be sent to Treasury within 10 days of DREF/ EA approval",Achieved Late,2024-09-20,9,0.5
+EAMaldivesMDRM787,ea,financial_management,Bank transfer process by IFRC to the NS within 24h after the request for payment is received/approved,Achieved Late,2024-09-22,9,0.5
+EAMaldivesMDRM787,ea,financial_management,Confirmation from the NSs of the funds received to be obtained within 3 working days from the value date of the transfer,Achieved Late,2024-09-25,8,0.5
+EAJordanMDRJ000,ea,financial_management,Project Funding Agreements (PFA) signed by the NS and the IFRC no longer than 7 days from the DREF/EA approval,Achieved Late,2024-09-21,9,0.5
+EAJordanMDRJ000,ea,financial_management,"After PFA  is signed by both parties, HoD/project manager to process the Request for Payment to be sent to Treasury within 10 days of DREF/ EA approval",Achieved Late,2024-09-23,8,0.5
+EAJordanMDRJ000,ea,financial_management,Bank transfer process by IFRC to the NS within 24h after the request for payment is received/approved,Achieved Late,2024-09-28,11,0.5
+EAJordanMDRJ000,ea,financial_management,Confirmation from the NSs of the funds received to be obtained within 3 working days from the value date of the transfer,Achieved Late,2024-10-01,10,0.5
+EAMozambiqueMDRM989,ea,hr_planning_and_recruitement,"Key initial longer-term positions identified by operational leadership and requested via submission in the HR system, one week after the EA publication",Achieved Early,2024-07-01,0,0.6
+EAMozambiqueMDRM989,ea,hr_planning_and_recruitement,"Once approved in the HR system and pre-classified JD provided, HR advertises key initial longer-term positions within 48 hours.",Achieved Early,2024-07-02,-1,0.6
+EANigeriaMDRN777,ea,hr_planning_and_recruitement,"Key initial longer-term positions identified by operational leadership and requested via submission in the HR system, one week after the EA publication",Achieved Late,2024-07-29,3,0.6
+EANigeriaMDRN777,ea,hr_planning_and_recruitement,"Once approved in the HR system and pre-classified JD provided, HR advertises key initial longer-term positions within 48 hours.",Achieved Late,2024-07-30,2,0.6
+EAPeruMDRO999,ea,hr_planning_and_recruitement,"Key initial longer-term positions identified by operational leadership and requested via submission in the HR system, one week after the EA publication",Achieved Late,2024-08-30,8,0.6
+EAPeruMDRO999,ea,hr_planning_and_recruitement,"Once approved in the HR system and pre-classified JD provided, HR advertises key initial longer-term positions within 48 hours.",Achieved Late,2024-09-01,8,0.6
+EAMaldivesMDRM787,ea,hr_planning_and_recruitement,"Key initial longer-term positions identified by operational leadership and requested via submission in the HR system, one week after the EA publication",Achieved Late,2024-09-15,7,0.6
+EAMaldivesMDRM787,ea,hr_planning_and_recruitement,"Once approved in the HR system and pre-classified JD provided, HR advertises key initial longer-term positions within 48 hours.",Achieved Late,2024-09-18,8,0.6
+EAJordanMDRJ000,ea,hr_planning_and_recruitement,"Key initial longer-term positions identified by operational leadership and requested via submission in the HR system, one week after the EA publication",Achieved Late,2024-09-21,9,0.6
+EAJordanMDRJ000,ea,hr_planning_and_recruitement,"Once approved in the HR system and pre-classified JD provided, HR advertises key initial longer-term positions within 48 hours.",Achieved Late,2024-09-25,11,0.6
 EAMozambiqueMDRM989,ea,information_management,A dashboard is in place and updated timely to display the situation and the activities being implemented (24h),Missing,-,-1,0.4
 EAMozambiqueMDRM989,ea,information_management,A dashboard is in place and updated timely to display the situation and the activities being implemented (72h),Missing,-,-1,0.4
 EAMozambiqueMDRM989,ea,information_management,A dashboard is in place and updated timely to display the situation and the activities being implemented (1 week),Achieved,2024-07-05 00:00:00,-1,0.4
@@ -79,194 +79,199 @@ EAJordanMDRJ000,ea,information_management,A dashboard is in place and updated ti
 EAJordanMDRJ000,ea,information_management,A dashboard is in place and updated timely to display the situation and the activities being implemented (1 week),Missing,-,-1,0.4
 EAJordanMDRJ000,ea,information_management,A dashboard is in place and updated timely to display the situation and the activities being implemented (2 weeks),Missing,-,-1,0.4
 EAJordanMDRJ000,ea,information_management,A dashboard is in place and updated timely to display the situation and the activities being implemented (1 month),Missing,-,-1,0.4
-EAMozambiqueMDRM989,ea,planning_and_resource_mobilization,Disaster Brief done to inform the FAD between 48-72 h,Achieved Late,2024-06-26 00:00:00,6,0.3
-EAMozambiqueMDRM989,ea,planning_and_resource_mobilization,EA is launched within 24 hours after the FAD has been approved (or within 48 hours after field report was published). ,Achieved Late,2024-06-28,8,0.5
-EAMozambiqueMDRM989,ea,planning_and_resource_mobilization,Operational Strategy validated 7 days after the EA ,Achieved Late,2024-07-03,13,0.6
-EAMozambiqueMDRM989,ea,planning_and_resource_mobilization,A resource mobilization plan is developed and approved within 2 weeks of the EA,Achieved Late,2024-07-10,20,0.5
-EANigeriaMDRN777,ea,planning_and_resource_mobilization,Disaster Brief done to inform the FAD between 48-72 h,Missing,-,-1,0.3
-EANigeriaMDRN777,ea,planning_and_resource_mobilization,EA is launched within 24 hours after the FAD has been approved (or within 48 hours after field report was published). ,Achieved Late,2024-07-22,7,0.5
-EANigeriaMDRN777,ea,planning_and_resource_mobilization,Operational Strategy validated 7 days after the EA ,Achieved Late,2024-07-30,15,0.6
-EANigeriaMDRN777,ea,planning_and_resource_mobilization,A resource mobilization plan is developed and approved within 2 weeks of the EA,Achieved Late,2024-08-15,31,0.5
-EAPeruMDRO999,ea,planning_and_resource_mobilization,Disaster Brief done to inform the FAD between 48-72 h,Achieved Late,2024-08-20 00:00:00,9,0.3
-EAPeruMDRO999,ea,planning_and_resource_mobilization,EA is launched within 24 hours after the FAD has been approved (or within 48 hours after field report was published). ,Achieved Late,2024-08-21,10,0.5
-EAPeruMDRO999,ea,planning_and_resource_mobilization,Operational Strategy validated 7 days after the EA ,Achieved Late,2024-08-29,18,0.6
-EAPeruMDRO999,ea,planning_and_resource_mobilization,A resource mobilization plan is developed and approved within 2 weeks of the EA,Achieved Late,2024-09-20,40,0.5
-EAMaldivesMDRM787,ea,planning_and_resource_mobilization,Disaster Brief done to inform the FAD between 48-72 h,Missing,-,-1,0.3
-EAMaldivesMDRM787,ea,planning_and_resource_mobilization,EA is launched within 24 hours after the FAD has been approved (or within 48 hours after field report was published). ,Achieved Late,2024-09-06,9,0.5
-EAMaldivesMDRM787,ea,planning_and_resource_mobilization,Operational Strategy validated 7 days after the EA ,Achieved Late,2024-09-12,15,0.6
-EAMaldivesMDRM787,ea,planning_and_resource_mobilization,A resource mobilization plan is developed and approved within 2 weeks of the EA,Achieved Late,2024-09-25,28,0.5
-EAJordanMDRJ000,ea,planning_and_resource_mobilization,Disaster Brief done to inform the FAD between 48-72 h,Achieved Late,2024-09-05 00:00:00,4,0.3
-EAJordanMDRJ000,ea,planning_and_resource_mobilization,EA is launched within 24 hours after the FAD has been approved (or within 48 hours after field report was published). ,Achieved Late,2024-09-07,6,0.5
-EAJordanMDRJ000,ea,planning_and_resource_mobilization,Operational Strategy validated 7 days after the EA ,Achieved Early,2024-09-12,11,0.6
-EAJordanMDRJ000,ea,planning_and_resource_mobilization,A resource mobilization plan is developed and approved within 2 weeks of the EA,Achieved Late,2024-10-05,34,0.5
-EAMozambiqueMDRM989,ea,procurement_and_logistics,Supply chain plan developed between logs and ops coordinator within 1 week of the approved EA,Achieved Early,2024-06-22,2,1.0
-EAMozambiqueMDRM989,ea,procurement_and_logistics,Fully approved and submitted requisitions for NFIs within 1 week of the EA (when relevant) ,Missing,-,-1,0.3
-EAMozambiqueMDRM989,ea,procurement_and_logistics,NFI (or emergencies items) being delivered to the country in 3 days since the approval of the  Requistion,Missing,-,-1,0.3
-EANigeriaMDRN777,ea,procurement_and_logistics,Supply chain plan developed between logs and ops coordinator within 1 week of the approved EA,Achieved Early,2024-07-16,1,1.0
-EANigeriaMDRN777,ea,procurement_and_logistics,Fully approved and submitted requisitions for NFIs within 1 week of the EA (when relevant) ,Achieved Late,2024-07-30 00:00:00,15,0.3
-EANigeriaMDRN777,ea,procurement_and_logistics,NFI (or emergencies items) being delivered to the country in 3 days since the approval of the  Requistion,Achieved Late,2024-08-02 00:00:00,18,0.3
-EAPeruMDRO999,ea,procurement_and_logistics,Supply chain plan developed between logs and ops coordinator within 1 week of the approved EA,Achieved Early,2024-08-11,0,1.0
-EAPeruMDRO999,ea,procurement_and_logistics,Fully approved and submitted requisitions for NFIs within 1 week of the EA (when relevant) ,Achieved Late,2024-08-27 00:00:00,16,0.3
-EAPeruMDRO999,ea,procurement_and_logistics,NFI (or emergencies items) being delivered to the country in 3 days since the approval of the  Requistion,Achieved Late,2024-08-29 00:00:00,18,0.3
-EAMaldivesMDRM787,ea,procurement_and_logistics,Supply chain plan developed between logs and ops coordinator within 1 week of the approved EA,Achieved Early,2024-08-29,1,1.0
-EAMaldivesMDRM787,ea,procurement_and_logistics,Fully approved and submitted requisitions for NFIs within 1 week of the EA (when relevant) ,Achieved Late,2024-09-16 00:00:00,19,0.3
-EAMaldivesMDRM787,ea,procurement_and_logistics,NFI (or emergencies items) being delivered to the country in 3 days since the approval of the  Requistion,Achieved Late,2024-09-20 00:00:00,23,0.3
-EAJordanMDRJ000,ea,procurement_and_logistics,Supply chain plan developed between logs and ops coordinator within 1 week of the approved EA,Achieved Early,2024-09-01,0,1.0
-EAJordanMDRJ000,ea,procurement_and_logistics,Fully approved and submitted requisitions for NFIs within 1 week of the EA (when relevant) ,Missing,-,-1,0.3
-EAJordanMDRJ000,ea,procurement_and_logistics,NFI (or emergencies items) being delivered to the country in 3 days since the approval of the  Requistion,Missing,-,-1,0.3
-EAMozambiqueMDRM989,ea,surge,IFRC having the green light from the receiving NS to deploy RR 24h after the disaster,Achieved Early,2024-06-21,1,0.6
-EAMozambiqueMDRM989,ea,surge,RR personnel Alert sent within 12h of the request ,Achieved Early,2024-06-21,1,0.9
-EAMozambiqueMDRM989,ea,surge,Identification of 1st rotation RR personnel within 48h of the alert ,Achieved Early,2024-06-22,2,0.9
-EANigeriaMDRN777,ea,surge,IFRC having the green light from the receiving NS to deploy RR 24h after the disaster,Achieved Late,2024-07-18,3,0.6
-EANigeriaMDRN777,ea,surge,RR personnel Alert sent within 12h of the request ,Achieved Late,2024-07-18,3,0.9
-EANigeriaMDRN777,ea,surge,Identification of 1st rotation RR personnel within 48h of the alert ,Achieved Late,2024-07-20,5,0.9
-EAPeruMDRO999,ea,surge,IFRC having the green light from the receiving NS to deploy RR 24h after the disaster,Achieved Late,2024-08-15,4,0.6
-EAPeruMDRO999,ea,surge,RR personnel Alert sent within 12h of the request ,Achieved Early,2024-08-11,0,0.9
-EAPeruMDRO999,ea,surge,Identification of 1st rotation RR personnel within 48h of the alert ,Achieved Early,2024-08-13,2,0.9
-EAMaldivesMDRM787,ea,surge,IFRC having the green light from the receiving NS to deploy RR 24h after the disaster,Achieved Late,2024-09-01,4,0.6
-EAMaldivesMDRM787,ea,surge,RR personnel Alert sent within 12h of the request ,Achieved Early,2024-08-29,1,0.9
-EAMaldivesMDRM787,ea,surge,Identification of 1st rotation RR personnel within 48h of the alert ,Achieved Early,2024-08-30,2,0.9
-EAJordanMDRJ000,ea,surge,IFRC having the green light from the receiving NS to deploy RR 24h after the disaster,Achieved Late,2024-09-03,2,0.6
-EAJordanMDRJ000,ea,surge,RR personnel Alert sent within 12h of the request ,Achieved Early,2024-09-02,1,0.9
-EAJordanMDRJ000,ea,surge,Identification of 1st rotation RR personnel within 48h of the alert ,Achieved Early,2024-09-03,2,0.9
-DREFAfghanistanMDRA111,dref,assessment,Initial needs assessments completed within 72 hours​ of the event.,Achieved Early,2024-06-07,2,0.8
-DREFBangladeshMDRB567,dref,assessment,Initial needs assessments completed within 72 hours​ of the event.,Achieved Early,2024-07-02,1,0.8
-DREFGermanyMDRG909,dref,assessment,Initial needs assessments completed within 72 hours​ of the event.,Achieved Late,2024-08-14,4,0.8
-DREFChileMDRC464,dref,assessment,Initial needs assessments completed within 72 hours​ of the event.,Achieved Late,2024-08-25,5,0.8
-DREFEgyptMDRE698,dref,assessment,Initial needs assessments completed within 72 hours​ of the event.,Achieved Early,2024-09-03,1,0.8
-DREFAfghanistanMDRA111,dref,financial_management,Project funding agreements (PFAs) signed by the NS and the IFRC no longer than 7 days from the DREF approval,Achieved Late,2024-06-20,15,0.5
-DREFAfghanistanMDRA111,dref,financial_management,"After PFA is signed by both parties, HoD/project manager to process the Request for Payment to be sent to Treasury within 10 days of DREF approval",Achieved Late,2024-06-22,17,0.5
-DREFAfghanistanMDRA111,dref,financial_management,Bank transfer process by IFRC to the NS within 24h after the request for payment is received/approved,Achieved Late,2024-06-23,18,0.5
-DREFAfghanistanMDRA111,dref,financial_management,Confirmation from the NSs of the funds received to be obtained within 3 working days from the value date of the transfer,Achieved Late,2024-06-26,21,0.5
-DREFBangladeshMDRB567,dref,financial_management,Project funding agreements (PFAs) signed by the NS and the IFRC no longer than 7 days from the DREF approval,Achieved Late,2024-07-19,18,0.5
-DREFBangladeshMDRB567,dref,financial_management,"After PFA is signed by both parties, HoD/project manager to process the Request for Payment to be sent to Treasury within 10 days of DREF approval",Achieved Late,2024-07-22,21,0.5
-DREFBangladeshMDRB567,dref,financial_management,Bank transfer process by IFRC to the NS within 24h after the request for payment is received/approved,Achieved Late,2024-07-24,23,0.5
-DREFBangladeshMDRB567,dref,financial_management,Confirmation from the NSs of the funds received to be obtained within 3 working days from the value date of the transfer,Achieved Late,2024-07-27,26,0.5
-DREFGermanyMDRG909,dref,financial_management,Project funding agreements (PFAs) signed by the NS and the IFRC no longer than 7 days from the DREF approval,Achieved Late,2024-08-30,20,0.5
-DREFGermanyMDRG909,dref,financial_management,"After PFA is signed by both parties, HoD/project manager to process the Request for Payment to be sent to Treasury within 10 days of DREF approval",Achieved Late,2024-09-02,23,0.5
-DREFGermanyMDRG909,dref,financial_management,Bank transfer process by IFRC to the NS within 24h after the request for payment is received/approved,Achieved Late,2024-09-03,24,0.5
-DREFGermanyMDRG909,dref,financial_management,Confirmation from the NSs of the funds received to be obtained within 3 working days from the value date of the transfer,Achieved Late,2024-09-06,27,0.5
-DREFChileMDRC464,dref,financial_management,Project funding agreements (PFAs) signed by the NS and the IFRC no longer than 7 days from the DREF approval,Achieved Late,2024-09-08,19,0.5
-DREFChileMDRC464,dref,financial_management,"After PFA is signed by both parties, HoD/project manager to process the Request for Payment to be sent to Treasury within 10 days of DREF approval",Achieved Late,2024-09-10,21,0.5
-DREFChileMDRC464,dref,financial_management,Bank transfer process by IFRC to the NS within 24h after the request for payment is received/approved,Achieved Late,2024-09-11,22,0.5
-DREFChileMDRC464,dref,financial_management,Confirmation from the NSs of the funds received to be obtained within 3 working days from the value date of the transfer,Achieved Late,2024-09-15,26,0.5
-DREFEgyptMDRE698,dref,financial_management,Project funding agreements (PFAs) signed by the NS and the IFRC no longer than 7 days from the DREF approval,Achieved Late,2024-09-22,20,0.5
-DREFEgyptMDRE698,dref,financial_management,"After PFA is signed by both parties, HoD/project manager to process the Request for Payment to be sent to Treasury within 10 days of DREF approval",Achieved Late,2024-09-25,23,0.5
-DREFEgyptMDRE698,dref,financial_management,Bank transfer process by IFRC to the NS within 24h after the request for payment is received/approved,Achieved Late,2024-09-26,24,0.5
-DREFEgyptMDRE698,dref,financial_management,Confirmation from the NSs of the funds received to be obtained within 3 working days from the value date of the transfer,Achieved Late,2024-09-29,27,0.5
-DREFAfghanistanMDRA111,dref,planning_and_resource_mobilization,DREF approved within 10 days of the trigger. 14 if the NS has started responding.,Achieved Early,2024-06-15,10,0.9
-DREFAfghanistanMDRA111,dref,planning_and_resource_mobilization,Approval by the DREF appeal manager within 24h of receiving the final package,Achieved Early,2024-06-05,0,0.7
-DREFBangladeshMDRB567,dref,planning_and_resource_mobilization,DREF approved within 10 days of the trigger. 14 if the NS has started responding.,Achieved Early,2024-07-12,11,0.9
-DREFBangladeshMDRB567,dref,planning_and_resource_mobilization,Approval by the DREF appeal manager within 24h of receiving the final package,Achieved Late,2024-07-03,2,0.7
-DREFGermanyMDRG909,dref,planning_and_resource_mobilization,DREF approved within 10 days of the trigger. 14 if the NS has started responding.,Achieved Early,2024-08-21,11,0.9
-DREFGermanyMDRG909,dref,planning_and_resource_mobilization,Approval by the DREF appeal manager within 24h of receiving the final package,Achieved Early,2024-08-11,1,0.7
-DREFChileMDRC464,dref,planning_and_resource_mobilization,DREF approved within 10 days of the trigger. 14 if the NS has started responding.,Achieved Early,2024-08-30,10,0.9
-DREFChileMDRC464,dref,planning_and_resource_mobilization,Approval by the DREF appeal manager within 24h of receiving the final package,Achieved Late,2024-08-23,3,0.7
-DREFEgyptMDRE698,dref,planning_and_resource_mobilization,DREF approved within 10 days of the trigger. 14 if the NS has started responding.,Achieved Late,2024-09-18,16,0.9
-DREFEgyptMDRE698,dref,planning_and_resource_mobilization,Approval by the DREF appeal manager within 24h of receiving the final package,Achieved Late,2024-09-08,6,0.7
-DREFAfghanistanMDRA111,dref,procurement_and_logistics,Supply chain plan developed within 1 week of DREF approval,Achieved Late,2024-06-21,16,0.5
-DREFAfghanistanMDRA111,dref,procurement_and_logistics,NFI (or emergencies items) being delivered to the country in 3 days since the Requistion,Achieved Late,2024-06-22,17,0.8
-DREFBangladeshMDRB567,dref,procurement_and_logistics,Supply chain plan developed within 1 week of DREF approval,Achieved Late,2024-07-18,17,0.5
-DREFBangladeshMDRB567,dref,procurement_and_logistics,NFI (or emergencies items) being delivered to the country in 3 days since the Requistion,Achieved Early,2024-07-14,13,0.8
-DREFGermanyMDRG909,dref,procurement_and_logistics,Supply chain plan developed within 1 week of DREF approval,Achieved Late,2024-08-29,19,0.5
-DREFGermanyMDRG909,dref,procurement_and_logistics,NFI (or emergencies items) being delivered to the country in 3 days since the Requistion,Achieved Late,2024-09-02,23,0.8
-DREFChileMDRC464,dref,procurement_and_logistics,Supply chain plan developed within 1 week of DREF approval,Achieved Late,2024-09-07,18,0.5
-DREFChileMDRC464,dref,procurement_and_logistics,NFI (or emergencies items) being delivered to the country in 3 days since the Requistion,Achieved Early,2024-09-02,13,0.8
-DREFEgyptMDRE698,dref,procurement_and_logistics,Supply chain plan developed within 1 week of DREF approval,Achieved Late,2024-09-25,23,0.5
-DREFEgyptMDRE698,dref,procurement_and_logistics,NFI (or emergencies items) being delivered to the country in 3 days since the Requistion,Achieved Early,2024-09-14,12,0.8
-DREFAfghanistanMDRA111,dref,programme_delivery,First round of payment received to the target beneficiaries four weeks after the DREF approval - 1 Month (Date),Achieved Early,2024-06-15,10,1.0
-DREFBangladeshMDRB567,dref,programme_delivery,First round of payment received to the target beneficiaries four weeks after the DREF approval - 1 Month (Date),Achieved Early,2024-07-12,11,1.0
-DREFGermanyMDRG909,dref,programme_delivery,First round of payment received to the target beneficiaries four weeks after the DREF approval - 1 Month (Date),Achieved Early,2024-08-21,11,1.0
-DREFChileMDRC464,dref,programme_delivery,First round of payment received to the target beneficiaries four weeks after the DREF approval - 1 Month (Date),Achieved Early,2024-08-30,10,1.0
-DREFEgyptMDRE698,dref,programme_delivery,First round of payment received to the target beneficiaries four weeks after the DREF approval - 1 Month (Date),Achieved Early,2024-09-18,16,1.0
-DREFAfghanistanMDRA111,dref,risk_and_accountability,Risk management one pager using country risk the dashboard developed within 48h after the approval,Achieved Early,2024-06-06,1,0.8
-DREFAfghanistanMDRA111,dref,risk_and_accountability,Project manager and appeal manager responsibilities one pager is shared with approval (max 14 days after trigger),Achieved Early,2024-06-09,4,0.9
-DREFBangladeshMDRB567,dref,risk_and_accountability,Risk management one pager using country risk the dashboard developed within 48h after the approval,Achieved Early,2024-07-02,-1,0.8
-DREFBangladeshMDRB567,dref,risk_and_accountability,Project manager and appeal manager responsibilities one pager is shared with approval (max 14 days after trigger),Achieved Early,2024-07-12,11,0.9
-DREFGermanyMDRG909,dref,risk_and_accountability,Risk management one pager using country risk the dashboard developed within 48h after the approval,Achieved Early,2024-08-12,1,0.8
-DREFGermanyMDRG909,dref,risk_and_accountability,Project manager and appeal manager responsibilities one pager is shared with approval (max 14 days after trigger),Achieved Early,2024-08-20,10,0.9
-DREFChileMDRC464,dref,risk_and_accountability,Risk management one pager using country risk the dashboard developed within 48h after the approval,Achieved Late,2024-09-03,11,0.8
-DREFChileMDRC464,dref,risk_and_accountability,Project manager and appeal manager responsibilities one pager is shared with approval (max 14 days after trigger),Achieved Early,2024-08-25,5,0.9
-DREFEgyptMDRE698,dref,risk_and_accountability,Risk management one pager using country risk the dashboard developed within 48h after the approval,Achieved Late,2024-09-23,15,0.8
-DREFEgyptMDRE698,dref,risk_and_accountability,Project manager and appeal manager responsibilities one pager is shared with approval (max 14 days after trigger),Achieved Late,2024-09-21,19,0.9
-DREFAfghanistanMDRA111,dref,surge,IFRC having the green light from the receiving NS to deploy RR 24h after the disaster (if relevant),Achieved Early,2024-06-06,1,0.8
-DREFAfghanistanMDRA111,dref,surge,RR personnel Alert sent within 12h of the request ,Achieved Early,2024-06-06,1,1.0
-DREFAfghanistanMDRA111,dref,surge,Identification of 1st rotation RR personnel within 48h of the alert ,Achieved Late,2024-06-09,4,0.7
-DREFBangladeshMDRB567,dref,surge,IFRC having the green light from the receiving NS to deploy RR 24h after the disaster (if relevant),Achieved Early,2024-07-02,1,0.8
-DREFBangladeshMDRB567,dref,surge,RR personnel Alert sent within 12h of the request ,Achieved Early,2024-07-02,1,1.0
-DREFBangladeshMDRB567,dref,surge,Identification of 1st rotation RR personnel within 48h of the alert ,Achieved Late,2024-07-05,4,0.7
-DREFGermanyMDRG909,dref,surge,IFRC having the green light from the receiving NS to deploy RR 24h after the disaster (if relevant),Achieved Early,2024-08-11,1,0.8
-DREFGermanyMDRG909,dref,surge,RR personnel Alert sent within 12h of the request ,Achieved Early,2024-08-11,1,1.0
-DREFGermanyMDRG909,dref,surge,Identification of 1st rotation RR personnel within 48h of the alert ,Achieved Early,2024-08-13,3,0.7
-DREFChileMDRC464,dref,surge,IFRC having the green light from the receiving NS to deploy RR 24h after the disaster (if relevant),Achieved Late,2024-08-22,2,0.8
-DREFChileMDRC464,dref,surge,RR personnel Alert sent within 12h of the request ,Achieved Early,2024-08-21,1,1.0
-DREFChileMDRC464,dref,surge,Identification of 1st rotation RR personnel within 48h of the alert ,Achieved Early,2024-08-23,3,0.7
-DREFEgyptMDRE698,dref,surge,IFRC having the green light from the receiving NS to deploy RR 24h after the disaster (if relevant),Achieved Late,2024-09-05,3,0.8
-DREFEgyptMDRE698,dref,surge,RR personnel Alert sent within 12h of the request ,Achieved Early,2024-09-03,1,1.0
-DREFEgyptMDRE698,dref,surge,Identification of 1st rotation RR personnel within 48h of the alert ,Achieved Late,2024-09-15,13,0.7
-MCMRNepalMDRS2002,mcmr,coordination,Establish a Multi country coordination mechanimsms with the membership for the crisis (24 hours since escalation date),Achieved Early,2024-06-11,1,0.8333333333333334
-MCMRZambiaMDRS7890,mcmr,coordination,Establish a Multi country coordination mechanimsms with the membership for the crisis (24 hours since escalation date),Achieved Early,2024-07-12,1,0.8333333333333334
-MCMRJordanMDRS1234,mcmr,coordination,Establish a Multi country coordination mechanimsms with the membership for the crisis (24 hours since escalation date),Achieved Late,2024-08-18,3,0.8333333333333334
-MCMRNepalMDRS2002,mcmr,financial_management,A breakdown of the Financial allocation per country is made within 5 days of the approval of the EA,Achieved Early,2024-06-27,5,1.0
-MCMRNepalMDRS2002,mcmr,financial_management,Transferts to NS & IFRC Sec. Structure are made within 5 days of the allocation table,Achieved Early,2024-06-30,3,0.8333333333333334
-MCMRZambiaMDRS7890,mcmr,financial_management,A breakdown of the Financial allocation per country is made within 5 days of the approval of the EA,Achieved Early,2024-07-19,5,1.0
-MCMRZambiaMDRS7890,mcmr,financial_management,Transferts to NS & IFRC Sec. Structure are made within 5 days of the allocation table,Achieved Late,2024-07-25,6,0.8333333333333334
-MCMRJordanMDRS1234,mcmr,financial_management,A breakdown of the Financial allocation per country is made within 5 days of the approval of the EA,Achieved Early,2024-08-24,5,1.0
-MCMRJordanMDRS1234,mcmr,financial_management,Transferts to NS & IFRC Sec. Structure are made within 5 days of the allocation table,Achieved Early,2024-08-29,5,0.8333333333333334
-MCMRNepalMDRS2002,mcmr,hr_planning_and_recruitement,"Key initial longer-term positions (for the Regional/multi country level) identified by operational leadership and requested via submission in the HR system, one week after the EA publication",Achieved Late,2024-06-29,7,0.5
-MCMRNepalMDRS2002,mcmr,hr_planning_and_recruitement,"Once approved in the HR system and pre-classified JD provided, HR advertises key initial longer-term positions within 48 hours.",Achieved Early,2024-06-30,1,0.6666666666666666
-MCMRZambiaMDRS7890,mcmr,hr_planning_and_recruitement,"Key initial longer-term positions (for the Regional/multi country level) identified by operational leadership and requested via submission in the HR system, one week after the EA publication",Achieved Late,2024-07-19,5,0.5
-MCMRZambiaMDRS7890,mcmr,hr_planning_and_recruitement,"Once approved in the HR system and pre-classified JD provided, HR advertises key initial longer-term positions within 48 hours.",Achieved Late,2024-07-22,3,0.6666666666666666
-MCMRJordanMDRS1234,mcmr,hr_planning_and_recruitement,"Key initial longer-term positions (for the Regional/multi country level) identified by operational leadership and requested via submission in the HR system, one week after the EA publication",Achieved Late,2024-08-25,6,0.5
-MCMRJordanMDRS1234,mcmr,hr_planning_and_recruitement,"Once approved in the HR system and pre-classified JD provided, HR advertises key initial longer-term positions within 48 hours.",Achieved Late,2024-08-28,3,0.6666666666666666
+EAMozambiqueMDRM989,ea,planning_and_resource_mobilization,Disaster Brief done to inform the FAD between 48-72 h,Achieved Late,2024-06-26 00:00:00,6,0.5
+EAMozambiqueMDRM989,ea,planning_and_resource_mobilization,Approval of decision for DREF operation escalation to EA (disaster trigger date),DNU,-,365,0.0
+EAMozambiqueMDRM989,ea,planning_and_resource_mobilization,EA is launched within 24 hours after the FAD has been approved (or within 48 hours after field report was published). ,Achieved Late,2024-06-28,4,0.5
+EAMozambiqueMDRM989,ea,planning_and_resource_mobilization,Operational Strategy validated 7 days after the EA ,Achieved Late,2024-07-03,2,0.5
+EAMozambiqueMDRM989,ea,planning_and_resource_mobilization,A resource mobilization plan is developed and approved within 2 weeks of the EA,Achieved Late,2024-07-10,2,0.5
+EANigeriaMDRN777,ea,planning_and_resource_mobilization,Disaster Brief done to inform the FAD between 48-72 h,Not Achieved,-,365,0.5
+EANigeriaMDRN777,ea,planning_and_resource_mobilization,Approval of decision for DREF operation escalation to EA (disaster trigger date),DNU,-,365,0.0
+EANigeriaMDRN777,ea,planning_and_resource_mobilization,EA is launched within 24 hours after the FAD has been approved (or within 48 hours after field report was published). ,Achieved Late,2024-07-22,3,0.5
+EANigeriaMDRN777,ea,planning_and_resource_mobilization,Operational Strategy validated 7 days after the EA ,Achieved Late,2024-07-30,4,0.5
+EANigeriaMDRN777,ea,planning_and_resource_mobilization,A resource mobilization plan is developed and approved within 2 weeks of the EA,Achieved Late,2024-08-15,13,0.5
+EAPeruMDRO999,ea,planning_and_resource_mobilization,Disaster Brief done to inform the FAD between 48-72 h,Achieved Late,2024-08-20 00:00:00,9,0.5
+EAPeruMDRO999,ea,planning_and_resource_mobilization,Approval of decision for DREF operation escalation to EA (disaster trigger date),DNU,-,365,0.0
+EAPeruMDRO999,ea,planning_and_resource_mobilization,EA is launched within 24 hours after the FAD has been approved (or within 48 hours after field report was published). ,Achieved Late,2024-08-21,6,0.5
+EAPeruMDRO999,ea,planning_and_resource_mobilization,Operational Strategy validated 7 days after the EA ,Achieved Late,2024-08-29,7,0.5
+EAPeruMDRO999,ea,planning_and_resource_mobilization,A resource mobilization plan is developed and approved within 2 weeks of the EA,Achieved Late,2024-09-20,22,0.5
+EAMaldivesMDRM787,ea,planning_and_resource_mobilization,Disaster Brief done to inform the FAD between 48-72 h,Not Achieved,-,365,0.5
+EAMaldivesMDRM787,ea,planning_and_resource_mobilization,Approval of decision for DREF operation escalation to EA (disaster trigger date),DNU,-,365,0.0
+EAMaldivesMDRM787,ea,planning_and_resource_mobilization,EA is launched within 24 hours after the FAD has been approved (or within 48 hours after field report was published). ,Achieved Late,2024-09-06,5,0.5
+EAMaldivesMDRM787,ea,planning_and_resource_mobilization,Operational Strategy validated 7 days after the EA ,Achieved Late,2024-09-12,4,0.5
+EAMaldivesMDRM787,ea,planning_and_resource_mobilization,A resource mobilization plan is developed and approved within 2 weeks of the EA,Achieved Late,2024-09-25,10,0.5
+EAJordanMDRJ000,ea,planning_and_resource_mobilization,Disaster Brief done to inform the FAD between 48-72 h,Not Achieved,-,365,0.5
+EAJordanMDRJ000,ea,planning_and_resource_mobilization,Approval of decision for DREF operation escalation to EA (disaster trigger date),DNU,-,365,0.0
+EAJordanMDRJ000,ea,planning_and_resource_mobilization,EA is launched within 24 hours after the FAD has been approved (or within 48 hours after field report was published). ,Achieved Late,2024-09-12,7,0.5
+EAJordanMDRJ000,ea,planning_and_resource_mobilization,Operational Strategy validated 7 days after the EA ,Achieved Late,2024-09-22,10,0.5
+EAJordanMDRJ000,ea,planning_and_resource_mobilization,A resource mobilization plan is developed and approved within 2 weeks of the EA,Achieved Late,2024-10-15,26,0.5
+EAMozambiqueMDRM989,ea,procurement_and_logistics,Supply chain plan developed between logs and ops coordinator within 1 week of the approved EA,Achieved Late,2024-07-05,8,0.5
+EAMozambiqueMDRM989,ea,procurement_and_logistics,Fully approved and submitted requisitions for NFIs within 1 week of the EA (when relevant) ,Not Achieved,-,365,0.5
+EAMozambiqueMDRM989,ea,procurement_and_logistics,NFI (or emergencies items) being delivered to the country in 3 days since the approval of the  Requistion,Not Achieved,-,365,0.5
+EANigeriaMDRN777,ea,procurement_and_logistics,Supply chain plan developed between logs and ops coordinator within 1 week of the approved EA,Achieved Late,2024-07-29,7,0.5
+EANigeriaMDRN777,ea,procurement_and_logistics,Fully approved and submitted requisitions for NFIs within 1 week of the EA (when relevant) ,Achieved Late,2024-07-30 00:00:00,4,0.5
+EANigeriaMDRN777,ea,procurement_and_logistics,NFI (or emergencies items) being delivered to the country in 3 days since the approval of the  Requistion,Achieved Late,2024-08-02 00:00:00,4,0.5
+EAPeruMDRO999,ea,procurement_and_logistics,Supply chain plan developed between logs and ops coordinator within 1 week of the approved EA,Achieved Late,2024-08-28,10,0.5
+EAPeruMDRO999,ea,procurement_and_logistics,Fully approved and submitted requisitions for NFIs within 1 week of the EA (when relevant) ,Achieved Late,2024-08-27 00:00:00,5,0.5
+EAPeruMDRO999,ea,procurement_and_logistics,NFI (or emergencies items) being delivered to the country in 3 days since the approval of the  Requistion,Achieved Late,2024-08-29 00:00:00,4,0.5
+EAMaldivesMDRM787,ea,procurement_and_logistics,Supply chain plan developed between logs and ops coordinator within 1 week of the approved EA,Achieved Late,2024-09-15,11,0.5
+EAMaldivesMDRM787,ea,procurement_and_logistics,Fully approved and submitted requisitions for NFIs within 1 week of the EA (when relevant) ,Achieved Late,2024-09-16 00:00:00,8,0.5
+EAMaldivesMDRM787,ea,procurement_and_logistics,NFI (or emergencies items) being delivered to the country in 3 days since the approval of the  Requistion,Achieved Late,2024-09-20 00:00:00,9,0.5
+EAJordanMDRJ000,ea,procurement_and_logistics,Supply chain plan developed between logs and ops coordinator within 1 week of the approved EA,Achieved Late,2024-09-20,12,0.5
+EAJordanMDRJ000,ea,procurement_and_logistics,Fully approved and submitted requisitions for NFIs within 1 week of the EA (when relevant) ,Not Achieved,-,365,0.5
+EAJordanMDRJ000,ea,procurement_and_logistics,NFI (or emergencies items) being delivered to the country in 3 days since the approval of the  Requistion,Not Achieved,-,365,0.5
+EAMozambiqueMDRM989,ea,surge,IFRC having the green light from the receiving NS to deploy RR 24h after the disaster,Achieved Early,2024-06-21,0,0.6
+EAMozambiqueMDRM989,ea,surge,RR personnel Alert sent within 12h of the request ,Achieved Early,2024-06-21,-1,0.8
+EAMozambiqueMDRM989,ea,surge,Identification of 1st rotation RR personnel within 48h of the alert ,Achieved Early,2024-06-22,-1,0.8
+EANigeriaMDRN777,ea,surge,IFRC having the green light from the receiving NS to deploy RR 24h after the disaster,Achieved Late,2024-07-18,2,0.6
+EANigeriaMDRN777,ea,surge,RR personnel Alert sent within 12h of the request ,Achieved Late,2024-07-18,1,0.8
+EANigeriaMDRN777,ea,surge,Identification of 1st rotation RR personnel within 48h of the alert ,Achieved Late,2024-07-20,2,0.8
+EAPeruMDRO999,ea,surge,IFRC having the green light from the receiving NS to deploy RR 24h after the disaster,Achieved Late,2024-08-15,3,0.6
+EAPeruMDRO999,ea,surge,RR personnel Alert sent within 12h of the request ,Achieved Early,2024-08-11,-2,0.8
+EAPeruMDRO999,ea,surge,Identification of 1st rotation RR personnel within 48h of the alert ,Achieved Early,2024-08-13,-1,0.8
+EAMaldivesMDRM787,ea,surge,IFRC having the green light from the receiving NS to deploy RR 24h after the disaster,Achieved Late,2024-09-01,3,0.6
+EAMaldivesMDRM787,ea,surge,RR personnel Alert sent within 12h of the request ,Achieved Early,2024-08-29,-1,0.8
+EAMaldivesMDRM787,ea,surge,Identification of 1st rotation RR personnel within 48h of the alert ,Achieved Early,2024-08-30,-1,0.8
+EAJordanMDRJ000,ea,surge,IFRC having the green light from the receiving NS to deploy RR 24h after the disaster,Achieved Late,2024-09-06,4,0.6
+EAJordanMDRJ000,ea,surge,RR personnel Alert sent within 12h of the request ,Achieved Late,2024-09-05,2,0.8
+EAJordanMDRJ000,ea,surge,Identification of 1st rotation RR personnel within 48h of the alert ,Achieved Late,2024-09-05,1,0.8
+DREFAfghanistanMDRA111,dref,assessment,Initial needs assessments completed within 72 hours​ of the event.,Achieved Early,2024-06-07,-1,0.8
+DREFBangladeshMDRB567,dref,assessment,Initial needs assessments completed within 72 hours​ of the event.,Achieved Early,2024-07-02,-2,0.8
+DREFGermanyMDRG909,dref,assessment,Initial needs assessments completed within 72 hours​ of the event.,Achieved Late,2024-08-14,1,0.8
+DREFChileMDRC464,dref,assessment,Initial needs assessments completed within 72 hours​ of the event.,Achieved Late,2024-08-25,2,0.8
+DREFEgyptMDRE698,dref,assessment,Initial needs assessments completed within 72 hours​ of the event.,Achieved Early,2024-09-03,-2,0.8
+DREFAfghanistanMDRA111,dref,financial_management,Project funding agreements (PFAs) signed by the NS and the IFRC no longer than 7 days from the DREF approval,Achieved Early,2024-06-20,-2,0.6
+DREFAfghanistanMDRA111,dref,financial_management,"After PFA is signed by both parties, HoD/project manager to process the Request for Payment to be sent to Treasury within 10 days of DREF approval",Achieved Early,2024-06-22,-4,0.8
+DREFAfghanistanMDRA111,dref,financial_management,Bank transfer process by IFRC to the NS within 24h after the request for payment is received/approved,Achieved Early,2024-06-23,-4,0.7
+DREFAfghanistanMDRA111,dref,financial_management,Confirmation from the NSs of the funds received to be obtained within 3 working days from the value date of the transfer,Achieved Early,2024-06-26,-9,1.0
+DREFBangladeshMDRB567,dref,financial_management,Project funding agreements (PFAs) signed by the NS and the IFRC no longer than 7 days from the DREF approval,Achieved Late,2024-07-19,1,0.6
+DREFBangladeshMDRB567,dref,financial_management,"After PFA is signed by both parties, HoD/project manager to process the Request for Payment to be sent to Treasury within 10 days of DREF approval",Achieved Early,2024-07-22,0,0.8
+DREFBangladeshMDRB567,dref,financial_management,Bank transfer process by IFRC to the NS within 24h after the request for payment is received/approved,Achieved Late,2024-07-24,1,0.7
+DREFBangladeshMDRB567,dref,financial_management,Confirmation from the NSs of the funds received to be obtained within 3 working days from the value date of the transfer,Achieved Early,2024-07-27,-4,1.0
+DREFGermanyMDRG909,dref,financial_management,Project funding agreements (PFAs) signed by the NS and the IFRC no longer than 7 days from the DREF approval,Achieved Late,2024-08-30,3,0.6
+DREFGermanyMDRG909,dref,financial_management,"After PFA is signed by both parties, HoD/project manager to process the Request for Payment to be sent to Treasury within 10 days of DREF approval",Achieved Late,2024-09-02,2,0.8
+DREFGermanyMDRG909,dref,financial_management,Bank transfer process by IFRC to the NS within 24h after the request for payment is received/approved,Achieved Late,2024-09-03,2,0.7
+DREFGermanyMDRG909,dref,financial_management,Confirmation from the NSs of the funds received to be obtained within 3 working days from the value date of the transfer,Achieved Early,2024-09-06,-3,1.0
+DREFChileMDRC464,dref,financial_management,Project funding agreements (PFAs) signed by the NS and the IFRC no longer than 7 days from the DREF approval,Achieved Late,2024-09-08,2,0.6
+DREFChileMDRC464,dref,financial_management,"After PFA is signed by both parties, HoD/project manager to process the Request for Payment to be sent to Treasury within 10 days of DREF approval",Achieved Early,2024-09-10,0,0.8
+DREFChileMDRC464,dref,financial_management,Bank transfer process by IFRC to the NS within 24h after the request for payment is received/approved,Achieved Early,2024-09-11,0,0.7
+DREFChileMDRC464,dref,financial_management,Confirmation from the NSs of the funds received to be obtained within 3 working days from the value date of the transfer,Achieved Early,2024-09-15,-4,1.0
+DREFEgyptMDRE698,dref,financial_management,Project funding agreements (PFAs) signed by the NS and the IFRC no longer than 7 days from the DREF approval,Achieved Late,2024-09-22,3,0.6
+DREFEgyptMDRE698,dref,financial_management,"After PFA is signed by both parties, HoD/project manager to process the Request for Payment to be sent to Treasury within 10 days of DREF approval",Achieved Late,2024-09-25,2,0.8
+DREFEgyptMDRE698,dref,financial_management,Bank transfer process by IFRC to the NS within 24h after the request for payment is received/approved,Achieved Late,2024-09-26,2,0.7
+DREFEgyptMDRE698,dref,financial_management,Confirmation from the NSs of the funds received to be obtained within 3 working days from the value date of the transfer,Achieved Early,2024-09-29,-3,1.0
+DREFAfghanistanMDRA111,dref,planning_and_resource_mobilization,DREF approved within 10 days of the trigger. 14 if the NS has started responding.,Achieved Early,2024-06-15,0,0.7
+DREFAfghanistanMDRA111,dref,planning_and_resource_mobilization,Approval by the DREF appeal manager within 24h of receiving the final package,Achieved Early,2024-06-05,-14,1.0
+DREFBangladeshMDRB567,dref,planning_and_resource_mobilization,DREF approved within 10 days of the trigger. 14 if the NS has started responding.,Achieved Late,2024-07-12,1,0.7
+DREFBangladeshMDRB567,dref,planning_and_resource_mobilization,Approval by the DREF appeal manager within 24h of receiving the final package,Achieved Early,2024-07-03,-12,1.0
+DREFGermanyMDRG909,dref,planning_and_resource_mobilization,DREF approved within 10 days of the trigger. 14 if the NS has started responding.,Achieved Late,2024-08-21,1,0.7
+DREFGermanyMDRG909,dref,planning_and_resource_mobilization,Approval by the DREF appeal manager within 24h of receiving the final package,Achieved Early,2024-08-11,-13,1.0
+DREFChileMDRC464,dref,planning_and_resource_mobilization,DREF approved within 10 days of the trigger. 14 if the NS has started responding.,Achieved Early,2024-08-30,0,0.7
+DREFChileMDRC464,dref,planning_and_resource_mobilization,Approval by the DREF appeal manager within 24h of receiving the final package,Achieved Early,2024-08-23,-11,1.0
+DREFEgyptMDRE698,dref,planning_and_resource_mobilization,DREF approved within 10 days of the trigger. 14 if the NS has started responding.,Achieved Late,2024-09-18,6,0.7
+DREFEgyptMDRE698,dref,planning_and_resource_mobilization,Approval by the DREF appeal manager within 24h of receiving the final package,Achieved Early,2024-09-08,-8,1.0
+DREFAfghanistanMDRA111,dref,procurement_and_logistics,Supply chain plan developed within 1 week of DREF approval,Achieved Early,2024-06-21,-3,0.9
+DREFAfghanistanMDRA111,dref,procurement_and_logistics,NFI (or emergencies items) being delivered to the country in 3 days since the Requistion,Achieved Late,2024-06-22,3,0.8
+DREFBangladeshMDRB567,dref,procurement_and_logistics,Supply chain plan developed within 1 week of DREF approval,Achieved Early,2024-07-18,-2,0.9
+DREFBangladeshMDRB567,dref,procurement_and_logistics,NFI (or emergencies items) being delivered to the country in 3 days since the Requistion,Achieved Early,2024-07-14,-1,0.8
+DREFGermanyMDRG909,dref,procurement_and_logistics,Supply chain plan developed within 1 week of DREF approval,Achieved Early,2024-08-29,0,0.9
+DREFGermanyMDRG909,dref,procurement_and_logistics,NFI (or emergencies items) being delivered to the country in 3 days since the Requistion,Achieved Late,2024-09-02,9,0.8
+DREFChileMDRC464,dref,procurement_and_logistics,Supply chain plan developed within 1 week of DREF approval,Achieved Early,2024-09-07,-1,0.9
+DREFChileMDRC464,dref,procurement_and_logistics,NFI (or emergencies items) being delivered to the country in 3 days since the Requistion,Achieved Early,2024-09-02,-1,0.8
+DREFEgyptMDRE698,dref,procurement_and_logistics,Supply chain plan developed within 1 week of DREF approval,Achieved Late,2024-09-25,4,0.9
+DREFEgyptMDRE698,dref,procurement_and_logistics,NFI (or emergencies items) being delivered to the country in 3 days since the Requistion,Achieved Early,2024-09-14,-2,0.8
+DREFAfghanistanMDRA111,dref,programme_delivery,First round of payment received to the target beneficiaries four weeks after the DREF approval - 1 Month (Date),Achieved Early,2024-06-15,-20,1.0
+DREFBangladeshMDRB567,dref,programme_delivery,First round of payment received to the target beneficiaries four weeks after the DREF approval - 1 Month (Date),Achieved Early,2024-07-12,-19,1.0
+DREFGermanyMDRG909,dref,programme_delivery,First round of payment received to the target beneficiaries four weeks after the DREF approval - 1 Month (Date),Achieved Early,2024-08-21,-19,1.0
+DREFChileMDRC464,dref,programme_delivery,First round of payment received to the target beneficiaries four weeks after the DREF approval - 1 Month (Date),Achieved Early,2024-08-30,-20,1.0
+DREFEgyptMDRE698,dref,programme_delivery,First round of payment received to the target beneficiaries four weeks after the DREF approval - 1 Month (Date),Achieved Early,2024-09-18,-14,1.0
+DREFAfghanistanMDRA111,dref,risk_and_accountability,Risk management one pager using country risk the dashboard developed within 48h after the approval,Achieved Early,2024-06-06,-11,0.8
+DREFAfghanistanMDRA111,dref,risk_and_accountability,Project manager and appeal manager responsibilities one pager is shared with approval (max 14 days after trigger),Achieved Early,2024-06-09,-10,0.9
+DREFBangladeshMDRB567,dref,risk_and_accountability,Risk management one pager using country risk the dashboard developed within 48h after the approval,Achieved Early,2024-07-02,-11,0.8
+DREFBangladeshMDRB567,dref,risk_and_accountability,Project manager and appeal manager responsibilities one pager is shared with approval (max 14 days after trigger),Achieved Early,2024-07-12,-3,0.9
+DREFGermanyMDRG909,dref,risk_and_accountability,Risk management one pager using country risk the dashboard developed within 48h after the approval,Achieved Early,2024-08-12,-10,0.8
+DREFGermanyMDRG909,dref,risk_and_accountability,Project manager and appeal manager responsibilities one pager is shared with approval (max 14 days after trigger),Achieved Early,2024-08-20,-4,0.9
+DREFChileMDRC464,dref,risk_and_accountability,Risk management one pager using country risk the dashboard developed within 48h after the approval,Achieved Late,2024-09-03,2,0.8
+DREFChileMDRC464,dref,risk_and_accountability,Project manager and appeal manager responsibilities one pager is shared with approval (max 14 days after trigger),Achieved Early,2024-08-25,-9,0.9
+DREFEgyptMDRE698,dref,risk_and_accountability,Risk management one pager using country risk the dashboard developed within 48h after the approval,Achieved Late,2024-09-23,9,0.8
+DREFEgyptMDRE698,dref,risk_and_accountability,Project manager and appeal manager responsibilities one pager is shared with approval (max 14 days after trigger),Achieved Late,2024-09-21,5,0.9
+DREFAfghanistanMDRA111,dref,surge,IFRC having the green light from the receiving NS to deploy RR 24h after the disaster (if relevant),Achieved Early,2024-06-06,0,0.8
+DREFAfghanistanMDRA111,dref,surge,RR personnel Alert sent within 12h of the request ,Achieved Early,2024-06-06,-1,1.0
+DREFAfghanistanMDRA111,dref,surge,Identification of 1st rotation RR personnel within 48h of the alert ,Achieved Late,2024-06-09,1,0.7
+DREFBangladeshMDRB567,dref,surge,IFRC having the green light from the receiving NS to deploy RR 24h after the disaster (if relevant),Achieved Early,2024-07-02,0,0.8
+DREFBangladeshMDRB567,dref,surge,RR personnel Alert sent within 12h of the request ,Achieved Early,2024-07-02,-1,1.0
+DREFBangladeshMDRB567,dref,surge,Identification of 1st rotation RR personnel within 48h of the alert ,Achieved Late,2024-07-05,1,0.7
+DREFGermanyMDRG909,dref,surge,IFRC having the green light from the receiving NS to deploy RR 24h after the disaster (if relevant),Achieved Early,2024-08-11,0,0.8
+DREFGermanyMDRG909,dref,surge,RR personnel Alert sent within 12h of the request ,Achieved Early,2024-08-11,-1,1.0
+DREFGermanyMDRG909,dref,surge,Identification of 1st rotation RR personnel within 48h of the alert ,Achieved Early,2024-08-13,0,0.7
+DREFChileMDRC464,dref,surge,IFRC having the green light from the receiving NS to deploy RR 24h after the disaster (if relevant),Achieved Late,2024-08-22,1,0.8
+DREFChileMDRC464,dref,surge,RR personnel Alert sent within 12h of the request ,Achieved Early,2024-08-21,-1,1.0
+DREFChileMDRC464,dref,surge,Identification of 1st rotation RR personnel within 48h of the alert ,Achieved Early,2024-08-23,0,0.7
+DREFEgyptMDRE698,dref,surge,IFRC having the green light from the receiving NS to deploy RR 24h after the disaster (if relevant),Achieved Late,2024-09-05,2,0.8
+DREFEgyptMDRE698,dref,surge,RR personnel Alert sent within 12h of the request ,Achieved Early,2024-09-03,-1,1.0
+DREFEgyptMDRE698,dref,surge,Identification of 1st rotation RR personnel within 48h of the alert ,Achieved Late,2024-09-15,10,0.7
+MCMRNepalMDRS2002,mcmr,coordination,Establish a Multi country coordination mechanimsms with the membership for the crisis (24 hours since escalation date),Achieved Early,2024-06-11,0,0.8333333333333334
+MCMRZambiaMDRS7890,mcmr,coordination,Establish a Multi country coordination mechanimsms with the membership for the crisis (24 hours since escalation date),Achieved Early,2024-07-12,0,0.8333333333333334
+MCMRJordanMDRS1234,mcmr,coordination,Establish a Multi country coordination mechanimsms with the membership for the crisis (24 hours since escalation date),Achieved Late,2024-08-18,2,0.8333333333333334
+MCMRNepalMDRS2002,mcmr,financial_management,A breakdown of the Financial allocation per country is made within 5 days of the approval of the EA,Achieved Late,2024-06-27,8,0.8333333333333334
+MCMRNepalMDRS2002,mcmr,financial_management,Transferts to NS & IFRC Sec. Structure are made within 5 days of the allocation table,Achieved Late,2024-06-30,6,0.8333333333333334
+MCMRZambiaMDRS7890,mcmr,financial_management,A breakdown of the Financial allocation per country is made within 5 days of the approval of the EA,Achieved Early,2024-07-19,-1,0.8333333333333334
+MCMRZambiaMDRS7890,mcmr,financial_management,Transferts to NS & IFRC Sec. Structure are made within 5 days of the allocation table,Achieved Early,2024-07-25,0,0.8333333333333334
+MCMRJordanMDRS1234,mcmr,financial_management,A breakdown of the Financial allocation per country is made within 5 days of the approval of the EA,Achieved Early,2024-08-24,0,0.8333333333333334
+MCMRJordanMDRS1234,mcmr,financial_management,Transferts to NS & IFRC Sec. Structure are made within 5 days of the allocation table,Achieved Early,2024-08-29,0,0.8333333333333334
+MCMRNepalMDRS2002,mcmr,hr_planning_and_recruitement,"Key initial longer-term positions (for the Regional/multi country level) identified by operational leadership and requested via submission in the HR system, one week after the EA publication",Achieved Late,2024-06-29,8,0.8333333333333334
+MCMRNepalMDRS2002,mcmr,hr_planning_and_recruitement,"Once approved in the HR system and pre-classified JD provided, HR advertises key initial longer-term positions within 48 hours.",Achieved Late,2024-06-30,7,0.8333333333333334
+MCMRZambiaMDRS7890,mcmr,hr_planning_and_recruitement,"Key initial longer-term positions (for the Regional/multi country level) identified by operational leadership and requested via submission in the HR system, one week after the EA publication",Achieved Early,2024-07-19,-3,0.8333333333333334
+MCMRZambiaMDRS7890,mcmr,hr_planning_and_recruitement,"Once approved in the HR system and pre-classified JD provided, HR advertises key initial longer-term positions within 48 hours.",Achieved Early,2024-07-22,-2,0.8333333333333334
+MCMRJordanMDRS1234,mcmr,hr_planning_and_recruitement,"Key initial longer-term positions (for the Regional/multi country level) identified by operational leadership and requested via submission in the HR system, one week after the EA publication",Achieved Early,2024-08-25,-1,0.8333333333333334
+MCMRJordanMDRS1234,mcmr,hr_planning_and_recruitement,"Once approved in the HR system and pre-classified JD provided, HR advertises key initial longer-term positions within 48 hours.",Achieved Early,2024-08-28,0,0.8333333333333334
 MCMRNepalMDRS2002,mcmr,information_management,A multi country dashboard is in place and updated timely to display the situation and the activities being implemented,Achieved,2024-06-21,-1,1.0
 MCMRZambiaMDRS7890,mcmr,information_management,A multi country dashboard is in place and updated timely to display the situation and the activities being implemented,Achieved,2024-07-14,-1,1.0
 MCMRJordanMDRS1234,mcmr,information_management,A multi country dashboard is in place and updated timely to display the situation and the activities being implemented,Achieved,2024-08-18,-1,1.0
-MCMRNepalMDRS2002,mcmr,planning_and_resource_mobilization,Disaster Brief done for the  Management Call to inform the FAD between 48-72 h,Achieved Late,2024-06-21,11,0.8333333333333334
-MCMRNepalMDRS2002,mcmr,planning_and_resource_mobilization,EA is launched within 24 hours after the FAD has been approved (or within 48 hours after field report was published). ,Achieved Early,2024-06-22,1,1.0
-MCMRNepalMDRS2002,mcmr,planning_and_resource_mobilization,Operational Strategy validated 12 days after the EA ,Achieved Late,2024-06-29,7,0.5
-MCMRNepalMDRS2002,mcmr,planning_and_resource_mobilization,Supply chain plan developed for the regional needs between logs and ops  within 1 week of the approved EA,Achieved Early,2024-06-28,6,1.0
-MCMRZambiaMDRS7890,mcmr,planning_and_resource_mobilization,Disaster Brief done for the  Management Call to inform the FAD between 48-72 h,Achieved Early,2024-07-14,3,0.8333333333333334
-MCMRZambiaMDRS7890,mcmr,planning_and_resource_mobilization,EA is launched within 24 hours after the FAD has been approved (or within 48 hours after field report was published). ,Achieved Early,2024-07-14,0,1.0
-MCMRZambiaMDRS7890,mcmr,planning_and_resource_mobilization,Operational Strategy validated 12 days after the EA ,Achieved Late,2024-07-30,16,0.5
-MCMRZambiaMDRS7890,mcmr,planning_and_resource_mobilization,Supply chain plan developed for the regional needs between logs and ops  within 1 week of the approved EA,Achieved Early,2024-07-17,3,1.0
-MCMRJordanMDRS1234,mcmr,planning_and_resource_mobilization,Disaster Brief done for the  Management Call to inform the FAD between 48-72 h,Achieved Early,2024-08-18,3,0.8333333333333334
-MCMRJordanMDRS1234,mcmr,planning_and_resource_mobilization,EA is launched within 24 hours after the FAD has been approved (or within 48 hours after field report was published). ,Achieved Early,2024-08-19,1,1.0
-MCMRJordanMDRS1234,mcmr,planning_and_resource_mobilization,Operational Strategy validated 12 days after the EA ,Achieved Late,2024-09-01,13,0.5
-MCMRJordanMDRS1234,mcmr,planning_and_resource_mobilization,Supply chain plan developed for the regional needs between logs and ops  within 1 week of the approved EA,Achieved Early,2024-08-26,7,1.0
-MCMRNepalMDRS2002,mcmr,procurement_and_logistics,Supply chain plan developed for the regional needs between logs and ops  within 1 week of the approved EA,Achieved Early,2024-06-28,6,1.0
-MCMRNepalMDRS2002,mcmr,procurement_and_logistics,Fully approved and submitted multi country requisitions for NFIs within 1 week of the EA (when relevant) ,Achieved Late,2024-06-30,8,0.8333333333333334
-MCMRNepalMDRS2002,mcmr,procurement_and_logistics,NFI (or emergencies items) being delivered to the country in 3 days since the Requistion,Achieved Early,2024-07-03,3,0.8333333333333334
-MCMRZambiaMDRS7890,mcmr,procurement_and_logistics,Supply chain plan developed for the regional needs between logs and ops  within 1 week of the approved EA,Achieved Early,2024-07-17,3,1.0
-MCMRZambiaMDRS7890,mcmr,procurement_and_logistics,Fully approved and submitted multi country requisitions for NFIs within 1 week of the EA (when relevant) ,Achieved Early,2024-07-19,5,0.8333333333333334
-MCMRZambiaMDRS7890,mcmr,procurement_and_logistics,NFI (or emergencies items) being delivered to the country in 3 days since the Requistion,Achieved Late,2024-07-23,4,0.8333333333333334
-MCMRJordanMDRS1234,mcmr,procurement_and_logistics,Supply chain plan developed for the regional needs between logs and ops  within 1 week of the approved EA,Achieved Early,2024-08-26,7,1.0
-MCMRJordanMDRS1234,mcmr,procurement_and_logistics,Fully approved and submitted multi country requisitions for NFIs within 1 week of the EA (when relevant) ,Achieved Early,2024-08-25,6,0.8333333333333334
-MCMRJordanMDRS1234,mcmr,procurement_and_logistics,NFI (or emergencies items) being delivered to the country in 3 days since the Requistion,Achieved Early,2024-08-27,2,0.8333333333333334
-MCMRNepalMDRS2002,mcmr,surge,Regional RR personnel Alert sent within 12h of the request ,Achieved Early,2024-06-11,1,1.0
-MCMRNepalMDRS2002,mcmr,surge,Identification of 1st rotation RR personnel within 48h of the alert ,Achieved Late,2024-06-13,2,0.5
-MCMRZambiaMDRS7890,mcmr,surge,Regional RR personnel Alert sent within 12h of the request ,Achieved Early,2024-07-12,1,1.0
-MCMRZambiaMDRS7890,mcmr,surge,Identification of 1st rotation RR personnel within 48h of the alert ,Achieved Late,2024-07-15,3,0.5
-MCMRJordanMDRS1234,mcmr,surge,Regional RR personnel Alert sent within 12h of the request ,Achieved Early,2024-08-17,2,1.0
+MCMRNepalMDRS2002,mcmr,planning_and_resource_mobilization,Disaster Brief done for the  Management Call to inform the FAD between 48-72 h,Achieved Late,2024-06-21,8,0.8333333333333334
+MCMRNepalMDRS2002,mcmr,planning_and_resource_mobilization,EA is launched within 24 hours after the FAD has been approved (or within 48 hours after field report was published). ,Achieved Late,2024-06-22,8,0.8333333333333334
+MCMRNepalMDRS2002,mcmr,planning_and_resource_mobilization,Operational Strategy validated 12 days after the EA ,Achieved Late,2024-06-29,8,0.5
+MCMRNepalMDRS2002,mcmr,planning_and_resource_mobilization,Supply chain plan developed for the regional needs between logs and ops  within 1 week of the approved EA,Achieved Late,2024-06-28,7,0.8333333333333334
+MCMRZambiaMDRS7890,mcmr,planning_and_resource_mobilization,Disaster Brief done for the  Management Call to inform the FAD between 48-72 h,Achieved Early,2024-07-14,0,0.8333333333333334
+MCMRZambiaMDRS7890,mcmr,planning_and_resource_mobilization,EA is launched within 24 hours after the FAD has been approved (or within 48 hours after field report was published). ,Achieved Early,2024-07-14,-1,0.8333333333333334
+MCMRZambiaMDRS7890,mcmr,planning_and_resource_mobilization,Operational Strategy validated 12 days after the EA ,Achieved Late,2024-07-30,8,0.5
+MCMRZambiaMDRS7890,mcmr,planning_and_resource_mobilization,Supply chain plan developed for the regional needs between logs and ops  within 1 week of the approved EA,Achieved Early,2024-07-17,-5,0.8333333333333334
+MCMRJordanMDRS1234,mcmr,planning_and_resource_mobilization,Disaster Brief done for the  Management Call to inform the FAD between 48-72 h,Achieved Early,2024-08-18,0,0.8333333333333334
+MCMRJordanMDRS1234,mcmr,planning_and_resource_mobilization,EA is launched within 24 hours after the FAD has been approved (or within 48 hours after field report was published). ,Achieved Early,2024-08-19,0,0.8333333333333334
+MCMRJordanMDRS1234,mcmr,planning_and_resource_mobilization,Operational Strategy validated 12 days after the EA ,Achieved Late,2024-09-01,6,0.5
+MCMRJordanMDRS1234,mcmr,planning_and_resource_mobilization,Supply chain plan developed for the regional needs between logs and ops  within 1 week of the approved EA,Achieved Early,2024-08-26,0,0.8333333333333334
+MCMRNepalMDRS2002,mcmr,procurement_and_logistics,Supply chain plan developed for the regional needs between logs and ops  within 1 week of the approved EA,Achieved Late,2024-06-28,7,0.8333333333333334
+MCMRNepalMDRS2002,mcmr,procurement_and_logistics,Fully approved and submitted multi country requisitions for NFIs within 1 week of the EA (when relevant) ,Achieved Late,2024-06-30,9,0.8333333333333334
+MCMRNepalMDRS2002,mcmr,procurement_and_logistics,NFI (or emergencies items) being delivered to the country in 3 days since the Requistion,Achieved Late,2024-07-03,9,0.8333333333333334
+MCMRZambiaMDRS7890,mcmr,procurement_and_logistics,Supply chain plan developed for the regional needs between logs and ops  within 1 week of the approved EA,Achieved Early,2024-07-17,-5,0.8333333333333334
+MCMRZambiaMDRS7890,mcmr,procurement_and_logistics,Fully approved and submitted multi country requisitions for NFIs within 1 week of the EA (when relevant) ,Achieved Early,2024-07-19,-3,0.8333333333333334
+MCMRZambiaMDRS7890,mcmr,procurement_and_logistics,NFI (or emergencies items) being delivered to the country in 3 days since the Requistion,Achieved Early,2024-07-23,-2,0.8333333333333334
+MCMRJordanMDRS1234,mcmr,procurement_and_logistics,Supply chain plan developed for the regional needs between logs and ops  within 1 week of the approved EA,Achieved Early,2024-08-26,0,0.8333333333333334
+MCMRJordanMDRS1234,mcmr,procurement_and_logistics,Fully approved and submitted multi country requisitions for NFIs within 1 week of the EA (when relevant) ,Achieved Early,2024-08-25,-1,0.8333333333333334
+MCMRJordanMDRS1234,mcmr,procurement_and_logistics,NFI (or emergencies items) being delivered to the country in 3 days since the Requistion,Achieved Early,2024-08-27,-2,0.8333333333333334
+MCMRNepalMDRS2002,mcmr,surge,Regional RR personnel Alert sent within 12h of the request ,Achieved Early,2024-06-11,0,0.8333333333333334
+MCMRNepalMDRS2002,mcmr,surge,Identification of 1st rotation RR personnel within 48h of the alert ,Achieved Late,2024-06-13,1,0.5
+MCMRZambiaMDRS7890,mcmr,surge,Regional RR personnel Alert sent within 12h of the request ,Achieved Early,2024-07-12,0,0.8333333333333334
+MCMRZambiaMDRS7890,mcmr,surge,Identification of 1st rotation RR personnel within 48h of the alert ,Achieved Late,2024-07-15,2,0.5
+MCMRJordanMDRS1234,mcmr,surge,Regional RR personnel Alert sent within 12h of the request ,Achieved Late,2024-08-17,1,0.8333333333333334
 MCMRJordanMDRS1234,mcmr,surge,Identification of 1st rotation RR personnel within 48h of the alert ,Achieved Late,2024-08-20,3,0.5
-PCCEIraqMDRI1998,pcce,coordination,Hold a mini summit within 48 h of the disaster,Achieved Early,2024-07-08,2,0.75
-PCCEIraqMDRI1998,pcce,coordination,Review/adapt membership coordination framework for the context for this specific emergency ,Achieved Early,2024-07-08,2,1.0
-PCCEIraqMDRI1998,pcce,coordination,Ensure an appropriate membership coordination framework is in place after 24h of trigger ,Achieved Early,2024-07-07,1,1.0
-PCCENigeriaMDRN6879,pcce,coordination,Hold a mini summit within 48 h of the disaster,Achieved Late,2024-08-13,3,0.75
-PCCENigeriaMDRN6879,pcce,coordination,Review/adapt membership coordination framework for the context for this specific emergency ,Achieved Early,2024-08-12,2,1.0
-PCCENigeriaMDRN6879,pcce,coordination,Ensure an appropriate membership coordination framework is in place after 24h of trigger ,Achieved Early,2024-08-11,1,1.0
-PCCEIraqMDRI1998,pcce,financial_management,Project agreements signed by the NS and the IFRC no longer than 7 days from the DREF/EA approval,Achieved Early,2024-07-14,8,1.0
-PCCEIraqMDRI1998,pcce,financial_management,"After PA is signed by both parties, HoD/project manager to process the Request for Payment to be sent to Treasury within 10 days of DREF/ EA approval",Achieved Early,2024-07-17,11,1.0
-PCCEIraqMDRI1998,pcce,financial_management,Bank transfer process by IFRC to the NS within 24h after the request for payment is received/approved,Achieved Early,2024-07-18,12,1.0
-PCCEIraqMDRI1998,pcce,financial_management,Confirmation from the NSs of the funds received to be obtained within 3 working days from the value date of the transfer,Achieved Early,2024-07-21,15,1.0
-PCCENigeriaMDRN6879,pcce,financial_management,Project agreements signed by the NS and the IFRC no longer than 7 days from the DREF/EA approval,Achieved Early,2024-08-20,10,1.0
-PCCENigeriaMDRN6879,pcce,financial_management,"After PA is signed by both parties, HoD/project manager to process the Request for Payment to be sent to Treasury within 10 days of DREF/ EA approval",Achieved Early,2024-08-23,13,1.0
-PCCENigeriaMDRN6879,pcce,financial_management,Bank transfer process by IFRC to the NS within 24h after the request for payment is received/approved,Achieved Early,2024-08-25,15,1.0
-PCCENigeriaMDRN6879,pcce,financial_management,Confirmation from the NSs of the funds received to be obtained within 3 working days from the value date of the transfer,Achieved Early,2024-08-29,19,1.0
-PCCEIraqMDRI1998,pcce,hr_planning_and_recruitement,"Key initial longer-term positions identified by operational leadership and requested via submission in the HR system, one week after the EA publication",Achieved Early,2024-07-12,6,1.0
-PCCEIraqMDRI1998,pcce,hr_planning_and_recruitement,"Once approved in the HR system and pre-classified JD provided, HR advertises key initial longer-term positions within 48 hours.",Achieved Early,2024-07-14,8,1.0
-PCCENigeriaMDRN6879,pcce,hr_planning_and_recruitement,"Key initial longer-term positions identified by operational leadership and requested via submission in the HR system, one week after the EA publication",Achieved Early,2024-08-18,8,1.0
-PCCENigeriaMDRN6879,pcce,hr_planning_and_recruitement,"Once approved in the HR system and pre-classified JD provided, HR advertises key initial longer-term positions within 48 hours.",Achieved Early,2024-08-21,11,1.0
+PCCEIraqMDRI1998,pcce,coordination,Hold a mini summit within 48 h of the disaster,Achieved Early,2024-07-08,0,0.75
+PCCEIraqMDRI1998,pcce,coordination,Review/adapt membership coordination framework for the context for this specific emergency ,Achieved Early,2024-07-08,-5,1.0
+PCCEIraqMDRI1998,pcce,coordination,Ensure an appropriate membership coordination framework is in place after 24h of trigger ,Achieved Early,2024-07-07,0,1.0
+PCCENigeriaMDRN6879,pcce,coordination,Hold a mini summit within 48 h of the disaster,Achieved Late,2024-08-13,1,0.75
+PCCENigeriaMDRN6879,pcce,coordination,Review/adapt membership coordination framework for the context for this specific emergency ,Achieved Early,2024-08-12,-5,1.0
+PCCENigeriaMDRN6879,pcce,coordination,Ensure an appropriate membership coordination framework is in place after 24h of trigger ,Achieved Early,2024-08-11,0,1.0
+PCCEIraqMDRI1998,pcce,financial_management,Project agreements signed by the NS and the IFRC no longer than 7 days from the DREF/EA approval,Achieved Early,2024-07-14,-3,1.0
+PCCEIraqMDRI1998,pcce,financial_management,"After PA is signed by both parties, HoD/project manager to process the Request for Payment to be sent to Treasury within 10 days of DREF/ EA approval",Achieved Early,2024-07-17,-3,1.0
+PCCEIraqMDRI1998,pcce,financial_management,Bank transfer process by IFRC to the NS within 24h after the request for payment is received/approved,Achieved Early,2024-07-18,-4,1.0
+PCCEIraqMDRI1998,pcce,financial_management,Confirmation from the NSs of the funds received to be obtained within 3 working days from the value date of the transfer,Achieved Early,2024-07-21,-5,1.0
+PCCENigeriaMDRN6879,pcce,financial_management,Project agreements signed by the NS and the IFRC no longer than 7 days from the DREF/EA approval,Achieved Early,2024-08-20,-1,1.0
+PCCENigeriaMDRN6879,pcce,financial_management,"After PA is signed by both parties, HoD/project manager to process the Request for Payment to be sent to Treasury within 10 days of DREF/ EA approval",Achieved Early,2024-08-23,-1,1.0
+PCCENigeriaMDRN6879,pcce,financial_management,Bank transfer process by IFRC to the NS within 24h after the request for payment is received/approved,Achieved Early,2024-08-25,-1,1.0
+PCCENigeriaMDRN6879,pcce,financial_management,Confirmation from the NSs of the funds received to be obtained within 3 working days from the value date of the transfer,Achieved Early,2024-08-29,-1,1.0
+PCCEIraqMDRI1998,pcce,hr_planning_and_recruitement,"Key initial longer-term positions identified by operational leadership and requested via submission in the HR system, one week after the EA publication",Achieved Early,2024-07-12,-5,1.0
+PCCEIraqMDRI1998,pcce,hr_planning_and_recruitement,"Once approved in the HR system and pre-classified JD provided, HR advertises key initial longer-term positions within 48 hours.",Achieved Early,2024-07-14,-5,1.0
+PCCENigeriaMDRN6879,pcce,hr_planning_and_recruitement,"Key initial longer-term positions identified by operational leadership and requested via submission in the HR system, one week after the EA publication",Achieved Early,2024-08-18,-3,1.0
+PCCENigeriaMDRN6879,pcce,hr_planning_and_recruitement,"Once approved in the HR system and pre-classified JD provided, HR advertises key initial longer-term positions within 48 hours.",Achieved Early,2024-08-21,-2,1.0
 PCCEIraqMDRI1998,pcce,information_management,A dashboard is in place and updated timely to display the situation and the activities being implemented (24h),Missing,-,-1,0.5
 PCCEIraqMDRI1998,pcce,information_management,A dashboard is in place and updated timely to display the situation and the activities being implemented (72h),Missing,-,-1,0.5
 PCCEIraqMDRI1998,pcce,information_management,A dashboard is in place and updated timely to display the situation and the activities being implemented (1 week),Missing,-,-1,0.5
@@ -277,23 +282,23 @@ PCCENigeriaMDRN6879,pcce,information_management,A dashboard is in place and upda
 PCCENigeriaMDRN6879,pcce,information_management,A dashboard is in place and updated timely to display the situation and the activities being implemented (1 week),Achieved,2024-08-29 00:00:00,-1,0.5
 PCCENigeriaMDRN6879,pcce,information_management,A dashboard is in place and updated timely to display the situation and the activities being implemented (2 weeks),Achieved,2024-08-04 00:00:00,-1,0.5
 PCCENigeriaMDRN6879,pcce,information_management,A dashboard is in place and updated timely to display the situation and the activities being implemented (1 m),Missing,-,-1,0.0
-PCCEIraqMDRI1998,pcce,planning_and_resource_mobilization,Disaster Brief done for the  Management Call to inform the FAD between 48-72 ,Achieved Early,2024-07-09,3,1.0
-PCCEIraqMDRI1998,pcce,planning_and_resource_mobilization,EA is launched within 24 hours after the FAD has been approved (or within 48 hours after field report was published). ,Achieved Early,2024-07-06,0,1.0
-PCCEIraqMDRI1998,pcce,planning_and_resource_mobilization,Operational Strategy validated 10 to 14  days after the EA ,Achieved Early,2024-07-16,10,1.0
-PCCEIraqMDRI1998,pcce,planning_and_resource_mobilization,A resource mobilization plan is developed and approved within 3 to 4 weeks of the EA that looks at long term funding and sustianability.  ,Achieved Early,2024-08-02,27,1.0
-PCCENigeriaMDRN6879,pcce,planning_and_resource_mobilization,Disaster Brief done for the  Management Call to inform the FAD between 48-72 ,Achieved Early,2024-08-13,3,1.0
-PCCENigeriaMDRN6879,pcce,planning_and_resource_mobilization,EA is launched within 24 hours after the FAD has been approved (or within 48 hours after field report was published). ,Achieved Early,2024-08-10,0,1.0
-PCCENigeriaMDRN6879,pcce,planning_and_resource_mobilization,Operational Strategy validated 10 to 14  days after the EA ,Achieved Early,2024-08-19,9,1.0
-PCCENigeriaMDRN6879,pcce,planning_and_resource_mobilization,A resource mobilization plan is developed and approved within 3 to 4 weeks of the EA that looks at long term funding and sustianability.  ,Achieved Early,2024-09-01,22,1.0
-PCCEIraqMDRI1998,pcce,procurement_and_logistics,Initial supply chain plan developed between logs and ops coordinator within 1 week of the approved EA,Achieved Early,2024-07-13,7,1.0
-PCCEIraqMDRI1998,pcce,procurement_and_logistics,Fully approved and submitted requisitions for NFIs within 1 week of the EA (when relevant) ,Missing,-,-1,0.5
-PCCEIraqMDRI1998,pcce,procurement_and_logistics,NFI (or emergencies items) being delivered to the country in 3 days since the Requistion,Missing,-,-1,0.5
-PCCENigeriaMDRN6879,pcce,procurement_and_logistics,Initial supply chain plan developed between logs and ops coordinator within 1 week of the approved EA,Achieved Early,2024-08-19,9,1.0
-PCCENigeriaMDRN6879,pcce,procurement_and_logistics,Fully approved and submitted requisitions for NFIs within 1 week of the EA (when relevant) ,Achieved Early,2024-08-18 00:00:00,8,0.5
-PCCENigeriaMDRN6879,pcce,procurement_and_logistics,NFI (or emergencies items) being delivered to the country in 3 days since the Requistion,Achieved Early,2024-08-21 00:00:00,11,0.5
-PCCEIraqMDRI1998,pcce,surge,IFRC advocates with NS  for the approval and use of  Surge or  in country capacity from movement partners within the first  5 days of the trigger,Achieved Early,2024-07-10,4,1.0
-PCCEIraqMDRI1998,pcce,surge,RR personnel Alert sent within 12h of the request ,Achieved Early,2024-07-07,1,1.0
-PCCEIraqMDRI1998,pcce,surge,Identification of 1st rotation RR personnel within 5 days of the alert *if not aligned to readiness process could be slower ,Achieved Early,2024-07-11,5,1.0
-PCCENigeriaMDRN6879,pcce,surge,IFRC advocates with NS  for the approval and use of  Surge or  in country capacity from movement partners within the first  5 days of the trigger,Achieved Early,2024-08-14,4,1.0
-PCCENigeriaMDRN6879,pcce,surge,RR personnel Alert sent within 12h of the request ,Achieved Early,2024-08-11,1,1.0
-PCCENigeriaMDRN6879,pcce,surge,Identification of 1st rotation RR personnel within 5 days of the alert *if not aligned to readiness process could be slower ,Achieved Early,2024-08-16,6,1.0
+PCCEIraqMDRI1998,pcce,planning_and_resource_mobilization,Disaster Brief done for the  Management Call to inform the FAD between 48-72 ,Achieved Early,2024-07-09,0,1.0
+PCCEIraqMDRI1998,pcce,planning_and_resource_mobilization,EA is launched within 24 hours after the FAD has been approved (or within 48 hours after field report was published). ,Achieved Early,2024-07-06,-4,1.0
+PCCEIraqMDRI1998,pcce,planning_and_resource_mobilization,Operational Strategy validated 10 to 14  days after the EA ,Achieved Early,2024-07-16,-1,1.0
+PCCEIraqMDRI1998,pcce,planning_and_resource_mobilization,A resource mobilization plan is developed and approved within 3 to 4 weeks of the EA that looks at long term funding and sustianability.  ,Achieved Late,2024-08-02,9,0.5
+PCCENigeriaMDRN6879,pcce,planning_and_resource_mobilization,Disaster Brief done for the  Management Call to inform the FAD between 48-72 ,Achieved Early,2024-08-13,0,1.0
+PCCENigeriaMDRN6879,pcce,planning_and_resource_mobilization,EA is launched within 24 hours after the FAD has been approved (or within 48 hours after field report was published). ,Achieved Early,2024-08-10,-4,1.0
+PCCENigeriaMDRN6879,pcce,planning_and_resource_mobilization,Operational Strategy validated 10 to 14  days after the EA ,Achieved Early,2024-08-19,-2,1.0
+PCCENigeriaMDRN6879,pcce,planning_and_resource_mobilization,A resource mobilization plan is developed and approved within 3 to 4 weeks of the EA that looks at long term funding and sustianability.  ,Achieved Late,2024-09-01,4,0.5
+PCCEIraqMDRI1998,pcce,procurement_and_logistics,Initial supply chain plan developed between logs and ops coordinator within 1 week of the approved EA,Achieved Early,2024-07-13,-4,1.0
+PCCEIraqMDRI1998,pcce,procurement_and_logistics,Fully approved and submitted requisitions for NFIs within 1 week of the EA (when relevant) ,Not Achieved,-,365,1.0
+PCCEIraqMDRI1998,pcce,procurement_and_logistics,NFI (or emergencies items) being delivered to the country in 3 days since the Requistion,Not Achieved,-,365,1.0
+PCCENigeriaMDRN6879,pcce,procurement_and_logistics,Initial supply chain plan developed between logs and ops coordinator within 1 week of the approved EA,Achieved Early,2024-08-19,-2,1.0
+PCCENigeriaMDRN6879,pcce,procurement_and_logistics,Fully approved and submitted requisitions for NFIs within 1 week of the EA (when relevant) ,Achieved Early,2024-08-18 00:00:00,-3,1.0
+PCCENigeriaMDRN6879,pcce,procurement_and_logistics,NFI (or emergencies items) being delivered to the country in 3 days since the Requistion,Achieved Early,2024-08-21 00:00:00,-3,1.0
+PCCEIraqMDRI1998,pcce,surge,IFRC advocates with NS  for the approval and use of  Surge or  in country capacity from movement partners within the first  5 days of the trigger,Achieved Early,2024-07-10,-3,1.0
+PCCEIraqMDRI1998,pcce,surge,RR personnel Alert sent within 12h of the request ,Achieved Early,2024-07-07,-1,1.0
+PCCEIraqMDRI1998,pcce,surge,Identification of 1st rotation RR personnel within 5 days of the alert *if not aligned to readiness process could be slower ,Achieved Late,2024-07-11,2,0.5
+PCCENigeriaMDRN6879,pcce,surge,IFRC advocates with NS  for the approval and use of  Surge or  in country capacity from movement partners within the first  5 days of the trigger,Achieved Early,2024-08-14,-3,1.0
+PCCENigeriaMDRN6879,pcce,surge,RR personnel Alert sent within 12h of the request ,Achieved Early,2024-08-11,-1,1.0
+PCCENigeriaMDRN6879,pcce,surge,Identification of 1st rotation RR personnel within 5 days of the alert *if not aligned to readiness process could be slower ,Achieved Late,2024-08-16,3,0.5

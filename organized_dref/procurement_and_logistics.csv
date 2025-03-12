@@ -1,6 +1,6 @@
-Ref,Achieved,NA,Missing,Achieved Early,Achieved Late,TBD,DNU,Data Completeness,General Performance,Supply chain plan developed within 1 week of DREF approval,Supply chain plan developed within 1 week of DREF approval (days),Supply chain plan developed within 1 week of DREF approval date,NFI (or emergencies items) being delivered to the country in 3 days since the Requistion,NFI (or emergencies items) being delivered to the country in 3 days since the Requistion (days),NFI (or emergencies items) being delivered to the country in 3 days since the Requistion date
-DREFAfghanistanMDRA111,0,0,0,0,2,0,0,1.0,0.5,Achieved Late,16,2024-06-21,Achieved Late,17,2024-06-22
-DREFBangladeshMDRB567,0,0,0,1,1,0,0,1.0,0.75,Achieved Late,17,2024-07-18,Achieved Early,13,2024-07-14
-DREFGermanyMDRG909,0,0,0,0,2,0,0,1.0,0.5,Achieved Late,19,2024-08-29,Achieved Late,23,2024-09-02
-DREFChileMDRC464,0,0,0,1,1,0,0,1.0,0.75,Achieved Late,18,2024-09-07,Achieved Early,13,2024-09-02
-DREFEgyptMDRE698,0,0,0,1,1,0,0,1.0,0.75,Achieved Late,23,2024-09-25,Achieved Early,12,2024-09-14
+Ref,Achieved,NA,Missing,Achieved Early,Achieved Late,DNU,Data Completeness,General Performance,Supply chain plan developed within 1 week of DREF approval,Supply chain plan developed within 1 week of DREF approval (days),Supply chain plan developed within 1 week of DREF approval date,NFI (or emergencies items) being delivered to the country in 3 days since the Requistion,NFI (or emergencies items) being delivered to the country in 3 days since the Requistion (days),NFI (or emergencies items) being delivered to the country in 3 days since the Requistion date
+DREFAfghanistanMDRA111,0,0,0,1,1,0,1.0,0.75,Achieved Early,-3,2024-06-21,Achieved Late,3,2024-06-22
+DREFBangladeshMDRB567,0,0,0,2,0,0,1.0,1.0,Achieved Early,-2,2024-07-18,Achieved Early,-1,2024-07-14
+DREFGermanyMDRG909,0,0,0,1,1,0,1.0,0.75,Achieved Early,0,2024-08-29,Achieved Late,9,2024-09-02
+DREFChileMDRC464,0,0,0,2,0,0,1.0,1.0,Achieved Early,-1,2024-09-07,Achieved Early,-1,2024-09-02
+DREFEgyptMDRE698,0,0,0,1,1,0,1.0,0.75,Achieved Late,4,2024-09-25,Achieved Early,-2,2024-09-14

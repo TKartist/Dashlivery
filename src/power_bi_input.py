@@ -45,7 +45,7 @@ def read_area_info_folder(folder):
             continue
         df = pd.read_csv(f"{folder}/{file}")
         df["Area"] = file.split(".")[0]
-        df = df[["Ref", "Area", "Achieved", "NA", "Missing", "Achieved Early", "Achieved Late", "TBD", "DNU", "Data Completeness", "General Performance"]]
+        df = df[["Ref", "Area", "Achieved", "NA", "Missing", "Achieved Early", "Achieved Late", "DNU", "Data Completeness", "General Performance"]]
         df_list.append(df)
     
     df_combined = pd.concat(df_list)
@@ -65,7 +65,7 @@ def area_info():
 def read_task_info(root, file):
     df = pd.read_csv(root+file, index_col="Ref")
     op_type = root.split("_")[1][:-1]
-    cols = df.columns[9:].copy()
+    cols = df.columns[8:].copy()
     area = file.split(".")[0]
     task_infos = []
     for index, row in df.iterrows():
@@ -75,7 +75,7 @@ def read_task_info(root, file):
                 "EWTS Varient" : op_type,
                 "Area" : area,
                 "Task" : a,
-                "Status" : row[a],
+                "Status" : row[a] if pd.notna(row[a]) else "Not Achieved",
                 "Completed" : row[c],
                 "Delta" : row[b],
             })
@@ -85,7 +85,7 @@ def read_task_info(root, file):
 def read_im(root, file):
     df = pd.read_csv(root+file, index_col="Ref")
     op_type = root.split("_")[1][:-1]
-    cols = df.columns[9:].copy()
+    cols = df.columns[8:].copy()
     area = file.split(".")[0]
     task_infos = []
     for index, row in df.iterrows():
@@ -95,7 +95,7 @@ def read_im(root, file):
                 "EWTS Varient" : op_type,
                 "Area" : area,
                 "Task" : a,
-                "Status" : row[a],
+                "Status" : row[a] if pd.notna(row[a]) else "Not Achieved",
                 "Completed" : row[b],
                 "Delta" : -1,
             })
