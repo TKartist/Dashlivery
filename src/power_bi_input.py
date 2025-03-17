@@ -97,7 +97,7 @@ def read_im(root, file):
                 "Task" : a,
                 "Status" : row[a] if pd.notna(row[a]) else "Not Achieved",
                 "Completed" : row[b],
-                "Delta" : -1,
+                "Delta" : pd.NA,
             })
     return task_infos
 
