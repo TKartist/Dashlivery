@@ -84,13 +84,13 @@ def area_split_ea(overview, columns):
     msr_column = "MSR ready (compliant or resource allocated)"
     folder = "../organized_ea/"
     assessment = overview[full_list(columns[11])]
-    resource_mobilization = overview[full_list(columns[12:16] + [columns[29]])] # add EA coverage
-    surge = overview[full_list(columns[30:33])] # add % related values to the surge (rrp)
-    hr = overview[full_list(columns[46:48])] # add % related values to the hr (rrp)
-    coordination = overview[full_list(columns[48:52])] # missing joint statement in master data
-    logistics = overview[full_list(columns[52:55])]
-    im = overview[full_list_im(columns[55:60])]
-    finance = overview[full_list(columns[60:64])]
+    resource_mobilization = overview[full_list(columns[12:16] + [columns[28]])] # add EA coverage
+    surge = overview[full_list(columns[29:32])] # add % related values to the surge (rrp)
+    hr = overview[full_list(columns[45:47])] # add % related values to the hr (rrp)
+    coordination = overview[full_list(columns[47:51])] # missing joint statement in master data
+    logistics = overview[full_list(columns[51:54])]
+    im = overview[full_list_im(columns[54:59])]
+    finance = overview[full_list(columns[59:63])]
     security = overview[[msr_column, f"{msr_column} (days)"]]
 
     summarize_df(assessment).to_csv(f"{folder}assessment.csv", index=True)
@@ -108,13 +108,13 @@ def area_split_dref(overview, columns):
     folder = "../organized_dref/"
     msr_column = "MSR ready (compliant or resource allocated)"
 
-    assessment = overview[full_list(columns[12])]
-    risk = overview[full_list(columns[13:15])]
-    resource_mobilization = overview[full_list(columns[15:17])]
-    surge = overview[full_list(columns[17:20])]
-    logistics = overview[full_list(columns[33:35])]
-    finance = overview[full_list(columns[35:39])]
-    delivery = overview[full_list([columns[39]])] # add targeted population, ehi distribution, and implementation rate
+    assessment = overview[full_list(columns[11])]
+    risk = overview[full_list(columns[12:14])]
+    resource_mobilization = overview[full_list(columns[14:16])]
+    surge = overview[full_list(columns[16:19])]
+    logistics = overview[full_list(columns[32:34])]
+    finance = overview[full_list(columns[34:38])]
+    delivery = overview[full_list([columns[38]])] # add targeted population, ehi distribution, and implementation rate
     security = overview[[msr_column, f"{msr_column} (days)"]]
 
     summarize_df(assessment).to_csv(f"{folder}assessment.csv", index=True)
@@ -129,13 +129,13 @@ def area_split_dref(overview, columns):
 
 def area_split_mcmr(overview, columns):
     folder = "../organized_mcmr/"
-    resource_mobilization = overview[full_list(columns[12:15] + [columns[39]])] # add coverage
-    surge = overview[full_list(columns[21:23])] # add % related values to the surge (rrp)
-    hr = overview[full_list(columns[36:38])] # add % related values to the hr (rrp)
-    coordination = overview[full_list(columns[38])]
-    logistics = overview[full_list(columns[39:42])]
-    im = overview[full_list_im(columns[42:43])]
-    finance = overview[full_list(columns[43:45])]
+    resource_mobilization = overview[full_list(columns[11:14] + [columns[38]])] # add coverage
+    surge = overview[full_list(columns[20:22])] # add % related values to the surge (rrp)
+    hr = overview[full_list(columns[35:37])] # add % related values to the hr (rrp)
+    coordination = overview[full_list(columns[37])]
+    logistics = overview[full_list(columns[38:41])]
+    im = overview[full_list_im(columns[41:42])]
+    finance = overview[full_list(columns[42:44])]
 
     summarize_df(resource_mobilization).to_csv(f"{folder}planning_and_resource_mobilization.csv", index=True)
     summarize_df(surge).to_csv(f"{folder}surge.csv", index=True)
@@ -150,14 +150,14 @@ def area_split_pcce(overview, columns):
     folder = "../organized_pcce/"
     msr_column = "MSR ready (compliant or resource allocated)"
 
-    assessment = overview[columns[12:13]]
-    resource_mobilization = overview[full_list(columns[13:16] + [columns[22]])]
-    surge = overview[full_list(columns[23:26])]
-    hr = overview[full_list(columns[40:42])]
-    coordination = overview[full_list(columns[42:45])]
-    logistics = overview[full_list(columns[45:48])]
-    im = overview[full_list_im(columns[48:53])]
-    finance = overview[full_list(columns[53:57])]
+    assessment = overview[columns[11:12]]
+    resource_mobilization = overview[full_list(columns[12:15] + [columns[21]])]
+    surge = overview[full_list(columns[22:25])]
+    hr = overview[full_list(columns[39:41])]
+    coordination = overview[full_list(columns[41:44])]
+    logistics = overview[full_list(columns[44:47])]
+    im = overview[full_list_im(columns[47:52])]
+    finance = overview[full_list(columns[52:56])]
     # delivery = overview[full_list(columns[55:57])] # add percentage of targeted population receiving assistance and % of planned budget implementation
     security = overview[[msr_column, f"{msr_column} (days)"]]
 

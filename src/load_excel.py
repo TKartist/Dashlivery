@@ -22,14 +22,14 @@ def organize_ea(sheet):
     col_name = sheet.columns.tolist()
     sheet["Ref"] = "EA" + sheet[col_name[4]] + sheet[col_name[6]]
     disasters = sheet.loc[:, col_name[:11]]
-    operational_progresses = sheet.loc[:, [col_name[0]] + col_name[11:16] + col_name[29:33] + col_name[46:53] + col_name[77:]]
-    financial_progress = sheet.loc[:, [col_name[0]] + col_name[60:65]]
-    dashboard_progress = sheet.loc[:, [col_name[0]] + col_name[55:60]]
-    sec_coverage = sheet.loc[:, [col_name[0]] + col_name[16:22]]
-    fed_coverage = sheet.loc[:, [col_name[0]] + col_name[22:28]]
-    rrp = sheet.loc[:, [col_name[0]] + col_name[33:46]]
-    nfi = sheet.loc[:, [col_name[0]] + col_name[53:55] + col_name[65:68]]
-    operational_achievements = sheet.loc[:, [col_name[0]] + col_name[68:77]]
+    operational_progresses = sheet.loc[:, [col_name[0]] + col_name[11:16] + col_name[28:32] + col_name[45:52] + col_name[76:]]
+    financial_progress = sheet.loc[:, [col_name[0]] + col_name[59:64]]
+    dashboard_progress = sheet.loc[:, [col_name[0]] + col_name[54:59]]
+    sec_coverage = sheet.loc[:, [col_name[0]] + col_name[15:21]]
+    fed_coverage = sheet.loc[:, [col_name[0]] + col_name[21:27]]
+    rrp = sheet.loc[:, [col_name[0]] + col_name[32:45]]
+    nfi = sheet.loc[:, [col_name[0]] + col_name[52:54] + col_name[64:67]]
+    operational_achievements = sheet.loc[:, [col_name[0]] + col_name[67:76]]
     
     sec_coverage = sec_coverage.replace('\n', ' ', regex=True)
     sec_coverage = sec_coverage.replace(' ', ' ', regex=True)
@@ -42,10 +42,10 @@ def organize_dref(sheet):
     col_name = sheet.columns.tolist()
     sheet["Ref"] = "DREF" + sheet[col_name[4]] + sheet[col_name[6]]
     disasters = sheet.loc[:, col_name[:11]]
-    operational_progresses = sheet.loc[:, [col_name[0]] + col_name[12:20] + col_name[33:35] + col_name[52:54]]
-    rrp = sheet.loc[:, [col_name[0]] + col_name[20:33]]
-    financial_progress = sheet.loc[:, [col_name[0]] + col_name[35:42]]
-    operational_achievements = sheet.loc[:, [col_name[0]] + col_name[42:52]]
+    operational_progresses = sheet.loc[:, [col_name[0]] + col_name[11:19] + col_name[32:34] + col_name[51:53]]
+    rrp = sheet.loc[:, [col_name[0]] + col_name[19:32]]
+    financial_progress = sheet.loc[:, [col_name[0]] + col_name[34:41]]
+    operational_achievements = sheet.loc[:, [col_name[0]] + col_name[41:51]]
     disasters.to_csv("../organized_dref/general_info.csv", index=False)
 
     print("DREF master data organized")
@@ -55,11 +55,11 @@ def organize_mcmr(sheet):
     col_name = sheet.columns.tolist()
     sheet["Ref"] = "MCMR" + sheet[col_name[4]] + sheet[col_name[6]] 
     disasters = sheet.loc[:, col_name[:11]]
-    operational_progresses = sheet.loc[:, [col_name[0]] + col_name[12:15] + col_name[21:23] + col_name[36:43]]
-    total_coverage = sheet.loc[:, [col_name[0]] + col_name[15:21]]
-    rrp = sheet.loc[:, [col_name[0]] + col_name[23:36]]
-    financial_progress = sheet.loc[:, [col_name[0]] + col_name[43:45]]
-    operational_achievements = sheet.loc[:, [col_name[0]] + col_name[45:]]
+    operational_progresses = sheet.loc[:, [col_name[0]] + col_name[11:14] + col_name[20:22] + col_name[35:42]]
+    total_coverage = sheet.loc[:, [col_name[0]] + col_name[14:20]]
+    rrp = sheet.loc[:, [col_name[0]] + col_name[22:35]]
+    financial_progress = sheet.loc[:, [col_name[0]] + col_name[42:44]]
+    operational_achievements = sheet.loc[:, [col_name[0]] + col_name[44:]]
 
     total_coverage = total_coverage.replace('\n', ' ', regex=True)
     total_coverage = total_coverage.replace(' ', ' ', regex=True)
@@ -73,12 +73,12 @@ def organize_protracted(sheet):
     col_name = sheet.columns.tolist()
     sheet["Ref"] = "PCCE" + sheet[col_name[4]] + sheet[col_name[6]]
     disasters = sheet.loc[:, col_name[:11]]
-    operational_progresses = sheet.loc[:, [col_name[0]] + col_name[12:16] + col_name[22:26] + col_name[40:48] + col_name[58:59] + col_name[61:63]]
-    coverage = sheet.loc[:, [col_name[0]] + col_name[16:22]]
-    rrp = sheet.loc[:, [col_name[0]] + col_name[26:40]]
-    dashboard = sheet.loc[:, [col_name[0]] + col_name[48:53]]
-    financial_progress = sheet.loc[:, [col_name[0]] + col_name[53:58]]
-    operational_achievements = sheet.loc[:, [col_name[0]] + col_name[59:61]]
+    operational_progresses = sheet.loc[:, [col_name[0]] + col_name[11:15] + col_name[21:25] + col_name[39:47] + col_name[57:58] + col_name[60:62]]
+    coverage = sheet.loc[:, [col_name[0]] + col_name[15:21]]
+    rrp = sheet.loc[:, [col_name[0]] + col_name[25:39]]
+    dashboard = sheet.loc[:, [col_name[0]] + col_name[47:52]]
+    financial_progress = sheet.loc[:, [col_name[0]] + col_name[52:57]]
+    operational_achievements = sheet.loc[:, [col_name[0]] + col_name[58:60]]
 
     coverage = coverage.replace('\n', ' ', regex=True)
     coverage = coverage.replace(' ', ' ', regex=True)
@@ -97,6 +97,9 @@ def organize_sheets(sheets):
             bucket["MCMR"] = organize_mcmr(sheet)
         elif "Protracted" in sheet_name:
             bucket["Protracted"] = organize_protracted(sheet)
+        elif "Escalation" in sheet_name:
+            sheet["Variant"] = sheet["Variant"].str.lower()
+            sheet.to_csv("../escalations.csv", index=False)
         else:
             print("Sheet name not recognized")
     print("organization complete")

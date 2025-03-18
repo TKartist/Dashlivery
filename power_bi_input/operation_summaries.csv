@@ -7,10 +7,10 @@ EAJordanMDRJ000,ACTIVE,2024-09-01,MENA,Jordan,,MDRJ000,Jordan earthquake (MDRJ00
 DREFAfghanistanMDRA111,active,2024-06-05,Asia,Afghanistan,AFG,MDRA111,Afghanistan Civil Unrest (MDRA111),Civil Unrest,Red,DREF,0,0,0,14,2,0,1.0,0.9375
 DREFBangladeshMDRB567,not active,2024-07-01,Asia,Bangladesh,BGD,MDRB567,Bangladesh Cyclone (MDRB567),Cyclone,Orange,DREF,0,0,0,12,4,0,1.0,0.875
 DREFGermanyMDRG909,active,2024-08-10,Europe,Germany,DEU,MDRG909,Germany Earthquake (MDRG909),Earthquake,Orange,DREF,0,0,0,10,6,0,1.0,0.8125
-DREFChileMDRC464,active,2024-08-20,Americas ,Chile,CHL,MDRC464,Chile Fire (MDRC464),Fire,Red,DREF,0,0,0,12,4,0,1.0,0.875
+DREFChileMDRC464,active,2024-08-20,Americas ,Chile,CHL,MDRC464,Chile Fire (MDRC464),Fire,Red,DREF,0,2,0,3,11,0,1.0,0.53125
 DREFEgyptMDRE698,not active,2024-09-02,MENA,Egypt,EGY,MDRE698,Egypt Cyclone (MDRE698),Cyclone,Orange,DREF,0,0,0,6,10,0,1.0,0.6875
 MCMRNepalMDRS2002,active,2024-06-10,Asia,Nepal,NPL,MDRS2002,Earthquake Minu South Asia (MDRS2002),Earthquake,Orange,Multi Country,1,0,0,2,12,0,1.0,0.6
-MCMRZambiaMDRS7890,active,2024-07-11,Africa,Zambia,ZMB,MDRS7890,Covid 19 Africa (MDRS7890),Epidemic,Orange,Multi Country,1,0,0,12,2,0,1.0,0.9333333333333332
+MCMRZambiaMDRS7890,active,2024-07-11,Africa,Zambia,ZMB,MDRS7890,Covid 19 Africa (MDRS7890),Epidemic,Orange,Multi Country,0,3,1,0,11,0,0.9333333333333332,0.3928571428571428
 MCMRJordanMDRS1234,not active ,2024-08-15,MENA,Jordan,JOR,MDRS1234,Civil waR MENA (MDRS1234),Civil Unrest,Red,Multi Country,1,0,0,10,4,0,1.0,0.8666666666666667
 PCCEIraqMDRI1998,active,2024-07-06,MENA,Iraq,IRQ,MDRI1998,Iraq complex emergency (MDRI1998),Complex Emergency,Red,Protracted ,0,2,5,16,3,0,0.8076923076923077,0.8333333333333334
 PCCENigeriaMDRN6879,not active,2024-08-10,Africa,Nigeria,NGA,MDRN6879,Nigeria population movement (MDRN6879),Population Movement ,Orange,Protracted ,4,0,1,17,4,0,0.9615384615384616,0.92

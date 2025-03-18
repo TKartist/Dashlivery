@@ -15,6 +15,7 @@ status_mapping = {
     "NA" : 0,
 }
 
+
 def general_info():
     filename = "general_info.csv"
     df = pd.read_csv(f"{ea_folder}{filename}")
@@ -64,12 +65,24 @@ def area_info():
 
 def read_task_info(root, file):
     df = pd.read_csv(root+file, index_col="Ref")
+    op_df = pd.read_csv("../power_bi_input/operation_summaries.csv", index_col="Ref")
+    escalation = pd.read_csv("../escalations.csv")
     op_type = root.split("_")[1][:-1]
     cols = df.columns[8:].copy()
     area = file.split(".")[0]
+    if op_type == "pcce":
+        op_type = "protracted crisis"
     task_infos = []
     for index, row in df.iterrows():
         for a, b, c in zip(cols[::3], cols[1::3], cols[2::3]):
+            filtered_df = escalation[(escalation["Variant"] == op_type) & (escalation["Indicator"] == a)]
+            column_name = op_df["Appeal Name"][index]
+
+            if not filtered_df.empty and column_name in filtered_df.columns:
+                escalated = filtered_df.loc[:, column_name].values[0]
+            else:
+                escalated = None
+
             task_infos.append({
                 "Ref" : index,
                 "EWTS Varient" : op_type,
@@ -78,18 +91,35 @@ def read_task_info(root, file):
                 "Status" : row[a] if pd.notna(row[a]) else "Not Achieved",
                 "Completed" : row[c],
                 "Delta" : row[b],
+                "Escalated" : escalated,
             })
     return task_infos
 
 
 def read_im(root, file):
     df = pd.read_csv(root+file, index_col="Ref")
+    op_df = pd.read_csv("../power_bi_input/operation_summaries.csv", index_col="Ref")
+    escalation = pd.read_csv("../escalations.csv")
     op_type = root.split("_")[1][:-1]
     cols = df.columns[8:].copy()
     area = file.split(".")[0]
+    if op_type == "pcce":
+        op_type = "protracted crisis"
     task_infos = []
     for index, row in df.iterrows():
         for a, b in zip(cols[::2], cols[1::2]):
+            if op_type == "mcmr":
+                filtered_df = escalation[(escalation["Variant"] == op_type) & (escalation["Indicator"] == "A multi country dashboard is in place and updated timely to display the situation and the activities being implemented")]
+            else:
+                filtered_df = escalation[(escalation["Variant"] == op_type) & (escalation["Indicator"] == "A dashboard is in place and updated timely to display the situation and the activities being implemented")]
+            
+            column_name = op_df["Appeal Name"][index]
+
+            if not filtered_df.empty and column_name in filtered_df.columns:
+                escalated = filtered_df.loc[:, column_name].values[0]
+            else:
+                escalated = None
+            
             task_infos.append({
                 "Ref" : index,
                 "EWTS Varient" : op_type,
@@ -98,6 +128,7 @@ def read_im(root, file):
                 "Status" : row[a] if pd.notna(row[a]) else "Not Achieved",
                 "Completed" : row[b],
                 "Delta" : pd.NA,
+                "Escalated" : escalated,
             })
     return task_infos
 
