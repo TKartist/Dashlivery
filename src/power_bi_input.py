@@ -82,7 +82,10 @@ def read_task_info(root, file):
                 escalated = filtered_df.loc[:, column_name].values[0]
             else:
                 escalated = None
-
+            if pd.notna(row[a]) and row[a] == "DNU":
+                delta = pd.NA
+            else:
+                delta = row[b] * -1
             task_infos.append({
                 "Ref" : index,
                 "EWTS Varient" : op_type,
@@ -90,7 +93,7 @@ def read_task_info(root, file):
                 "Task" : a,
                 "Status" : row[a] if pd.notna(row[a]) else "Not Achieved",
                 "Completed" : row[c],
-                "Delta" : row[b],
+                "Delta" : delta,
                 "Escalated" : escalated,
             })
     return task_infos
