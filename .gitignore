@@ -2,3 +2,4 @@ dummy_data/format_early_warning.xlsx
 trial.py
 src/__pycache__/
 .env
+credentials.json

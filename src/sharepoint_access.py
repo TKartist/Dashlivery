@@ -1,19 +1,33 @@
-from office365.sharepoint.client_context import ClientContext
-from office365.runtime.auth.client_credential import ClientCredential
-from dotenv import load_dotenv
+from google.oauth2 import service_account
+from googleapiclient.discovery import build
+from googleapiclient.http import MediaFileUpload
+from googleapiclient.http import MediaIoBaseDownload
+import io
 import os
-
-
+from dotenv import load_dotenv
 load_dotenv()
-client_id = os.getenv("CLIENT_ID")
-client_secret = os.getenv("CLIENT_SECRET")
-print(client_id)
-print(client_secret)
 
-url = "https://ifrcorg.sharepoint.com/sites/QualityDeliveryUnit221"
-file_url = "/sites/QualityDeliveryUnit221/Documents/Quality team files/Project folders/Tracking system working folder/Master_data/EWTS_Master_data_Dummy_Data_070325.xlsx"
+def download():
+    file_id = os.getenv("FILE_ID")
 
-ctx = ClientContext(url).with_credentials(ClientCredential(client_id, client_secret))
-web = ctx.web
-ctx.load(web)
-ctx.execute_query()
+    # --- SETUP ---
+    SCOPES = ['https://www.googleapis.com/auth/drive']
+    SERVICE_ACCOUNT_FILE = os.getenv("SERVICE_ACCOUNT_FILE")
+
+    credentials = service_account.Credentials.from_service_account_file(
+        SERVICE_ACCOUNT_FILE, scopes=SCOPES)
+    drive_service = build('drive', 'v3', credentials=credentials)
+
+    # --- YOUR FILE ---
+    local_path = '../dummy_data/updated_dummy.xlsx'  # Local file path
+
+    request = drive_service.files().get_media(fileId=file_id)
+    fh = io.FileIO(local_path, 'wb')
+    downloader = MediaIoBaseDownload(fh, request)
+
+    done = False
+    while not done:
+        status, done = downloader.next_chunk()
+        print(f"Download progress: {int(status.progress() * 100)}%")
+
+    print(f"✅ File downloaded as: {local_path}")
