@@ -40,17 +40,20 @@ def general_info():
 
 def read_area_info_folder(folder):
     files = os.listdir(folder)
+    cols = ["Ref", "Area", "Achieved", "NA", "Missing", "Achieved Early", "Achieved Late", "DNU", "Data Completeness", "General Performance"]
     df_list = []
     for file in files:
         if file == "general_info.csv":
             continue
         df = pd.read_csv(f"{folder}/{file}")
         df["Area"] = file.split(".")[0]
-        df = df[["Ref", "Area", "Achieved", "NA", "Missing", "Achieved Early", "Achieved Late", "DNU", "Data Completeness", "General Performance"]]
+        df = df[cols]
         df_list.append(df)
-    
-    df_combined = pd.concat(df_list)
-    return df_combined
+    if len(df_list) == 0:
+        return pd.DataFrame(columns=cols)
+    else:    
+        df_combined = pd.concat(df_list)
+        return df_combined
 
 
 def area_info():

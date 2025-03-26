@@ -1,16 +1,9 @@
 Ref,tracker Status,Trigger Date,Region,Country,ISO,Appeal Code,Appeal Name,Disaster Type,Classification,EWTS Varient,Achieved,NA,Missing,Achieved Early,Achieved Late,DNU,Data Completeness,General Performance
-EAMozambiqueMDRM989,NOT ACTIVE,2024-06-20,Africa,Mozambique,,MDRM989,Mozambique earthquake (MDRM989),Earthquake,Orange,Emergency Appeal,3,2,2,7,11,3,0.8214285714285714,0.6739130434782609
-EANigeriaMDRN777,NOT ACTIVE,2024-07-15,Africa,Nigeria,,MDRN777,Nigeria population movement (MDRN777),Population Movement ,Red,Emergency Appeal,0,1,5,3,16,3,0.7142857142857143,0.55
-EAPeruMDRO999,ACTIVE,2024-08-11,Americas ,Peru,,MDRO999,Peru population movement (MDRO999),Population Movement ,Orange,Emergency Appeal,2,0,3,7,15,1,0.8571428571428571,0.6875
-EAMaldivesMDRM787,ACTIVE,2024-08-28,Asia,Maldives,,MDRM787,Maldives floods (MDRM787),Flood,Orange,Emergency Appeal,5,1,0,4,17,1,0.9642857142857144,0.6481481481481481
-EAJordanMDRJ000,ACTIVE,2024-09-01,MENA,Jordan,,MDRJ000,Jordan earthquake (MDRJ000),Earthquake,Red,Emergency Appeal,0,5,5,0,17,1,0.7857142857142857,0.3863636363636363
-DREFAfghanistanMDRA111,active,2024-06-05,Asia,Afghanistan,AFG,MDRA111,Afghanistan Civil Unrest (MDRA111),Civil Unrest,Red,DREF,0,0,0,14,2,0,1.0,0.9375
-DREFBangladeshMDRB567,not active,2024-07-01,Asia,Bangladesh,BGD,MDRB567,Bangladesh Cyclone (MDRB567),Cyclone,Orange,DREF,0,0,0,12,4,0,1.0,0.875
-DREFGermanyMDRG909,active,2024-08-10,Europe,Germany,DEU,MDRG909,Germany Earthquake (MDRG909),Earthquake,Orange,DREF,0,0,0,10,6,0,1.0,0.8125
-DREFChileMDRC464,active,2024-08-20,Americas ,Chile,CHL,MDRC464,Chile Fire (MDRC464),Fire,Red,DREF,0,2,0,3,11,0,1.0,0.53125
-DREFEgyptMDRE698,not active,2024-09-02,MENA,Egypt,EGY,MDRE698,Egypt Cyclone (MDRE698),Cyclone,Orange,DREF,0,0,0,6,10,0,1.0,0.6875
-MCMRNepalMDRS2002,active,2024-06-10,Asia,Nepal,NPL,MDRS2002,Earthquake Minu South Asia (MDRS2002),Earthquake,Orange,Multi Country,1,0,0,2,12,0,1.0,0.6
-MCMRZambiaMDRS7890,active,2024-07-11,Africa,Zambia,ZMB,MDRS7890,Covid 19 Africa (MDRS7890),Epidemic,Orange,Multi Country,0,3,1,0,11,0,0.9333333333333332,0.3928571428571428
-MCMRJordanMDRS1234,not active ,2024-08-15,MENA,Jordan,JOR,MDRS1234,Civil waR MENA (MDRS1234),Civil Unrest,Red,Multi Country,1,0,0,10,4,0,1.0,0.8666666666666667
-PCCEIraqMDRI1998,active,2024-07-06,MENA,Iraq,IRQ,MDRI1998,Iraq complex emergency (MDRI1998),Complex Emergency,Red,Protracted ,0,2,5,16,3,0,0.8076923076923077,0.8333333333333334
-PCCENigeriaMDRN6879,not active,2024-08-10,Africa,Nigeria,NGA,MDRN6879,Nigeria population movement (MDRN6879),Population Movement ,Orange,Protracted ,4,0,1,17,4,0,0.9615384615384616,0.92
+EAVanuatuMDRVU012,NOT ACTIVE,2024-12-17,Asia,Vanuatu,,MDRVU012,Vanuatu Earthquake (MDRVU012),Earthquake,Orange,Emergency Appeal,0.0,6.0,5.0,10.0,5.0,2.0,0.75,0.5952380952380952
+EAUgandaMDRUG055,ACTIVE,2025-02-17,Africa,Uganda,,MDRUG055,Uganda Ebola Outbreak (MDRUG055),Epidemic,Orange,Emergency Appeal,0.0,8.0,5.0,11.0,2.0,2.0,0.75,0.5714285714285714
+EAMalawiMDRMW021,NOT ACTIVE,2024-12-15,Africa,Malawi,,MDRMW021,Malawi Cyclone chido (MDRMW021),Cyclone,Orange,Emergency Appeal,2.0,23.0,3.0,0.0,0.0,0.0,0.8928571428571429,0.08
+EAMozambiqueMDRMZ026,NOT ACTIVE,2024-12-15,Africa,Mozambique,,MDRMZ026,Mozambique Cyclone Chido (MDRMZ026),Cyclone,Orange,Emergency Appeal,0.0,18.0,5.0,0.0,5.0,0.0,0.8214285714285714,0.108695652173913
+EAComorosMDRKM013,NOT ACTIVE,2024-12-15,Africa,Comoros,,MDRKM013,Comoros Cyclone Chido (MDRKM013),Cyclone,Orange,Emergency Appeal,0.0,15.0,5.0,0.0,7.0,1.0,0.7857142857142857,0.1590909090909091
+EAMadagascarMDRMG023,NOT ACTIVE,2024-12-15,Africa,Madagascar,,MDRMG023,Madagascar Cyclone Chido (MDRMG023),Cyclone,Orange,Emergency Appeal,0.0,2.0,0.0,2.0,2.0,22.0,0.2142857142857142,0.5
+DREFMozambiqueMDRMZ026,not active,2024-12-15,Africa,Mozambique,,MDRMZ026,Cyclone Chido Mozambique (MDRMZ026),Cyclone,Orange,DREF,0.0,7.0,0.0,9.0,0.0,0.0,1.0,0.5625
+MCMRMDRS1005,not active ,2024-12-23,Africa,,,MDRS1005,Africa -Cyclone Chido (MDRS1005),Cyclone,Orange,Multi Country,0.0,14.0,1.0,0.0,0.0,0.0,0.9333333333333332,0.0

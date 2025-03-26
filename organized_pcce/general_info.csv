@@ -1,3 +1,1 @@
-Ref,tracker Status,Escalation date,Region,Country,ISO,Appeal Code,Appeal Name ,Disaster Type ,Classification ,EWTS Varient ,Achieved,NA,Missing,Achieved Early,Achieved Late,DNU,Data Completeness,General Performance
-PCCEIraqMDRI1998,active,2024-07-06,MENA,Iraq,IRQ,MDRI1998,Iraq complex emergency (MDRI1998),Complex Emergency,Red,Protracted ,0,2,5,16,3,0,0.8076923076923077,0.8333333333333334
-PCCENigeriaMDRN6879,not active,2024-08-10,Africa,Nigeria,NGA,MDRN6879,Nigeria population movement (MDRN6879),Population Movement ,Orange,Protracted ,4,0,1,17,4,0,0.9615384615384616,0.92
+Ref,tracker Status,Escalation date,Region,Country,ISO,Appeal Code,Appeal Name ,Disaster Type ,Classification ,EWTS Varient 

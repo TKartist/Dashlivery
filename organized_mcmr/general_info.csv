@@ -1,4 +1,2 @@
 Ref,tracker Status, Disaster Escalation Date ,Region,Country,ISO,Appeal Code,Appeal Name ,Disaster Type ,Classification ,EWTS Varient ,Achieved,NA,Missing,Achieved Early,Achieved Late,DNU,Data Completeness,General Performance
-MCMRNepalMDRS2002,active,2024-06-10,Asia,Nepal,NPL,MDRS2002,Earthquake Minu South Asia (MDRS2002),Earthquake,Orange,Multi Country,1,0,0,2,12,0,1.0,0.6
-MCMRZambiaMDRS7890,active,2024-07-11,Africa,Zambia,ZMB,MDRS7890,Covid 19 Africa (MDRS7890),Epidemic,Orange,Multi Country,0,3,1,0,11,0,0.9333333333333333,0.39285714285714285
-MCMRJordanMDRS1234,not active ,2024-08-15,MENA,Jordan,JOR,MDRS1234,Civil waR MENA (MDRS1234),Civil Unrest,Red,Multi Country,1,0,0,10,4,0,1.0,0.8666666666666667
+MCMRMDRS1005,not active ,2024-12-23,Africa,,,MDRS1005,Africa -Cyclone Chido (MDRS1005),Cyclone,Orange,Multi Country,0,14,1,0,0,0,0.9333333333333333,0.0

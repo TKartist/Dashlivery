@@ -1,6 +1,7 @@
 Ref,Achieved,NA,Missing,Achieved Early,Achieved Late,DNU,Data Completeness,General Performance,MSR ready (compliant or resource allocated),MSR ready (compliant or resource allocated) (days)
-EAMozambiqueMDRM989,0,0,0,1,0,0,1.0,1.0,Achieved Early,-2
-EANigeriaMDRN777,0,0,0,1,0,0,1.0,1.0,Achieved Early,0
-EAPeruMDRO999,0,0,0,1,0,0,1.0,1.0,Achieved Early,-3
-EAMaldivesMDRM787,0,0,0,1,0,0,1.0,1.0,Achieved Early,-1
-EAJordanMDRJ000,0,0,0,0,1,0,1.0,0.5,Achieved Late,7
+EAVanuatuMDRVU012,0,1,0,0,0,0,1.0,0.0,NA,365
+EAUgandaMDRUG055,0,0,0,1,0,0,1.0,1.0,Achieved Early,-17
+EAMalawiMDRMW021,0,1,0,0,0,0,1.0,0.0,NA,365
+EAMozambiqueMDRMZ026,0,1,0,0,0,0,1.0,0.0,NA,365
+EAComorosMDRKM013,0,1,0,0,0,0,1.0,0.0,NA,365
+EAMadagascarMDRMG023,0,0,0,1,0,0,1.0,1.0,Achieved Early,0

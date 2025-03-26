@@ -1,6 +1,7 @@
 Ref,tracker Status,Trigger Date ,Region,Country,ISO,Appeal Code,Appeal Name ,Disaster Type ,Classification ,EWTS Varient ,Achieved,NA,Missing,Achieved Early,Achieved Late,DNU,Data Completeness,General Performance
-EAMozambiqueMDRM989,Not Active,2024-06-20,Africa,Mozambique,,MDRM989,Mozambique earthquake (MDRM989),Earthquake,Orange,Emergency Appeal,3,2,2,7,11,3,0.8214285714285714,0.6739130434782609
-EANigeriaMDRN777,Not Active,2024-07-15,Africa,Nigeria,,MDRN777,Nigeria population movement (MDRN777),Population Movement ,Red,Emergency Appeal,0,1,5,3,16,3,0.7142857142857143,0.55
-EAPeruMDRO999,Active,2024-08-11,Americas ,Peru,,MDRO999,Peru population movement (MDRO999),Population Movement ,Orange,Emergency Appeal,2,0,3,7,15,1,0.8571428571428571,0.6875
-EAMaldivesMDRM787,Active,2024-08-28,Asia,Maldives,,MDRM787,Maldives floods (MDRM787),Flood,Orange,Emergency Appeal,5,1,0,4,17,1,0.9642857142857143,0.6481481481481481
-EAJordanMDRJ000,Active,2024-09-01,MENA,Jordan,,MDRJ000,Jordan earthquake (MDRJ000),Earthquake,Red,Emergency Appeal,0,5,5,0,17,1,0.7857142857142857,0.38636363636363635
+EAVanuatuMDRVU012,Not Active,2024-12-17,Asia,Vanuatu,,MDRVU012,Vanuatu Earthquake (MDRVU012),Earthquake,Orange,Emergency Appeal,0,6,5,10,5,2,0.75,0.5952380952380952
+EAUgandaMDRUG055,Active,2025-02-17,Africa,Uganda,,MDRUG055,Uganda Ebola Outbreak (MDRUG055),Epidemic,Orange,Emergency Appeal,0,8,5,11,2,2,0.75,0.5714285714285714
+EAMalawiMDRMW021,Not Active,2024-12-15,Africa,Malawi,,MDRMW021,Malawi Cyclone chido (MDRMW021),Cyclone,Orange,Emergency Appeal,2,23,3,0,0,0,0.8928571428571429,0.08
+EAMozambiqueMDRMZ026,Not Active,2024-12-15,Africa,Mozambique,,MDRMZ026,Mozambique Cyclone Chido (MDRMZ026),Cyclone,Orange,Emergency Appeal,0,18,5,0,5,0,0.8214285714285714,0.10869565217391304
+EAComorosMDRKM013,Not Active,2024-12-15,Africa,Comoros,,MDRKM013,Comoros Cyclone Chido (MDRKM013),Cyclone,Orange,Emergency Appeal,0,15,5,0,7,1,0.7857142857142857,0.1590909090909091
+EAMadagascarMDRMG023,Not Active,2024-12-15,Africa,Madagascar,,MDRMG023,Madagascar Cyclone Chido (MDRMG023),Cyclone,Orange,Emergency Appeal,0,2,0,2,2,22,0.21428571428571427,0.5

@@ -22,21 +22,20 @@ def organize_ea(sheet):
     col_name = sheet.columns.tolist()
     sheet["Ref"] = "EA" + sheet[col_name[4]] + sheet[col_name[6]]
     disasters = sheet.loc[:, col_name[:11]]
-    operational_progresses = sheet.loc[:, [col_name[0]] + col_name[11:16] + col_name[28:32] + col_name[45:52] + col_name[76:]]
-    financial_progress = sheet.loc[:, [col_name[0]] + col_name[59:64]]
-    dashboard_progress = sheet.loc[:, [col_name[0]] + col_name[54:59]]
+    operational_progresses = sheet.loc[:, [col_name[0]] + col_name[11:16] + col_name[22:26] + col_name[38:45] + col_name[69:]]
+    financial_progress = sheet.loc[:, [col_name[0]] + col_name[52:57]]
+    dashboard_progress = sheet.loc[:, [col_name[0]] + col_name[47:52]]
     sec_coverage = sheet.loc[:, [col_name[0]] + col_name[15:21]]
-    fed_coverage = sheet.loc[:, [col_name[0]] + col_name[21:27]]
-    rrp = sheet.loc[:, [col_name[0]] + col_name[32:45]]
-    nfi = sheet.loc[:, [col_name[0]] + col_name[52:54] + col_name[64:67]]
-    operational_achievements = sheet.loc[:, [col_name[0]] + col_name[67:76]]
+    rrp = sheet.loc[:, [col_name[0]] + col_name[26:39]]
+    nfi = sheet.loc[:, [col_name[0]] + col_name[45:47] + col_name[57:60]]
+    operational_achievements = sheet.loc[:, [col_name[0]] + col_name[60:69]]
     
     sec_coverage = sec_coverage.replace('\n', ' ', regex=True)
     sec_coverage = sec_coverage.replace(' ', ' ', regex=True)
     disasters.to_csv("../organized_ea/general_info.csv", index=False)
 
     print("EA master data organized")
-    return {"disasters" : disasters.set_index("Ref"), "operational_progresses" : operational_progresses.set_index("Ref"), "financial_progress" : financial_progress.set_index("Ref"), "dashboard_progress" : dashboard_progress.set_index("Ref"), "sec_coverage" : sec_coverage.set_index("Ref"), "fed_coverage" : fed_coverage.set_index("Ref"), "rrp" : rrp.set_index("Ref"), "nfi" : nfi.set_index("Ref"), "operational_achievements" : operational_achievements.set_index("Ref")}
+    return {"disasters" : disasters.set_index("Ref"), "operational_progresses" : operational_progresses.set_index("Ref"), "financial_progress" : financial_progress.set_index("Ref"), "dashboard_progress" : dashboard_progress.set_index("Ref"), "sec_coverage" : sec_coverage.set_index("Ref"), "rrp" : rrp.set_index("Ref"), "nfi" : nfi.set_index("Ref"), "operational_achievements" : operational_achievements.set_index("Ref")}
 
 def organize_dref(sheet):
     col_name = sheet.columns.tolist()
@@ -53,7 +52,7 @@ def organize_dref(sheet):
 
 def organize_mcmr(sheet):
     col_name = sheet.columns.tolist()
-    sheet["Ref"] = "MCMR" + sheet[col_name[4]] + sheet[col_name[6]] 
+    sheet["Ref"] = "MCMR" + sheet[col_name[6]] 
     disasters = sheet.loc[:, col_name[:11]]
     operational_progresses = sheet.loc[:, [col_name[0]] + col_name[11:14] + col_name[20:22] + col_name[35:42]]
     total_coverage = sheet.loc[:, [col_name[0]] + col_name[14:20]]

@@ -84,13 +84,13 @@ def area_split_ea(overview, columns):
     msr_column = "MSR ready (compliant or resource allocated)"
     folder = "../organized_ea/"
     assessment = overview[full_list(columns[11])]
-    resource_mobilization = overview[full_list(columns[12:16] + [columns[28]])] # add EA coverage
-    surge = overview[full_list(columns[29:32])] # add % related values to the surge (rrp)
-    hr = overview[full_list(columns[45:47])] # add % related values to the hr (rrp)
-    coordination = overview[full_list(columns[47:51])] # missing joint statement in master data
-    logistics = overview[full_list(columns[51:54])]
-    im = overview[full_list_im(columns[54:59])]
-    finance = overview[full_list(columns[59:63])]
+    resource_mobilization = overview[full_list(columns[12:16] + [columns[22]])] # add EA coverage
+    surge = overview[full_list(columns[23:26])] # add % related values to the surge (rrp)
+    hr = overview[full_list(columns[38:40])] # add % related values to the hr (rrp)
+    coordination = overview[full_list(columns[40:44])] # missing joint statement in master data
+    logistics = overview[full_list(columns[44:47])]
+    im = overview[full_list_im(columns[47:52])]
+    finance = overview[full_list(columns[52:56])]
     security = overview[[msr_column, f"{msr_column} (days)"]]
 
     summarize_df(assessment).to_csv(f"{folder}assessment.csv", index=True)
@@ -174,24 +174,28 @@ def area_split_pcce(overview, columns):
     update_general_info(folder)
 
 def convert_date(date_str):
-    if date_str == "-" or pd.isna(date_str):
-        return "-"
-    if date_str == "DNU":
-        return "DNU"
-    if date_str == "NA":
-        return "NA"
-    return datetime.strptime(str(date_str)[:10], "%Y-%m-%d")
+    if date_str in ["-", "DNU", "NA"] or pd.isna(date_str):
+        return date_str
+
+    date_formats = ["%Y-%m-%d", "%d-%m-%Y", "%m-%d-%Y", "%m/%d/%Y", "%d/%m/%Y"]
+    
+    for fmt in date_formats:
+        try:
+            return datetime.strptime(str(date_str)[:10], fmt)
+        except:
+            continue
+    
+    return date_str
+
 
 def determine_status(row, limit):
     keys = row.index.tolist()
     r0, r1 = row.iloc[0], row.iloc[1]
-
-    if r1 == "-":    
+    if r1 == "-" or pd.isna(r1):
         deadline = r0 + pd.Timedelta(days=limit)
         if deadline > datetime.now():
             return pd.Series(["Missing", 365, "-"], index=[keys[1], f"{keys[1]} (days)", f"{keys[1]} date"]) 
         return pd.Series(["NA", 365, "-"], index=[keys[1], f"{keys[1]} (days)", f"{keys[1]} date"])
-    
     if r1 == "DNU":
         return pd.Series(["DNU", 365, "-"], index=[keys[1], f"{keys[1]} (days)", f"{keys[1]} date"])
     
@@ -234,6 +238,8 @@ def msr_ready(row ,limit):
 
 def process_ea(ea):
     op = ea["operational_progresses"].copy()
+    if op.empty:
+        return None
     dash = ea["dashboard_progress"].copy()
     fin = ea["financial_progress"].copy()
     nfi = ea["nfi"].copy()
@@ -281,7 +287,6 @@ def process_ea(ea):
     ea[key][[msr_column, f"{msr_column} (days)", f"{msr_column} date"]] = pd.merge(start_date, op[[on[16], on[17]]], left_index=True, right_index=True).apply(msr_ready, args=(7,), axis=1)
     ea[key][[nn[0], f"{nn[0]} (days)", f"{nn[0]} date"]] = pd.merge(start_date, nfi[nn[0]], left_index=True, right_index=True).apply(determine_status, args=(11,), axis=1)
     ea[key][[nn[1], f"{nn[1]} (days)", f"{nn[1]} date"]] = pd.merge(start_date, nfi[nn[1]], left_index=True, right_index=True).apply(determine_status, args=(14,), axis=1)
-    ea[key][[nn[2], f"{nn[2]} (days)", f"{nn[2]} date"]] = pd.merge(start_date, nfi[nn[2]], left_index=True, right_index=True).apply(determine_status, args=(28,), axis=1)
     ea[key][dn[0]] = dash[dn[0]].apply(lambda x: determine_done(x)[0])
     ea[key][f"{dn[0]} date"] = dash[dn[0]].apply(lambda x: determine_done(x)[1])
     ea[key][dn[1]] = dash[dn[1]].apply(lambda x: determine_done(x)[0])
@@ -292,7 +297,6 @@ def process_ea(ea):
     ea[key][f"{dn[3]} date"] = dash[dn[4]].apply(lambda x: determine_done(x)[1])
     ea[key][dn[4]] = dash[dn[4]].apply(lambda x: determine_done(x)[0])
     ea[key][f"{dn[4]} date"] = dash[dn[4]].apply(lambda x: determine_done(x)[1])
-
     ea[key][[fn[0], f"{fn[0]} (days)", f"{fn[0]} date"]] = pd.merge(start_date, fin[fn[0]], left_index=True, right_index=True).apply(determine_status, args=(11,), axis=1)
     ea[key][[fn[1], f"{fn[1]} (days)", f"{fn[1]} date"]] = pd.merge(start_date, fin[fn[1]], left_index=True, right_index=True).apply(determine_status, args=(14,), axis=1)
     ea[key][[fn[2], f"{fn[2]} (days)", f"{fn[2]} date"]] = pd.merge(start_date, fin[fn[2]], left_index=True, right_index=True).apply(determine_status, args=(16,), axis=1)
@@ -303,6 +307,9 @@ def process_ea(ea):
 
 def process_dref(dref):
     op = dref["operational_progresses"].copy()
+    
+    if op.empty:
+        return None
     fin = dref["financial_progress"].copy()
     key = "achievements"
     msr_column = "MSR ready (compliant or resource allocated)"
@@ -343,6 +350,9 @@ def process_dref(dref):
 
 def process_mcmr(mcmr):
     op = mcmr["operational_progresses"].copy()
+    
+    if op.empty:
+        return None
     fin = mcmr["financial_progress"].copy()
     key = "achievements"
 
@@ -381,6 +391,8 @@ def process_mcmr(mcmr):
 
 def process_pcce(pcce):
     op = pcce["operational_progresses"].copy()
+    if op.empty:
+        return None
     dash = pcce["dashboard"].copy()
     fin = pcce["financial_progress"].copy()
     key = "achievements"
@@ -449,13 +461,13 @@ def generate_overview(bucket, sheets):
 
     key = "achievements"
     for sheet_name, sheet in sheets.items():
-        if "EA" in sheet_name:
+        if "EA" in sheet_name and ea != None:
             area_split_ea(ea[key], sheet.columns.tolist())
-        elif "DREF" in sheet_name:
+        elif "DREF" in sheet_name and dref != None:
             area_split_dref(dref[key], sheet.columns.tolist())
-        elif "MCMR" in sheet_name:
+        elif "MCMR" in sheet_name and mcmr != None:
             area_split_mcmr(mcmr[key], sheet.columns.tolist())
-        elif "Protracted" in sheet_name:
+        elif "Protracted" in sheet_name and pcce != None:
             area_split_pcce(pcce[key], sheet.columns.tolist())
         else:
             continue
