@@ -1,5 +1,6 @@
 from datetime import datetime
 import pandas as pd
+from pyspark.sql.functions import to_date
 
 def organize_ea(sheet):
     col_name = sheet.columns.tolist()
@@ -115,17 +116,17 @@ def full_list_im(cols):
 
 def summarize_df(df):
     df = df.copy()
-    categories = ["Achieved", "NA", "Achieved Early", "Achieved Late", "DNU", "Missing"]
+    categories = ["Achieved", "Not Achieved", "Achieved Early", "Achieved Late", "DNU", "Missing"]
 
     for category in categories:
         df.loc[:, category] = df.apply(lambda x: sum(str(cell) == category for cell in x), axis=1)
     
-    df.loc[:, "Data Completeness"] = (df["Achieved"] + df["Achieved Early"] + df["Achieved Late"] + df["NA"]) / \
-                                    (df["Achieved"] + df["NA"] + df["Achieved Early"] + df["Achieved Late"] + df["Missing"] + df["DNU"])
+    df.loc[:, "Data Completeness"] = (df["Achieved"] + df["Achieved Early"] + df["Achieved Late"] + df["Not Achieved"]) / \
+                                    (df["Achieved"] + df["Not Achieved"] + df["Achieved Early"] + df["Achieved Late"] + df["Missing"] + df["DNU"])
     df.loc[:, "General Performance"] = (((df["Achieved"] + df["Achieved Early"]) * 2) + df["Achieved Late"]) / \
-                                    ((df["Achieved"] + df["NA"] + df["Achieved Early"] + df["Achieved Late"]) * 2)
+                                    ((df["Achieved"] + df["Not Achieved"] + df["Achieved Early"] + df["Achieved Late"] + df["Missing"]) * 2)
 
-    cols_to_move = ["Achieved", "NA", "Missing", "Achieved Early", "Achieved Late", "DNU", "Data Completeness", "General Performance"]
+    cols_to_move = ["Achieved", "Not Achieved", "Missing", "Achieved Early", "Achieved Late", "DNU", "Data Completeness", "General Performance"]
     df = df[cols_to_move + [col for col in df.columns if col not in cols_to_move]]
     return df
 
@@ -136,16 +137,16 @@ def update_general_info(folder, general):
     df.rename(columns={df.columns[1]: "Trigger Date"}, inplace=True)
     for name, temp in folder.items():
         df["Achieved"] = temp["Achieved"] if "Achieved" not in df.columns else df["Achieved"] + temp["Achieved"]
-        df["NA"] = temp["NA"] if "NA" not in df.columns else df["NA"] + temp["NA"]
+        df["Not Achieved"] = temp["Not Achieved"] if "Not Achieved" not in df.columns else df["Not Achieved"] + temp["Not Achieved"]
         df["Missing"] = temp["Missing"] if "Missing" not in df.columns else df["Missing"] + temp["Missing"]
         df["Achieved Early"] = temp["Achieved Early"] if "Achieved Early" not in df.columns else df["Achieved Early"] + temp["Achieved Early"]
         df["Achieved Late"] = temp["Achieved Late"] if "Achieved Late" not in df.columns else df["Achieved Late"] + temp["Achieved Late"]
         df["DNU"] = temp["DNU"] if "DNU" not in df.columns else df["DNU"] + temp["DNU"]
     
-    df.loc[:, "Data Completeness"] = (df["Achieved"] + df["Achieved Early"] + df["Achieved Late"] + df["NA"]) / \
-                                    (df["Achieved"] + df["NA"] + df["Achieved Early"] + df["Achieved Late"] + df["Missing"] + df["DNU"])
+    df.loc[:, "Data Completeness"] = (df["Achieved"] + df["Achieved Early"] + df["Achieved Late"] + df["Not Achieved"]) / \
+                                    (df["Achieved"] + df["Not Achieved"] + df["Achieved Early"] + df["Achieved Late"] + df["Missing"] + df["DNU"])
     df.loc[:, "General Performance"] = (((df["Achieved"] + df["Achieved Early"]) * 2) + df["Achieved Late"]) / \
-                                    ((df["Achieved"] + df["NA"] + df["Achieved Early"] + df["Achieved Late"]) * 2)
+                                    ((df["Achieved"] + df["Not Achieved"] + df["Achieved Early"] + df["Achieved Late"]) * 2)
 
     return df
 
@@ -168,17 +169,17 @@ def area_split_ea(overview, columns, general):
 
     areas = {}
     
-    areas["assessment"] = summarize_df(assessment)
-    areas["resource_mobilization"] = summarize_df(resource_mobilization)
-    areas["surge"] = summarize_df(surge)
-    areas["hr"] = summarize_df(hr)
-    areas["coordination"] = summarize_df(coordination)
-    areas["logistics"] = summarize_df(logistics)
-    areas["im"] = summarize_df(im)
-    areas["finance"] = summarize_df(finance)
-    areas["security"] = summarize_df(security)
+    areas["Assessment"] = summarize_df(assessment)
+    areas["Resource Mobilization"] = summarize_df(resource_mobilization)
+    areas["Surge"] = summarize_df(surge)
+    areas["HR"] = summarize_df(hr)
+    areas["Coordination"] = summarize_df(coordination)
+    areas["Logistics"] = summarize_df(logistics)
+    areas["Information Management"] = summarize_df(im)
+    areas["Finance"] = summarize_df(finance)
+    areas["Security"] = summarize_df(security)
     general_info = update_general_info(areas, general)
-    areas["general_information"] = general_info
+    areas["General Information"] = general_info
     return areas
 
 def area_split_dref(overview, columns, general):
@@ -195,16 +196,16 @@ def area_split_dref(overview, columns, general):
 
     areas = {}
     
-    areas["assessment"] = summarize_df(assessment)
-    areas["resource_mobilization"] = summarize_df(resource_mobilization)
-    areas["surge"] = summarize_df(surge)
-    areas["risk"] = summarize_df(risk)
-    areas["logistics"] = summarize_df(logistics)
-    areas["finance"] = summarize_df(finance)
-    areas["delivery"] = summarize_df(delivery) 
-    areas["security"] = summarize_df(security)
+    areas["Assessment"] = summarize_df(assessment)
+    areas["Resource Mobilization"] = summarize_df(resource_mobilization)
+    areas["Surge"] = summarize_df(surge)
+    areas["Risk"] = summarize_df(risk)
+    areas["Logistics"] = summarize_df(logistics)
+    areas["Finance"] = summarize_df(finance)
+    areas["Delivery"] = summarize_df(delivery) 
+    areas["Security"] = summarize_df(security)
     general_info = update_general_info(areas, general)
-    areas["general_information"] = general_info
+    areas["General Information"] = general_info
     return areas
 
 def area_split_mcmr(overview, columns, general):
@@ -218,15 +219,15 @@ def area_split_mcmr(overview, columns, general):
 
     areas = {}
     
-    areas["resource_mobilization"] = summarize_df(resource_mobilization)
-    areas["surge"] = summarize_df(surge)
-    areas["hr"] = summarize_df(hr)
-    areas["coordination"] = summarize_df(coordination)
-    areas["logistics"] = summarize_df(logistics)
-    areas["im"] = summarize_df(im)
-    areas["finance"] = summarize_df(finance)
+    areas["Resource Mobilization"] = summarize_df(resource_mobilization)
+    areas["Surge"] = summarize_df(surge)
+    areas["HR"] = summarize_df(hr)
+    areas["Coordination"] = summarize_df(coordination)
+    areas["Logistics"] = summarize_df(logistics)
+    areas["Information Management"] = summarize_df(im)
+    areas["Finance"] = summarize_df(finance)
     general_info = update_general_info(areas, general)
-    areas["general_information"] = general_info
+    areas["General Information"] = general_info
     return areas
 
 
@@ -246,17 +247,17 @@ def area_split_pcce(overview, columns, general):
 
     areas = {}
     
-    areas["assessment"] = summarize_df(assessment)
-    areas["resource_mobilization"] = summarize_df(resource_mobilization)
-    areas["surge"] = summarize_df(surge)
-    areas["hr"] = summarize_df(hr)
-    areas["coordination"] = summarize_df(coordination)
-    areas["logistics"] = summarize_df(logistics)
-    areas["im"] = summarize_df(im)
-    areas["finance"] = summarize_df(finance)
-    areas["security"] = summarize_df(security)
+    areas["Assessment"] = summarize_df(assessment)
+    areas["Resource Mobilization"] = summarize_df(resource_mobilization)
+    areas["Surge"] = summarize_df(surge)
+    areas["HR"] = summarize_df(hr)
+    areas["Coordination"] = summarize_df(coordination)
+    areas["Logistics"] = summarize_df(logistics)
+    areas["Information Management"] = summarize_df(im)
+    areas["Finance"] = summarize_df(finance)
+    areas["Security"] = summarize_df(security)
     general_info = update_general_info(areas, general)
-    areas["general_information"] = general_info
+    areas["General Information"] = general_info
     return areas
 
 
@@ -264,7 +265,7 @@ def area_split_pcce(overview, columns, general):
 
 
 def convert_date(date_str):
-    if date_str in ["-", "DNU", "NA"] or pd.isna(date_str):
+    if date_str in ["-", "DNU", "Not Achieved"] or pd.isna(date_str):
         return date_str
 
     date_formats = ["%Y-%m-%d", "%d-%m-%Y", "%m-%d-%Y", "%m/%d/%Y", "%d/%m/%Y"]
@@ -285,12 +286,12 @@ def determine_status(row, limit):
         deadline = r0 + pd.Timedelta(days=limit)
         if deadline > datetime.now():
             return pd.Series(["Missing", 365, "-"], index=[keys[1], f"{keys[1]} (days)", f"{keys[1]} date"]) 
-        return pd.Series(["NA", 365, "-"], index=[keys[1], f"{keys[1]} (days)", f"{keys[1]} date"])
+        return pd.Series(["Not Achieved", 365, "-"], index=[keys[1], f"{keys[1]} (days)", f"{keys[1]} date"])
     if r1 == "DNU":
         return pd.Series(["DNU", 365, "-"], index=[keys[1], f"{keys[1]} (days)", f"{keys[1]} date"])
     
-    if r1 == "NA":
-        return pd.Series(["NA", 365, "-"], index=[keys[1], f"{keys[1]} (days)", f"{keys[1]} date"])
+    if r1 == "Not Achieved":
+        return pd.Series(["Not Achieved", 365, "-"], index=[keys[1], f"{keys[1]} (days)", f"{keys[1]} date"])
     
     days = (r1 - r0).days
     delta = days - limit
@@ -304,8 +305,8 @@ def determine_done(row):
         return ["Missing", "-"]
     if row == "DNU":
         return ["DNU", "-"]
-    if row == "NA":
-        return ["NA", "-"]
+    if row == "Not Achieved":
+        return ["Not Achieved", "-"]
     return ["Achieved", row]
 
 def msr_ready(row ,limit):
@@ -313,11 +314,11 @@ def msr_ready(row ,limit):
     r0, r1, r2 = row.iloc[0], row.iloc[1], row.iloc[2]
     deadline = r0 + pd.Timedelta(days=limit)
 
-    if (pd.isna(r1) or r1 == "-" or r1 == "DNU" or r1 == "NA") and (pd.isna(r2) or r2 == "-" or r2 == "DNU" or r2 == "NA"):        
+    if (pd.isna(r1) or r1 == "-" or r1 == "DNU" or r1 == "Not Achieved") and (pd.isna(r2) or r2 == "-" or r2 == "DNU" or r2 == "Not Achieved"):        
         if deadline > datetime.now():
             return pd.Series(["Missing", 365, "-"], index=[msr_column, f"{msr_column} (days)", f"{msr_column} date"])
-        return pd.Series(["NA", 365, "-"], index=[msr_column, f"{msr_column} (days)", f"{msr_column} date"])
-    elif pd.isna(r1) or r1 == "-" or r1 == "DNU" or r1 == "NA":
+        return pd.Series(["Not Achieved", 365, "-"], index=[msr_column, f"{msr_column} (days)", f"{msr_column} date"])
+    elif pd.isna(r1) or r1 == "-" or r1 == "DNU" or r1 == "Not Achieved":
         days = (r2 - r0).days
         delta = days - limit
         return pd.Series(["Achieved Late" if days > limit else "Achieved Early", delta, r2], index=[msr_column, f"{msr_column} (days)", f"{msr_column} date"])
@@ -577,24 +578,27 @@ sheets["EA"] = spark.read.table("ea").toPandas()
 sheets["DREF"] = spark.read.table("dref").toPandas()
 sheets["MCMR"] = spark.read.table("mcmr").toPandas()
 sheets["Protracted"] = spark.read.table("pcce").toPandas()
-escalation = spark.read.table("escalation").toPandas()
+escalation = spark.read.table("escalation_events").toPandas()
 bucket = organize_sheets()
 area_split_dfs = generate_overview(bucket, sheets)
-general_df = pd.concat([i["general_information"] for _, i in area_split_dfs.items()])
+general_df = pd.concat([i["General Information"] for _, i in area_split_dfs.items()])
 general_df.reset_index(inplace=True)
 general_df = general_df[['Ref'] + [col for col in general_df.columns if col != 'Ref']]
 spark_general_info = spark.createDataFrame(general_df)
 spark_general_info = spark_general_info.toDF(*[c.replace(" ", "_") for c in spark_general_info.columns])
-spark_general_info.write.mode("overwrite").option("mergeSchema", "true").saveAsTable("general_info")
+spark_general_info = spark_general_info.withColumn("Trigger_Date", to_date("Trigger_Date", "M/d/yyyy"))
+spark_general_info.write.mode("overwrite").option("overwriteSchema", "true").format("delta").saveAsTable("master_data_processing.general_info")
 
 '''----------------------------------------------------------------------------------------------------------------------------------------------------------------------------'''
 
 def read_area_info_folder(dfs):
-    cols = ["Ref", "Area", "Achieved", "NA", "Missing", "Achieved Early", "Achieved Late", "DNU", "Data Completeness", "General Performance"]
+    cols = ["Ref", "Area", "Achieved", "Not Achieved", "Missing", "Achieved Early", "Achieved Late", "DNU", "Data Completeness", "General Performance"]
     df_list = []
+    print(cols)
     for key, df in dfs.items():
         df.reset_index(inplace=True)
         df["Area"] = key
+        print(key)
         df = df[cols]
         df_list.append(df)
     if len(df_list) == 0:
@@ -613,13 +617,6 @@ def area_info(area_split_dfs):
     
     return df_combined
 
-
-df_area_info = area_info(area_split_dfs)
-spark_area_info = spark.createDataFrame(df_area_info)
-spark_area_info = spark_area_info.toDF(*[c.replace(" ", "_") for c in spark_area_info.columns])
-spark_area_info.write.mode("overwrite").option("mergeSchema", "true").saveAsTable("area_info")
-
-
 '''----------------------------------------------------------------------------------------------------------------------------------------------------------------------------'''
 
 
@@ -628,13 +625,15 @@ def read_task_info(df, op, op_df, area):
     task_infos = []
     for index, row in df.iterrows():
         for a, b, c in zip(cols[::3], cols[1::3], cols[2::3]):
-            filtered_df = escalation[(escalation["Variant"] == op) & (escalation["Indicator"] == a)]
-            column_name = op_df["Appeal_Name_"][index]
-
-            if not filtered_df.empty and column_name in filtered_df.columns:
+            d = a.replace("_", " ")
+            filtered_df = escalation[(escalation["Variant"] == op.upper()) & (escalation["Indicator"] == d)]
+            column_name = op_df["Appeal_Name_"][index].split(" ")[:-1]
+            column_name = "_".join(column_name)
+            column_name = column_name + "__" +op_df["Appeal_Code"][index] + "_"
+            if not filtered_df.empty and (column_name in filtered_df.columns or f"EA_{column_name}" in filtered_df.columns):
                 escalated = filtered_df.loc[:, column_name].values[0]
             else:
-                escalated = None
+                escalated = "Not Escalated"
             if pd.notna(row[a]) and row[a] == "DNU":
                 delta = ""
             else:
@@ -643,7 +642,7 @@ def read_task_info(df, op, op_df, area):
                 "Ref" : row["Ref"],
                 "EWTS Varient" : op,
                 "Area" : area,
-                "Task" : a,
+                "Task" : d,
                 "Status" : row[a] if pd.notna(row[a]) else "Not Achieved",
                 "Completed" : str(row[c])[:10],
                 "Delta" : delta,
@@ -657,23 +656,25 @@ def read_im(df, op, op_df):
     task_infos = []
     for index, row in df.iterrows():
         for a, b in zip(cols[::2], cols[1::2]):
+            c = a.replace("_", " ")
             if op == "mcmr":
-                filtered_df = escalation[(escalation["Variant"] == op) & (escalation["Indicator"] == "A multi country dashboard is in place and updated timely to display the situation and the activities being implemented")]
+                filtered_df = escalation[(escalation["Variant"] == op.upper()) & (escalation["Indicator"] == "A multi country dashboard is in place and updated timely to display the situation and the activities being implemented")]
             else:
-                filtered_df = escalation[(escalation["Variant"] == op) & (escalation["Indicator"] == "A dashboard is in place and updated timely to display the situation and the activities being implemented")]
+                filtered_df = escalation[(escalation["Variant"] == op.upper()) & (escalation["Indicator"] == "A dashboard is in place and updated timely to display the situation and the activities being implemented")]
             
-            column_name = op_df["Appeal_Name_"][index]
-
-            if not filtered_df.empty and column_name in filtered_df.columns:
+            column_name = op_df["Appeal_Name_"][index].split(" ")[:-1]
+            column_name = "_".join(column_name)
+            column_name = column_name + "__" +op_df["Appeal_Code"][index] + "_"
+            if not filtered_df.empty and (column_name in filtered_df.columns or f"EA_{column_name}" in filtered_df.columns):
                 escalated = filtered_df.loc[:, column_name].values[0]
             else:
-                escalated = None
+                escalated = "Not Escalated"
             
             task_infos.append({
                 "Ref" : row["Ref"],
                 "EWTS Varient" : op,
-                "Area" : "information management",
-                "Task" : a,
+                "Area" : "Information Management",
+                "Task" : c,
                 "Status" : row[a] if pd.notna(row[a]) else "Not Achieved",
                 "Completed" : str(row[b])[:10],
                 "Delta" :"",
@@ -688,17 +689,17 @@ status_mapping = {
     "Achieved Late" : 1,
     "DNU" : 0,
     "Missing" : 0,
-    "NA" : 0,
+    "Not Achieved" : 0,
 }
 
 
 def areas_in_op(adf, op):
     task_infos = []
-    op_df = adf.get("general_information", pd.DataFrame())
+    op_df = adf.get("General Information", pd.DataFrame())
     for key, df in adf.items():
-        if key == "general_information":
+        if key == "General Information":
             continue
-        elif key == "im":
+        elif key == "Information Management":
             task_infos += read_im(df, op, op_df)
             continue
         task_infos += read_task_info(df, op, op_df, key)
@@ -719,11 +720,29 @@ def task_info_extraction(area_split_dfs):
     return df
 
 
+
+'''====================================================================================='''
+
+print(area_split_dfs)
+df_area_info = area_info(area_split_dfs)
+
+
 ti = task_info_extraction(area_split_dfs)
 spark_task_infos = spark.createDataFrame(ti)
 spark_task_infos = spark_task_infos.toDF(*[c.replace(" ", "_") for c in spark_task_infos.columns])
-spark_task_infos.write.mode("overwrite").option("mergeSchema", "true").saveAsTable("task_info")
+spark_task_infos.write.mode("overwrite").option("overwriteSchema", "true").format("delta").saveAsTable("master_data_processing.task_info")
+print(df_area_info.columns)
+df_area_info["General Performance"] = df_area_info["General Performance"].fillna(0)
+for i in df_area_info["General Performance"]:
+    print(i)
 
-
+spark_area_info = spark.createDataFrame(df_area_info)
+spark_area_info = spark_area_info.toDF(*[c.replace(" ", "_") for c in spark_area_info.columns])
+spark_area_info.write.mode("overwrite").option("overwriteSchema", "true").format("delta").saveAsTable("master_data_processing.area_info")
+# spark.sql("DROP TABLE IF EXISTS ea")
+# spark.sql("DROP TABLE IF EXISTS dref")
+# spark.sql("DROP TABLE IF EXISTS escalation_events")
+# spark.sql("DROP TABLE IF EXISTS mcmr")
+# spark.sql("DROP TABLE IF EXISTS pcce")
 
 
