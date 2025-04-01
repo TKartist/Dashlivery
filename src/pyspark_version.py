@@ -2,6 +2,9 @@ from datetime import datetime
 import pandas as pd
 from pyspark.sql.functions import to_date
 
+print("Starting...")
+
+
 def organize_ea(sheet):
     col_name = sheet.columns.tolist()
     sheet["Ref"] = "EA" + sheet[col_name[4]] + sheet[col_name[6]]
@@ -598,7 +601,9 @@ def read_area_info_folder(dfs):
     for key, df in dfs.items():
         df.reset_index(inplace=True)
         df["Area"] = key
-        print(key)
+        if key == "General Information":
+            print("got here")
+            continue
         df = df[cols]
         df_list.append(df)
     if len(df_list) == 0:
@@ -637,7 +642,10 @@ def read_task_info(df, op, op_df, area):
             if pd.notna(row[a]) and row[a] == "DNU":
                 delta = ""
             else:
-                delta = row[b] * -1
+                if row[b] == 365:
+                    delta = ""
+                else:
+                    delta = row[b] * -1
             task_infos.append({
                 "Ref" : row["Ref"],
                 "EWTS Varient" : op,
@@ -721,20 +729,20 @@ def task_info_extraction(area_split_dfs):
 
 
 
-'''====================================================================================='''
-
-print(area_split_dfs)
+print("Good")
+print("Hello")
 df_area_info = area_info(area_split_dfs)
-
+print("What")
+print("Hello")
 
 ti = task_info_extraction(area_split_dfs)
 spark_task_infos = spark.createDataFrame(ti)
 spark_task_infos = spark_task_infos.toDF(*[c.replace(" ", "_") for c in spark_task_infos.columns])
 spark_task_infos.write.mode("overwrite").option("overwriteSchema", "true").format("delta").saveAsTable("master_data_processing.task_info")
-print(df_area_info.columns)
 df_area_info["General Performance"] = df_area_info["General Performance"].fillna(0)
-for i in df_area_info["General Performance"]:
-    print(i)
+
+print("Hello")
+
 
 spark_area_info = spark.createDataFrame(df_area_info)
 spark_area_info = spark_area_info.toDF(*[c.replace(" ", "_") for c in spark_area_info.columns])
