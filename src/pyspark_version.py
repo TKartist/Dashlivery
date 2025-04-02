@@ -1,8 +1,8 @@
 from datetime import datetime
 import pandas as pd
 from pyspark.sql.functions import to_date
-
-print("Starting...")
+import warnings
+warnings.filterwarnings("ignore")
 
 
 def organize_ea(sheet):
@@ -76,24 +76,6 @@ def organize_sheets():
     return bucket
 
 
-'''
-Needed data for overview:
-- Disaster name
-- Country
-- Date
-- Operation type
-- Operation status
-- Operation budget
-- Achievements (late, early, not completed) -> for performance
-- Active operation count
-- Missing columns (to be filled) -> for data completeness
-'''
-
-# missing data if it the date is in the future
-# uncomplete IF it the due date has passed
-# Missing, Not Achieved, Achieved Early, Achieved Late, Achieved
-
-
 '''----------------------------------------------------------------------------------------------------------------------------------------------------------------------------'''
 
 
@@ -107,15 +89,6 @@ def full_list(cols):
         output.append(f"{col} date")
     return output
 
-
-def full_list_im(cols):
-    output = []
-    if not isinstance(cols, list):
-        cols = [cols]
-    for col in cols:
-        output.append(col)
-        output.append(f"{col} date")
-    return output
 
 def summarize_df(df):
     df = df.copy()
@@ -166,7 +139,7 @@ def area_split_ea(overview, columns, general):
     hr = overview[full_list(columns[38:40])] # add % related values to the hr (rrp)
     coordination = overview[full_list(columns[40:44])] # missing joint statement in master data
     logistics = overview[full_list(columns[44:47])]
-    im = overview[full_list_im(columns[47:52])]
+    im = overview[full_list(columns[47:52])]
     finance = overview[full_list(columns[52:56])]
     security = overview[[msr_column, f"{msr_column} (days)"]]
 
@@ -217,7 +190,7 @@ def area_split_mcmr(overview, columns, general):
     hr = overview[full_list(columns[35:37])] # add % related values to the hr (rrp)
     coordination = overview[full_list(columns[37])]
     logistics = overview[full_list(columns[38:41])]
-    im = overview[full_list_im(columns[41:42])]
+    im = overview[full_list(columns[41:42])]
     finance = overview[full_list(columns[42:44])]
 
     areas = {}
@@ -243,7 +216,7 @@ def area_split_pcce(overview, columns, general):
     hr = overview[full_list(columns[39:41])]
     coordination = overview[full_list(columns[41:44])]
     logistics = overview[full_list(columns[44:47])]
-    im = overview[full_list_im(columns[47:52])]
+    im = overview[full_list(columns[47:52])]
     finance = overview[full_list(columns[52:56])]
     # delivery = overview[full_list(columns[55:57])] # add percentage of targeted population receiving assistance and % of planned budget implementation
     security = overview[[msr_column, f"{msr_column} (days)"]]
@@ -300,17 +273,10 @@ def determine_status(row, limit):
     delta = days - limit
     if days > limit:
         return pd.Series(["Achieved Late", delta, r1], index=[keys[1], f"{keys[1]} (days)", f"{keys[1]} date"])
+    if delta == 0:
+        return pd.Series(["Achieved", delta, r1], index=[keys[1], f"{keys[1]} (days)", f"{keys[1]} date"])
 
     return pd.Series(["Achieved Early", delta, r1], index=[keys[1], f"{keys[1]} (days)", f"{keys[1]} date"])
-
-def determine_done(row):
-    if row == "-":
-        return ["Missing", "-"]
-    if row == "DNU":
-        return ["DNU", "-"]
-    if row == "Not Achieved":
-        return ["Not Achieved", "-"]
-    return ["Achieved", row]
 
 def msr_ready(row ,limit):
     msr_column = "MSR ready (compliant or resource allocated)"
@@ -366,8 +332,8 @@ def process_ea(ea):
     ea[key]["Ref"] = ea["disasters"].index
     ea[key].set_index("Ref", inplace=True)
     ea[key][[on[0], f"{on[0]} (days)", f"{on[0]} date"]] = pd.merge(start_date, op[on[0]], left_index=True, right_index=True).apply(determine_status, args=(3,), axis=1)
-    ea[key][[on[1], f"{on[1]} (days)", f"{on[1]} date"]] = pd.merge(start_date, op[on[1]], left_index=True, right_index=True).apply(determine_status, args=(0,), axis=1)
-    ea[key][[on[2], f"{on[2]} (days)", f"{on[2]} date"]] = pd.merge(start_date, op[on[2]], left_index=True, right_index=True).apply(determine_status, args=(3,), axis=1)
+    ea[key][[on[1], f"{on[1]} (days)", f"{on[1]} date"]] = pd.merge(start_date, op[on[1]], left_index=True, right_index=True).apply(determine_status, args=(3,), axis=1)
+    ea[key][[on[2], f"{on[2]} (days)", f"{on[2]} date"]] = pd.merge(start_date, op[on[2]], left_index=True, right_index=True).apply(determine_status, args=(0,), axis=1)
     ea[key][[on[3], f"{on[3]} (days)", f"{on[3]} date"]] = pd.merge(start_date, op[on[3]], left_index=True, right_index=True).apply(determine_status, args=(4,), axis=1)
     ea[key][[on[4], f"{on[4]} (days)", f"{on[4]} date"]] = pd.merge(start_date, op[on[4]], left_index=True, right_index=True).apply(determine_status, args=(11,), axis=1)
     ea[key][[on[5], f"{on[5]} (days)", f"{on[5]} date"]] = pd.merge(start_date, op[on[5]], left_index=True, right_index=True).apply(determine_status, args=(18,), axis=1)
@@ -384,16 +350,11 @@ def process_ea(ea):
     ea[key][[msr_column, f"{msr_column} (days)", f"{msr_column} date"]] = pd.merge(start_date, op[[on[16], on[17]]], left_index=True, right_index=True).apply(msr_ready, args=(7,), axis=1)
     ea[key][[nn[0], f"{nn[0]} (days)", f"{nn[0]} date"]] = pd.merge(start_date, nfi[nn[0]], left_index=True, right_index=True).apply(determine_status, args=(11,), axis=1)
     ea[key][[nn[1], f"{nn[1]} (days)", f"{nn[1]} date"]] = pd.merge(start_date, nfi[nn[1]], left_index=True, right_index=True).apply(determine_status, args=(14,), axis=1)
-    ea[key][dn[0]] = dash[dn[0]].apply(lambda x: determine_done(x)[0])
-    ea[key][f"{dn[0]} date"] = dash[dn[0]].apply(lambda x: determine_done(x)[1])
-    ea[key][dn[1]] = dash[dn[1]].apply(lambda x: determine_done(x)[0])
-    ea[key][f"{dn[1]} date"] = dash[dn[1]].apply(lambda x: determine_done(x)[1])
-    ea[key][dn[2]] = dash[dn[2]].apply(lambda x: determine_done(x)[0])
-    ea[key][f"{dn[2]} date"] = dash[dn[2]].apply(lambda x: determine_done(x)[1])
-    ea[key][dn[3]] = dash[dn[4]].apply(lambda x: determine_done(x)[0])
-    ea[key][f"{dn[3]} date"] = dash[dn[4]].apply(lambda x: determine_done(x)[1])
-    ea[key][dn[4]] = dash[dn[4]].apply(lambda x: determine_done(x)[0])
-    ea[key][f"{dn[4]} date"] = dash[dn[4]].apply(lambda x: determine_done(x)[1])
+    ea[key][[dn[0], f"{dn[0]} (days)", f"{dn[0]} date"]] = pd.merge(start_date, dash[dn[0]], left_index=True, right_index=True).apply(determine_status, args=(1,), axis=1)
+    ea[key][[dn[1], f"{dn[1]} (days)", f"{dn[1]} date"]] = pd.merge(start_date, dash[dn[1]], left_index=True, right_index=True).apply(determine_status, args=(3,), axis=1)
+    ea[key][[dn[2], f"{dn[2]} (days)", f"{dn[2]} date"]] = pd.merge(start_date, dash[dn[2]], left_index=True, right_index=True).apply(determine_status, args=(7,), axis=1)
+    ea[key][[dn[4], f"{dn[4]} (days)", f"{dn[4]} date"]] = pd.merge(start_date, dash[dn[4]], left_index=True, right_index=True).apply(determine_status, args=(30,), axis=1)
+    ea[key][[dn[3], f"{dn[3]} (days)", f"{dn[3]} date"]] = pd.merge(start_date, dash[dn[3]], left_index=True, right_index=True).apply(determine_status, args=(14,), axis=1)
     ea[key][[fn[0], f"{fn[0]} (days)", f"{fn[0]} date"]] = pd.merge(start_date, fin[fn[0]], left_index=True, right_index=True).apply(determine_status, args=(11,), axis=1)
     ea[key][[fn[1], f"{fn[1]} (days)", f"{fn[1]} date"]] = pd.merge(start_date, fin[fn[1]], left_index=True, right_index=True).apply(determine_status, args=(14,), axis=1)
     ea[key][[fn[2], f"{fn[2]} (days)", f"{fn[2]} date"]] = pd.merge(start_date, fin[fn[2]], left_index=True, right_index=True).apply(determine_status, args=(16,), axis=1)
@@ -478,8 +439,8 @@ def process_mcmr(mcmr):
     mcmr[key][[on[8], f"{on[8]} (days)", f"{on[8]} date"]] = pd.merge(start_date, op[on[8]], left_index=True, right_index=True).apply(determine_status, args=(11,), axis=1)
     mcmr[key][[on[9], f"{on[9]} (days)", f"{on[9]} date"]] = pd.merge(start_date, op[on[9]], left_index=True, right_index=True).apply(determine_status, args=(11,), axis=1)
     mcmr[key][[on[10], f"{on[10]} (days)", f"{on[10]} date"]] = pd.merge(start_date, op[on[10]], left_index=True, right_index=True).apply(determine_status, args=(14,), axis=1)
-    mcmr[key][on[11]] = op[on[0]].apply(lambda x: determine_done(x)[0])
-    mcmr[key][f"{on[11]} date"] = op[on[0]].apply(lambda x: determine_done(x)[1])
+    mcmr[key][[on[11], f"{on[11]} (days)", f"{on[11]} date"]] = pd.merge(start_date, op[on[11]], left_index=True, right_index=True).apply(determine_status, args=(1,), axis=1)
+
     mcmr[key][[fn[0], f"{fn[0]} (days)", f"{fn[0]} date"]] = pd.merge(start_date, fin[fn[0]], left_index=True, right_index=True).apply(determine_status, args=(9,), axis=1)
     mcmr[key][[fn[1], f"{fn[1]} (days)", f"{fn[1]} date"]] = pd.merge(start_date, fin[fn[1]], left_index=True, right_index=True).apply(determine_status, args=(14,), axis=1)
 
@@ -531,16 +492,12 @@ def process_pcce(pcce):
     pcce[key][[on[15], f"{on[15]} (days)", f"{on[15]} date"]] = pd.merge(start_date, op[on[15]], left_index=True, right_index=True).apply(determine_status, args=(14,), axis=1)
     pcce[key][[on[16], f"{on[16]} (days)", f"{on[16]} date"]] = pd.merge(start_date, op[on[16]], left_index=True, right_index=True).apply(determine_status, args=(28,), axis=1)
     pcce[key][[msr_column, f"{msr_column} (days)", f"{msr_column} date"]] = pd.merge(start_date, op[[on[17], on[18]]], left_index=True, right_index=True).apply(msr_ready, args=(7,), axis=1)
-    pcce[key][dn[0]] = dash[dn[0]].apply(lambda x: determine_done(x)[0])
-    pcce[key][f"{dn[0]} date"] = dash[dn[0]].apply(lambda x: determine_done(x)[1])
-    pcce[key][dn[1]] = dash[dn[1]].apply(lambda x: determine_done(x)[0])
-    pcce[key][f"{dn[1]} date"] = dash[dn[1]].apply(lambda x: determine_done(x)[1])
-    pcce[key][dn[2]] = dash[dn[2]].apply(lambda x: determine_done(x)[0])
-    pcce[key][f"{dn[2]} date"] = dash[dn[2]].apply(lambda x: determine_done(x)[1])
-    pcce[key][dn[3]] = dash[dn[3]].apply(lambda x: determine_done(x)[0])
-    pcce[key][f"{dn[3]} date"] = dash[dn[3]].apply(lambda x: determine_done(x)[1])
-    pcce[key][dn[4]] = dash[dn[4]].apply(lambda x: determine_done(x)[0])
-    pcce[key][f"{dn[4]} date"] = dash[dn[4]].apply(lambda x: determine_done(x)[1])
+    pcce[key][[dn[0], f"{dn[0]} (days)", f"{dn[0]} date"]] = pd.merge(start_date, dash[dn[0]], left_index=True, right_index=True).apply(determine_status, args=(1,), axis=1)
+    pcce[key][[dn[1], f"{dn[1]} (days)", f"{dn[1]} date"]] = pd.merge(start_date, dash[dn[1]], left_index=True, right_index=True).apply(determine_status, args=(3,), axis=1)
+    pcce[key][[dn[2], f"{dn[2]} (days)", f"{dn[2]} date"]] = pd.merge(start_date, dash[dn[2]], left_index=True, right_index=True).apply(determine_status, args=(7,), axis=1)
+    pcce[key][[dn[3], f"{dn[3]} (days)", f"{dn[3]} date"]] = pd.merge(start_date, dash[dn[3]], left_index=True, right_index=True).apply(determine_status, args=(14,), axis=1)
+    pcce[key][[dn[4], f"{dn[4]} (days)", f"{dn[4]} date"]] = pd.merge(start_date, dash[dn[4]], left_index=True, right_index=True).apply(determine_status, args=(30,), axis=1)
+
     pcce[key][[fn[0], f"{fn[0]} (days)", f"{fn[0]} date"]] = pd.merge(start_date, fin[fn[0]], left_index=True, right_index=True).apply(determine_status, args=(11,), axis=1)
     pcce[key][[fn[1], f"{fn[1]} (days)", f"{fn[1]} date"]] = pd.merge(start_date, fin[fn[1]], left_index=True, right_index=True).apply(determine_status, args=(14,), axis=1)
     pcce[key][[fn[2], f"{fn[2]} (days)", f"{fn[2]} date"]] = pd.merge(start_date, fin[fn[2]], left_index=True, right_index=True).apply(determine_status, args=(16,), axis=1)
@@ -572,8 +529,10 @@ def generate_overview(bucket, sheets):
             split_dict["PCCE"] = area_split_pcce(pcce[key], sheet.columns.tolist(), bucket["PCCE"]["disasters"])
         else:
             continue
-    return split_dict
+
     print("All complete")
+    
+    return split_dict
 
 
 sheets = {}
@@ -597,12 +556,10 @@ spark_general_info.write.mode("overwrite").option("overwriteSchema", "true").for
 def read_area_info_folder(dfs):
     cols = ["Ref", "Area", "Achieved", "Not Achieved", "Missing", "Achieved Early", "Achieved Late", "DNU", "Data Completeness", "General Performance"]
     df_list = []
-    print(cols)
     for key, df in dfs.items():
         df.reset_index(inplace=True)
         df["Area"] = key
         if key == "General Information":
-            print("got here")
             continue
         df = df[cols]
         df_list.append(df)
@@ -663,8 +620,7 @@ def read_im(df, op, op_df):
     cols = df.columns[9:].copy()
     task_infos = []
     for index, row in df.iterrows():
-        for a, b in zip(cols[::2], cols[1::2]):
-            c = a.replace("_", " ")
+        for a, b, c in zip(cols[::3], cols[1::3], cols[2::3]):
             if op == "mcmr":
                 filtered_df = escalation[(escalation["Variant"] == op.upper()) & (escalation["Indicator"] == "A multi country dashboard is in place and updated timely to display the situation and the activities being implemented")]
             else:
@@ -677,15 +633,21 @@ def read_im(df, op, op_df):
                 escalated = filtered_df.loc[:, column_name].values[0]
             else:
                 escalated = "Not Escalated"
-            
+            if pd.notna(row[a]) and row[a] == "DNU":
+                delta = ""
+            else:
+                if row[b] == 365:
+                    delta = ""
+                else:
+                    delta = row[b] * -1
             task_infos.append({
                 "Ref" : row["Ref"],
                 "EWTS Varient" : op,
                 "Area" : "Information Management",
-                "Task" : c,
+                "Task" : a,
                 "Status" : row[a] if pd.notna(row[a]) else "Not Achieved",
-                "Completed" : str(row[b])[:10],
-                "Delta" :"",
+                "Completed" : str(row[c])[:10],
+                "Delta" : delta,
                 "Escalated" : escalated,
             })
     return task_infos
@@ -729,19 +691,16 @@ def task_info_extraction(area_split_dfs):
 
 
 
-print("Good")
-print("Hello")
 df_area_info = area_info(area_split_dfs)
-print("What")
-print("Hello")
 
 ti = task_info_extraction(area_split_dfs)
+display(ti)
+
 spark_task_infos = spark.createDataFrame(ti)
 spark_task_infos = spark_task_infos.toDF(*[c.replace(" ", "_") for c in spark_task_infos.columns])
 spark_task_infos.write.mode("overwrite").option("overwriteSchema", "true").format("delta").saveAsTable("master_data_processing.task_info")
 df_area_info["General Performance"] = df_area_info["General Performance"].fillna(0)
 
-print("Hello")
 
 
 spark_area_info = spark.createDataFrame(df_area_info)
@@ -752,5 +711,3 @@ spark_area_info.write.mode("overwrite").option("overwriteSchema", "true").format
 # spark.sql("DROP TABLE IF EXISTS escalation_events")
 # spark.sql("DROP TABLE IF EXISTS mcmr")
 # spark.sql("DROP TABLE IF EXISTS pcce")
-
-
