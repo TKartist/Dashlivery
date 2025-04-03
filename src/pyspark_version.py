@@ -2,6 +2,7 @@ from datetime import datetime
 import pandas as pd
 from pyspark.sql.functions import to_date
 import warnings
+import numpy as np
 warnings.filterwarnings("ignore")
 
 
@@ -92,17 +93,19 @@ def full_list(cols):
 
 def summarize_df(df):
     df = df.copy()
-    categories = ["Achieved", "Not Achieved", "Achieved Early", "Achieved Late", "DNU", "Missing"]
+    categories = ["Achieved", "Not Achieved", "Achieved Early", "Achieved Late", "DNU", "Upcoming"]
 
     for category in categories:
         df.loc[:, category] = df.apply(lambda x: sum(str(cell) == category for cell in x), axis=1)
     
-    df.loc[:, "Data Completeness"] = (df["Achieved"] + df["Achieved Early"] + df["Achieved Late"] + df["Not Achieved"]) / \
-                                    (df["Achieved"] + df["Not Achieved"] + df["Achieved Early"] + df["Achieved Late"] + df["Missing"] + df["DNU"])
-    df.loc[:, "General Performance"] = (((df["Achieved"] + df["Achieved Early"]) * 2) + df["Achieved Late"]) / \
-                                    ((df["Achieved"] + df["Not Achieved"] + df["Achieved Early"] + df["Achieved Late"] + df["Missing"]) * 2)
+    df.loc[:, "Data Completeness"] = (df["Achieved"] + df["Achieved Early"] + df["Achieved Late"]) / \
+                                    (df["Achieved"] + df["Not Achieved"] + df["Achieved Early"] + df["Achieved Late"] + df["Upcoming"])
+    numerator = ((df["Achieved"] + df["Achieved Early"]) * 2) + df["Achieved Late"]
+    denominator = (df["Achieved"] + df["Not Achieved"] + df["Achieved Early"] + df["Achieved Late"]) * 2
 
-    cols_to_move = ["Achieved", "Not Achieved", "Missing", "Achieved Early", "Achieved Late", "DNU", "Data Completeness", "General Performance"]
+    df["General Performance"] = np.where(denominator != 0, numerator / denominator, 0)
+
+    cols_to_move = ["Achieved", "Not Achieved", "Upcoming", "Achieved Early", "Achieved Late", "DNU", "Data Completeness", "General Performance"]
     df = df[cols_to_move + [col for col in df.columns if col not in cols_to_move]]
     return df
 
@@ -114,15 +117,17 @@ def update_general_info(folder, general):
     for name, temp in folder.items():
         df["Achieved"] = temp["Achieved"] if "Achieved" not in df.columns else df["Achieved"] + temp["Achieved"]
         df["Not Achieved"] = temp["Not Achieved"] if "Not Achieved" not in df.columns else df["Not Achieved"] + temp["Not Achieved"]
-        df["Missing"] = temp["Missing"] if "Missing" not in df.columns else df["Missing"] + temp["Missing"]
+        df["Upcoming"] = temp["Upcoming"] if "Upcoming" not in df.columns else df["Upcoming"] + temp["Upcoming"]
         df["Achieved Early"] = temp["Achieved Early"] if "Achieved Early" not in df.columns else df["Achieved Early"] + temp["Achieved Early"]
         df["Achieved Late"] = temp["Achieved Late"] if "Achieved Late" not in df.columns else df["Achieved Late"] + temp["Achieved Late"]
         df["DNU"] = temp["DNU"] if "DNU" not in df.columns else df["DNU"] + temp["DNU"]
     
-    df.loc[:, "Data Completeness"] = (df["Achieved"] + df["Achieved Early"] + df["Achieved Late"] + df["Not Achieved"]) / \
-                                    (df["Achieved"] + df["Not Achieved"] + df["Achieved Early"] + df["Achieved Late"] + df["Missing"] + df["DNU"])
-    df.loc[:, "General Performance"] = (((df["Achieved"] + df["Achieved Early"]) * 2) + df["Achieved Late"]) / \
-                                    ((df["Achieved"] + df["Not Achieved"] + df["Achieved Early"] + df["Achieved Late"]) * 2)
+    df.loc[:, "Data Completeness"] = (df["Achieved"] + df["Achieved Early"] + df["Achieved Late"]) / \
+                                    (df["Achieved"] + df["Not Achieved"] + df["Achieved Early"] + df["Achieved Late"] + df["Upcoming"])
+    numerator = ((df["Achieved"] + df["Achieved Early"]) * 2) + df["Achieved Late"]
+    denominator = (df["Achieved"] + df["Not Achieved"] + df["Achieved Early"] + df["Achieved Late"]) * 2
+
+    df["General Performance"] = np.where(denominator != 0, numerator / denominator, 0)
 
     return df
 
@@ -137,7 +142,7 @@ def area_split_ea(overview, columns, general):
     resource_mobilization = overview[full_list(columns[12:16] + [columns[22]])] # add EA coverage
     surge = overview[full_list(columns[23:26])] # add % related values to the surge (rrp)
     hr = overview[full_list(columns[38:40])] # add % related values to the hr (rrp)
-    coordination = overview[full_list(columns[40:44])] # missing joint statement in master data
+    coordination = overview[full_list(columns[40:44])] # Upcoming joint statement in master data
     logistics = overview[full_list(columns[44:47])]
     im = overview[full_list(columns[47:52])]
     finance = overview[full_list(columns[52:56])]
@@ -261,7 +266,7 @@ def determine_status(row, limit):
     if r1 == "-" or pd.isna(r1):
         deadline = r0 + pd.Timedelta(days=limit)
         if deadline > datetime.now():
-            return pd.Series(["Missing", 365, "-"], index=[keys[1], f"{keys[1]} (days)", f"{keys[1]} date"]) 
+            return pd.Series(["Upcoming", 365, "-"], index=[keys[1], f"{keys[1]} (days)", f"{keys[1]} date"]) 
         return pd.Series(["Not Achieved", 365, "-"], index=[keys[1], f"{keys[1]} (days)", f"{keys[1]} date"])
     if r1 == "DNU":
         return pd.Series(["DNU", 365, "-"], index=[keys[1], f"{keys[1]} (days)", f"{keys[1]} date"])
@@ -285,7 +290,7 @@ def msr_ready(row ,limit):
 
     if (pd.isna(r1) or r1 == "-" or r1 == "DNU" or r1 == "Not Achieved") and (pd.isna(r2) or r2 == "-" or r2 == "DNU" or r2 == "Not Achieved"):        
         if deadline > datetime.now():
-            return pd.Series(["Missing", 365, "-"], index=[msr_column, f"{msr_column} (days)", f"{msr_column} date"])
+            return pd.Series(["Upcoming", 365, "-"], index=[msr_column, f"{msr_column} (days)", f"{msr_column} date"])
         return pd.Series(["Not Achieved", 365, "-"], index=[msr_column, f"{msr_column} (days)", f"{msr_column} date"])
     elif pd.isna(r1) or r1 == "-" or r1 == "DNU" or r1 == "Not Achieved":
         days = (r2 - r0).days
@@ -554,7 +559,7 @@ spark_general_info.write.mode("overwrite").option("overwriteSchema", "true").for
 '''----------------------------------------------------------------------------------------------------------------------------------------------------------------------------'''
 
 def read_area_info_folder(dfs):
-    cols = ["Ref", "Area", "Achieved", "Not Achieved", "Missing", "Achieved Early", "Achieved Late", "DNU", "Data Completeness", "General Performance"]
+    cols = ["Ref", "Area", "Achieved", "Not Achieved", "Upcoming", "Achieved Early", "Achieved Late", "DNU", "Data Completeness", "General Performance"]
     df_list = []
     for key, df in dfs.items():
         df.reset_index(inplace=True)
@@ -658,7 +663,7 @@ status_mapping = {
     "Achieved Early" : 2,
     "Achieved Late" : 1,
     "DNU" : 0,
-    "Missing" : 0,
+    "Upcoming" : 0,
     "Not Achieved" : 0,
 }
 
@@ -694,7 +699,6 @@ def task_info_extraction(area_split_dfs):
 df_area_info = area_info(area_split_dfs)
 
 ti = task_info_extraction(area_split_dfs)
-display(ti)
 
 spark_task_infos = spark.createDataFrame(ti)
 spark_task_infos = spark_task_infos.toDF(*[c.replace(" ", "_") for c in spark_task_infos.columns])
@@ -706,6 +710,7 @@ df_area_info["General Performance"] = df_area_info["General Performance"].fillna
 spark_area_info = spark.createDataFrame(df_area_info)
 spark_area_info = spark_area_info.toDF(*[c.replace(" ", "_") for c in spark_area_info.columns])
 spark_area_info.write.mode("overwrite").option("overwriteSchema", "true").format("delta").saveAsTable("master_data_processing.area_info")
+print(datetime.now())
 # spark.sql("DROP TABLE IF EXISTS ea")
 # spark.sql("DROP TABLE IF EXISTS dref")
 # spark.sql("DROP TABLE IF EXISTS escalation_events")
