@@ -146,6 +146,7 @@ def area_split_ea(overview, columns, general):
     logistics = overview[full_list(columns[44:47])]
     im = overview[full_list(columns[47:52])]
     finance = overview[full_list(columns[52:56])]
+    program_delivery = overview[full_list(columns[56:58])]
     security = overview[[msr_column, f"{msr_column} (days)"]]
 
     areas = {}
@@ -161,6 +162,7 @@ def area_split_ea(overview, columns, general):
     areas["Security"] = summarize_df(security)
     general_info = update_general_info(areas, general)
     areas["General Information"] = general_info
+    areas["Program Delivery"] = summarize_df(program_delivery)
     return areas
 
 def area_split_dref(overview, columns, general):
@@ -355,6 +357,8 @@ def process_ea(ea):
     ea[key][[msr_column, f"{msr_column} (days)", f"{msr_column} date"]] = pd.merge(start_date, op[[on[16], on[17]]], left_index=True, right_index=True).apply(msr_ready, args=(7,), axis=1)
     ea[key][[nn[0], f"{nn[0]} (days)", f"{nn[0]} date"]] = pd.merge(start_date, nfi[nn[0]], left_index=True, right_index=True).apply(determine_status, args=(11,), axis=1)
     ea[key][[nn[1], f"{nn[1]} (days)", f"{nn[1]} date"]] = pd.merge(start_date, nfi[nn[1]], left_index=True, right_index=True).apply(determine_status, args=(14,), axis=1)
+    ea[key][[nn[2], f"{nn[2]} (days)", f"{nn[2]} date"]] = pd.merge(start_date, nfi[nn[2]], left_index=True, right_index=True).apply(determine_status, args=(14,), axis=1)
+    
     ea[key][[dn[0], f"{dn[0]} (days)", f"{dn[0]} date"]] = pd.merge(start_date, dash[dn[0]], left_index=True, right_index=True).apply(determine_status, args=(1,), axis=1)
     ea[key][[dn[1], f"{dn[1]} (days)", f"{dn[1]} date"]] = pd.merge(start_date, dash[dn[1]], left_index=True, right_index=True).apply(determine_status, args=(3,), axis=1)
     ea[key][[dn[2], f"{dn[2]} (days)", f"{dn[2]} date"]] = pd.merge(start_date, dash[dn[2]], left_index=True, right_index=True).apply(determine_status, args=(7,), axis=1)
@@ -649,7 +653,7 @@ def read_im(df, op, op_df):
                 "Ref" : row["Ref"],
                 "EWTS Varient" : op,
                 "Area" : "Information Management",
-                "Task" : a,
+                "Task" : a.replace("_", " "),
                 "Status" : row[a] if pd.notna(row[a]) else "Not Achieved",
                 "Completed" : str(row[c])[:10],
                 "Delta" : delta,
@@ -705,7 +709,7 @@ spark_task_infos = spark_task_infos.toDF(*[c.replace(" ", "_") for c in spark_ta
 spark_task_infos.write.mode("overwrite").option("overwriteSchema", "true").format("delta").saveAsTable("master_data_processing.task_info")
 df_area_info["General Performance"] = df_area_info["General Performance"].fillna(0)
 
-
+display(ti)
 
 spark_area_info = spark.createDataFrame(df_area_info)
 spark_area_info = spark_area_info.toDF(*[c.replace(" ", "_") for c in spark_area_info.columns])
