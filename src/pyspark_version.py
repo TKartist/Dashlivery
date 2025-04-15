@@ -26,6 +26,9 @@ def organize_ea(sheet):
 
 def organize_dref(sheet):
     col_name = sheet.columns.tolist()
+    for col in col_name:
+        sheet = sheet.rename(columns={col:col.replace(" ", "_")})
+    col_name = sheet.columns.tolist()
     sheet["Ref"] = "DREF" + sheet[col_name[4]] + sheet[col_name[6]]
     disasters = sheet.loc[:, col_name[:11]]
     operational_progresses = sheet.loc[:, [col_name[0]] + col_name[11:19] + col_name[32:34] + col_name[51:53]]
@@ -99,7 +102,7 @@ def summarize_df(df):
         df.loc[:, category] = df.apply(lambda x: sum(str(cell) == category for cell in x), axis=1)
     
     df.loc[:, "Data Completeness"] = (df["Achieved"] + df["Achieved Early"] + df["Achieved Late"]) / \
-                                    (df["Achieved"] + df["Not Achieved"] + df["Achieved Early"] + df["Achieved Late"] + df["Upcoming"])
+                                    (df["Achieved"] + df["Not Achieved"] + df["Achieved Early"] + df["Achieved Late"])
     numerator = ((df["Achieved"] + df["Achieved Early"]) * 2) + df["Achieved Late"]
     denominator = (df["Achieved"] + df["Not Achieved"] + df["Achieved Early"] + df["Achieved Late"]) * 2
 
@@ -123,7 +126,7 @@ def update_general_info(folder, general):
         df["DNU"] = temp["DNU"] if "DNU" not in df.columns else df["DNU"] + temp["DNU"]
     
     df.loc[:, "Data Completeness"] = (df["Achieved"] + df["Achieved Early"] + df["Achieved Late"]) / \
-                                    (df["Achieved"] + df["Not Achieved"] + df["Achieved Early"] + df["Achieved Late"] + df["Upcoming"])
+                                    (df["Achieved"] + df["Not Achieved"] + df["Achieved Early"] + df["Achieved Late"])
     numerator = ((df["Achieved"] + df["Achieved Early"]) * 2) + df["Achieved Late"]
     denominator = (df["Achieved"] + df["Not Achieved"] + df["Achieved Early"] + df["Achieved Late"]) * 2
 
@@ -380,7 +383,7 @@ def process_dref(dref):
     fin = dref["financial_progress"].copy()
     key = "achievements"
     msr_column = "MSR ready (compliant or resource allocated)"
-
+    print(dref["disasters"])
     dref[key] = pd.DataFrame()
     start_date = dref["disasters"]["Trigger_Date_"].apply(convert_date)
 
@@ -547,6 +550,10 @@ def generate_overview(bucket, sheets):
 sheets = {}
 sheets["EA"] = spark.read.table("ea").toPandas()
 sheets["DREF"] = spark.read.table("dref").toPandas()
+dref_cols = sheets["DREF"].columns
+for col in dref_cols:
+    new_col = col.replace(" ", "_")
+    sheets["DREF"] = sheets["DREF"].rename(columns={col:new_col})
 sheets["MCMR"] = spark.read.table("mcmr").toPandas()
 sheets["Protracted"] = spark.read.table("pcce").toPandas()
 escalation = spark.read.table("escalation_events").toPandas()
@@ -554,7 +561,7 @@ bucket = organize_sheets()
 area_split_dfs = generate_overview(bucket, sheets)
 general_df = pd.concat([i["General Information"] for _, i in area_split_dfs.items()])
 general_df.reset_index(inplace=True)
-general_df = general_df[['Ref'] + [col for col in general_df.columns if col != 'Ref']]
+general_df = general_df[['Ref'] + [col for col in general_df.columns[:19] if col != 'Ref']]
 spark_general_info = spark.createDataFrame(general_df)
 spark_general_info = spark_general_info.toDF(*[c.replace(" ", "_") for c in spark_general_info.columns])
 spark_general_info = spark_general_info.withColumn("Trigger_Date", to_date("Trigger_Date", "M/d/yyyy"))
@@ -675,6 +682,11 @@ status_mapping = {
 def areas_in_op(adf, op):
     task_infos = []
     op_df = adf.get("General Information", pd.DataFrame())
+    op_df = op_df[op_df.columns[:18]]
+    if "Appeal_Name_" not in op_df.columns:
+        op_df = op_df.rename(columns={"Appeal Name_": "Appeal_Name_", "Appeal Code":"Appeal_Code"})
+    print(op_df)
+    
     for key, df in adf.items():
         if key == "General Information":
             continue
@@ -714,9 +726,3 @@ display(ti)
 spark_area_info = spark.createDataFrame(df_area_info)
 spark_area_info = spark_area_info.toDF(*[c.replace(" ", "_") for c in spark_area_info.columns])
 spark_area_info.write.mode("overwrite").option("overwriteSchema", "true").format("delta").saveAsTable("master_data_processing.area_info")
-print(datetime.now())
-# spark.sql("DROP TABLE IF EXISTS ea")
-# spark.sql("DROP TABLE IF EXISTS dref")
-# spark.sql("DROP TABLE IF EXISTS escalation_events")
-# spark.sql("DROP TABLE IF EXISTS mcmr")
-# spark.sql("DROP TABLE IF EXISTS pcce")
