@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, date
 import pandas as pd
 from pyspark.sql.functions import to_date
 import warnings
@@ -10,7 +10,7 @@ def organize_ea(sheet):
     col_name = sheet.columns.tolist()
     sheet["Ref"] = "EA" + sheet[col_name[4]] + sheet[col_name[6]]
     disasters = sheet.loc[:, col_name[:11]]
-    operational_progresses = sheet.loc[:, [col_name[0]] + col_name[11:16] + col_name[22:26] + col_name[38:45] + col_name[69:]]
+    operational_progresses = sheet.loc[:, [col_name[0]] + col_name[11:16] + col_name[22:26] + col_name[38:45] + col_name[69:72]]
     financial_progress = sheet.loc[:, [col_name[0]] + col_name[52:57]]
     dashboard_progress = sheet.loc[:, [col_name[0]] + col_name[47:52]]
     sec_coverage = sheet.loc[:, [col_name[0]] + col_name[15:21]]
@@ -26,12 +26,9 @@ def organize_ea(sheet):
 
 def organize_dref(sheet):
     col_name = sheet.columns.tolist()
-    for col in col_name:
-        sheet = sheet.rename(columns={col:col.replace(" ", "_")})
-    col_name = sheet.columns.tolist()
     sheet["Ref"] = "DREF" + sheet[col_name[4]] + sheet[col_name[6]]
     disasters = sheet.loc[:, col_name[:11]]
-    operational_progresses = sheet.loc[:, [col_name[0]] + col_name[11:19] + col_name[32:34] + col_name[51:53]]
+    operational_progresses = sheet.loc[:, [col_name[0]] + col_name[11:19] + col_name[32:34] + col_name[51:54]]
     rrp = sheet.loc[:, [col_name[0]] + col_name[19:32]]
     financial_progress = sheet.loc[:, [col_name[0]] + col_name[34:41]]
     operational_achievements = sheet.loc[:, [col_name[0]] + col_name[41:51]]
@@ -59,7 +56,7 @@ def organize_protracted(sheet):
     col_name = sheet.columns.tolist()
     sheet["Ref"] = "PCCE" + sheet[col_name[4]] + sheet[col_name[6]]
     disasters = sheet.loc[:, col_name[:11]]
-    operational_progresses = sheet.loc[:, [col_name[0]] + col_name[11:15] + col_name[21:25] + col_name[39:47] + col_name[57:58] + col_name[60:62]]
+    operational_progresses = sheet.loc[:, [col_name[0]] + col_name[11:15] + col_name[21:25] + col_name[39:47] + col_name[57:58] + col_name[60:63]]
     coverage = sheet.loc[:, [col_name[0]] + col_name[15:21]]
     rrp = sheet.loc[:, [col_name[0]] + col_name[25:39]]
     dashboard = sheet.loc[:, [col_name[0]] + col_name[47:52]]
@@ -102,10 +99,11 @@ def summarize_df(df):
     for category in categories:
         df.loc[:, category] = df.apply(lambda x: sum(str(cell) == category for cell in x), axis=1)
     
-    df.loc[:, "Data Completeness"] = (df["Achieved"] + df["Achieved Early"] + df["Achieved Late"]) / \
-                                    (df["Achieved"] + df["Not Achieved"] + df["Achieved Early"] + df["Achieved Late"])
-    numerator = ((df["Achieved"] + df["Achieved Early"]) * 2) + df["Achieved Late"]
-    denominator = (df["Achieved"] + df["Not Achieved"] + df["Achieved Early"] + df["Achieved Late"]) * 2
+    dc_num = df["Achieved"] + df["Achieved Early"] + df["Achieved Late"]
+    dc_den = df["Achieved"] + df["Not Achieved"] + df["Achieved Early"] + df["Achieved Late"]
+    df["Data Completeness"] = np.where(dc_den != 0, dc_num / dc_den, 1)
+    numerator = df["Achieved"] * 3 + df["Achieved Early"] * 4 + df["Achieved Late"] * 2
+    denominator = (df["Achieved"] + df["Not Achieved"] + df["Achieved Early"] + df["Achieved Late"]) * 4
 
     df["General Performance"] = np.where(denominator != 0, numerator / denominator, 0)
 
@@ -126,10 +124,11 @@ def update_general_info(folder, general):
         df["Achieved Late"] = temp["Achieved Late"] if "Achieved Late" not in df.columns else df["Achieved Late"] + temp["Achieved Late"]
         df["DNU"] = temp["DNU"] if "DNU" not in df.columns else df["DNU"] + temp["DNU"]
     
-    df.loc[:, "Data Completeness"] = (df["Achieved"] + df["Achieved Early"] + df["Achieved Late"]) / \
-                                    (df["Achieved"] + df["Not Achieved"] + df["Achieved Early"] + df["Achieved Late"])
-    numerator = ((df["Achieved"] + df["Achieved Early"]) * 2) + df["Achieved Late"]
-    denominator = (df["Achieved"] + df["Not Achieved"] + df["Achieved Early"] + df["Achieved Late"]) * 2
+    dc_num = df["Achieved"] + df["Achieved Early"] + df["Achieved Late"]
+    dc_den = df["Achieved"] + df["Not Achieved"] + df["Achieved Early"] + df["Achieved Late"]
+    df["Data Completeness"] = np.where(dc_den != 0, dc_num / dc_den, 1)
+    numerator = df["Achieved"] * 3 + df["Achieved Early"] * 4 + df["Achieved Late"] * 2
+    denominator = (df["Achieved"] + df["Not Achieved"] + df["Achieved Early"] + df["Achieved Late"]) * 4
 
     df["General Performance"] = np.where(denominator != 0, numerator / denominator, 0)
 
@@ -143,7 +142,7 @@ def update_general_info(folder, general):
 def area_split_ea(overview, columns, general):
     msr_column = "MSR ready (compliant or resource allocated)"
     assessment = overview[full_list(columns[11])]
-    resource_mobilization = overview[full_list(columns[12:16] + [columns[22]])] # add EA coverage
+    resource_mobilization = overview[full_list(columns[12:16] + [columns[22]] + [columns[71]])] # add EA coverage
     surge = overview[full_list(columns[23:26])] # add % related values to the surge (rrp)
     hr = overview[full_list(columns[38:40])] # add % related values to the hr (rrp)
     coordination = overview[full_list(columns[40:44])] # Upcoming joint statement in master data
@@ -171,10 +170,9 @@ def area_split_ea(overview, columns, general):
 
 def area_split_dref(overview, columns, general):
     msr_column = "MSR ready (compliant or resource allocated)"
-
     assessment = overview[full_list(columns[11])]
     risk = overview[full_list(columns[12:14])]
-    resource_mobilization = overview[full_list(columns[14:16])]
+    resource_mobilization = overview[full_list(columns[14:16] + [columns[53]])]
     surge = overview[full_list(columns[16:19])]
     logistics = overview[full_list(columns[32:34])]
     finance = overview[full_list(columns[34:38])]
@@ -222,7 +220,7 @@ def area_split_pcce(overview, columns, general):
     msr_column = "MSR ready (compliant or resource allocated)"
 
     assessment = overview[columns[11:12]]
-    resource_mobilization = overview[full_list(columns[12:15] + [columns[21]])]
+    resource_mobilization = overview[full_list(columns[12:15] + [columns[21]] + [columns[62]])]
     surge = overview[full_list(columns[22:25])]
     hr = overview[full_list(columns[39:41])]
     coordination = overview[full_list(columns[41:44])]
@@ -269,7 +267,7 @@ def convert_date(date_str):
 def determine_status(row, limit):
     keys = row.index.tolist()
     r0, r1 = row.iloc[0], row.iloc[1]
-    expected_date = r0 + pd.Timedelta(limit)
+    expected_date = r0 + pd.Timedelta(days=limit)
     if r1 == "-" or pd.isna(r1):
         deadline = r0 + pd.Timedelta(days=limit)
         if deadline > datetime.now():
@@ -350,6 +348,7 @@ def process_ea(ea):
     for i in range(16):
         ea[key][[on[i], f"{on[i]} (days)", f"{on[i]} date", f"{on[i]} expected date"]] = pd.merge(start_date, op[on[i]], left_index=True, right_index=True).apply(determine_status, args=(deltas[i],), axis=1)
     
+    ea[key][[on[18], f"{on[18]} (days)", f"{on[18]} date", f"{on[18]} expected date"]] = pd.merge(start_date, op[on[18]], left_index=True, right_index=True).apply(determine_status, args=(6,), axis=1)
     ea[key][[msr_column, f"{msr_column} (days)", f"{msr_column} date", f"{msr_column} expected date"]] = pd.merge(start_date, op[[on[16], on[17]]], left_index=True, right_index=True).apply(msr_ready, args=(7,), axis=1)
     ea[key][[nn[0], f"{nn[0]} (days)", f"{nn[0]} date", f"{nn[0]} expected date"]] = pd.merge(start_date, nfi[nn[0]], left_index=True, right_index=True).apply(determine_status, args=(11,), axis=1)
     ea[key][[nn[1], f"{nn[1]} (days)", f"{nn[1]} date", f"{nn[1]} expected date"]] = pd.merge(start_date, nfi[nn[1]], left_index=True, right_index=True).apply(determine_status, args=(14,), axis=1)
@@ -377,7 +376,7 @@ def process_dref(dref):
     key = "achievements"
     msr_column = "MSR ready (compliant or resource allocated)"
     dref[key] = pd.DataFrame()
-    start_date = dref["disasters"]["Trigger_Date_"].apply(convert_date)
+    start_date = dref["disasters"]["Trigger Date_"].apply(convert_date)
 
     on = op.columns
     for col in on:
@@ -395,6 +394,7 @@ def process_dref(dref):
         dref[key][[on[i], f"{on[i]} (days)", f"{on[i]} date", f"{on[i]} expected date"]] = pd.merge(start_date, op[on[i]], left_index=True, right_index=True).apply(determine_status, args=(deltas[i],), axis=1)
 
     dref[key][[msr_column, f"{msr_column} (days)", f"{msr_column} date", f"{msr_column} expected date"]] = pd.merge(start_date, op[[on[10], on[11]]], left_index=True, right_index=True).apply(msr_ready, args=(7,), axis=1)
+    dref[key][[on[12], f"{on[12]} (days)", f"{on[12]} date", f"{on[12]} expected date"]] = pd.merge(start_date, op[on[12]], left_index=True, right_index=True).apply(determine_status, args=(12,), axis=1)
     
     deltas_fn = [17, 21, 22, 30, 30]
     for i in range(5):
@@ -464,7 +464,8 @@ def process_pcce(pcce):
     deltas = [3, 3, 4, 11, 18, 7, 2, 3, 11, 13, 2, 7, 1, 11, 11, 14, 28]
     for i in range(17):
         pcce[key][[on[i], f"{on[i]} (days)", f"{on[i]} date", f"{on[i]} expected date"]] = pd.merge(start_date, op[on[i]], left_index=True, right_index=True).apply(determine_status, args=(deltas[i],), axis=1)
-
+    
+    pcce[key][[on[19], f"{on[19]} (days)", f"{on[19]} date", f"{on[19]} expected date"]] = pd.merge(start_date, op[on[19]], left_index=True, right_index=True).apply(determine_status, args=(6,), axis=1)
     pcce[key][[msr_column, f"{msr_column} (days)", f"{msr_column} date", f"{msr_column} expected date"]] = pd.merge(start_date, op[[on[17], on[18]]], left_index=True, right_index=True).apply(msr_ready, args=(7,), axis=1)
     
     deltas_dn = [1, 3, 7, 14, 30]
@@ -539,10 +540,32 @@ def area_info(area_split_dfs):
 
 '''----------------------------------------------------------------------------------------------------------------------------------------------------------------------------'''
 
+def calculate_delta(today, status, expected, d):
+    if pd.notna(status) and status == "DNU":
+        delta = "Did Not Use"
+    else:
+        if d == 365:
+            if status == "Upcoming":
+                delta = expected - today
+                delta = f"{delta.days} days before deadline"
+            else:
+                delta = today - expected
+                delta = f"{delta.days} days after deadline"
+        else:
+            delta = d * -1
+            if delta == 0:
+                delta = "On Date"
+            elif delta > 0:
+                delta = f"{delta} days early"
+            else:
+                delta = f"{delta * -1} days late"
+    return delta
+
 
 def read_task_info(df, op, op_df, area):
     cols = df.columns[9:].copy()
     task_infos = []
+    today = pd.Timestamp(date.today())
     for index, row in df.iterrows():
         for a, b, c, d in zip(cols[::4], cols[1::4], cols[2::4], cols[3::4]):
             e = a.replace("_", " ")
@@ -554,21 +577,16 @@ def read_task_info(df, op, op_df, area):
                 escalated = filtered_df.loc[:, column_name].values[0]
             else:
                 escalated = "Not Escalated"
-            if pd.notna(row[a]) and row[a] == "DNU":
-                delta = ""
-            else:
-                if row[b] == 365:
-                    delta = ""
-                else:
-                    delta = row[b] * -1
+            status = row[a] if pd.notna(row[a]) else "Not Achieved"
+            delta = calculate_delta(today, row[a], row[d], row[b])
             task_infos.append({
                 "Ref" : row["Ref"],
                 "EWTS Varient" : op,
                 "Area" : area,
                 "Task" : e,
-                "Status" : row[a] if pd.notna(row[a]) else "Not Achieved",
+                "Status" : status,
                 "Completed" : str(row[c])[:10],
-                "Expected Date" : str(row[d])[:10],
+                "Expected Date" : "-" if row[a] == "DNU" else str(row[d])[:10],
                 "Delta" : delta,
                 "Escalated" : escalated,
             })
@@ -578,6 +596,7 @@ def read_task_info(df, op, op_df, area):
 def read_im(df, op, op_df):
     cols = df.columns[9:].copy()
     task_infos = []
+    today = pd.Timestamp(date.today())
     for index, row in df.iterrows():
         for a, b, c, d in zip(cols[::4], cols[1::4], cols[2::4], cols[3::4]):
             if op == "mcmr":
@@ -592,21 +611,16 @@ def read_im(df, op, op_df):
                 escalated = filtered_df.loc[:, column_name].values[0]
             else:
                 escalated = "Not Escalated"
-            if pd.notna(row[a]) and row[a] == "DNU":
-                delta = ""
-            else:
-                if row[b] == 365:
-                    delta = ""
-                else:
-                    delta = row[b] * -1
+            status = row[a] if pd.notna(row[a]) else "Not Achieved"
+            delta = calculate_delta(today, row[a], row[d], row[b])
             task_infos.append({
                 "Ref" : row["Ref"],
                 "EWTS Varient" : op,
                 "Area" : "Information Management",
                 "Task" : a.replace("_", " "),
-                "Status" : row[a] if pd.notna(row[a]) else "Not Achieved",
+                "Status" : status,
                 "Completed" : str(row[c])[:10],
-                "Expected Date": str(row[d])[:10],
+                "Expected Date": "-" if row[a] == "DNU" else str(row[d])[:10],
                 "Delta" : delta,
                 "Escalated" : escalated,
             })
@@ -614,9 +628,9 @@ def read_im(df, op, op_df):
 
 
 status_mapping = {
-    "Achieved" : 2,
-    "Achieved Early" : 2,
-    "Achieved Late" : 1,
+    "Achieved" : 3,
+    "Achieved Early" : 4,
+    "Achieved Late" : 2,
     "DNU" : 0,
     "Upcoming" : 0,
     "Not Achieved" : 0,
@@ -643,13 +657,7 @@ def areas_in_op(adf, op):
 def task_info_extraction(area_split_dfs):
     task_infos = areas_in_op(area_split_dfs.get("EA", {}), "ea") + areas_in_op(area_split_dfs.get("DREF", {}), "dref") + areas_in_op(area_split_dfs.get("MCMR", {}), "mcmr") + areas_in_op(area_split_dfs.get("PCCE", {}), "protracted crisis")
     df = pd.DataFrame(task_infos)
-    df["Avg"] = df["Status"].map(status_mapping)
-    df_grouped = df.groupby(["EWTS Varient", "Task"], as_index=False).agg({
-        'Avg': 'mean'
-    })
-    df = df.merge(df_grouped, on=["EWTS Varient", "Task"], suffixes=('', '_col'))
-    df = df.drop(columns=["Avg"])
-    df["Avg_col"] = df["Avg_col"] / 2
+    df["Score"] = df["Status"].map(status_mapping)
     df["Delta"] = df["Delta"].astype(str)
     return df
 
@@ -659,9 +667,6 @@ sheets = {}
 sheets["EA"] = spark.read.table("ea").toPandas()
 sheets["DREF"] = spark.read.table("dref").toPandas()
 dref_cols = sheets["DREF"].columns
-for col in dref_cols:
-    new_col = col.replace(" ", "_")
-    sheets["DREF"] = sheets["DREF"].rename(columns={col:new_col})
 sheets["MCMR"] = spark.read.table("mcmr").toPandas()
 sheets["Protracted"] = spark.read.table("pcce").toPandas()
 escalation = spark.read.table("escalation_events").toPandas()
@@ -673,7 +678,7 @@ general_df = general_df[['Ref'] + [col for col in general_df.columns[:19] if col
 spark_general_info = spark.createDataFrame(general_df)
 spark_general_info = spark_general_info.toDF(*[c.replace(" ", "_") for c in spark_general_info.columns])
 spark_general_info = spark_general_info.withColumn("Trigger_Date", to_date("Trigger_Date", "M/d/yyyy"))
-spark_general_info.write.mode("overwrite").option("overwriteSchema", "true").format("delta").saveAsTable("master_data_processing.general_info")
+spark_general_info.write.mode("overwrite").option("mergeSchema", "true").format("delta").saveAsTable("master_data_processing.general_info")
 
 df_area_info = area_info(area_split_dfs)
 
@@ -686,4 +691,4 @@ df_area_info["General Performance"] = df_area_info["General Performance"].fillna
 
 spark_area_info = spark.createDataFrame(df_area_info)
 spark_area_info = spark_area_info.toDF(*[c.replace(" ", "_") for c in spark_area_info.columns])
-spark_area_info.write.mode("overwrite").option("overwriteSchema", "true").format("delta").saveAsTable("master_data_processing.area_info")
+spark_area_info.write.mode("overwrite").option("mergeSchema", "true").format("delta").saveAsTable("master_data_processing.area_info")
