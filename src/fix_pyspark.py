@@ -279,6 +279,9 @@ def determine_status(row, limit):
     if r1 == "Not Achieved":
         return pd.Series(["Not Achieved", 365, "-", expected_date], index=[keys[1], f"{keys[1]} (days)", f"{keys[1]} date", f"{keys[1]} expected date"])
     
+    if (limit == 30):
+        limit = 31
+
     days = (r1 - r0).days
     delta = days - limit
     if days > limit:
@@ -550,15 +553,15 @@ def calculate_delta(today, status, expected, d):
                 delta = f"{delta.days} days before deadline"
             else:
                 delta = today - expected
-                delta = f"{delta.days} days after deadline"
+                delta = f"{delta.days} days behind deadline"
         else:
             delta = d * -1
             if delta == 0:
-                delta = "On Date"
+                delta = "Achieved On Date"
             elif delta > 0:
-                delta = f"{delta} days early"
+                delta = f"Achieved {delta} days early"
             else:
-                delta = f"{delta * -1} days late"
+                delta = f"Achieved {delta * -1} days late"
     return delta
 
 
@@ -578,7 +581,11 @@ def read_task_info(df, op, op_df, area):
             else:
                 escalated = "Not Escalated"
             status = row[a] if pd.notna(row[a]) else "Not Achieved"
-            delta = calculate_delta(today, row[a], row[d], row[b])
+            if row[b] > 90:
+                raw_delta = 90
+            else:
+                raw_delta = row[b]
+            delta = calculate_delta(today, row[a], row[d], raw_delta)
             task_infos.append({
                 "Ref" : row["Ref"],
                 "EWTS Varient" : op,
@@ -588,6 +595,7 @@ def read_task_info(df, op, op_df, area):
                 "Completed" : str(row[c])[:10],
                 "Expected Date" : "-" if row[a] == "DNU" else str(row[d])[:10],
                 "Delta" : delta,
+                "Raw_Delta": raw_delta,
                 "Escalated" : escalated,
             })
     return task_infos
@@ -612,7 +620,11 @@ def read_im(df, op, op_df):
             else:
                 escalated = "Not Escalated"
             status = row[a] if pd.notna(row[a]) else "Not Achieved"
-            delta = calculate_delta(today, row[a], row[d], row[b])
+            if row[b] > 90:
+                raw_delta = 90
+            else:
+                raw_delta = row[b]
+            delta = calculate_delta(today, row[a], row[d], raw_delta)
             task_infos.append({
                 "Ref" : row["Ref"],
                 "EWTS Varient" : op,
@@ -622,6 +634,7 @@ def read_im(df, op, op_df):
                 "Completed" : str(row[c])[:10],
                 "Expected Date": "-" if row[a] == "DNU" else str(row[d])[:10],
                 "Delta" : delta,
+                "Raw_Delta": raw_delta,
                 "Escalated" : escalated,
             })
     return task_infos
