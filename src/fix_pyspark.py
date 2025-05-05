@@ -281,7 +281,10 @@ def determine_status(row, limit):
     
     if (limit == 30):
         limit = 31
+<<<<<<< HEAD
 
+=======
+>>>>>>> c6ef388 (changing spark file)
     days = (r1 - r0).days
     delta = days - limit
     if days > limit:
@@ -547,10 +550,10 @@ def calculate_delta(today, status, expected, d):
     if pd.notna(status) and status == "DNU":
         delta = "Did Not Use"
     else:
-        if d == 365:
+        if d == 90:
             if status == "Upcoming":
                 delta = expected - today
-                delta = f"{delta.days} days before deadline"
+                delta = f"{delta.days} days to deadline"
             else:
                 delta = today - expected
                 delta = f"{delta.days} days behind deadline"
