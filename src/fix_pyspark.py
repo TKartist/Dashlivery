@@ -250,7 +250,7 @@ def area_split_pcce(overview, columns, general):
 
 
 def convert_date(date_str):
-    if date_str in ["-", "DNU", "Not Achieved"] or pd.isna(date_str):
+    if date_str in ["-", "DNU", "Not Achieved", "N/A"] or pd.isna(date_str):
         return date_str
 
     date_formats = ["%Y-%m-%d", "%d-%m-%Y", "%m-%d-%Y", "%m/%d/%Y", "%d/%m/%Y"]
@@ -273,7 +273,7 @@ def determine_status(row, limit):
         if deadline > datetime.now():
             return pd.Series(["Upcoming", 365, "-", expected_date], index=[keys[1], f"{keys[1]} (days)", f"{keys[1]} date", f"{keys[1]} expected date"]) 
         return pd.Series(["Not Achieved", 365, "-", expected_date], index=[keys[1], f"{keys[1]} (days)", f"{keys[1]} date", f"{keys[1]} expected date"])
-    if r1 == "DNU":
+    if r1 == "DNU" or r1 == "N/A":
         return pd.Series(["DNU", 365, "-", expected_date], index=[keys[1], f"{keys[1]} (days)", f"{keys[1]} date", f"{keys[1]} expected date"])
     
     if r1 == "Not Achieved":
@@ -281,10 +281,6 @@ def determine_status(row, limit):
     
     if (limit == 30):
         limit = 31
-<<<<<<< HEAD
-
-=======
->>>>>>> c6ef388 (changing spark file)
     days = (r1 - r0).days
     delta = days - limit
     if days > limit:
@@ -352,6 +348,7 @@ def process_ea(ea):
     deltas = [3, 3, 0, 4, 11, 18, 1, 2, 3, 11, 13, 2, 4, 7, 2, 7]
 
     for i in range(16):
+        print(on[i])
         ea[key][[on[i], f"{on[i]} (days)", f"{on[i]} date", f"{on[i]} expected date"]] = pd.merge(start_date, op[on[i]], left_index=True, right_index=True).apply(determine_status, args=(deltas[i],), axis=1)
     
     ea[key][[on[18], f"{on[18]} (days)", f"{on[18]} date", f"{on[18]} expected date"]] = pd.merge(start_date, op[on[18]], left_index=True, right_index=True).apply(determine_status, args=(6,), axis=1)
@@ -548,7 +545,7 @@ def area_info(area_split_dfs):
 
 def calculate_delta(today, status, expected, d):
     if pd.notna(status) and status == "DNU":
-        delta = "Did Not Use"
+        delta = "DNU"
     else:
         if d == 90:
             if status == "Upcoming":
