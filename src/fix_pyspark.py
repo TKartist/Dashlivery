@@ -10,63 +10,38 @@ def organize_ea(sheet):
     col_name = sheet.columns.tolist()
     sheet["Ref"] = "EA" + sheet[col_name[4]] + sheet[col_name[6]]
     disasters = sheet.loc[:, col_name[:11]]
-    operational_progresses = sheet.loc[:, [col_name[0]] + col_name[11:16] + col_name[22:26] + col_name[38:45] + col_name[69:72]]
-    financial_progress = sheet.loc[:, [col_name[0]] + col_name[52:57]]
-    dashboard_progress = sheet.loc[:, [col_name[0]] + col_name[47:52]]
-    sec_coverage = sheet.loc[:, [col_name[0]] + col_name[15:21]]
-    rrp = sheet.loc[:, [col_name[0]] + col_name[26:39]]
-    nfi = sheet.loc[:, [col_name[0]] + col_name[45:47] + col_name[57:60]]
-    operational_achievements = sheet.loc[:, [col_name[0]] + col_name[60:69]]
-    
-    sec_coverage = sec_coverage.replace('\n', ' ', regex=True)
-    sec_coverage = sec_coverage.replace(' ', ' ', regex=True)
-
+    ops_details = sheet.loc[:, [col_name[0]] + col_name[11:16] + col_name[22:26] + col_name[38:58] + col_name[69:72] + col_name[73:75]]
+    dref_shift = sheet.loc[:, [col_name[0]] + [col_name[72]]]
     print("EA master data organized")
-    return {"disasters" : disasters.set_index("Ref"), "operational_progresses" : operational_progresses.set_index("Ref"), "financial_progress" : financial_progress.set_index("Ref"), "dashboard_progress" : dashboard_progress.set_index("Ref"), "sec_coverage" : sec_coverage.set_index("Ref"), "rrp" : rrp.set_index("Ref"), "nfi" : nfi.set_index("Ref"), "operational_achievements" : operational_achievements.set_index("Ref")}
+    return {"disasters" : disasters.set_index("Ref"), "operational_progresses" : ops_details.set_index("Ref"), "dref_shift" : dref_shift.set_index("Ref")}
 
 def organize_dref(sheet):
     col_name = sheet.columns.tolist()
     sheet["Ref"] = "DREF" + sheet[col_name[4]] + sheet[col_name[6]]
     disasters = sheet.loc[:, col_name[:11]]
-    operational_progresses = sheet.loc[:, [col_name[0]] + col_name[11:19] + col_name[32:34] + col_name[51:54]]
-    rrp = sheet.loc[:, [col_name[0]] + col_name[19:32]]
-    financial_progress = sheet.loc[:, [col_name[0]] + col_name[34:41]]
-    operational_achievements = sheet.loc[:, [col_name[0]] + col_name[41:51]]
+    operational_progresses = sheet.loc[:, [col_name[0]] + col_name[11:19] + col_name[32:39] + col_name[51:54]]
 
     print("DREF master data organized")
-    return {"disasters": disasters.set_index("Ref"), "operational_progresses": operational_progresses.set_index("Ref"), "rrp": rrp.set_index("Ref"), "financial_progress": financial_progress.set_index("Ref"), "operational_achievements": operational_achievements.set_index("Ref")}
+    return {"disasters": disasters.set_index("Ref"), "operational_progresses": operational_progresses.set_index("Ref")}
 
 def organize_mcmr(sheet):
     col_name = sheet.columns.tolist()
     sheet["Ref"] = "MCMR" + sheet[col_name[6]] 
     disasters = sheet.loc[:, col_name[:11]]
-    operational_progresses = sheet.loc[:, [col_name[0]] + col_name[11:14] + col_name[20:22] + col_name[35:42]]
-    total_coverage = sheet.loc[:, [col_name[0]] + col_name[14:20]]
-    rrp = sheet.loc[:, [col_name[0]] + col_name[22:35]]
-    financial_progress = sheet.loc[:, [col_name[0]] + col_name[42:44]]
-    operational_achievements = sheet.loc[:, [col_name[0]] + col_name[44:]]
+    operational_progresses = sheet.loc[:, [col_name[0]] + col_name[11:14] + col_name[20:22] + col_name[35:44] + col_name[46:]]
 
-    total_coverage = total_coverage.replace('\n', ' ', regex=True)
-    total_coverage = total_coverage.replace(' ', ' ', regex=True)
     print("MCMR master data organized")
-    return {"disasters" : disasters.set_index("Ref"), "operational_progresses" : operational_progresses.set_index("Ref"), "total_coverage" : total_coverage.set_index("Ref"), "rrp" : rrp.set_index("Ref"), "financial_progress" : financial_progress.set_index("Ref"), "operational_achievements" : operational_achievements.set_index("Ref")}
+    return {"disasters" : disasters.set_index("Ref"), "operational_progresses" : operational_progresses.set_index("Ref")}
 
 
 def organize_protracted(sheet):
     col_name = sheet.columns.tolist()
     sheet["Ref"] = "PCCE" + sheet[col_name[4]] + sheet[col_name[6]]
     disasters = sheet.loc[:, col_name[:11]]
-    operational_progresses = sheet.loc[:, [col_name[0]] + col_name[11:15] + col_name[21:25] + col_name[39:47] + col_name[57:58] + col_name[60:63]]
-    coverage = sheet.loc[:, [col_name[0]] + col_name[15:21]]
-    rrp = sheet.loc[:, [col_name[0]] + col_name[25:39]]
-    dashboard = sheet.loc[:, [col_name[0]] + col_name[47:52]]
-    financial_progress = sheet.loc[:, [col_name[0]] + col_name[52:57]]
-    operational_achievements = sheet.loc[:, [col_name[0]] + col_name[58:60]]
+    operational_progresses = sheet.loc[:, [col_name[0]] + col_name[11:15] + col_name[21:25] + col_name[39:57] + col_name[57:58] + col_name[60:65]]
 
-    coverage = coverage.replace('\n', ' ', regex=True)
-    coverage = coverage.replace(' ', ' ', regex=True)
     print("PCCE master data organized")
-    return {"disasters" : disasters.set_index("Ref"), "operational_progresses" : operational_progresses.set_index("Ref"), "coverage" : coverage.set_index("Ref"), "rrp" : rrp.set_index("Ref"), "dashboard" : dashboard.set_index("Ref"), "financial_progress" : financial_progress.set_index("Ref"), "operational_achievements" : operational_achievements.set_index("Ref")}
+    return {"disasters" : disasters.set_index("Ref"), "operational_progresses" : operational_progresses.set_index("Ref")}
 
 def organize_sheets():
     bucket = {}
@@ -140,17 +115,16 @@ def update_general_info(folder, general):
 
 
 def area_split_ea(overview, columns, general):
-    msr_column = "MSR ready (compliant or resource allocated)"
     assessment = overview[full_list(columns[11])]
     resource_mobilization = overview[full_list(columns[12:16] + [columns[22]] + [columns[71]])] # add EA coverage
     surge = overview[full_list(columns[23:26])] # add % related values to the surge (rrp)
     hr = overview[full_list(columns[38:40])] # add % related values to the hr (rrp)
     coordination = overview[full_list(columns[40:44])] # Upcoming joint statement in master data
     logistics = overview[full_list(columns[44:47])]
-    im = overview[full_list(columns[47:52])]
+    im = overview[full_list(columns[47:52] + columns[73:75])]
     finance = overview[full_list(columns[52:56])]
     program_delivery = overview[full_list(columns[56:58])]
-    security = overview[[msr_column, f"{msr_column} (days)"]]
+    security = overview[full_list(columns[69:71])]
 
     areas = {}
     
@@ -169,7 +143,6 @@ def area_split_ea(overview, columns, general):
     return areas
 
 def area_split_dref(overview, columns, general):
-    msr_column = "MSR ready (compliant or resource allocated)"
     assessment = overview[full_list(columns[11])]
     risk = overview[full_list(columns[12:14])]
     resource_mobilization = overview[full_list(columns[14:16] + [columns[53]])]
@@ -177,7 +150,7 @@ def area_split_dref(overview, columns, general):
     logistics = overview[full_list(columns[32:34])]
     finance = overview[full_list(columns[34:38])]
     delivery = overview[full_list([columns[38]])] # add targeted population, ehi distribution, and implementation rate
-    security = overview[[msr_column, f"{msr_column} (days)"]]
+    security = overview[full_list(columns[51:53])]
 
     areas = {}
     
@@ -199,7 +172,7 @@ def area_split_mcmr(overview, columns, general):
     hr = overview[full_list(columns[35:37])] # add % related values to the hr (rrp)
     coordination = overview[full_list(columns[37])]
     logistics = overview[full_list(columns[38:41])]
-    im = overview[full_list(columns[41:42])]
+    im = overview[full_list(columns[41:42] + columns[46:52])]
     finance = overview[full_list(columns[42:44])]
 
     areas = {}
@@ -217,18 +190,16 @@ def area_split_mcmr(overview, columns, general):
 
 
 def area_split_pcce(overview, columns, general):
-    msr_column = "MSR ready (compliant or resource allocated)"
-
     assessment = overview[columns[11:12]]
     resource_mobilization = overview[full_list(columns[12:15] + [columns[21]] + [columns[62]])]
     surge = overview[full_list(columns[22:25])]
     hr = overview[full_list(columns[39:41])]
     coordination = overview[full_list(columns[41:44])]
     logistics = overview[full_list(columns[44:47])]
-    im = overview[full_list(columns[47:52])]
+    im = overview[full_list(columns[47:52] + columns[63:65])]
     finance = overview[full_list(columns[52:56])]
     # delivery = overview[full_list(columns[55:57])] # add percentage of targeted population receiving assistance and % of planned budget implementation
-    security = overview[[msr_column, f"{msr_column} (days)"]]
+    security = overview[full_list(columns[60:62])]
 
     areas = {}
     
@@ -264,6 +235,36 @@ def convert_date(date_str):
     return date_str
 
 
+def determine_status_ea(row, l1, l2):
+    keys = row.index.tolist()
+    r0, r1 = row.iloc[0], row.iloc[1]
+    if row.iloc[2] == "Yes":
+        limit = l2
+    else:
+        limit = l1
+    expected_date = r0 + pd.Timedelta(days=limit)
+    if r1 == "-" or pd.isna(r1):
+        deadline = r0 + pd.Timedelta(days=limit)
+        if deadline > datetime.now():
+            return pd.Series(["Upcoming", 365, "-", expected_date], index=[keys[1], f"{keys[1]} (days)", f"{keys[1]} date", f"{keys[1]} expected date"]) 
+        return pd.Series(["Not Achieved", 365, "-", expected_date], index=[keys[1], f"{keys[1]} (days)", f"{keys[1]} date", f"{keys[1]} expected date"])
+    if r1 == "DNU" or r1 == "N/A":
+        return pd.Series(["DNU", 365, "-", expected_date], index=[keys[1], f"{keys[1]} (days)", f"{keys[1]} date", f"{keys[1]} expected date"])
+    
+    if r1 == "Not Achieved":
+        return pd.Series(["Not Achieved", 365, "-", expected_date], index=[keys[1], f"{keys[1]} (days)", f"{keys[1]} date", f"{keys[1]} expected date"])
+    
+    if (limit == 30):
+        limit = 31
+    days = (r1 - r0).days
+    delta = days - limit
+    if days > limit:
+        return pd.Series(["Achieved Late", delta, r1, expected_date], index=[keys[1], f"{keys[1]} (days)", f"{keys[1]} date", f"{keys[1]} expected date"])
+    if delta == 0:
+        return pd.Series(["Achieved", delta, r1, expected_date], index=[keys[1], f"{keys[1]} (days)", f"{keys[1]} date", f"{keys[1]} expected date"])
+
+    return pd.Series(["Achieved Early", delta, r1, expected_date], index=[keys[1], f"{keys[1]} (days)", f"{keys[1]} date", f"{keys[1]} expected date"])
+
 def determine_status(row, limit):
     keys = row.index.tolist()
     r0, r1 = row.iloc[0], row.iloc[1]
@@ -290,24 +291,6 @@ def determine_status(row, limit):
 
     return pd.Series(["Achieved Early", delta, r1, expected_date], index=[keys[1], f"{keys[1]} (days)", f"{keys[1]} date", f"{keys[1]} expected date"])
 
-def msr_ready(row ,limit):
-    msr_column = "MSR ready (compliant or resource allocated)"
-    r0, r1, r2 = row.iloc[0], row.iloc[1], row.iloc[2]
-    deadline = r0 + pd.Timedelta(days=limit)
-
-    if (pd.isna(r1) or r1 == "-" or r1 == "DNU" or r1 == "Not Achieved") and (pd.isna(r2) or r2 == "-" or r2 == "DNU" or r2 == "Not Achieved"):        
-        if deadline > datetime.now():
-            return pd.Series(["Upcoming", 365, "-", deadline], index=[msr_column, f"{msr_column} (days)", f"{msr_column} expected date"])
-        return pd.Series(["Not Achieved", 365, "-", deadline], index=[msr_column, f"{msr_column} (days)", f"{msr_column} date", f"{msr_column} expected date"])
-    elif pd.isna(r1) or r1 == "-" or r1 == "DNU" or r1 == "Not Achieved":
-        days = (r2 - r0).days
-        delta = days - limit
-        return pd.Series(["Achieved Late" if days > limit else "Achieved Early", delta, r2, deadline], index=[msr_column, f"{msr_column} (days)", f"{msr_column} date", f"{msr_column} expected date"])
-    else:
-        days = (r1 - r0).days
-        delta = days - limit
-        return pd.Series(["Achieved Late" if days > limit else "Achieved Early", delta, r1, deadline], index=[msr_column, f"{msr_column} (days)", f"{msr_column} date", f"{msr_column} expected date"])
-
 
 '''----------------------------------------------------------------------------------------------------------------------------------------------------------------------------'''
 
@@ -316,58 +299,31 @@ def process_ea(ea):
     op = ea["operational_progresses"].copy()
     if op.empty:
         return None
-    dash = ea["dashboard_progress"].copy()
-    fin = ea["financial_progress"].copy()
-    nfi = ea["nfi"].copy()
     key = "achievements"
-    msr_column = "MSR ready (compliant or resource allocated)"
 
     ea[key] = pd.DataFrame()
     if "Trigger Date_" in ea["disasters"].columns:
         ea["disasters"] = ea["disasters"].rename(columns={"Trigger Date_":"Trigger_Date_"})
     start_date = ea["disasters"]["Trigger_Date_"].apply(convert_date)
+    surge_date = ea["disasters"]["Trigger_Date_"].copy()
+    for ref, val in surge_requests.iterrows():
+        surge_date[ref] = val["requested-on"]
+    surge_date = surge_date.apply(convert_date)
 
     on = op.columns
     for col in on:
         op[col] = op[col].apply(convert_date)
     
-    dn = dash.columns
-    for col in dn:
-        dash[col] = dash[col].apply(convert_date)
-    
-    fn = fin.columns
-    for col in fn:
-        fin[col] = fin[col].apply(convert_date)
-    
-    nn = nfi.columns
-    for col in nn[:3]:
-        nfi[col] = nfi[col].apply(convert_date)    
-    
     ea[key]["Ref"] = ea["disasters"].index
     ea[key].set_index("Ref", inplace=True)
-    deltas = [3, 3, 0, 4, 11, 18, 1, 2, 3, 11, 13, 2, 4, 7, 2, 7]
+    deltas = [3, 3, 0, 4, 11, 18, 1, 2, 3, 11, 13, 2, 4, 7, 1, 11, 11, 14, 1, 3, 7, 14, 30, 11, 14, 16, 20, 32, 18, 7, 7, 6, 60, 90]
+    deltas_b = [3, 3, 0, 0, 7, 14, 1, 2, 3, 7, 9, 2, 4, 7, 1, 7, 7, 10, 1, 3, 7, 14, 30, 7, 10, 12, 16, 29, 14, 7, 7, 2, 60, 90]
 
-    for i in range(16):
-        print(on[i])
-        ea[key][[on[i], f"{on[i]} (days)", f"{on[i]} date", f"{on[i]} expected date"]] = pd.merge(start_date, op[on[i]], left_index=True, right_index=True).apply(determine_status, args=(deltas[i],), axis=1)
-    
-    ea[key][[on[18], f"{on[18]} (days)", f"{on[18]} date", f"{on[18]} expected date"]] = pd.merge(start_date, op[on[18]], left_index=True, right_index=True).apply(determine_status, args=(6,), axis=1)
-    ea[key][[msr_column, f"{msr_column} (days)", f"{msr_column} date", f"{msr_column} expected date"]] = pd.merge(start_date, op[[on[16], on[17]]], left_index=True, right_index=True).apply(msr_ready, args=(7,), axis=1)
-    ea[key][[nn[0], f"{nn[0]} (days)", f"{nn[0]} date", f"{nn[0]} expected date"]] = pd.merge(start_date, nfi[nn[0]], left_index=True, right_index=True).apply(determine_status, args=(11,), axis=1)
-    ea[key][[nn[1], f"{nn[1]} (days)", f"{nn[1]} date", f"{nn[1]} expected date"]] = pd.merge(start_date, nfi[nn[1]], left_index=True, right_index=True).apply(determine_status, args=(14,), axis=1)
-    ea[key][[nn[2], f"{nn[2]} (days)", f"{nn[2]} date", f"{nn[2]} expected date"]] = pd.merge(start_date, nfi[nn[2]], left_index=True, right_index=True).apply(determine_status, args=(14,), axis=1)
-    
-    ea[key][[dn[0], f"{dn[0]} (days)", f"{dn[0]} date", f"{dn[0]} expected date"]] = pd.merge(start_date, dash[dn[0]], left_index=True, right_index=True).apply(determine_status, args=(1,), axis=1)
-    ea[key][[dn[1], f"{dn[1]} (days)", f"{dn[1]} date", f"{dn[1]} expected date"]] = pd.merge(start_date, dash[dn[1]], left_index=True, right_index=True).apply(determine_status, args=(3,), axis=1)
-    ea[key][[dn[2], f"{dn[2]} (days)", f"{dn[2]} date", f"{dn[2]} expected date"]] = pd.merge(start_date, dash[dn[2]], left_index=True, right_index=True).apply(determine_status, args=(7,), axis=1)
-    ea[key][[dn[4], f"{dn[4]} (days)", f"{dn[4]} date", f"{dn[4]} expected date"]] = pd.merge(start_date, dash[dn[4]], left_index=True, right_index=True).apply(determine_status, args=(30,), axis=1)
-    ea[key][[dn[3], f"{dn[3]} (days)", f"{dn[3]} date", f"{dn[3]} expected date"]] = pd.merge(start_date, dash[dn[3]], left_index=True, right_index=True).apply(determine_status, args=(14,), axis=1)
-    ea[key][[fn[0], f"{fn[0]} (days)", f"{fn[0]} date", f"{fn[0]} expected date"]] = pd.merge(start_date, fin[fn[0]], left_index=True, right_index=True).apply(determine_status, args=(11,), axis=1)
-    ea[key][[fn[1], f"{fn[1]} (days)", f"{fn[1]} date", f"{fn[1]} expected date"]] = pd.merge(start_date, fin[fn[1]], left_index=True, right_index=True).apply(determine_status, args=(14,), axis=1)
-    ea[key][[fn[2], f"{fn[2]} (days)", f"{fn[2]} date", f"{fn[2]} expected date"]] = pd.merge(start_date, fin[fn[2]], left_index=True, right_index=True).apply(determine_status, args=(16,), axis=1)
-    ea[key][[fn[3], f"{fn[3]} (days)", f"{fn[3]} date", f"{fn[3]} expected date"]] = pd.merge(start_date, fin[fn[3]], left_index=True, right_index=True).apply(determine_status, args=(20,), axis=1)
-    ea[key][[fn[4], f"{fn[4]} (days)", f"{fn[4]} date", f"{fn[4]} expected date"]] = pd.merge(start_date, fin[fn[4]], left_index=True, right_index=True).apply(determine_status, args=(32,), axis=1)
-
+    for i in range(len(deltas)):
+        if "Surge" in on[i] or "RR" in on[i]:
+            ea[key][[on[i], f"{on[i]} (days)", f"{on[i]} date", f"{on[i]} expected date"]] = pd.concat([start_date, op[on[i]], ea["dref_shift"]], axis=1).apply(determine_status_ea, args=(deltas[i],deltas_b[i],), axis=1)
+        else:
+            ea[key][[on[i], f"{on[i]} (days)", f"{on[i]} date", f"{on[i]} expected date"]] = pd.concat([start_date, op[on[i]], ea["dref_shift"]], axis=1).apply(determine_status_ea, args=(deltas[i],deltas_b[i],), axis=1)
     return ea
 
 def process_dref(dref):
@@ -375,33 +331,30 @@ def process_dref(dref):
     
     if op.empty:
         return None
-    fin = dref["financial_progress"].copy()
+    
     key = "achievements"
-    msr_column = "MSR ready (compliant or resource allocated)"
     dref[key] = pd.DataFrame()
     start_date = dref["disasters"]["Trigger Date_"].apply(convert_date)
+    surge_date = dref["disasters"]["Trigger Date_"].copy()
+    for ref, val in surge_requests.iterrows():
+        surge_date[ref] = val["requested-on"]
+    
+    surge_date = surge_date.apply(convert_date)
 
     on = op.columns
     for col in on:
         op[col] = op[col].apply(convert_date)
     
-    fn = fin.columns
-    for col in fn[:5]:
-        fin[col] = fin[col].apply(convert_date)
     
     dref[key]["Ref"] = dref["disasters"].index
     dref[key].set_index("Ref", inplace=True)
 
-    deltas = [3, 12, 14, 10, 14, 1, 2, 3, 19, 14]
-    for i in range(10):
-        dref[key][[on[i], f"{on[i]} (days)", f"{on[i]} date", f"{on[i]} expected date"]] = pd.merge(start_date, op[on[i]], left_index=True, right_index=True).apply(determine_status, args=(deltas[i],), axis=1)
-
-    dref[key][[msr_column, f"{msr_column} (days)", f"{msr_column} date", f"{msr_column} expected date"]] = pd.merge(start_date, op[[on[10], on[11]]], left_index=True, right_index=True).apply(msr_ready, args=(7,), axis=1)
-    dref[key][[on[12], f"{on[12]} (days)", f"{on[12]} date", f"{on[12]} expected date"]] = pd.merge(start_date, op[on[12]], left_index=True, right_index=True).apply(determine_status, args=(12,), axis=1)
-    
-    deltas_fn = [17, 21, 22, 30, 30]
-    for i in range(5):
-        dref[key][[fn[i], f"{fn[i]} (days)", f"{fn[i]} date", f"{fn[i]} expected date"]] = pd.merge(start_date, fin[fn[i]], left_index=True, right_index=True).apply(determine_status, args=(deltas_fn[i],), axis=1)
+    deltas = [3, 12, 14, 14, 14, 1, 2, 3, 19, 22, 17, 21, 22, 30, 30, 7, 7, 6]
+    for i in range(len(deltas)):
+        if "Surge" in on[i] or "RR" in on[i]:
+            dref[key][[on[i], f"{on[i]} (days)", f"{on[i]} date", f"{on[i]} expected date"]] = pd.merge(surge_date, op[on[i]], left_index=True, right_index=True).apply(determine_status, args=(deltas[i],), axis=1)
+        else:
+            dref[key][[on[i], f"{on[i]} (days)", f"{on[i]} date", f"{on[i]} expected date"]] = pd.merge(start_date, op[on[i]], left_index=True, right_index=True).apply(determine_status, args=(deltas[i],), axis=1)
 
     return dref
 
@@ -410,29 +363,30 @@ def process_mcmr(mcmr):
     
     if op.empty:
         return None
-    fin = mcmr["financial_progress"].copy()
     key = "achievements"
 
     mcmr[key] = pd.DataFrame()
     start_date = mcmr["disasters"][mcmr["disasters"].columns[1]].apply(convert_date)
 
+    surge_date = mcmr["disasters"][mcmr["disasters"].columns[1]].copy()
+    for ref, val in surge_requests.iterrows():
+        surge_date[ref] = val["requested-on"]
+    surge_date = surge_date.apply(convert_date)
+
     on = op.columns
     for col in on:
         op[col] = op[col].apply(convert_date)
     
-    fn = fin.columns
-    for col in fn:
-        fin[col] = fin[col].apply(convert_date)
     
     mcmr[key]["Ref"] = mcmr["disasters"].index
     mcmr[key].set_index("Ref", inplace=True)
-    deltas = [3, 4, 11, 1, 2, 11, 13, 1, 11, 11, 14, 1]
+    deltas = [3, 4, 11, 1, 2, 11, 13, 1, 11, 11, 14, 1, 9, 14, 3, 7, 14, 30, 60, 90]
 
-    for i in range(12):
-        mcmr[key][[on[i], f"{on[i]} (days)", f"{on[i]} date", f"{on[i]} expected date"]] = pd.merge(start_date, op[on[i]], left_index=True, right_index=True).apply(determine_status, args=(deltas[i],), axis=1)
-
-    mcmr[key][[fn[0], f"{fn[0]} (days)", f"{fn[0]} date", f"{fn[0]} expected date"]] = pd.merge(start_date, fin[fn[0]], left_index=True, right_index=True).apply(determine_status, args=(9,), axis=1)
-    mcmr[key][[fn[1], f"{fn[1]} (days)", f"{fn[1]} date", f"{fn[1]} expected date"]] = pd.merge(start_date, fin[fn[1]], left_index=True, right_index=True).apply(determine_status, args=(14,), axis=1)
+    for i in range(len(deltas)):
+        if "Surge" in on[i] or "RR" in on[i]:
+            mcmr[key][[on[i], f"{on[i]} (days)", f"{on[i]} date", f"{on[i]} expected date"]] = pd.merge(surge_date, op[on[i]], left_index=True, right_index=True).apply(determine_status, args=(deltas[i],), axis=1)
+        else:
+            mcmr[key][[on[i], f"{on[i]} (days)", f"{on[i]} date", f"{on[i]} expected date"]] = pd.merge(start_date, op[on[i]], left_index=True, right_index=True).apply(determine_status, args=(deltas[i],), axis=1)
 
     return mcmr
     
@@ -441,44 +395,29 @@ def process_pcce(pcce):
     op = pcce["operational_progresses"].copy()
     if op.empty:
         return None
-    dash = pcce["dashboard"].copy()
-    fin = pcce["financial_progress"].copy()
     key = "achievements"
-    msr_column = "MSR ready (compliant or resource allocated)"
 
 
     pcce[key] = pd.DataFrame()
     start_date = pcce["disasters"][pcce["disasters"].columns[1]].apply(convert_date)
 
+    surge_date = pcce["disasters"][pcce["disasters"].columns[1]].copy()
+    for ref, val in surge_requests.iterrows():
+        surge_date[ref] = val["requested-on"]
+    surge_date = surge_date.apply(convert_date)
+
     on = op.columns
     for col in on:
         op[col] = op[col].apply(convert_date)
     
-    dn = dash.columns
-    for col in dn:
-        dash[col] = dash[col].apply(convert_date)
-    
-    fn = fin.columns
-    for col in fn:
-        fin[col] = fin[col].apply(convert_date)    
-    
     pcce[key]["Ref"] = pcce["disasters"].index
     pcce[key].set_index("Ref", inplace=True)
-    deltas = [3, 3, 4, 11, 18, 7, 2, 3, 11, 13, 2, 7, 1, 11, 11, 14, 28]
-    for i in range(17):
-        pcce[key][[on[i], f"{on[i]} (days)", f"{on[i]} date", f"{on[i]} expected date"]] = pd.merge(start_date, op[on[i]], left_index=True, right_index=True).apply(determine_status, args=(deltas[i],), axis=1)
-    
-    pcce[key][[on[19], f"{on[19]} (days)", f"{on[19]} date", f"{on[19]} expected date"]] = pd.merge(start_date, op[on[19]], left_index=True, right_index=True).apply(determine_status, args=(6,), axis=1)
-    pcce[key][[msr_column, f"{msr_column} (days)", f"{msr_column} date", f"{msr_column} expected date"]] = pd.merge(start_date, op[[on[17], on[18]]], left_index=True, right_index=True).apply(msr_ready, args=(7,), axis=1)
-    
-    deltas_dn = [1, 3, 7, 14, 30]
-    for i in range(5):
-        pcce[key][[dn[i], f"{dn[i]} (days)", f"{dn[i]} date", f"{dn[i]} expected date"]] = pd.merge(start_date, dash[dn[i]], left_index=True, right_index=True).apply(determine_status, args=(deltas_dn[i],), axis=1)
-
-
-    deltas_fn = [11, 14, 16, 20, 32]
-    for i in range(5):
-        pcce[key][[fn[i], f"{fn[i]} (days)", f"{fn[i]} date", f"{fn[i]} expected date"]] = pd.merge(start_date, fin[fn[i]], left_index=True, right_index=True).apply(determine_status, args=(deltas_fn[i],), axis=1)
+    deltas = [3, 3, 4, 11, 18, 7, 2, 3, 11, 13, 2, 7, 1, 11, 11, 14, 1, 3, 7, 14, 30, 11, 14, 16, 20, 32, 28, 7, 7, 6, 60, 90]
+    for i in range(len(deltas)):
+        if "Surge" in on[i] or "RR" in on[i]:
+            pcce[key][[on[i], f"{on[i]} (days)", f"{on[i]} date", f"{on[i]} expected date"]] = pd.merge(surge_date, op[on[i]], left_index=True, right_index=True).apply(determine_status, args=(deltas[i],), axis=1)
+        else:   
+            pcce[key][[on[i], f"{on[i]} (days)", f"{on[i]} date", f"{on[i]} expected date"]] = pd.merge(start_date, op[on[i]], left_index=True, right_index=True).apply(determine_status, args=(deltas[i],), axis=1)
 
     return pcce
 
@@ -683,6 +622,8 @@ dref_cols = sheets["DREF"].columns
 sheets["MCMR"] = spark.read.table("mcmr").toPandas()
 sheets["Protracted"] = spark.read.table("pcce").toPandas()
 escalation = spark.read.table("escalation_events").toPandas()
+surge_requests = spark.read.table("SURGE").toPandas()
+surge_requests = surge_requests.set_index("Ref")
 bucket = organize_sheets()
 area_split_dfs = generate_overview(bucket, sheets)
 general_df = pd.concat([i["General Information"] for _, i in area_split_dfs.items()])
