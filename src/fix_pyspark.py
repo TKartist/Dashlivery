@@ -69,7 +69,7 @@ def full_list(cols):
 
 def summarize_df(df):
     df = df.copy()
-    categories = ["Achieved", "Not Achieved", "Achieved Early", "Achieved Late", "DNU", "Upcoming"]
+    categories = ["Achieved", "Not Achieved", "Achieved Early", "Achieved Late", "N/A", "Upcoming"]
 
     for category in categories:
         df.loc[:, category] = df.apply(lambda x: sum(str(cell) == category for cell in x), axis=1)
@@ -82,7 +82,7 @@ def summarize_df(df):
 
     df["General Performance"] = np.where(denominator != 0, numerator / denominator, 0)
 
-    cols_to_move = ["Achieved", "Not Achieved", "Upcoming", "Achieved Early", "Achieved Late", "DNU", "Data Completeness", "General Performance"]
+    cols_to_move = ["Achieved", "Not Achieved", "Upcoming", "Achieved Early", "Achieved Late", "N/A", "Data Completeness", "General Performance"]
     df = df[cols_to_move + [col for col in df.columns if col not in cols_to_move]]
     return df
 
@@ -97,7 +97,7 @@ def update_general_info(folder, general):
         df["Upcoming"] = temp["Upcoming"] if "Upcoming" not in df.columns else df["Upcoming"] + temp["Upcoming"]
         df["Achieved Early"] = temp["Achieved Early"] if "Achieved Early" not in df.columns else df["Achieved Early"] + temp["Achieved Early"]
         df["Achieved Late"] = temp["Achieved Late"] if "Achieved Late" not in df.columns else df["Achieved Late"] + temp["Achieved Late"]
-        df["DNU"] = temp["DNU"] if "DNU" not in df.columns else df["DNU"] + temp["DNU"]
+        df["N/A"] = temp["N/A"] if "N/A" not in df.columns else df["N/A"] + temp["N/A"]
     
     dc_num = df["Achieved"] + df["Achieved Early"] + df["Achieved Late"]
     dc_den = df["Achieved"] + df["Not Achieved"] + df["Achieved Early"] + df["Achieved Late"]
@@ -249,7 +249,7 @@ def determine_status_ea(row, l1, l2):
             return pd.Series(["Upcoming", 365, "-", expected_date], index=[keys[1], f"{keys[1]} (days)", f"{keys[1]} date", f"{keys[1]} expected date"]) 
         return pd.Series(["Not Achieved", 365, "-", expected_date], index=[keys[1], f"{keys[1]} (days)", f"{keys[1]} date", f"{keys[1]} expected date"])
     if r1 == "DNU" or r1 == "N/A":
-        return pd.Series(["DNU", 365, "-", expected_date], index=[keys[1], f"{keys[1]} (days)", f"{keys[1]} date", f"{keys[1]} expected date"])
+        return pd.Series(["N/A", 365, "-", expected_date], index=[keys[1], f"{keys[1]} (days)", f"{keys[1]} date", f"{keys[1]} expected date"])
     
     if r1 == "Not Achieved":
         return pd.Series(["Not Achieved", 365, "-", expected_date], index=[keys[1], f"{keys[1]} (days)", f"{keys[1]} date", f"{keys[1]} expected date"])
@@ -275,7 +275,7 @@ def determine_status(row, limit):
             return pd.Series(["Upcoming", 365, "-", expected_date], index=[keys[1], f"{keys[1]} (days)", f"{keys[1]} date", f"{keys[1]} expected date"]) 
         return pd.Series(["Not Achieved", 365, "-", expected_date], index=[keys[1], f"{keys[1]} (days)", f"{keys[1]} date", f"{keys[1]} expected date"])
     if r1 == "DNU" or r1 == "N/A":
-        return pd.Series(["DNU", 365, "-", expected_date], index=[keys[1], f"{keys[1]} (days)", f"{keys[1]} date", f"{keys[1]} expected date"])
+        return pd.Series(["N/A", 365, "-", expected_date], index=[keys[1], f"{keys[1]} (days)", f"{keys[1]} date", f"{keys[1]} expected date"])
     
     if r1 == "Not Achieved":
         return pd.Series(["Not Achieved", 365, "-", expected_date], index=[keys[1], f"{keys[1]} (days)", f"{keys[1]} date", f"{keys[1]} expected date"])
@@ -455,7 +455,7 @@ def generate_overview(bucket, sheets):
 '''----------------------------------------------------------------------------------------------------------------------------------------------------------------------------'''
 
 def read_area_info_folder(dfs):
-    cols = ["Ref", "Area", "Achieved", "Not Achieved", "Upcoming", "Achieved Early", "Achieved Late", "DNU", "Data Completeness", "General Performance"]
+    cols = ["Ref", "Area", "Achieved", "Not Achieved", "Upcoming", "Achieved Early", "Achieved Late", "N/A", "Data Completeness", "General Performance"]
     df_list = []
     for key, df in dfs.items():
         df.reset_index(inplace=True)
@@ -483,8 +483,8 @@ def area_info(area_split_dfs):
 '''----------------------------------------------------------------------------------------------------------------------------------------------------------------------------'''
 
 def calculate_delta(today, status, expected, d):
-    if pd.notna(status) and status == "DNU":
-        delta = "DNU"
+    if pd.notna(status) and status == "N/A":
+        delta = "N/A"
     else:
         if d == 90:
             if status == "Upcoming":
@@ -532,7 +532,7 @@ def read_task_info(df, op, op_df, area):
                 "Task" : e,
                 "Status" : status,
                 "Completed" : str(row[c])[:10],
-                "Expected Date" : "-" if row[a] == "DNU" else str(row[d])[:10],
+                "Expected Date" : "-" if row[a] == "N/A" else str(row[d])[:10],
                 "Delta" : delta,
                 "Raw_Delta": raw_delta,
                 "Escalated" : escalated,
@@ -571,7 +571,7 @@ def read_im(df, op, op_df):
                 "Task" : a.replace("_", " "),
                 "Status" : status,
                 "Completed" : str(row[c])[:10],
-                "Expected Date": "-" if row[a] == "DNU" else str(row[d])[:10],
+                "Expected Date": "-" if row[a] == "N/A" else str(row[d])[:10],
                 "Delta" : delta,
                 "Raw_Delta": raw_delta,
                 "Escalated" : escalated,
@@ -583,7 +583,7 @@ status_mapping = {
     "Achieved" : 3,
     "Achieved Early" : 4,
     "Achieved Late" : 2,
-    "DNU" : 0,
+    "N/A" : 0,
     "Upcoming" : 0,
     "Not Achieved" : 0,
 }
