@@ -1,7 +1,15 @@
+from datetime import datetime, timedelta, date
+import pandas as pd
+from pyspark.sql.functions import to_date
+import warnings
+import numpy as np
+warnings.filterwarnings("ignore")
+
+
 def organize_ea(sheet):
     col_name = sheet.columns.tolist()
     sheet["Ref"] = "EA" + sheet[col_name[4]] + sheet[col_name[6]]
-    disasters = sheet.loc[:, col_name[:11]]
+    disasters = sheet.loc[:, col_name[:11] + [col_name[77]]]
     ops_details = sheet.loc[:, [col_name[0]] + col_name[11:16] + col_name[22:26] + col_name[38:58] + col_name[69:72] + col_name[73:75]]
     dref_shift = sheet.loc[:, [col_name[0]] + [col_name[72]]]
     print("EA master data organized")
@@ -10,7 +18,7 @@ def organize_ea(sheet):
 def organize_dref(sheet):
     col_name = sheet.columns.tolist()
     sheet["Ref"] = "DREF" + sheet[col_name[4]] + sheet[col_name[6]]
-    disasters = sheet.loc[:, col_name[:11]]
+    disasters = sheet.loc[:, col_name[:11] + [col_name[54]]]
     operational_progresses = sheet.loc[:, [col_name[0]] + col_name[11:19] + col_name[32:39] + col_name[51:54]]
 
     print("DREF master data organized")
@@ -19,7 +27,7 @@ def organize_dref(sheet):
 def organize_mcmr(sheet):
     col_name = sheet.columns.tolist()
     sheet["Ref"] = "MCMR" + sheet[col_name[6]] 
-    disasters = sheet.loc[:, col_name[:11]]
+    disasters = sheet.loc[:, col_name[:11] + [col_name[52]]]
     operational_progresses = sheet.loc[:, [col_name[0]] + col_name[11:14] + col_name[20:22] + col_name[35:44] + col_name[46:]]
 
     print("MCMR master data organized")
@@ -59,6 +67,23 @@ def full_list(cols):
     return output
 
 
+def replace_category(row, df_classification):
+    idx = row.name
+    if df_classification[idx] == 'Orange':
+        return row.apply(lambda x: 'N/A' if x == 'Not Achieved' else x)
+    return row
+
+
+def correct_im(df, df_classification):
+    df = df.copy()
+    categories = ["Achieved", "Not Achieved", "Achieved Early", "Achieved Late", "N/A", "Upcoming"]
+    df = df.apply(lambda row: replace_category(row, df_classification), axis=1)
+
+    return df
+    # for category in categories:
+    #     df.loc[:, category] = df.apply(lambda x: sum(str(cell) == category for cell in x), axis=1)
+
+
 def summarize_df(df):
     df = df.copy()
     categories = ["Achieved", "Not Achieved", "Achieved Early", "Achieved Late", "N/A", "Upcoming"]
@@ -69,9 +94,9 @@ def summarize_df(df):
     dc_num = df["Achieved"] + df["Achieved Early"] + df["Achieved Late"]
     dc_den = df["Achieved"] + df["Not Achieved"] + df["Achieved Early"] + df["Achieved Late"]
     df["Data Completeness"] = np.where(dc_den != 0, dc_num / dc_den, 1)
+
     numerator = df["Achieved"] * 3 + df["Achieved Early"] * 4 + df["Achieved Late"] * 2
     denominator = (df["Achieved"] + df["Not Achieved"] + df["Achieved Early"] + df["Achieved Late"]) * 4
-
     df["General Performance"] = np.where(denominator != 0, numerator / denominator, 0)
 
     cols_to_move = ["Achieved", "Not Achieved", "Upcoming", "Achieved Early", "Achieved Late", "N/A", "Data Completeness", "General Performance"]
@@ -94,9 +119,9 @@ def update_general_info(folder, general):
     dc_num = df["Achieved"] + df["Achieved Early"] + df["Achieved Late"]
     dc_den = df["Achieved"] + df["Not Achieved"] + df["Achieved Early"] + df["Achieved Late"]
     df["Data Completeness"] = np.where(dc_den != 0, dc_num / dc_den, 1)
+    
     numerator = df["Achieved"] * 3 + df["Achieved Early"] * 4 + df["Achieved Late"] * 2
     denominator = (df["Achieved"] + df["Not Achieved"] + df["Achieved Early"] + df["Achieved Late"]) * 4
-
     df["General Performance"] = np.where(denominator != 0, numerator / denominator, 0)
 
     return df
@@ -119,14 +144,13 @@ def area_split_ea(overview, columns, general):
     security = overview[full_list(columns[69:71])]
 
     areas = {}
-    
     areas["Assessment"] = summarize_df(assessment)
     areas["Planning"] = summarize_df(resource_mobilization)
     areas["Surge"] = summarize_df(surge)
     areas["HR"] = summarize_df(hr)
     areas["Coordination"] = summarize_df(coordination)
     areas["Logistics"] = summarize_df(logistics)
-    areas["Information Management"] = summarize_df(im)
+    areas["Information Management"] = summarize_df(correct_im(im, general["Classification_"]))
     areas["Finance"] = summarize_df(finance)
     areas["Security"] = summarize_df(security)
     general_info = update_general_info(areas, general)
@@ -152,7 +176,7 @@ def area_split_dref(overview, columns, general):
     areas["Risk"] = summarize_df(risk)
     areas["Logistics"] = summarize_df(logistics)
     areas["Finance"] = summarize_df(finance)
-    areas["Delivery"] = summarize_df(delivery) 
+    areas["Program Delivery"] = summarize_df(delivery) 
     areas["Security"] = summarize_df(security)
     general_info = update_general_info(areas, general)
     areas["General Information"] = general_info
@@ -174,7 +198,7 @@ def area_split_mcmr(overview, columns, general):
     areas["HR"] = summarize_df(hr)
     areas["Coordination"] = summarize_df(coordination)
     areas["Logistics"] = summarize_df(logistics)
-    areas["Information Management"] = summarize_df(im)
+    areas["Information Management"] = summarize_df(correct_im(im, general["Classification_"]))
     areas["Finance"] = summarize_df(finance)
     general_info = update_general_info(areas, general)
     areas["General Information"] = general_info
@@ -201,7 +225,7 @@ def area_split_pcce(overview, columns, general):
     areas["HR"] = summarize_df(hr)
     areas["Coordination"] = summarize_df(coordination)
     areas["Logistics"] = summarize_df(logistics)
-    areas["Information Management"] = summarize_df(im)
+    areas["Information Management"] = summarize_df(correct_im(im, general["Classification_"]))
     areas["Finance"] = summarize_df(finance)
     areas["Security"] = summarize_df(security)
     general_info = update_general_info(areas, general)
@@ -620,10 +644,12 @@ bucket = organize_sheets()
 area_split_dfs = generate_overview(bucket, sheets)
 general_df = pd.concat([i["General Information"] for _, i in area_split_dfs.items()])
 general_df.reset_index(inplace=True)
-general_df = general_df[['Ref'] + [col for col in general_df.columns[:19] if col != 'Ref']]
+general_df = general_df[['Ref'] + [col for col in general_df.columns[:20] if col != 'Ref']]
+general_df["Launch Date"] = general_df["Launch Date"].apply(convert_date)
 spark_general_info = spark.createDataFrame(general_df)
 spark_general_info = spark_general_info.toDF(*[c.replace(" ", "_") for c in spark_general_info.columns])
 spark_general_info = spark_general_info.withColumn("Trigger_Date", to_date("Trigger_Date", "M/d/yyyy"))
+spark_general_info = spark_general_info.withColumn("Launch_Date", to_date("Launch_Date", "M/d/yyyy"))
 spark_general_info.write.mode("overwrite").option("mergeSchema", "true").format("delta").saveAsTable("master_data_processing.general_info")
 
 df_area_info = area_info(area_split_dfs)
