@@ -24,6 +24,15 @@ def organize_dref(sheet):
     print("DREF master data organized")
     return {"disasters": disasters.set_index("Ref"), "operational_progresses": operational_progresses.set_index("Ref")}
 
+def organize_dref_escalated(sheet):
+    col_name = sheet.columns.tolist()
+    sheet["Ref"] = "DREF" + sheet[col_name[4]] + sheet[col_name[6]]
+    disasters = sheet.loc[:, col_name[:11] + [col_name[50]]]
+    operational_progresses = sheet.loc[:, [col_name[0]] + col_name[11:17] + col_name[30:38]]
+
+    print("DREF master data organized")
+    return {"disasters": disasters.set_index("Ref"), "operational_progresses": operational_progresses.set_index("Ref")}
+
 def organize_mcmr(sheet):
     col_name = sheet.columns.tolist()
     sheet["Ref"] = "MCMR" + sheet[col_name[6]] 
@@ -49,6 +58,7 @@ def organize_sheets():
     bucket["EA"] = organize_ea(spark.read.table("ea").toPandas())
     bucket["MCMR"] = organize_mcmr(spark.read.table("mcmr").toPandas())
     bucket["PCCE"] = organize_protracted(spark.read.table("pcce").toPandas())
+    bucket["DREF_ESCALATED"] = organize_dref_escalated(spark.read.table("dref_2").toPandas())
     return bucket
 
 
@@ -76,12 +86,9 @@ def replace_category(row, df_classification):
 
 def correct_im(df, df_classification):
     df = df.copy()
-    categories = ["Achieved", "Not Achieved", "Achieved Early", "Achieved Late", "N/A", "Upcoming"]
     df = df.apply(lambda row: replace_category(row, df_classification), axis=1)
 
     return df
-    # for category in categories:
-    #     df.loc[:, category] = df.apply(lambda x: sum(str(cell) == category for cell in x), axis=1)
 
 
 def summarize_df(df):
@@ -156,6 +163,29 @@ def area_split_ea(overview, columns, general):
     general_info = update_general_info(areas, general)
     areas["General Information"] = general_info
     areas["Program Delivery"] = summarize_df(program_delivery)
+    return areas
+
+def area_split_dref_escalated(overview, columns, general):
+    assessment = overview[full_list(columns[11])]
+    resource_mobilization = overview[full_list(columns[12:14] + [columns[33]])]
+    surge = overview[full_list(columns[14:17])]
+    logistics = overview[full_list(columns[30:32])]
+    finance = overview[full_list(columns[32:33] + columns[34:37])]
+    delivery = overview[full_list([columns[37]])]
+
+    if "Tracker Status" in general.columns:
+        general = general.rename(columns={"Tracker Status" : "tracker Status"})
+
+    areas = {}
+    
+    areas["Assessment"] = summarize_df(assessment)
+    areas["Planning"] = summarize_df(resource_mobilization)
+    areas["Surge"] = summarize_df(surge)
+    areas["Logistics"] = summarize_df(logistics)
+    areas["Finance"] = summarize_df(finance)
+    areas["Program Delivery"] = summarize_df(delivery)
+    general_info = update_general_info(areas, general)
+    areas["General Information"] = general_info
     return areas
 
 def area_split_dref(overview, columns, general):
@@ -374,6 +404,38 @@ def process_dref(dref):
 
     return dref
 
+def process_dref_escalated(dref_escalated):
+    op = dref_escalated["operational_progresses"].copy()
+    
+    if op.empty:
+        return None
+    
+    key = "achievements"
+    dref_escalated[key] = pd.DataFrame()
+    start_date = dref_escalated["disasters"]["Trigger Date_"].apply(convert_date)
+    surge_date = dref_escalated["disasters"]["Trigger Date_"].copy()
+    for ref, val in surge_requests.iterrows():
+        surge_date[ref] = val["requested-on"]
+    
+    surge_date = surge_date.apply(convert_date)
+
+    on = op.columns
+    for col in on:
+        op[col] = op[col].apply(convert_date)
+    
+    
+    dref_escalated[key]["Ref"] = dref_escalated["disasters"].index
+    dref_escalated[key].set_index("Ref", inplace=True)
+
+    deltas = [3, 10, 10, 1, 2, 3, 17, 20, 17, 12, 20, 21, 24, 38]
+    for i in range(len(deltas)):
+        if "Surge" in on[i] or "RR" in on[i]:
+            dref_escalated[key][[on[i], f"{on[i]} (days)", f"{on[i]} date", f"{on[i]} expected date"]] = pd.merge(surge_date, op[on[i]], left_index=True, right_index=True).apply(determine_status, args=(deltas[i],), axis=1)
+        else:
+            dref_escalated[key][[on[i], f"{on[i]} (days)", f"{on[i]} date", f"{on[i]} expected date"]] = pd.merge(start_date, op[on[i]], left_index=True, right_index=True).apply(determine_status, args=(deltas[i],), axis=1)
+
+    return dref_escalated
+
 def process_mcmr(mcmr):
     op = mcmr["operational_progresses"].copy()
     
@@ -446,12 +508,15 @@ def generate_overview(bucket, sheets):
     dref = process_dref(bucket["DREF"])
     mcmr = process_mcmr(bucket["MCMR"])
     pcce = process_pcce(bucket["PCCE"])
+    dref_escalated = process_dref_escalated(bucket["DREF_ESCALATED"])
 
     key = "achievements"
     split_dict = {}
     for sheet_name, sheet in sheets.items():
         if "EA" in sheet_name and ea != None:
             split_dict["EA"] = area_split_ea(ea[key], sheet.columns.tolist(), bucket["EA"]["disasters"])
+        elif "DREF_ESCALATED" in sheet_name and dref_escalated != None:
+            split_dict["DREF_ESCALATED"] = area_split_dref_escalated(dref_escalated[key], sheet.columns.tolist(), bucket["DREF_ESCALATED"]["disasters"])
         elif "DREF" in sheet_name and dref != None:
             split_dict["DREF"] = area_split_dref(dref[key], sheet.columns.tolist(), bucket["DREF"]["disasters"])
         elif "MCMR" in sheet_name and mcmr != None:
@@ -492,6 +557,7 @@ def area_info(area_split_dfs):
     df1 = read_area_info_folder(area_split_dfs.get("DREF", {}))
     df2 = read_area_info_folder(area_split_dfs.get("MCMR", {}))
     df3 = read_area_info_folder(area_split_dfs.get("PCCE", {}))
+    df4 = read_area_info_folder(area_split_dfs.get("DREF_ESCALATED", {}))
     df_combined = pd.concat([df, df1, df2, df3])
     
     return df_combined
@@ -623,7 +689,7 @@ def areas_in_op(adf, op):
 
 
 def task_info_extraction(area_split_dfs):
-    task_infos = areas_in_op(area_split_dfs.get("EA", {}), "ea") + areas_in_op(area_split_dfs.get("DREF", {}), "dref") + areas_in_op(area_split_dfs.get("MCMR", {}), "mcmr") + areas_in_op(area_split_dfs.get("PCCE", {}), "protracted crisis")
+    task_infos = areas_in_op(area_split_dfs.get("EA", {}), "ea") + areas_in_op(area_split_dfs.get("DREF", {}), "dref") + areas_in_op(area_split_dfs.get("MCMR", {}), "mcmr") + areas_in_op(area_split_dfs.get("PCCE", {}), "protracted crisis") + areas_in_op(area_split_dfs.get("DREF_ESCALATED", {}), "dref_escalated")
     df = pd.DataFrame(task_infos)
     df["Score"] = df["Status"].map(status_mapping)
     df["Delta"] = df["Delta"].astype(str)
@@ -637,6 +703,7 @@ sheets["DREF"] = spark.read.table("dref").toPandas()
 dref_cols = sheets["DREF"].columns
 sheets["MCMR"] = spark.read.table("mcmr").toPandas()
 sheets["Protracted"] = spark.read.table("pcce").toPandas()
+sheets["DREF_ESCALATED"] = spark.read.table("dref_2").toPandas()
 escalation = spark.read.table("escalation_events").toPandas()
 surge_requests = spark.read.table("SURGE").toPandas()
 surge_requests = surge_requests.set_index("Ref")
