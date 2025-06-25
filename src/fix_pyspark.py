@@ -1,10 +1,9 @@
 from datetime import datetime, timedelta, date
 import pandas as pd
-from pyspark.sql.functions import to_date
+from pyspark.sql.functions import to_date, when, col
 import warnings
 import numpy as np
 warnings.filterwarnings("ignore")
-
 
 def organize_ea(sheet):
     col_name = sheet.columns.tolist()
@@ -351,6 +350,9 @@ def process_ea(ea):
     if "Trigger Date_" in ea["disasters"].columns:
         ea["disasters"] = ea["disasters"].rename(columns={"Trigger Date_":"Trigger_Date_"})
     start_date = ea["disasters"]["Trigger_Date_"].apply(convert_date)
+    print(start_date)
+    start_date["EANigeriaMDRNG042"] = ea["disasters"]["Launch Date"]["EANigeriaMDRNG042"]
+    print(start_date)
     surge_date = ea["disasters"]["Trigger_Date_"].copy()
     for ref, val in surge_requests.iterrows():
         surge_date[ref] = val["requested-on"]
@@ -725,9 +727,16 @@ ti = task_info_extraction(area_split_dfs)
 
 spark_task_infos = spark.createDataFrame(ti)
 spark_task_infos = spark_task_infos.toDF(*[c.replace(" ", "_") for c in spark_task_infos.columns])
+spark_task_infos = spark_task_infos.withColumn(
+    "Score",
+    when(((col("Status") == "N/A") | (col("Status") == "Upcoming")) & (col("Score") == 0), None)
+    .otherwise(col("Score"))
+)
 spark_task_infos.write.mode("overwrite").option("mergeSchema", "true").format("delta").saveAsTable("master_data_processing.task_info")
 df_area_info["General Performance"] = df_area_info["General Performance"].fillna(0)
-
+df_area_info.loc[(df_area_info["Achieved"] == 0) & (df_area_info["Achieved Early"] == 0) & (df_area_info["Achieved Late"] == 0) & (df_area_info["Not Achieved"] == 0), "General Performance"] = None
+# print(df_area_info.columns)
 spark_area_info = spark.createDataFrame(df_area_info)
 spark_area_info = spark_area_info.toDF(*[c.replace(" ", "_") for c in spark_area_info.columns])
+
 spark_area_info.write.mode("overwrite").option("mergeSchema", "true").format("delta").saveAsTable("master_data_processing.area_info")
