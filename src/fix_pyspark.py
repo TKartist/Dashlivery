@@ -139,13 +139,13 @@ def update_general_info(folder, general):
 
 def area_split_ea(overview, columns, general):
     assessment = overview[full_list(columns[11])]
-    resource_mobilization = overview[full_list(columns[12:16] + [columns[22]] + [columns[71]])] # add EA coverage
+    resource_mobilization = overview[full_list(columns[12:16] + [columns[22]])] # add EA coverage
     surge = overview[full_list(columns[23:26])] # add % related values to the surge (rrp)
     hr = overview[full_list(columns[38:40])] # add % related values to the hr (rrp)
     coordination = overview[full_list(columns[40:44])] # Upcoming joint statement in master data
     logistics = overview[full_list(columns[44:47])]
     im = overview[full_list(columns[47:52] + columns[73:75])]
-    finance = overview[full_list(columns[52:56])]
+    finance = overview[full_list(columns[52:56] + [columns[71]])]
     program_delivery = overview[full_list(columns[56:58])]
     security = overview[full_list(columns[69:71])]
 
