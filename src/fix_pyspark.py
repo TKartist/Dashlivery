@@ -26,6 +26,7 @@ def organize_dref(sheet):
 def organize_dref_escalated(sheet):
     col_name = sheet.columns.tolist()
     sheet["Ref"] = "DREF" + sheet[col_name[4]] + sheet[col_name[6]]
+    sheet["EWTS Varient_"] = "DREF 2nd Allocation"
     disasters = sheet.loc[:, col_name[:11] + [col_name[50]]]
     operational_progresses = sheet.loc[:, [col_name[0]] + col_name[11:17] + col_name[30:38]]
 
@@ -350,9 +351,7 @@ def process_ea(ea):
     if "Trigger Date_" in ea["disasters"].columns:
         ea["disasters"] = ea["disasters"].rename(columns={"Trigger Date_":"Trigger_Date_"})
     start_date = ea["disasters"]["Trigger_Date_"].apply(convert_date)
-    print(start_date)
     start_date["EANigeriaMDRNG042"] = ea["disasters"]["Launch Date"]["EANigeriaMDRNG042"]
-    print(start_date)
     surge_date = ea["disasters"]["Trigger_Date_"].copy()
     for ref, val in surge_requests.iterrows():
         surge_date[ref] = val["requested-on"]
