@@ -9,7 +9,7 @@ def organize_ea(sheet):
     col_name = sheet.columns.tolist()
     sheet["Ref"] = "EA" + sheet[col_name[4]] + sheet[col_name[6]]
     disasters = sheet.loc[:, col_name[:11] + [col_name[75]]]
-    ops_details = sheet.loc[:, [col_name[0]] + col_name[11:16] + col_name[22:26] + col_name[38:58] + col_name[69:70] + col_name[71:73]]
+    ops_details = sheet.loc[:, [col_name[0]] + col_name[11:16] + col_name[22:26] + col_name[38:58] + col_name[69:70] + col_name[71:75] + col_name[76:79]]
     dref_shift = sheet.loc[:, [col_name[0]] + [col_name[70]]]
     print("EA master data organized")
     return {"disasters" : disasters.set_index("Ref"), "operational_progresses" : ops_details.set_index("Ref"), "dref_shift" : dref_shift.set_index("Ref")}
@@ -18,7 +18,7 @@ def organize_dref(sheet):
     col_name = sheet.columns.tolist()
     sheet["Ref"] = "DREF" + sheet[col_name[4]] + sheet[col_name[6]]
     disasters = sheet.loc[:, col_name[:11] + [col_name[52]]]
-    operational_progresses = sheet.loc[:, [col_name[0]] + col_name[11:19] + col_name[32:39] + col_name[51:52]]
+    operational_progresses = sheet.loc[:, [col_name[0]] + col_name[11:19] + col_name[32:39] + col_name[51:52] + col_name[53:56]]
 
     print("DREF master data organized")
     return {"disasters": disasters.set_index("Ref"), "operational_progresses": operational_progresses.set_index("Ref")}
@@ -146,13 +146,15 @@ def area_split_ea(overview, columns, general):
     coordination = overview[full_list(columns[40:44])] # Upcoming joint statement in master data
     logistics = overview[full_list(columns[44:47])]
     im = overview[full_list(columns[47:52] + columns[71:73])]
-    finance = overview[full_list(columns[52:56])]
+    risk = overview[full_list(columns[73:75])]
+    finance = overview[full_list(columns[52:56] + columns[77:79])]
     program_delivery = overview[full_list(columns[56:58])]
-    security = overview[full_list(columns[69:70])]
+    security = overview[full_list(columns[69:70] + columns[76:77])]
 
     areas = {}
     areas["Assessment"] = summarize_df(assessment)
     areas["Planning"] = summarize_df(resource_mobilization)
+    areas["Risk"] = summarize_df(risk)
     areas["Surge"] = summarize_df(surge)
     areas["HR"] = summarize_df(hr)
     areas["Coordination"] = summarize_df(coordination)
@@ -194,9 +196,9 @@ def area_split_dref(overview, columns, general):
     resource_mobilization = overview[full_list(columns[14:16])]
     surge = overview[full_list(columns[16:19])]
     logistics = overview[full_list(columns[32:34])]
-    finance = overview[full_list(columns[34:38])]
+    finance = overview[full_list(columns[34:38] + columns[54:56])]
     delivery = overview[full_list([columns[38]])] # add targeted population, ehi distribution, and implementation rate
-    security = overview[full_list(columns[51:52])]
+    security = overview[full_list(columns[51:52] + columns[53:54])]
 
     areas = {}
     
@@ -363,8 +365,8 @@ def process_ea(ea):
     
     ea[key]["Ref"] = ea["disasters"].index
     ea[key].set_index("Ref", inplace=True)
-    deltas = [3, 3, 0, 4, 11, 18, 1, 2, 3, 11, 13, 2, 4, 7, 1, 11, 11, 14, 1, 3, 7, 14, 30, 11, 14, 16, 20, 32, 18, 7, 60, 90]
-    deltas_b = [3, 3, 0, 0, 7, 14, 1, 2, 3, 7, 9, 2, 4, 7, 1, 7, 7, 10, 1, 3, 7, 14, 30, 7, 10, 12, 16, 29, 14, 7, 60, 90]
+    deltas = [3, 3, 0, 4, 11, 18, 1, 2, 3, 11, 13, 2, 4, 7, 1, 11, 11, 14, 1, 3, 7, 14, 30, 11, 14, 16, 20, 32, 18, 7, 60, 90, 18, 34, 7, 2, 4]
+    deltas_b = [3, 3, 0, 0, 7, 14, 1, 2, 3, 7, 9, 2, 4, 7, 1, 7, 7, 10, 1, 3, 7, 14, 30, 7, 10, 12, 16, 29, 14, 7, 60, 90, 14, 30, 7, 2, 4]
 
     for i in range(len(deltas)):
         if "Surge" in on[i] or "RR" in on[i]:
@@ -396,7 +398,7 @@ def process_dref(dref):
     dref[key]["Ref"] = dref["disasters"].index
     dref[key].set_index("Ref", inplace=True)
 
-    deltas = [3, 12, 14, 14, 14, 1, 2, 3, 19, 22, 17, 21, 22, 30, 30, 7]
+    deltas = [3, 12, 14, 14, 14, 1, 2, 3, 19, 22, 17, 21, 22, 30, 30, 7, 7, 2, 4]
     for i in range(len(deltas)):
         if "Surge" in on[i] or "RR" in on[i]:
             dref[key][[on[i], f"{on[i]} (days)", f"{on[i]} date", f"{on[i]} expected date"]] = pd.merge(surge_date, op[on[i]], left_index=True, right_index=True).apply(determine_status, args=(deltas[i],), axis=1)
@@ -723,10 +725,8 @@ spark_general_info.write.mode("overwrite").option("mergeSchema", "true").format(
 df_area_info = area_info(area_split_dfs)
 
 ti = task_info_extraction(area_split_dfs)
-print(len(ti))
 
 ti = ti[~ti["Task"].str.contains("Working Advance Request  IRP Form  signed by IFRC and NS no longer than 2 days from the DREF approval", na=False)]
-print(len(ti))
 spark_task_infos = spark.createDataFrame(ti)
 spark_task_infos = spark_task_infos.toDF(*[c.replace(" ", "_") for c in spark_task_infos.columns])
 spark_task_infos = spark_task_infos.withColumn(
