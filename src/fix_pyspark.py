@@ -1,9 +1,4 @@
-from datetime import datetime, timedelta, date
-import pandas as pd
-from pyspark.sql.functions import to_date, when, col
-import warnings
-import numpy as np
-warnings.filterwarnings("ignore")
+
 
 def organize_ea(sheet):
     col_name = sheet.columns.tolist()
@@ -36,8 +31,8 @@ def organize_dref_escalated(sheet):
 def organize_mcmr(sheet):
     col_name = sheet.columns.tolist()
     sheet["Ref"] = "MCMR" + sheet[col_name[6]] 
-    disasters = sheet.loc[:, col_name[:11] + [col_name[52]]]
-    operational_progresses = sheet.loc[:, [col_name[0]] + col_name[11:14] + col_name[20:22] + col_name[35:44] + col_name[46:]]
+    disasters = sheet.loc[:, col_name[:11] + [col_name[53]]]
+    operational_progresses = sheet.loc[:, [col_name[0]] + col_name[11:14] + col_name[20:23] + col_name[36:45] + col_name[47:53]]
 
     print("MCMR master data organized")
     return {"disasters" : disasters.set_index("Ref"), "operational_progresses" : operational_progresses.set_index("Ref")}
@@ -215,13 +210,13 @@ def area_split_dref(overview, columns, general):
     return areas
 
 def area_split_mcmr(overview, columns, general):
-    resource_mobilization = overview[full_list(columns[11:14] + [columns[38]])] # add coverage
-    surge = overview[full_list(columns[20:22])] # add % related values to the surge (rrp)
-    hr = overview[full_list(columns[35:37])] # add % related values to the hr (rrp)
-    coordination = overview[full_list(columns[37])]
-    logistics = overview[full_list(columns[38:41])]
-    im = overview[full_list(columns[41:42] + columns[46:52])]
-    finance = overview[full_list(columns[42:44])]
+    resource_mobilization = overview[full_list(columns[11:14] + [columns[20]])] # add coverage
+    surge = overview[full_list(columns[21:23])] # add % related values to the surge (rrp)
+    hr = overview[full_list(columns[36:38])] # add % related values to the hr (rrp)
+    coordination = overview[full_list(columns[38])]
+    logistics = overview[full_list(columns[39:42])]
+    im = overview[full_list(columns[42:43] + columns[47:53])]
+    finance = overview[full_list(columns[43:45])]
 
     areas = {}
     
@@ -461,7 +456,7 @@ def process_mcmr(mcmr):
     
     mcmr[key]["Ref"] = mcmr["disasters"].index
     mcmr[key].set_index("Ref", inplace=True)
-    deltas = [3, 4, 11, 1, 2, 11, 13, 1, 11, 11, 14, 1, 9, 14, 3, 7, 14, 30, 60, 90]
+    deltas = [3, 4, 11, 18, 1, 2, 11, 13, 1, 11, 11, 14, 1, 9, 14, 3, 7, 14, 30, 60, 90]
 
     for i in range(len(deltas)):
         if "Surge" in on[i] or "RR" in on[i]:
@@ -725,6 +720,8 @@ spark_general_info.write.mode("overwrite").option("mergeSchema", "true").format(
 df_area_info = area_info(area_split_dfs)
 
 ti = task_info_extraction(area_split_dfs)
+
+ti["Task"] = ti["Task"].str.rstrip() + " " + ti["EWTS Varient"]
 
 ti = ti[~ti["Task"].str.contains("Working Advance Request  IRP Form  signed by IFRC and NS no longer than 2 days from the DREF approval", na=False)]
 spark_task_infos = spark.createDataFrame(ti)
