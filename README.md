@@ -22,7 +22,6 @@ Outlayer of the Dashboard can be viewed here: [***Please Click Here***](https://
 
 
 ## GOAL:
-- Data transformation to clean and organize data for the dashboard
-- Visualization on PowerBI
+- Completely overwritting the code with same logic for better automation of the process and for future integration of newer versions
 
 - COMPLETEEEEE
