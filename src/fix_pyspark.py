@@ -1,5 +1,3 @@
-
-
 def organize_ea(sheet):
     col_name = sheet.columns.tolist()
     sheet["Ref"] = "EA" + sheet[col_name[4]] + sheet[col_name[6]]
