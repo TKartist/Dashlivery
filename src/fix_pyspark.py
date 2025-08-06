@@ -658,9 +658,9 @@ def read_im(df, op, op_df):
 
 
 status_mapping = {
-    "Achieved" : 3,
-    "Achieved Early" : 4,
-    "Achieved Late" : 2,
+    "Achieved" : 75,
+    "Achieved Early" : 100,
+    "Achieved Late" : 50,
     "N/A" : 0,
     "Upcoming" : 0,
     "Not Achieved" : 0,
