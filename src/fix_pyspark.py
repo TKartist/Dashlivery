@@ -2,7 +2,7 @@ def organize_ea(sheet):
     col_name = sheet.columns.tolist()
     sheet["Ref"] = "EA" + sheet[col_name[4]] + sheet[col_name[6]]
     disasters = sheet.loc[:, col_name[:11] + [col_name[75]]]
-    ops_details = sheet.loc[:, [col_name[0]] + col_name[11:16] + col_name[22:26] + col_name[38:58] + col_name[69:70] + col_name[71:75] + col_name[76:81]]
+    ops_details = sheet.loc[:, [col_name[0]] + col_name[11:16] + col_name[22:26] + col_name[38:58] + col_name[69:70] + col_name[71:75] + col_name[76:82]]
     
     dref_shift = sheet.loc[:, [col_name[0]] + [col_name[70]]]
     print("EA master data organized")
@@ -21,7 +21,7 @@ def organize_dref_escalated(sheet):
     col_name = sheet.columns.tolist()
     sheet["Ref"] = "DREF" + sheet[col_name[4]] + sheet[col_name[6]]
     sheet["EWTS Varient_"] = "DREF 2nd Allocation"
-    disasters = sheet.loc[:, col_name[:11] + [col_name[50]]]
+    disasters = sheet.loc[:, col_name[:11] + [col_name[49]]]
     operational_progresses = sheet.loc[:, [col_name[0]] + col_name[11:17] + col_name[30:37]]
     print("DREF master data organized")
     return {"disasters": disasters.set_index("Ref"), "operational_progresses": operational_progresses.set_index("Ref")}
@@ -51,7 +51,7 @@ def organize_sheets():
     bucket["EA"] = organize_ea(spark.read.table("ea").toPandas())
     bucket["MCMR"] = organize_mcmr(spark.read.table("mcmr").toPandas())
     bucket["PCCE"] = organize_protracted(spark.read.table("pcce").toPandas())
-    bucket["DREF_ESCALATED"] = organize_dref_escalated(spark.read.table("dref_2").toPandas())
+    bucket["DREF_ESCALATED"] = organize_dref_escalated(spark.read.table("dref_two").toPandas())
     return bucket
 
 
@@ -138,7 +138,8 @@ def area_split_ea(overview, columns, general):
     hr = overview[full_list(columns[38:40])] # add % related values to the hr (rrp)
     coordination = overview[full_list(columns[40:44])] # Upcoming joint statement in master data
     logistics = overview[full_list(columns[44:47])]
-    im = overview[full_list(columns[47:52] + columns[71:73])]
+    # im = overview[full_list(columns[47:52] + columns[71:73])]
+    im = overview[full_list(columns[47:51])]
     risk = overview[full_list(columns[73:75])]
     finance = overview[full_list(columns[52:56] + columns[77:79])]
     program_delivery = overview[full_list(columns[56:58] + columns[79:80])]
@@ -213,7 +214,8 @@ def area_split_mcmr(overview, columns, general):
     hr = overview[full_list(columns[36:38])] # add % related values to the hr (rrp)
     coordination = overview[full_list(columns[38])]
     logistics = overview[full_list(columns[39:42])]
-    im = overview[full_list(columns[42:43] + columns[47:53])]
+    # im = overview[full_list(columns[42:43] + columns[47:53])]
+    im = overview[full_list(columns[42:43] + columns[47:50])]
     finance = overview[full_list(columns[43:45])]
 
     areas = {}
@@ -237,7 +239,9 @@ def area_split_pcce(overview, columns, general):
     hr = overview[full_list(columns[39:41])]
     coordination = overview[full_list(columns[41:44])]
     logistics = overview[full_list(columns[44:47])]
-    im = overview[full_list(columns[47:52] + columns[63:65])]
+    # im = overview[full_list(columns[47:52] + columns[63:65])]
+    im = overview[full_list(columns[47:51])]
+
     finance = overview[full_list(columns[52:56])]
     # delivery = overview[full_list(columns[55:57])] # add percentage of targeted population receiving assistance and % of planned budget implementation
     security = overview[full_list(columns[60:62])]
@@ -360,8 +364,8 @@ def process_ea(ea):
     ea[key]["Ref"] = ea["disasters"].index
     ea[key].set_index("Ref", inplace=True)
     points = [4, 5, 9, 10, 15, 16, 23, 24, 25, 26, 27, 28, 32, 33]
-    deltas = [3, 3, 0, 4, 11, 18, 1, 2, 3, 11, 13, 2, 4, 7, 1, 11, 11, 14, 1, 3, 7, 14, 30, 11, 14, 16, 20, 32, 18, 7, 60, 90, 18, 34, 7, 2, 4, 60]
-    deltas_b = [3, 3, 0, 0, 7, 14, 1, 2, 3, 7, 9, 2, 4, 7, 1, 7, 7, 10, 1, 3, 7, 14, 30, 7, 10, 12, 16, 29, 14, 7, 60, 90, 14, 30, 7, 2, 4, 60]  
+    deltas = [3, 3, 0, 4, 11, 18, 1, 2, 3, 11, 13, 2, 4, 7, 1, 11, 11, 14, 1, 3, 7, 14, 30, 11, 14, 16, 20, 32, 18, 7, 60, 90, 18, 34, 7, 2, 4, 60, 5]
+    deltas_b = [3, 3, 0, 0, 7, 14, 1, 2, 3, 7, 9, 2, 4, 7, 1, 7, 7, 10, 1, 3, 7, 14, 30, 7, 10, 12, 16, 29, 14, 7, 60, 90, 14, 30, 7, 2, 4, 60, 1]  
     for i in range(len(deltas)):
         if "Surge" in on[i] or "RR" in on[i]:
             if i in points:
@@ -437,15 +441,15 @@ def process_dref_escalated(dref_escalated):
     dref_escalated[key]["Ref"] = dref_escalated["disasters"].index
     dref_escalated[key].set_index("Ref", inplace=True)
 
-    deltas = [3, 10, 10, 1, 2, 3, 17, 20, 17, 20, 21, 24, 38]
+    deltas = [3, 10, 10, 1, 2, 3, 11, 14, 14, 6, 7, 10, 34]
     for i in range(len(deltas)):
         if "Surge" in on[i] or "RR" in on[i]:
-            if i > 5:
+            if i > 6:
                 dref_escalated[key][[on[i], f"{on[i]} (days)", f"{on[i]} date", f"{on[i]} expected date"]] = pd.merge(launch_date, op[on[i]], left_index=True, right_index=True).apply(determine_status, args=(deltas[i] - 4,), axis=1)
             else:
                 dref_escalated[key][[on[i], f"{on[i]} (days)", f"{on[i]} date", f"{on[i]} expected date"]] = pd.merge(surge_date, op[on[i]], left_index=True, right_index=True).apply(determine_status, args=(deltas[i],), axis=1)
         else:
-            if i > 5:
+            if i > 6:
                 dref_escalated[key][[on[i], f"{on[i]} (days)", f"{on[i]} date", f"{on[i]} expected date"]] = pd.merge(launch_date, op[on[i]], left_index=True, right_index=True).apply(determine_status, args=(deltas[i] - 4,), axis=1)
             else:    
                 dref_escalated[key][[on[i], f"{on[i]} (days)", f"{on[i]} date", f"{on[i]} expected date"]] = pd.merge(start_date, op[on[i]], left_index=True, right_index=True).apply(determine_status, args=(deltas[i],), axis=1)
@@ -727,7 +731,7 @@ sheets["DREF"] = spark.read.table("dref").toPandas()
 dref_cols = sheets["DREF"].columns
 sheets["MCMR"] = spark.read.table("mcmr").toPandas()
 sheets["Protracted"] = spark.read.table("pcce").toPandas()
-sheets["DREF_ESCALATED"] = spark.read.table("dref_2").toPandas()
+sheets["DREF_ESCALATED"] = spark.read.table("dref_two").toPandas()
 escalation = spark.read.table("escalation_events").toPandas()
 surge_requests = spark.read.table("SURGE").toPandas()
 surge_requests = surge_requests.set_index("Ref")
