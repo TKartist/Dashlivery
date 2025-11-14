@@ -1,14 +1,17 @@
 def organize_ea(sheet):
+    # Take the EA sheet, build a unique reference ID for each row,
+    # then split it into 3 smaller tables: disasters, operational progress, and DREF shift info.
     col_name = sheet.columns.tolist()
     sheet["Ref"] = "EA" + sheet[col_name[4]] + sheet[col_name[6]]
     disasters = sheet.loc[:, col_name[:11] + [col_name[75]]]
-    ops_details = sheet.loc[:, [col_name[0]] + col_name[11:16] + col_name[22:26] + col_name[38:58] + col_name[69:70] + col_name[71:75] + col_name[76:82]]
-    
+    ops_details = sheet.loc[:, [col_name[0]] + col_name[11:16] + col_name[22:26] + col_name[38:58] + col_name[69:70] + col_name[71:75] + col_name[76:81]]
+
     dref_shift = sheet.loc[:, [col_name[0]] + [col_name[70]]]
     print("EA master data organized")
     return {"disasters" : disasters.set_index("Ref"), "operational_progresses" : ops_details.set_index("Ref"), "dref_shift" : dref_shift.set_index("Ref")}
 
 def organize_dref(sheet):
+    # Same idea as organize_ea but for DREF data: add reference ID, and split into disasters and operational progress tables.
     col_name = sheet.columns.tolist()
     sheet["Ref"] = "DREF" + sheet[col_name[4]] + sheet[col_name[6]]
     disasters = sheet.loc[:, col_name[:11] + [col_name[52]]]
@@ -18,6 +21,7 @@ def organize_dref(sheet):
     return {"disasters": disasters.set_index("Ref"), "operational_progresses": operational_progresses.set_index("Ref")}
 
 def organize_dref_escalated(sheet):
+    # Organize DREF escalated sheet: set reference ID, tag it as "DREF 2nd Allocation", and split into disasters + progress.
     col_name = sheet.columns.tolist()
     sheet["Ref"] = "DREF" + sheet[col_name[4]] + sheet[col_name[6]]
     sheet["EWTS Varient_"] = "DREF 2nd Allocation"
@@ -27,6 +31,7 @@ def organize_dref_escalated(sheet):
     return {"disasters": disasters.set_index("Ref"), "operational_progresses": operational_progresses.set_index("Ref")}
 
 def organize_mcmr(sheet):
+    # Organize multi-country (MCMR) sheet: create ref ID and split into disasters + operational progress tables.
     col_name = sheet.columns.tolist()
     sheet["Ref"] = "MCMR" + sheet[col_name[6]] 
     disasters = sheet.loc[:, col_name[:11] + [col_name[53]]]
@@ -37,6 +42,7 @@ def organize_mcmr(sheet):
 
 
 def organize_protracted(sheet):
+    # Organize protracted crisis (PCCE) sheet: create ref ID and split into disasters + operational progress tables.
     col_name = sheet.columns.tolist()
     sheet["Ref"] = "PCCE" + sheet[col_name[4]] + sheet[col_name[6]]
     disasters = sheet.loc[:, col_name[:11]]
@@ -46,6 +52,8 @@ def organize_protracted(sheet):
     return {"disasters" : disasters.set_index("Ref"), "operational_progresses" : operational_progresses.set_index("Ref")}
 
 def organize_sheets():
+    # Read the different Spark tables into pandas, organize each type,
+    # and return everything in one big dictionary called bucket.
     bucket = {}
     bucket["DREF"] = organize_dref(spark.read.table("dref").toPandas())
     bucket["EA"] = organize_ea(spark.read.table("ea").toPandas())
@@ -59,6 +67,8 @@ def organize_sheets():
 
 
 def full_list(cols):
+    # For each indicator column, build the related set of columns:
+    # [status, days difference, actual date, expected date].
     output = []
     if not isinstance(cols, list):
         cols = [cols]
@@ -71,6 +81,8 @@ def full_list(cols):
 
 
 def replace_category(row, df_classification):
+    # If a row is classified as 'Orange', set 'Not Achieved' cells to 'N/A' (ignore them),
+    # otherwise leave the row as-is.
     idx = row.name
     if df_classification[idx] == 'Orange':
         return row.apply(lambda x: 'N/A' if x == 'Not Achieved' else x)
@@ -78,6 +90,7 @@ def replace_category(row, df_classification):
 
 
 def correct_im(df, df_classification):
+    # Apply replace_category to all rows in the Information Management (IM) dataframe.
     df = df.copy()
     df = df.apply(lambda row: replace_category(row, df_classification), axis=1)
 
@@ -85,26 +98,33 @@ def correct_im(df, df_classification):
 
 
 def summarize_df(df):
+    # For each row, count how many indicators fall into each category
+    # and compute "Data Completeness" and "General Performance" scores.
     df = df.copy()
     categories = ["Achieved", "Not Achieved", "Achieved Early", "Achieved Late", "N/A", "Upcoming"]
 
+    # Count how many times each status appears per row
     for category in categories:
         df.loc[:, category] = df.apply(lambda x: sum(str(cell) == category for cell in x), axis=1)
     
+    # Data completeness = how many achieved vs total that could be achieved
     dc_num = df["Achieved"] + df["Achieved Early"] + df["Achieved Late"]
     dc_den = df["Achieved"] + df["Not Achieved"] + df["Achieved Early"] + df["Achieved Late"]
     df["Data Completeness"] = np.where(dc_den != 0, dc_num / dc_den, 1)
 
+    # General performance = weighted score of outcome types
     numerator = df["Achieved"] * 3 + df["Achieved Early"] * 4 + df["Achieved Late"] * 2
     denominator = (df["Achieved"] + df["Not Achieved"] + df["Achieved Early"] + df["Achieved Late"]) * 4
     df["General Performance"] = np.where(denominator != 0, numerator / denominator, 0)
 
+    # Move summary columns to the front
     cols_to_move = ["Achieved", "Not Achieved", "Upcoming", "Achieved Early", "Achieved Late", "N/A", "Data Completeness", "General Performance"]
     df = df[cols_to_move + [col for col in df.columns if col not in cols_to_move]]
     return df
 
 
 def update_general_info(folder, general):
+    # Combine summary stats from all areas (like Assessment, Logistics...) into one "general" overview table.
     df = general.copy()
     df.rename(columns=lambda x: x.strip(), inplace=True)
     df.rename(columns={df.columns[1]: "Trigger Date"}, inplace=True)
@@ -116,6 +136,7 @@ def update_general_info(folder, general):
         df["Achieved Late"] = temp["Achieved Late"] if "Achieved Late" not in df.columns else df["Achieved Late"] + temp["Achieved Late"]
         df["N/A"] = temp["N/A"] if "N/A" not in df.columns else df["N/A"] + temp["N/A"]
     
+    # Recompute completeness and performance at the general level
     dc_num = df["Achieved"] + df["Achieved Early"] + df["Achieved Late"]
     dc_den = df["Achieved"] + df["Not Achieved"] + df["Achieved Early"] + df["Achieved Late"]
     df["Data Completeness"] = np.where(dc_den != 0, dc_num / dc_den, 1)
@@ -132,8 +153,10 @@ def update_general_info(folder, general):
 
 
 def area_split_ea(overview, columns, general):
+    # For EA data, slice the big "achievements" table into thematic areas
+    # (Assessment, Planning, Surge, HR, etc.), summarize each, and add General Information.
     assessment = overview[full_list(columns[11])]
-    resource_mobilization = overview[full_list(columns[12:16] + [columns[22]])] # add EA coverage
+    resource_mobilization = overview[full_list(columns[12:16] + [columns[22]] + columns[79:81])] # add EA coverage
     surge = overview[full_list(columns[23:26])] # add % related values to the surge (rrp)
     hr = overview[full_list(columns[38:40])] # add % related values to the hr (rrp)
     coordination = overview[full_list(columns[40:44])] # Upcoming joint statement in master data
@@ -142,7 +165,7 @@ def area_split_ea(overview, columns, general):
     im = overview[full_list(columns[47:51])]
     risk = overview[full_list(columns[73:75])]
     finance = overview[full_list(columns[52:56] + columns[77:79])]
-    program_delivery = overview[full_list(columns[56:58] + columns[79:80])]
+    program_delivery = overview[full_list(columns[56:58])]
     security = overview[full_list(columns[69:70] + columns[76:77])]
 
     areas = {}
@@ -162,6 +185,7 @@ def area_split_ea(overview, columns, general):
     return areas
 
 def area_split_dref_escalated(overview, columns, general):
+    # For escalated DREF data, split indicators into areas and summarize them.
     assessment = overview[full_list(columns[11])]
     resource_mobilization = overview[full_list(columns[12:14])]
     surge = overview[full_list(columns[14:17])]
@@ -185,6 +209,7 @@ def area_split_dref_escalated(overview, columns, general):
     return areas
 
 def area_split_dref(overview, columns, general):
+    # For regular DREF data, split the "achievements" table into areas and compute summaries.
     assessment = overview[full_list(columns[11])]
     risk = overview[full_list(columns[12:14])]
     resource_mobilization = overview[full_list(columns[14:16])]
@@ -209,6 +234,7 @@ def area_split_dref(overview, columns, general):
     return areas
 
 def area_split_mcmr(overview, columns, general):
+    # For multi-country (MCMR), split achievements into areas and summarize each.
     resource_mobilization = overview[full_list(columns[11:14] + [columns[20]])] # add coverage
     surge = overview[full_list(columns[21:23])] # add % related values to the surge (rrp)
     hr = overview[full_list(columns[36:38])] # add % related values to the hr (rrp)
@@ -233,6 +259,7 @@ def area_split_mcmr(overview, columns, general):
 
 
 def area_split_pcce(overview, columns, general):
+    # For protracted crisis (PCCE), split achievements into areas and summarize each.
     assessment = overview[columns[11:12]]
     resource_mobilization = overview[full_list(columns[12:15] + [columns[21]] + [columns[62]])]
     surge = overview[full_list(columns[22:25])]
@@ -266,6 +293,8 @@ def area_split_pcce(overview, columns, general):
 
 
 def convert_date(date_str):
+    # Try to turn a messy date string into a proper datetime object.
+    # If it's a known placeholder like "-", "DNU", "Not Achieved", or "N/A", just return it as-is.
     if date_str in ["-", "DNU", "Not Achieved", "N/A"] or pd.isna(date_str):
         return date_str
 
@@ -281,24 +310,32 @@ def convert_date(date_str):
 
 
 def determine_status_ea(row, l1, l2):
+    # For EA indicators, decide if a task is:
+    # "Upcoming", "Not Achieved", "N/A", "Achieved Early", "Achieved", or "Achieved Late"
+    # based on start date, completion date, and deadline rules.
     keys = row.index.tolist()
-    r0, r1 = row.iloc[0], row.iloc[1]
+    r0, r1 = row.iloc[0], row.iloc[1]  # r0 = start date, r1 = completion or status
+    # If the third value in the row is "Yes", use the second limit (l2), else use first limit (l1)
     if row.iloc[2] == "Yes":
         limit = l2
     else:
         limit = l1
     expected_date = r0 + pd.Timedelta(days=limit)
     if r1 == "-" or pd.isna(r1):
-        deadline = r0 + pd.Timedelta(days=limit)
-        if deadline > datetime.now():
+        # No completion date: check if deadline passed or not
+        deadline = r0 + pd.Timedelta(days=limit + 1)
+        if deadline >= datetime.now():
             return pd.Series(["Upcoming", 365, "-", expected_date], index=[keys[1], f"{keys[1]} (days)", f"{keys[1]} date", f"{keys[1]} expected date"]) 
         return pd.Series(["Not Achieved", 365, "-", expected_date], index=[keys[1], f"{keys[1]} (days)", f"{keys[1]} date", f"{keys[1]} expected date"])
     if r1 == "DNU" or r1 == "N/A":
+        # Explicitly marked as not applicable
         return pd.Series(["N/A", 365, "-", expected_date], index=[keys[1], f"{keys[1]} (days)", f"{keys[1]} date", f"{keys[1]} expected date"])
     
     if r1 == "Not Achieved":
+        # Explicitly marked as not achieved
         return pd.Series(["Not Achieved", 365, "-", expected_date], index=[keys[1], f"{keys[1]} (days)", f"{keys[1]} date", f"{keys[1]} expected date"])
     
+    # Small tweak to treat 30 days as 31, probably because of month-length edge cases
     if (limit == 30):
         limit = 31
     days = (r1 - r0).days
@@ -311,12 +348,13 @@ def determine_status_ea(row, l1, l2):
     return pd.Series(["Achieved Early", delta, r1, expected_date], index=[keys[1], f"{keys[1]} (days)", f"{keys[1]} date", f"{keys[1]} expected date"])
 
 def determine_status(row, limit):
+    # Same as determine_status_ea but for non-EA logic (single deadline limit).
     keys = row.index.tolist()
     r0, r1 = row.iloc[0], row.iloc[1]
     expected_date = r0 + pd.Timedelta(days=limit)
     if r1 == "-" or pd.isna(r1):
-        deadline = r0 + pd.Timedelta(days=limit)
-        if deadline > datetime.now():
+        deadline = r0 + pd.Timedelta(days=limit + 1)
+        if deadline >= datetime.now():
             return pd.Series(["Upcoming", 365, "-", expected_date], index=[keys[1], f"{keys[1]} (days)", f"{keys[1]} date", f"{keys[1]} expected date"]) 
         return pd.Series(["Not Achieved", 365, "-", expected_date], index=[keys[1], f"{keys[1]} (days)", f"{keys[1]} date", f"{keys[1]} expected date"])
     if r1 == "DNU" or r1 == "N/A":
@@ -341,6 +379,8 @@ def determine_status(row, limit):
 
 
 def process_ea(ea):
+    # Take organized EA data (disasters + operational progress) and compute detailed
+    # achievement status columns for each indicator with deadlines.
     op = ea["operational_progresses"].copy()
     if op.empty:
         return None
@@ -350,9 +390,11 @@ def process_ea(ea):
     if "Trigger Date_" in ea["disasters"].columns:
         ea["disasters"] = ea["disasters"].rename(columns={"Trigger Date_":"Trigger_Date_"})
     start_date = ea["disasters"]["Trigger_Date_"].apply(convert_date)
+    # Hard-coded correction for one specific reference
     start_date["EANigeriaMDRNG042"] = ea["disasters"]["Launch Date"]["EANigeriaMDRNG042"]
     launch_date = ea["disasters"]["Launch Date"].apply(convert_date)
     surge_date = ea["disasters"]["Trigger_Date_"].copy()
+    # Override surge dates with SURGE table where available
     for ref, val in surge_requests.iterrows():
         surge_date[ref] = val["requested-on"]
     surge_date = surge_date.apply(convert_date)
@@ -363,16 +405,20 @@ def process_ea(ea):
     
     ea[key]["Ref"] = ea["disasters"].index
     ea[key].set_index("Ref", inplace=True)
+    # Predefined index positions that behave differently for deadlines
     points = [4, 5, 9, 10, 15, 16, 23, 24, 25, 26, 27, 28, 32, 33]
-    deltas = [3, 3, 0, 4, 11, 18, 1, 2, 3, 11, 13, 2, 4, 7, 1, 11, 11, 14, 1, 3, 7, 14, 30, 11, 14, 16, 20, 32, 18, 7, 60, 90, 18, 34, 7, 2, 4, 60, 5]
-    deltas_b = [3, 3, 0, 0, 7, 14, 1, 2, 3, 7, 9, 2, 4, 7, 1, 7, 7, 10, 1, 3, 7, 14, 30, 7, 10, 12, 16, 29, 14, 7, 60, 90, 14, 30, 7, 2, 4, 60, 1]  
+    # Deltas define how many days each indicator has to be completed
+    deltas = [3, 3, 0, 4, 11, 18, 1, 2, 3, 11, 13, 2, 4, 7, 1, 11, 11, 14, 1, 3, 7, 14, 30, 11, 14, 16, 20, 32, 18, 7, 60, 90, 18, 34, 7, 2, 4, 60, 7]
+    deltas_b = [3, 3, 0, 0, 7, 14, 1, 2, 3, 7, 9, 2, 4, 7, 1, 7, 7, 10, 1, 3, 7, 14, 30, 7, 10, 12, 16, 29, 14, 7, 60, 90, 14, 30, 7, 2, 4, 60, 3]  
     for i in range(len(deltas)):
         if "Surge" in on[i] or "RR" in on[i]:
+            # Some surge tasks are counted from launch date, others from surge date
             if i in points:
                 ea[key][[on[i], f"{on[i]} (days)", f"{on[i]} date", f"{on[i]} expected date"]] = pd.concat([launch_date, op[on[i]], ea["dref_shift"]], axis=1).apply(determine_status_ea, args=(deltas[i] - 4,deltas_b[i] - 4,), axis=1)
             else:
                 ea[key][[on[i], f"{on[i]} (days)", f"{on[i]} date", f"{on[i]} expected date"]] = pd.concat([surge_date, op[on[i]], ea["dref_shift"]], axis=1).apply(determine_status_ea, args=(deltas[i],deltas_b[i],), axis=1)
         else:
+            # Non-surge tasks start counting from launch or trigger date
             if i in points:
                 ea[key][[on[i], f"{on[i]} (days)", f"{on[i]} date", f"{on[i]} expected date"]] = pd.concat([launch_date, op[on[i]], ea["dref_shift"]], axis=1).apply(determine_status_ea, args=(deltas[i] - 4,deltas_b[i] - 4,), axis=1)
             else:
@@ -380,6 +426,7 @@ def process_ea(ea):
     return ea
 
 def process_dref(dref):
+    # Same idea as process_ea but for DREF data, using its own rules and deadlines.
     op = dref["operational_progresses"].copy()
     
     if op.empty:
@@ -419,6 +466,7 @@ def process_dref(dref):
     return dref
 
 def process_dref_escalated(dref_escalated):
+    # Process escalated DREF data, computing achievement status per indicator using its deadline setup.
     op = dref_escalated["operational_progresses"].copy()
     
     if op.empty:
@@ -457,6 +505,7 @@ def process_dref_escalated(dref_escalated):
     return dref_escalated
 
 def process_mcmr(mcmr):
+    # Process multi-country (MCMR) data: compute status for each operational indicator.
     op = mcmr["operational_progresses"].copy()
     
     if op.empty:
@@ -495,6 +544,7 @@ def process_mcmr(mcmr):
     
 
 def process_pcce(pcce):
+    # Process protracted crisis (PCCE) data: compute deadlines and achievement status per indicator.
     op = pcce["operational_progresses"].copy()
     if op.empty:
         return None
@@ -532,6 +582,8 @@ def process_pcce(pcce):
 
 
 def generate_overview(bucket, sheets):
+    # Run the processing functions for each operation type (EA, DREF, etc.),
+    # then split achievements into areas and return all the area-level data.
     ea = process_ea(bucket["EA"])
     dref = process_dref(bucket["DREF"])
     mcmr = process_mcmr(bucket["MCMR"])
@@ -564,6 +616,8 @@ def generate_overview(bucket, sheets):
 '''----------------------------------------------------------------------------------------------------------------------------------------------------------------------------'''
 
 def read_area_info_folder(dfs):
+    # Flatten all area-level tables for a single operation type into one dataframe
+    # with standard columns (Ref, Area, Achieved, Not Achieved, etc.).
     cols = ["Ref", "Area", "Achieved", "Not Achieved", "Upcoming", "Achieved Early", "Achieved Late", "N/A", "Data Completeness", "General Performance"]
     df_list = []
     for key, df in dfs.items():
@@ -581,6 +635,7 @@ def read_area_info_folder(dfs):
 
 
 def area_info(area_split_dfs):
+    # Combine area info for all operation types (EA, DREF, MCMR, PCCE, DREF_ESCALATED) into a single dataframe.
     df = read_area_info_folder(area_split_dfs.get("EA", {}))
     df1 = read_area_info_folder(area_split_dfs.get("DREF", {}))
     df2 = read_area_info_folder(area_split_dfs.get("MCMR", {}))
@@ -593,17 +648,24 @@ def area_info(area_split_dfs):
 '''----------------------------------------------------------------------------------------------------------------------------------------------------------------------------'''
 
 def calculate_delta(today, status, expected, d):
+    # Turn raw numeric or date-based lag info into human-readable text like
+    # "5 days to deadline", "3 days behind deadline", or "Achieved 2 days early".
     if pd.notna(status) and status == "N/A":
         delta = "N/A"
     else:
         if d == 90:
+            # For "Upcoming" style entries, use expected date vs today
             if status == "Upcoming":
                 delta = expected - today
-                delta = f"{delta.days} days to deadline"
+                if delta.days == 0:
+                    delta = f"Due Today"
+                else:
+                    delta = f"{delta.days} days to deadline"
             else:
                 delta = today - expected
                 delta = f"{delta.days} days behind deadline"
         else:
+            # For completed tasks, d is a signed number of days early/late
             delta = d * -1
             if delta == 0:
                 delta = "Achieved On Date"
@@ -615,6 +677,8 @@ def calculate_delta(today, status, expected, d):
 
 
 def read_task_info(df, op, op_df, area):
+    # From an area-level summary dataframe, build a row-per-task structure with status, dates,
+    # delta text, escalation info, etc., for one operation type.
     cols = df.columns[9:].copy()
     task_infos = []
     today = pd.Timestamp(date.today())
@@ -651,6 +715,8 @@ def read_task_info(df, op, op_df, area):
 
 
 def read_im(df, op, op_df):
+    # Same as read_task_info but specifically for the Information Management area,
+    # which uses a fixed indicator text to look up escalation.
     cols = df.columns[9:].copy()
     task_infos = []
     today = pd.Timestamp(date.today())
@@ -690,6 +756,7 @@ def read_im(df, op, op_df):
 
 
 status_mapping = {
+    # Map a status label to a numeric score for later aggregation.
     "Achieved" : 75,
     "Achieved Early" : 100,
     "Achieved Late" : 50,
@@ -700,6 +767,8 @@ status_mapping = {
 
 
 def areas_in_op(adf, op):
+    # For a single operation type (e.g. EA or DREF),
+    # loop through all its areas and build a list of task info dictionaries.
     task_infos = []
     op_df = adf.get("General Information", pd.DataFrame())
     op_df = op_df[op_df.columns[:18]]
@@ -717,6 +786,8 @@ def areas_in_op(adf, op):
 
 
 def task_info_extraction(area_split_dfs):
+    # Gather task-level info for all operation types into a single dataframe
+    # and attach a numeric score for each task based on its status.
     task_infos = areas_in_op(area_split_dfs.get("EA", {}), "ea") + areas_in_op(area_split_dfs.get("DREF", {}), "dref") + areas_in_op(area_split_dfs.get("MCMR", {}), "mcmr") + areas_in_op(area_split_dfs.get("PCCE", {}), "protracted crisis") + areas_in_op(area_split_dfs.get("DREF_ESCALATED", {}), "dref_escalated")
     df = pd.DataFrame(task_infos)
     df["Score"] = df["Status"].map(status_mapping)
@@ -725,6 +796,16 @@ def task_info_extraction(area_split_dfs):
 
 
 
+# ==== MAIN FLOW ====
+# From here down, we're not defining functions anymore.
+# This is the "orchestrator" that:
+# 1) pulls raw data from Spark
+# 2) organizes + processes it
+# 3) calculates summaries and scores
+# 4) writes the final cleaned tables back to Spark
+
+
+# 1) READ RAW TABLES FROM SPARK INTO PANDAS
 sheets = {}
 sheets["EA"] = spark.read.table("ea").toPandas()
 sheets["DREF"] = spark.read.table("dref").toPandas()
@@ -734,37 +815,74 @@ sheets["Protracted"] = spark.read.table("pcce").toPandas()
 sheets["DREF_ESCALATED"] = spark.read.table("dref_two").toPandas()
 escalation = spark.read.table("escalation_events").toPandas()
 surge_requests = spark.read.table("SURGE").toPandas()
-surge_requests = surge_requests.set_index("Ref")
+surge_requests = surge_requests.set_index("Ref")  # make "Ref" the key so we can look up surge dates fast
+
+# 2) ORGANIZE RAW SHEETS INTO STRUCTURED BUCKET (DISASTERS + OP PROGRESS + SHIFT INFO)
 bucket = organize_sheets()
+
+# 3) PROCESS EACH OPERATION TYPE TO BUILD "ACHIEVEMENTS" AND SPLIT THEM BY AREA
 area_split_dfs = generate_overview(bucket, sheets)
+
+# 4) BUILD GENERAL-LEVEL OVERVIEW TABLE ACROSS ALL OPS
+#    - Take "General Information" from every operation type
+#    - Stack them together into one big dataframe
 general_df = pd.concat([i["General Information"] for _, i in area_split_dfs.items()])
 general_df.reset_index(inplace=True)
+
+# Make sure "Ref" is the first column, then keep first 20 columns
 general_df = general_df[['Ref'] + [col for col in general_df.columns[:20] if col != 'Ref']]
+
+# Normalize launch date to proper datetime
 general_df["Launch Date"] = general_df["Launch Date"].apply(convert_date)
+
+# 5) PUSH GENERAL INFO BACK TO SPARK AS A CLEAN TABLE
 spark_general_info = spark.createDataFrame(general_df)
+# Replace spaces with underscores in column names to avoid Spark whining
 spark_general_info = spark_general_info.toDF(*[c.replace(" ", "_") for c in spark_general_info.columns])
+# Make sure date columns are actual date type in Spark
 spark_general_info = spark_general_info.withColumn("Trigger_Date", to_date("Trigger_Date", "M/d/yyyy"))
 spark_general_info = spark_general_info.withColumn("Launch_Date", to_date("Launch_Date", "M/d/yyyy"))
+# Overwrite the target Delta table with the new data
 spark_general_info.write.mode("overwrite").option("mergeSchema", "true").format("delta").saveAsTable("master_data_processing.general_info")
 
+# 6) BUILD AREA-LEVEL SUMMARY TABLE (PER AREA, PER OPERATION)
 df_area_info = area_info(area_split_dfs)
 
+# 7) EXTRACT TASK-LEVEL INFO (ONE ROW PER TASK) FROM THE AREA SPLITS
 ti = task_info_extraction(area_split_dfs)
 
-ti["Task"] = ti["Task"].str.rstrip() + " " + ti["EWTS Varient"]
+# Clean trailing spaces from task names
+ti["Task"] = ti["Task"].str.rstrip()
 
+# Drop one very specific, noisy task row that you don't want in the output
 ti = ti[~ti["Task"].str.contains("Working Advance Request  IRP Form  signed by IFRC and NS no longer than 2 days from the DREF approval", na=False)]
+
+# 8) PUSH TASK-LEVEL TABLE TO SPARK
 spark_task_infos = spark.createDataFrame(ti)
 spark_task_infos = spark_task_infos.toDF(*[c.replace(" ", "_") for c in spark_task_infos.columns])
+
+# For N/A or Upcoming tasks with score=0, remove the score (set to null) so they don't drag averages
 spark_task_infos = spark_task_infos.withColumn(
     "Score",
     when(((col("Status") == "N/A") | (col("Status") == "Upcoming")) & (col("Score") == 0), None)
     .otherwise(col("Score"))
 )
 spark_task_infos.write.mode("overwrite").option("mergeSchema", "true").format("delta").saveAsTable("master_data_processing.task_info")
-df_area_info["General Performance"] = df_area_info["General Performance"].fillna(0)
-df_area_info.loc[(df_area_info["Achieved"] == 0) & (df_area_info["Achieved Early"] == 0) & (df_area_info["Achieved Late"] == 0) & (df_area_info["Not Achieved"] == 0), "General Performance"] = None
 
+# 9) FINAL CLEANUP FOR AREA-LEVEL INFO BEFORE SENDING TO SPARK
+# Fill missing performance with 0 first
+df_area_info["General Performance"] = df_area_info["General Performance"].fillna(0)
+
+# If literally nothing was done in that area (all zeros), set performance back to None
+df_area_info.loc[
+    (df_area_info["Achieved"] == 0) &
+    (df_area_info["Achieved Early"] == 0) &
+    (df_area_info["Achieved Late"] == 0) &
+    (df_area_info["Not Achieved"] == 0),
+    "General Performance"
+] = None
+
+# 10) PUSH AREA-LEVEL SUMMARY TABLE TO SPARK
 spark_area_info = spark.createDataFrame(df_area_info)
 spark_area_info = spark_area_info.toDF(*[c.replace(" ", "_") for c in spark_area_info.columns])
 
